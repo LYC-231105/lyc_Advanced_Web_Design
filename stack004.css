@@ -1,0 +1,136 @@
+/* 根据截图提取；补充样式放在文件末尾，保留原有颜色演示。 */
+* {
+  padding: 0;
+  margin: 0;
+  /* width 和 height 包含内容、padding 与 border，但不包含 margin。 */
+  box-sizing: border-box;
+}
+
+body {
+  background-color: yellow;
+  font-family: "微软雅黑", "Microsoft YaHei", sans-serif;
+  color: blue;
+}
+
+/* 子元素可继承部分属性，如 font、color；margin、padding、border 默认不继承。 */
+.container {
+  background-color: red;
+  width: 1200px;
+  margin: 40px auto;
+}
+
+/* 在其他层叠条件相同时，类选择器比标签选择器优先级高。 */
+.container-title {
+  color: black;
+}
+
+h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 30px;
+  padding: 10px 20px;
+  border: 2px dotted white;
+}
+
+/* 以下两条规则在截图中被注释，默认不生效。
+   更正截图注释：后代选择器按组成部分累计优先级。
+   body .container .card-wrap 为 (0, 2, 1)，
+   .container .card-wrap 为 (0, 2, 0)。
+   前者高于后者，两者都高于单独的 .card-wrap (0, 1, 0)。
+
+body .container .card-wrap {
+  background-color: purple;
+  padding: 20px;
+}
+
+.container .card-wrap {
+  background-color: green;
+  padding: 20px;
+}
+*/
+
+/* ID 选择器 (1, 0, 0) 高于本例的类选择器。 */
+#card-wrap {
+  background-color: orange;
+}
+
+.card-wrap {
+  background-color: pink;
+  padding: 20px;
+}
+
+/* 以下为补全内容：窄屏适配、卡片和列表。 */
+body {
+  line-height: 1.7;
+}
+
+.container {
+  max-width: calc(100% - 32px);
+  padding: 20px;
+}
+
+.card-wrap {
+  margin-bottom: 24px;
+}
+
+.card {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid blue;
+  background-color: white;
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 16px;
+}
+
+.card h3 {
+  margin-bottom: 8px;
+  font-size: 24px;
+}
+
+.card-desc + .card-desc {
+  margin-top: 8px;
+}
+
+.answer-note {
+  padding: 12px 16px;
+  color: black;
+  background-color: #fff2cc;
+}
+
+.answer-list {
+  padding: 20px 20px 20px 48px;
+  background-color: white;
+}
+
+.answer-list li + li {
+  margin-top: 10px;
+}
+
+code {
+  font-family: Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin: 16px auto;
+    padding: 12px;
+  }
+
+  h2 {
+    padding: 10px;
+    font-size: 24px;
+  }
+
+  .card-wrap,
+  .card {
+    padding: 12px;
+  }
+}

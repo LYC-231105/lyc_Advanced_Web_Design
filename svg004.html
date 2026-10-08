@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG图标</title>
+    <script src="http://at.alicdn.com/t/c/font_5238918_iycntmkq04.js"></script>
+    <link rel="stylesheet" href="./svg004.css">
+    
+
+</head>
+
+<body>
+    <h2>SVG图标</h2>
+    <div class="tab-nav">
+        <div class="tab-item" onclick="changeTab(this)">
+            <svg class="icon" aria-hidden="true">
+                <use href="#icon-sound"></use>
+            </svg>
+            <span>声音</span>
+        </div>
+           <div class="tab-item" onclick="changeTab(this)">
+            <svg class="icon" aria-hidden="true">
+                <use href="#icon-message"></use>
+            </svg>
+            <span>消息</span>
+        </div>
+           <div class="tab-item" onclick="changeTab(this)">
+            <svg class="icon" aria-hidden="true">
+                <use href="#icon-pinglun"></use>
+            </svg>
+            <span>评论</span>
+        </div>
+
+
+    </div>
+
+    <script>
+        function changeTab(current) {
+            var items = document.querySelectorAll('.tab-item');
+            for (var i = 0; i < items.length; i++) {
+                items[i].classList.remove('active');
+            }
+            current.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

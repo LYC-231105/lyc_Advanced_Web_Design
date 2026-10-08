@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>homework1 · 网页整体布局课后作业</title>
+  <link rel="stylesheet" href="homework1.css">
+</head>
+<body id="top">
+  <header class="page-header wrap">
+    <div class="course-line"><a href="index.html">高级网页设计</a><span>homework1 / 课后练习 01</span></div>
+    <h1>homework1 · 语义布局与 CSS 动画</h1>
+    <p class="intro">把布局搭好，再让图片和文字动起来。</p>
+    <nav class="top-nav" aria-label="页面导航">
+      <a href="#demo">效果演示</a><a href="#fix">代码找错</a><a href="#fill">代码填空</a><a href="#explain">原理简答</a><a href="#extra">拓展挑战</a>
+    </nav>
+  </header>
+
+  <!-- 桌面版两栏：792 + 8 + 400 = 1200px。窄屏时改为上下排列。 -->
+  <div class="layout wrap">
+    <main>
+      <section id="demo" class="section demo-section">
+        <div class="section-heading"><div><p class="eyebrow">先看效果</p><h2>六张图片，两种排法</h2></div><span class="small-label">CSS 交互演示</span></div>
+        <p class="muted">移入卡片，看看图片缩放和文字展开；移出后也会平滑收起。</p>
+        <div class="demo">
+          <!-- 用 radio 切换样式，整个页面不需要 JavaScript。 -->
+          <input class="mode-input" type="radio" name="card-mode" id="mode-below" checked>
+          <input class="mode-input" type="radio" name="card-mode" id="mode-overlay">
+          <div class="mode-switch" role="group" aria-label="卡片展示方式"><label for="mode-below">上图下文</label><label for="mode-overlay">图上文字</label></div>
+          <ul class="box">
+            <!-- li 是定位参照；overflow 把缩放的图片留在卡片内部。 -->
+            <li tabindex="0"><img src="img/1.jpg" alt="蓝天下平静的湖水与岸边绿树"><div class="txt"><h3>湖边的午后</h3><p>水面很静，远处的云慢慢散开。给忙碌的一天留一点空白。</p><span>01 / 湖畔</span></div></li>
+            <li tabindex="0"><img src="img/2.jpg" alt="停在机场停机坪上的客机"><div class="txt"><h3>准备出发</h3><p>行李收好，下一站还很远。旅途从这里开始。</p><span>02 / 旅途</span></div></li>
+            <li tabindex="0"><img src="img/3.jpg" alt="夜色中亮着灯的临水建筑"><div class="txt"><h3>夜色入水</h3><p>灯光落进水里，建筑也有了另一半。天黑以后，景色换了模样。</p><span>03 / 夜景</span></div></li>
+            <li tabindex="0"><img src="img/4.jpg" alt="红色地表上蜿蜒的浅色水道与绿色植被"><div class="txt"><h3>大地的纹路</h3><p>从高处看，水道像细细的树枝，在红色的大地上伸展开。</p><span>04 / 俯瞰</span></div></li>
+            <li tabindex="0"><img src="img/5.jpg" alt="山脚下的滨水小镇与码头"><div class="txt"><h3>靠岸的小镇</h3><p>船停在岸边，灯亮了起来。沿着水边走一走，等晚风吹过。</p><span>05 / 小镇</span></div></li>
+            <li tabindex="0"><img src="img/6.jpg" alt="蓝色海水环绕着岩石与陡峭海岸"><div class="txt"><h3>海岸转角</h3><p>岩石伸向海面，浪从脚下经过。路走到这里，刚好能看见海。</p><span>06 / 海岸</span></div></li>
+          </ul>
+        </div>
+        <p class="demo-note">奇数卡片的文字铺满整张卡片，偶数卡片展开至 144px。键盘 Tab 聚焦或手机点按卡片也能查看。</p>
+      </section>
+
+      <section id="fix" class="section">
+        <div class="section-heading"><h2><span class="section-number">01</span>看代码找错</h2><span class="points">20 分</span></div>
+        <article class="answer"><h3>① 图片放大后越界，文字定位也不对</h3><p><code>.box li</code> 缺少裁剪和定位参照。加上 <code>overflow: hidden</code> 后，图片放大的部分会被裁掉；加上 <code>position: relative</code>，绝对定位的文字条才会贴着自己的卡片底部。</p>
+<pre><code>.box li {
+  width: 300px;
+  position: relative; /* 让文字以这张卡片为参照 */
+  overflow: hidden;  /* 放大后不能盖住旁边的卡片 */
+}</code></pre></article>
+        <article class="answer"><h3>② 移入有动画，移出却突然恢复</h3><p>截图把图片的 <code>transition</code> 写在了 <code>:hover</code> 中，文字的默认样式也没有过渡。应把过渡放回普通选择器，悬浮时只改目标值，同时补上文字的展开规则。</p>
+<pre><code>.box img {
+  width: 100%;
+  transform: scale(1);
+  transition: transform .6s ease;
+}
+.box li:hover img { transform: scale(1.2); }
+
+.txt {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, .6);
+  transition: height .6s ease;
+}
+.box li:hover .txt { height: 144px; }</code></pre></article>
+        <article class="answer"><h3>③ 卡片挤在一行，宽度也被压缩</h3><p><code>display: flex</code> 本身没错，但 Flex 默认不换行，而且子项允许收缩。保留 Flex，补上换行、间距并禁止卡片收缩；列表自带的圆点和缩进也一起清掉。</p>
+<pre><code>.box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.box li { flex: 0 0 300px; }</code></pre>
+        <p class="note">这里保留题目中的 300px。上面的演示区较窄，实际用 <code>calc((100% - 32px) / 3)</code> 排三列。</p></article>
+      </section>
+
+      <section id="fill" class="section">
+        <div class="section-heading"><h2><span class="section-number">02</span>补全代码</h2><span class="points">40 分</span></div>
+        <h3 class="subheading">2.1 语义标签</h3>
+        <table><caption class="sr-only">页面区域对应的 HTML5 语义标签</caption><thead><tr><th scope="col">页面区域</th><th scope="col">填写答案</th></tr></thead><tbody>
+          <tr><td>顶部头部区域</td><td><code>&lt;header&gt;</code></td></tr><tr><td>导航栏</td><td><code>&lt;nav&gt;</code></td></tr><tr><td>页面唯一主要内容区</td><td><code>&lt;main&gt;</code></td></tr><tr><td>侧边栏附属内容</td><td><code>&lt;aside&gt;</code></td></tr><tr><td>底部版权页脚</td><td><code>&lt;footer&gt;</code></td></tr>
+        </tbody></table>
+        <h3 class="subheading">2.2 卡片动画</h3>
+        <table class="animation-table"><caption class="sr-only">卡片动画的关键 CSS 答案</caption><thead><tr><th scope="col">要实现的效果</th><th scope="col">关键代码 / 答案</th></tr></thead><tbody>
+          <tr><td>防止放大图片溢出 li</td><td><code>overflow: hidden;</code></td></tr>
+          <tr><td>子绝父相，文字条固定在卡片底部</td><td>li 加 <code>position: relative;</code></td></tr>
+          <tr><td>图片从原大小放大到 1.2 倍</td><td><code>.box img</code> 与 <code>.box li:hover img</code>，分别设置 <code>scale(1)</code> 和 <code>scale(1.2)</code>。</td></tr>
+          <tr><td>文字展开、收起都有过渡</td><td>写在默认的 <code>.txt</code> 上：<code>transition: height .6s ease;</code>。这样进入和离开悬浮状态都保留过渡设置。</td></tr>
+          <tr><td>奇数卡片悬浮时文字铺满</td><td><code>.box li:nth-child(odd):hover .txt { height: 100%; }</code></td></tr>
+        </tbody></table>
+        <h3 class="subheading">2.3 Flex 两栏布局</h3>
+        <p>两个空依次填 <code>flex</code> 和 <code>gap: 8px;</code>。版心宽度刚好是 792 + 8 + 400 = 1200px。</p>
+        <div class="width-diagram" aria-label="主内容792像素，间隔8像素，侧栏400像素"><span>main · 792px</span><i title="gap: 8px"></i><span>aside · 400px</span></div>
+<pre><code>.layout {
+  width: 1200px;
+  display: flex;
+  gap: 8px; /* 两栏间距由父容器统一设置 */
+}
+.layout &gt; main  { flex: 0 0 792px; }
+.layout &gt; aside { flex: 0 0 400px; }</code></pre>
+      </section>
+
+      <section id="explain" class="section">
+        <div class="section-heading"><h2><span class="section-number">03</span>原理简答</h2><span class="points">25 分</span></div>
+        <article class="answer"><h3>1. “子绝父相”是什么位置关系？</h3><p>父元素设置相对定位，仍然占着原来的位置。子元素设置绝对定位后脱离普通文档流，以最近的已定位祖先为参照。这里文字条的 <code>left: 0; bottom: 0;</code> 就是贴住 li 的左下角。</p>
+          <figure class="position-figure"><div class="parent-box"><span>父元素 li · position: relative</span><p>图片在普通文档流中</p><div class="child-box"><span>子元素 .txt · position: absolute</span><small>left: 0; bottom: 0; width: 100%;</small></div></div><figcaption>定位关系示意：文字覆盖图片，不会把图片往上挤。</figcaption></figure>
+        </article>
+        <article class="answer"><h3>2. overflow: hidden 在这次练习中有哪两个作用？</h3><p>一是裁掉图片缩放后超出卡片的部分，避免挡住邻居。二是裁掉文字条当前高度以外的内容，让描述先藏起来，等文字条变高后再逐渐露出。</p></article>
+        <article class="answer"><h3>3. scale(1.2) 会把实际占位撑大吗？</h3><p>不会。<code>transform</code> 改变的是元素绘制出来的样子，不会重新计算它在普通布局中的占位，所以旁边的卡片不会被挤走。但画面可能越界，仍然需要父元素做裁剪。</p></article>
+        <article class="answer"><h3>4. transition 写在 hover 和普通选择器上有什么区别？</h3><p>只写在 <code>:hover</code> 上，鼠标移入时有过渡，移出后这条规则就失效，通常会直接恢复。写在普通选择器上，移入和移出时都能读到过渡设置，两边都能平滑变化。</p></article>
+        <article class="answer"><h3>5. 一次代码排查记录</h3><p>检查文件夹里的 <code>picture_above_text.css</code> 时，发现图片悬浮规则写成了 <code>transition: scale(1.5)</code>。这个值不是合法的过渡写法，浏览器会忽略，所以图片不会按预期放大。修复方法是将它改为 <code>transform: scale(1.2)</code>，并在图片默认样式里设置 <code>transition: transform .6s ease</code>。</p><p class="note">这条记录来自现有练习文件，修正后的写法已用于本页演示。</p></article>
+      </section>
+
+      <section id="extra" class="section">
+        <div class="section-heading"><h2><span class="section-number">04</span>拓展：返回顶部</h2><span class="points">选做 · 15 分</span></div>
+        <p>用锚点跳到 <code>id="top"</code>，CSS 控制固定位置和悬浮效果。页面右下角就是实际效果，没有用 JavaScript。</p>
+<pre><code>&lt;a class="back-top" href="#top" aria-label="返回顶部"&gt;↑&lt;/a&gt;
+
+html { scroll-behavior: smooth; }
+.back-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 100;
+  opacity: .5;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.back-top:hover {
+  opacity: 1;
+  transform: scale(1.08);
+}</code></pre>
+      </section>
+    </main>
+
+    <aside aria-label="作业笔记">
+      <div class="side-inner">
+        <p class="eyebrow">本次练习</p><h2>布局是骨架，<br>动画是细节。</h2><p class="side-intro">H5 语义布局 +<br>溢出 / 隐藏过渡动画</p>
+        <nav class="side-nav" aria-label="作业目录"><a href="#fix"><span>01</span>看代码找错<span>↗</span></a><a href="#fill"><span>02</span>补全代码<span>↗</span></a><a href="#explain"><span>03</span>原理简答<span>↗</span></a><a href="#extra"><span>04</span>拓展挑战<span>↗</span></a></nav>
+        <div class="side-note"><h3>容易写混的两个属性</h3><p><code>transform</code> 决定怎么变，比如放大到 1.2 倍。</p><p><code>transition</code> 决定变化过程，比如用 0.6 秒完成。</p></div>
+        <div class="side-note"><h3>检查时看这几处</h3><ul><li>图片放大后有没有越界</li><li>鼠标移出时有没有过渡</li><li>文字是不是相对自己的卡片定位</li><li>1、3、5 张卡片能不能铺满文字层</li></ul></div>
+        <p class="side-foot">HTML + CSS<br>本地图片 · 无外部依赖</p>
+      </div>
+    </aside>
+  </div>
+  <footer class="page-footer wrap"><span>高级网页设计 · homework1</span><a href="#top">回到开头 ↑</a></footer>
+  <a class="back-top" href="#top" aria-label="返回顶部" title="返回顶部">↑</a>
+</body>
+</html>
