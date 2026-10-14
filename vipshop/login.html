@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+  唯品会特卖商城 - 登录/注册页
+  高级网页设计I 期末试题：手机APP模仿与设计（选题：唯品会）
+  24001010817 梁钰承
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>唯品会特卖商城-登录-24001010817梁钰承</title>
+    <link rel="stylesheet" href="css/liang.css">
+</head>
+<body>
+    <div class="liang-app liang-login">
+
+        <div class="liang-login-panel">
+            <!-- 登录/注册切换（JS 效果 tab 切换） -->
+            <div class="liang-login-tabs">
+                <button class="liang-active" data-tab="login" type="button">登录</button>
+                <button data-tab="register" type="button">注册</button>
+            </div>
+
+            <form id="liangLoginForm" novalidate>
+                <!-- 手机号 -->
+                <div class="liang-login-field">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#bbb" stroke-width="2">
+                        <rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/>
+                    </svg>
+                    <input type="tel" id="liangPhone" placeholder="请输入手机号" maxlength="11">
+                </div>
+
+                <!-- 密码 / 验证码 -->
+                <div class="liang-login-field" id="liangPwdField">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#bbb" stroke-width="2">
+                        <rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/>
+                    </svg>
+                    <input type="password" id="liangPwd" placeholder="请输入密码（6-16位）" maxlength="16">
+                </div>
+                <div class="liang-login-field" id="liangCodeField" style="display:none">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#bbb" stroke-width="2">
+                        <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/>
+                    </svg>
+                    <input type="text" id="liangCode" placeholder="请输入验证码" maxlength="6">
+                    <button class="liang-login-code-btn" id="liangCodeBtn" type="button">获取验证码</button>
+                </div>
+
+                <!-- 错误提示：JS 效果 表单校验 -->
+                <p class="liang-login-err" id="liangErr"></p>
+
+                <button class="liang-login-submit" id="liangSubmitBtn" type="submit">登 录</button>
+
+                <div class="liang-login-links">
+                    <a href="javascript:void(0)">忘记密码</a>
+                    <a href="index.html">先逛逛再说 ›</a>
+                </div>
+
+                <label class="liang-login-agree">
+                    <input type="checkbox" id="liangAgree" checked>
+                    <span>已阅读并同意《唯品会服务条款》与《隐私政策》（模拟）</span>
+                </label>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/liang-common.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>
