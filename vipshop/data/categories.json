@@ -1,0 +1,132 @@
+{
+  "code": 200,
+  "msg": "分类数据接口",
+  "data": [
+    {
+      "name": "女装",
+      "sections": [
+        {
+          "title": "当季热卖",
+          "items": [
+            { "name": "呢子大衣", "img": "img/goods3.jpg" },
+            { "name": "连衣裙", "img": "img/goods6.jpg" },
+            { "name": "针织裙", "img": "img/goods9.jpg" },
+            { "name": "羽绒服", "img": "img/goods14.jpg" },
+            { "name": "卫衣", "img": "img/goods7.jpg" },
+            { "name": "牛仔外套", "img": "img/goods11.jpg" }
+          ]
+        },
+        {
+          "title": "品牌推荐",
+          "items": [
+            { "name": "伊芙丽", "img": "img/banner2.jpg" },
+            { "name": "EP雅莹", "img": "img/banner1.jpg" },
+            { "name": "江南布衣", "img": "img/floor-1.jpg" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "美妆",
+      "sections": [
+        {
+          "title": "热销彩妆",
+          "items": [
+            { "name": "口红", "img": "img/goods2.jpg" },
+            { "name": "唇膏", "img": "img/goods10.jpg" },
+            { "name": "护肤套装", "img": "img/goods5.jpg" },
+            { "name": "香氛", "img": "img/floor-2.jpg" }
+          ]
+        },
+        {
+          "title": "大牌专区",
+          "items": [
+            { "name": "雅诗兰黛", "img": "img/banner1.jpg" },
+            { "name": "MAC魅可", "img": "img/goods2.jpg" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "鞋包",
+      "sections": [
+        {
+          "title": "人气鞋款",
+          "items": [
+            { "name": "凉鞋", "img": "img/goods1.jpg" },
+            { "name": "老爹鞋", "img": "img/goods8.jpg" },
+            { "name": "休闲板鞋", "img": "img/goods12.jpg" },
+            { "name": "商务皮鞋", "img": "img/goods15.jpg" }
+          ]
+        },
+        {
+          "title": "品牌推荐",
+          "items": [
+            { "name": "斯凯奇", "img": "img/goods8.jpg" },
+            { "name": "鬼塚虎", "img": "img/goods12.jpg" },
+            { "name": "爱步", "img": "img/goods15.jpg" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "男装",
+      "sections": [
+        {
+          "title": "热卖男装",
+          "items": [
+            { "name": "卫衣", "img": "img/goods7.jpg" },
+            { "name": "牛仔夹克", "img": "img/goods11.jpg" },
+            { "name": "T恤", "img": "img/banner3.jpg" }
+          ]
+        },
+        {
+          "title": "品牌推荐",
+          "items": [
+            { "name": "北面", "img": "img/brand-anta.png" },
+            { "name": "马克华菲", "img": "img/banner3.jpg" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "运动",
+      "sections": [
+        {
+          "title": "运动精选",
+          "items": [
+            { "name": "运动鞋", "img": "img/goods8.jpg" },
+            { "name": "板鞋", "img": "img/goods12.jpg" },
+            { "name": "运动卫衣", "img": "img/goods7.jpg" }
+          ]
+        },
+        {
+          "title": "品牌推荐",
+          "items": [
+            { "name": "安踏", "img": "img/brand-anta.png" },
+            { "name": "361°", "img": "img/brand-361.png" },
+            { "name": "Pual Frank", "img": "img/brand-paulfrank.png" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "内衣",
+      "sections": [
+        {
+          "title": "舒适内衣",
+          "items": [
+            { "name": "无痕套装", "img": "img/goods4.jpg" },
+            { "name": "家居服", "img": "img/floor-3.png" }
+          ]
+        },
+        {
+          "title": "品牌推荐",
+          "items": [
+            { "name": "曼妮芬", "img": "img/goods4.jpg" }
+          ]
+        }
+      ]
+    }
+  ]
+}

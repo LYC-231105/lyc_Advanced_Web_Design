@@ -1,0 +1,14 @@
+{
+  "code": 200,
+  "msg": "限时秒杀数据接口（hour 为当日开抢时间，24小时制）",
+  "hour": 20,
+  "minute": 0,
+  "data": [
+    { "id": 2,  "img": "img/goods2.jpg",  "brand": "MAC 魅可",        "name": "经典子弹头口红 #Chili", "price": 149, "originalPrice": 230, "total": 500, "sold": 436 },
+    { "id": 5,  "img": "img/goods5.jpg",  "brand": "ESTEE LAUDER",    "name": "小棕瓶修护精华套装",    "price": 799, "originalPrice": 1560, "total": 200, "sold": 187 },
+    { "id": 12, "img": "img/goods12.jpg", "brand": "ONITSUKA TIGER",  "name": "MEXICO 66 休闲板鞋",    "price": 329, "originalPrice": 790,  "total": 300, "sold": 121 },
+    { "id": 4,  "img": "img/goods4.jpg",  "brand": "MANIFORM 曼妮芬", "name": "轻塑形无痕内衣套装",    "price": 129, "originalPrice": 399,  "total": 400, "sold": 366 },
+    { "id": 8,  "img": "img/goods8.jpg",  "brand": "SKECHERS 斯凯奇", "name": "复古厚底老爹运动鞋",    "price": 269, "originalPrice": 729,  "total": 260, "sold": 58 },
+    { "id": 10, "img": "img/goods10.jpg", "brand": "ESTEE LAUDER",    "name": "倾慕哑光唇膏 #333",     "price": 199, "originalPrice": 320,  "total": 350, "sold": 294 }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "code": 200,
+  "msg": "轮播图数据接口",
+  "data": [
+    { "id": 1, "img": "img/banner1.jpg", "title": "雅诗兰黛 千载难逢", "link": "detail.html?id=5" },
+    { "id": 2, "img": "img/banner2.jpg", "title": "品牌特卖 美妆狂欢", "link": "category.html?cat=美妆" },
+    { "id": 3, "img": "img/banner3.jpg", "title": "马克华菲 情侣款专场", "link": "detail.html?id=11" }
+  ]
+}
