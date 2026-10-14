@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--
+  唯品会特卖商城 - 后台管理页
+  高级网页设计I 期末试题：手机APP模仿与设计（选题：唯品会）
+  24001010817 梁钰承
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>唯品会特卖商城-后台管理-24001010817梁钰承</title>
+    <link rel="stylesheet" href="css/liang.css">
+</head>
+<body>
+    <div class="liang-app">
+
+        <header class="liang-header">
+            <div class="liang-header-top">
+                <button class="liang-header-back">‹</button>
+                <h1 class="liang-header-title">后台管理</h1>
+                <a class="liang-header-right" href="profile.html">我的</a>
+            </div>
+        </header>
+
+        <main class="liang-main" style="padding-bottom:70px">
+
+            <!-- 经营数据统计：JS 效果 fetch 统计计算 -->
+            <div class="liang-admin-stat">
+                <div><b id="liangStatCount">0</b><span>在售商品</span></div>
+                <div><b id="liangStatStock">0</b><span>库存总量</span></div>
+                <div><b id="liangStatSales">0</b><span>累计销量</span></div>
+            </div>
+
+            <!-- 工具栏：JS 效果 关键词搜索过滤 -->
+            <div class="liang-admin-toolbar">
+                <input type="search" id="liangAdminSearch" placeholder="按商品名/品牌/分类搜索">
+                <button id="liangAdminAddBtn" type="button">+ 新增</button>
+            </div>
+
+            <!-- 表头 -->
+            <div class="liang-admin-table">
+                <div class="liang-admin-row liang-head">
+                    <span style="width:44px"></span>
+                    <span class="liang-admin-name">商品名称</span>
+                    <span class="liang-admin-price">售价</span>
+                    <span class="liang-admin-stock">库存</span>
+                    <span class="liang-admin-del">操作</span>
+                </div>
+                <div id="liangAdminList"></div>
+            </div>
+
+            <footer class="liang-footer">
+                <p>后台数据基于本地 mock 接口与 localStorage 模拟</p>
+                <p>唯品会特卖商城 · 24001010817 梁钰承</p>
+            </footer>
+        </main>
+
+        <!-- 新增商品弹层 -->
+        <div class="liang-sheet-mask" id="liangSheetMask"></div>
+        <div class="liang-sheet" id="liangSheet">
+            <button class="liang-sheet-close" id="liangSheetClose" type="button">×</button>
+            <h3 style="font-size:15px">新增商品</h3>
+            <div class="liang-form">
+                <div class="liang-form-item">
+                    <label>品牌</label>
+                    <input type="text" id="liangNewBrand" placeholder="如：SKECHERS 斯凯奇">
+                </div>
+                <div class="liang-form-item">
+                    <label>商品名</label>
+                    <input type="text" id="liangNewName" placeholder="请输入商品名称">
+                </div>
+                <div class="liang-form-item">
+                    <label>售价(¥)</label>
+                    <input type="number" id="liangNewPrice" min="1" placeholder="如：199">
+                </div>
+                <div class="liang-form-item">
+                    <label>库存(件)</label>
+                    <input type="number" id="liangNewStock" min="0" placeholder="如：100">
+                </div>
+                <div class="liang-form-item">
+                    <label>商品图</label>
+                    <select id="liangNewImg" style="flex:1;color:#333;background:transparent">
+                        <option value="img/goods1.jpg">图1 凉鞋</option>
+                        <option value="img/goods2.jpg">图2 口红</option>
+                        <option value="img/goods3.jpg">图3 大衣</option>
+                        <option value="img/goods5.jpg">图5 精华套装</option>
+                        <option value="img/goods7.jpg">图7 卫衣</option>
+                        <option value="img/goods8.jpg">图8 老爹鞋</option>
+                        <option value="img/goods12.jpg">图12 板鞋</option>
+                        <option value="img/goods15.jpg">图15 皮鞋</option>
+                    </select>
+                </div>
+            </div>
+            <button class="liang-save-btn" id="liangNewSaveBtn" type="button">确认新增</button>
+        </div>
+
+        <button class="liang-backtop">顶部<br>▲</button>
+    </div>
+
+    <script src="js/liang-common.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
