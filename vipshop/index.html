@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!--
+  唯品会特卖商城 - 首页（一级页面）
+  高级网页设计I 期末试题：手机APP模仿与设计（选题：唯品会）
+  24001010817 梁钰承
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>唯品会特卖商城-首页-24001010817梁钰承</title>
+    <link rel="stylesheet" href="css/liang.css">
+</head>
+<body>
+    <div class="liang-app">
+
+        <!-- 顶部：logo + 搜索框（fetch 热搜词） -->
+        <header class="liang-header">
+            <div class="liang-search">
+                <a class="liang-search-logo" href="index.html">
+                    <img src="img/logo.png" alt="唯品会logo">
+                </a>
+                <div class="liang-search-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2">
+                        <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
+                    </svg>
+                    <input type="search" id="liangSearchInput" placeholder="搜索商品，当前热搜：羽绒服">
+                </div>
+                <button class="liang-search-btn" id="liangSearchBtn">搜索</button>
+            </div>
+        </header>
+
+        <main class="liang-main">
+
+            <!-- 轮播图：JS 效果1 自动轮播+圆点+触摸滑动 -->
+            <div class="liang-banner" id="liangBanner">
+                <ul class="liang-banner-list" id="liangBannerList"></ul>
+                <div class="liang-banner-dots" id="liangBannerDots"></div>
+            </div>
+
+            <!-- 金刚区导航 -->
+            <nav class="liang-nav">
+                <a class="liang-nav-item" href="category.html?cat=女装"><img src="img/goods3.jpg" alt="女装"><p>女装</p></a>
+                <a class="liang-nav-item" href="category.html?cat=美妆"><img src="img/goods2.jpg" alt="美妆"><p>美妆</p></a>
+                <a class="liang-nav-item" href="category.html?cat=鞋包"><img src="img/goods12.jpg" alt="鞋包"><p>鞋包</p></a>
+                <a class="liang-nav-item" href="category.html?cat=男装"><img src="img/goods7.jpg" alt="男装"><p>男装</p></a>
+                <a class="liang-nav-item" href="seckill.html"><img src="img/floor-seckill.jpg" alt="秒杀"><p>限时秒杀</p></a>
+            </nav>
+
+            <!-- 限时秒杀楼层：JS 效果2 倒计时 -->
+            <section class="liang-seckill">
+                <div class="liang-seckill-head">
+                    <h2>限时秒杀</h2>
+                    <div class="liang-seckill-time">
+                        <span id="liangSeckillLabel">20点场</span>
+                        <b id="liangHour">00</b>:<b id="liangMinute">00</b>:<b id="liangSecond">00</b>
+                        <a href="seckill.html">更多 &gt;</a>
+                    </div>
+                </div>
+                <ul class="liang-seckill-list" id="liangSeckillList"></ul>
+            </section>
+
+            <!-- 品牌特卖楼层 -->
+            <section class="liang-floor">
+                <div class="liang-floor-head">
+                    <h2>品牌特卖</h2>
+                    <a href="category.html">全部品牌 &gt;</a>
+                </div>
+                <div class="liang-brand-floor">
+                    <img src="img/brand-anta.png" alt="安踏">
+                    <img src="img/brand-paulfrank.png" alt="大嘴猴">
+                    <img src="img/brand-361.png" alt="361度">
+                </div>
+            </section>
+
+            <!-- 服务承诺 -->
+            <img class="liang-floor-img liang-floor" src="img/services.jpg" alt="100%正品 86元免邮 退换无忧" style="margin-top:10px">
+
+            <!-- 楼层促销图 -->
+            <img class="liang-floor-img liang-floor" src="img/floor-1.jpg" alt="橙橙疯抢 天天低价">
+            <img class="liang-floor-img liang-floor" src="img/floor-2.jpg" alt="2折低价 物美超值">
+
+            <!-- 猜你喜欢：fetch 商品接口 + JS 效果3 搜索过滤 -->
+            <section class="liang-floor">
+                <div class="liang-floor-head">
+                    <h2>猜你喜欢</h2>
+                    <span id="liangGoodsCount"></span>
+                </div>
+                <ul class="liang-goods" id="liangGoodsList"></ul>
+            </section>
+
+            <!-- 页脚 -->
+            <footer class="liang-footer">
+                <img src="img/qrcode.jpg" alt="唯品会二维码">
+                <p>唯品会特卖商城 · 24001010817 梁钰承</p>
+                <p>高级网页设计I 期末试题作品 | 纯HTML/CSS/JS实现 · 本地mock数据</p>
+            </footer>
+        </main>
+
+        <!-- 底部导航栏 -->
+        <nav class="liang-tabbar">
+            <a class="liang-active" href="index.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>
+                </svg>首页
+            </a>
+            <a href="category.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>分类
+            </a>
+            <a href="cart.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 4h2l2.5 12h11L21 8H6"/>
+                    <circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/>
+                </svg>购物车<span class="liang-cart-badge" style="display:none"></span>
+            </a>
+            <a href="profile.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>
+                </svg>我的
+            </a>
+        </nav>
+
+        <!-- 返回顶部：JS 效果4 -->
+        <button class="liang-backtop">顶部<br>▲</button>
+    </div>
+
+    <script src="js/liang-common.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
