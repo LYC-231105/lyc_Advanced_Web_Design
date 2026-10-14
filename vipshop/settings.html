@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--
+  唯品会特卖商城 - 个人设置页
+  高级网页设计I 期末试题：手机APP模仿与设计（选题：唯品会）
+  24001010817 梁钰承
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>唯品会特卖商城-个人设置-24001010817梁钰承</title>
+    <link rel="stylesheet" href="css/liang.css">
+</head>
+<body>
+    <div class="liang-app">
+
+        <header class="liang-header">
+            <div class="liang-header-top">
+                <button class="liang-header-back">‹</button>
+                <h1 class="liang-header-title">个人设置</h1>
+                <a class="liang-header-right" href="profile.html">我的</a>
+            </div>
+        </header>
+
+        <main class="liang-main" style="padding-bottom:70px">
+
+            <form class="liang-form" id="liangSettingForm">
+
+                <!-- 头像选择：JS 效果 预设头像切换 + 本地上传预览（FileReader） -->
+                <div class="liang-form-item">
+                    <label>头像</label>
+                    <div class="liang-avatar-picker" id="liangAvatarPicker">
+                        <img src="img/logo.png" data-src="img/logo.png" alt="默认头像" class="liang-active">
+                        <img src="img/goods2.jpg" data-src="img/goods2.jpg" alt="口红头像">
+                        <img src="img/goods12.jpg" data-src="img/goods12.jpg" alt="板鞋头像">
+                        <label class="liang-avatar-upload">
+                            本地上传
+                            <input type="file" id="liangAvatarFile" accept="image/*">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 昵称 -->
+                <div class="liang-form-item">
+                    <label>昵称</label>
+                    <input type="text" id="liangNicknameInput" maxlength="12" placeholder="请输入昵称（2-12位）">
+                </div>
+
+                <!-- 性别 -->
+                <div class="liang-form-item">
+                    <label>性别</label>
+                    <div class="liang-form-radio-group">
+                        <label style="display:flex;align-items:center;gap:5px">
+                            <input type="radio" name="liangGender" value="男" checked>男
+                        </label>
+                        <label style="display:flex;align-items:center;gap:5px">
+                            <input type="radio" name="liangGender" value="女">女
+                        </label>
+                        <label style="display:flex;align-items:center;gap:5px">
+                            <input type="radio" name="liangGender" value="保密">保密
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 生日 -->
+                <div class="liang-form-item">
+                    <label>生日</label>
+                    <input type="date" id="liangBirthday" style="flex:1;color:#333">
+                </div>
+
+                <!-- 收货地址 -->
+                <div class="liang-form-item">
+                    <label>收货地址</label>
+                    <input type="text" id="liangAddress" maxlength="50" placeholder="请输入常用收货地址">
+                </div>
+            </form>
+
+            <!-- JS 效果：表单校验 + 保存到 localStorage -->
+            <button class="liang-save-btn" id="liangSaveBtn" type="button">保 存</button>
+
+            <!-- 退出登录 -->
+            <div class="liang-cell-group" style="margin-top:18px">
+                <a class="liang-cell" href="javascript:void(0)" id="liangLogout" style="justify-content:center;color:var(--liang-red)">
+                    退出登录
+                </a>
+            </div>
+
+            <footer class="liang-footer">
+                <p>唯品会特卖商城 · 24001010817 梁钰承</p>
+            </footer>
+        </main>
+
+        <nav class="liang-tabbar">
+            <a href="index.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>
+                </svg>首页
+            </a>
+            <a href="category.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>分类
+            </a>
+            <a href="cart.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 4h2l2.5 12h11L21 8H6"/>
+                    <circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/>
+                </svg>购物车<span class="liang-cart-badge" style="display:none"></span>
+            </a>
+            <a class="liang-active" href="profile.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>
+                </svg>我的
+            </a>
+        </nav>
+
+        <button class="liang-backtop">顶部<br>▲</button>
+    </div>
+
+    <script src="js/liang-common.js"></script>
+    <script src="js/settings.js"></script>
+</body>
+</html>
