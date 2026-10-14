@@ -5,13 +5,23 @@
         购物车数据读写（localStorage 模拟本地数据库）
    ============================================================ */
 
-/* ---------- fetch 数据接口封装（mock 数据统一入口） ---------- */
+/* ---------- fetch 数据接口封装（mock 数据统一入口） ----------
+ * 正常运行时通过 fetch 访问 data/*.json 本地接口；
+ * 当页面以 file:// 协议直接打开导致 fetch 被浏览器拦截时，
+ * 自动回退到内嵌的 LiangMockData，保证离线也能完整浏览。
+ * ---------------------------------------------------------- */
 function liangFetchJSON(url) {
     return fetch(url).then(function (res) {
         if (!res.ok) {
             throw new Error("接口请求失败：" + url + " (" + res.status + ")");
         }
         return res.json();
+    }).catch(function (err) {
+        if (window.LiangMockData && LiangMockData[url]) {
+            console.warn("[liang] fetch 被拦截，已回退到内嵌数据：", url);
+            return Promise.resolve(JSON.parse(JSON.stringify(LiangMockData[url])));
+        }
+        throw err;
     });
 }
 
