@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+  唯品会特卖商城 - 购物车页
+  高级网页设计I 期末试题：手机APP模仿与设计（选题：唯品会）
+  24001010817 梁钰承
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>唯品会特卖商城-购物车-24001010817梁钰承</title>
+    <link rel="stylesheet" href="css/liang.css">
+</head>
+<body>
+    <div class="liang-app">
+
+        <header class="liang-header">
+            <div class="liang-header-top">
+                <button class="liang-header-back">‹</button>
+                <h1 class="liang-header-title">购物车</h1>
+                <a class="liang-header-right" href="index.html">首页</a>
+            </div>
+        </header>
+
+        <main class="liang-main" style="padding-bottom:120px">
+            <!-- 购物车列表：JS 效果 全选/合计/增减/删除 -->
+            <ul class="liang-cart-list" id="liangCartList"></ul>
+
+            <!-- 结算栏 -->
+            <div class="liang-cart-footer">
+                <label>
+                    <input type="checkbox" class="liang-cart-check" id="liangCheckAll">全选
+                </label>
+                <p class="liang-cart-total">合计：<b id="liangCartTotal">¥0</b></p>
+                <button class="liang-cart-settle" id="liangSettleBtn" type="button">去结算(0)</button>
+            </div>
+        </main>
+
+        <nav class="liang-tabbar">
+            <a href="index.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>
+                </svg>首页
+            </a>
+            <a href="category.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>分类
+            </a>
+            <a class="liang-active" href="cart.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 4h2l2.5 12h11L21 8H6"/>
+                    <circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/>
+                </svg>购物车<span class="liang-cart-badge" style="display:none"></span>
+            </a>
+            <a href="profile.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>
+                </svg>我的
+            </a>
+        </nav>
+
+        <button class="liang-backtop">顶部<br>▲</button>
+    </div>
+
+    <script src="js/liang-common.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>
