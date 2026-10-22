@@ -1,27 +1,68 @@
 {
   "code": 200,
-  "msg": "分类数据接口",
+  "msg": "分类数据接口：商品图、名称、链接按 productId 关联",
   "data": [
     {
       "name": "女装",
       "sections": [
         {
-          "title": "当季热卖",
+          "title": "日常连衣裙",
           "items": [
-            { "name": "呢子大衣", "img": "img/goods3.jpg" },
-            { "name": "连衣裙", "img": "img/goods6.jpg" },
-            { "name": "针织裙", "img": "img/goods9.jpg" },
-            { "name": "羽绒服", "img": "img/goods14.jpg" },
-            { "name": "卫衣", "img": "img/goods7.jpg" },
-            { "name": "牛仔外套", "img": "img/goods11.jpg" }
+            {
+              "name": "蓝色波点无袖连衣裙",
+              "img": "img/products/product-3-1.webp",
+              "productId": 3
+            },
+            {
+              "name": "黑底花卉印花长裙",
+              "img": "img/products/product-6-1.webp",
+              "productId": 6
+            },
+            {
+              "name": "黑白格纹蝴蝶结连衣裙",
+              "img": "img/products/product-9-1.webp",
+              "productId": 9
+            },
+            {
+              "name": "浅灰色无袖长款连衣裙",
+              "img": "img/products/product-14-1.webp",
+              "productId": 14
+            },
+            {
+              "name": "黑白植物印花无袖长裙",
+              "img": "img/products/product-22-1.webp",
+              "productId": 22
+            },
+            {
+              "name": "灰绿色抹胸层叠短裙",
+              "img": "img/products/product-23-1.webp",
+              "productId": 23
+            },
+            {
+              "name": "浅色细波点无袖连衣裙",
+              "img": "img/products/product-25-1.webp",
+              "productId": 25
+            }
           ]
         },
         {
-          "title": "品牌推荐",
+          "title": "礼服与长裙",
           "items": [
-            { "name": "伊芙丽", "img": "img/banner2.jpg" },
-            { "name": "EP雅莹", "img": "img/banner1.jpg" },
-            { "name": "江南布衣", "img": "img/floor-1.jpg" }
+            {
+              "name": "红色抹胸长款礼服裙",
+              "img": "img/products/product-4-1.webp",
+              "productId": 4
+            },
+            {
+              "name": "黑色抹胸长款礼服裙",
+              "img": "img/products/product-24-1.webp",
+              "productId": 24
+            },
+            {
+              "name": "酒红色撞色长袖长裙",
+              "img": "img/products/product-26-1.webp",
+              "productId": 26
+            }
           ]
         }
       ]
@@ -30,19 +71,73 @@
       "name": "美妆",
       "sections": [
         {
-          "title": "热销彩妆",
+          "title": "人气彩妆",
           "items": [
-            { "name": "口红", "img": "img/goods2.jpg" },
-            { "name": "唇膏", "img": "img/goods10.jpg" },
-            { "name": "护肤套装", "img": "img/goods5.jpg" },
-            { "name": "香氛", "img": "img/floor-2.jpg" }
+            {
+              "name": "经典红色唇膏",
+              "img": "img/products/product-2-1.webp",
+              "productId": 2
+            },
+            {
+              "name": "Lash Princess 黑色睫毛膏",
+              "img": "img/products/product-10-1.webp",
+              "productId": 10
+            },
+            {
+              "name": "多色眼影盘带镜款",
+              "img": "img/products/product-27-1.webp",
+              "productId": 27
+            },
+            {
+              "name": "米色粉饼圆盒带镜款",
+              "img": "img/products/product-28-1.webp",
+              "productId": 28
+            },
+            {
+              "name": "红色指甲油",
+              "img": "img/products/product-29-1.webp",
+              "productId": 29
+            }
           ]
         },
         {
-          "title": "大牌专区",
+          "title": "香水精选",
           "items": [
-            { "name": "雅诗兰黛", "img": "img/banner1.jpg" },
-            { "name": "MAC魅可", "img": "img/goods2.jpg" }
+            {
+              "name": "CK One 淡香水",
+              "img": "img/products/product-30-1.webp",
+              "productId": 30
+            },
+            {
+              "name": "COCO NOIR 香水",
+              "img": "img/products/product-31-1.webp",
+              "productId": 31
+            },
+            {
+              "name": "J’adore 真我香水",
+              "img": "img/products/product-32-1.webp",
+              "productId": 32
+            }
+          ]
+        },
+        {
+          "title": "身体护理",
+          "items": [
+            {
+              "name": "乳木果保湿沐浴露",
+              "img": "img/products/product-5-1.webp",
+              "productId": 5
+            },
+            {
+              "name": "植物图案泵装洗手液",
+              "img": "img/products/product-33-1.webp",
+              "productId": 33
+            },
+            {
+              "name": "Men 男士润肤乳",
+              "img": "img/products/product-34-1.webp",
+              "productId": 34
+            }
           ]
         }
       ]
@@ -51,20 +146,98 @@
       "name": "鞋包",
       "sections": [
         {
-          "title": "人气鞋款",
+          "title": "包袋精选",
           "items": [
-            { "name": "凉鞋", "img": "img/goods1.jpg" },
-            { "name": "老爹鞋", "img": "img/goods8.jpg" },
-            { "name": "休闲板鞋", "img": "img/goods12.jpg" },
-            { "name": "商务皮鞋", "img": "img/goods15.jpg" }
+            {
+              "name": "深蓝色双提手手提包",
+              "img": "img/products/product-16-1.webp",
+              "productId": 16
+            },
+            {
+              "name": "棕色拉链双提手手提包",
+              "img": "img/products/product-17-1.webp",
+              "productId": 17
+            },
+            {
+              "name": "浅蓝绿色通勤手提包",
+              "img": "img/products/product-18-1.webp",
+              "productId": 18
+            },
+            {
+              "name": "白色翻盖双肩背包",
+              "img": "img/products/product-19-1.webp",
+              "productId": 19
+            },
+            {
+              "name": "黑色简约双提手手提包",
+              "img": "img/products/product-20-1.webp",
+              "productId": 20
+            },
+            {
+              "name": "藏蓝色翻盖双肩背包",
+              "img": "img/products/product-21-1.png",
+              "productId": 21
+            }
           ]
         },
         {
-          "title": "品牌推荐",
+          "title": "女鞋精选",
           "items": [
-            { "name": "斯凯奇", "img": "img/goods8.jpg" },
-            { "name": "鬼塚虎", "img": "img/goods12.jpg" },
-            { "name": "爱步", "img": "img/goods15.jpg" }
+            {
+              "name": "黑色露趾高跟凉鞋",
+              "img": "img/products/product-1-1.webp",
+              "productId": 1
+            },
+            {
+              "name": "黑色尖头高跟鞋棕色内里款",
+              "img": "img/products/product-40-1.webp",
+              "productId": 40
+            },
+            {
+              "name": "金色尖头高跟鞋",
+              "img": "img/products/product-41-1.webp",
+              "productId": 41
+            },
+            {
+              "name": "黑色尖头高跟鞋米色内里款",
+              "img": "img/products/product-42-1.webp",
+              "productId": 42
+            },
+            {
+              "name": "红色尖头高跟鞋",
+              "img": "img/products/product-43-1.webp",
+              "productId": 43
+            }
+          ]
+        },
+        {
+          "title": "运动休闲鞋",
+          "items": [
+            {
+              "name": "Future Rider 撞色休闲运动鞋",
+              "img": "img/products/product-8-1.webp",
+              "productId": 8
+            },
+            {
+              "name": "Air Jordan 1 红黑拼色运动鞋",
+              "img": "img/products/product-12-1.webp",
+              "productId": 12
+            },
+            {
+              "name": "白红拼色低帮休闲鞋",
+              "img": "img/products/product-15-1.webp",
+              "productId": 15
+            },
+            {
+              "name": "绿白拼色棒球钉鞋",
+              "img": "img/products/product-44-1.webp",
+              "productId": 44
+            },
+            {
+              "name": "白色红边低帮运动鞋",
+              "img": "img/products/product-45-1.webp",
+              "productId": 45
+            }
           ]
         }
       ]
@@ -73,18 +246,58 @@
       "name": "男装",
       "sections": [
         {
-          "title": "热卖男装",
+          "title": "衬衫精选",
           "items": [
-            { "name": "卫衣", "img": "img/goods7.jpg" },
-            { "name": "牛仔夹克", "img": "img/goods11.jpg" },
-            { "name": "T恤", "img": "img/banner3.jpg" }
+            {
+              "name": "蓝黑格纹长袖衬衫",
+              "img": "img/products/product-7-1.webp",
+              "productId": 7
+            },
+            {
+              "name": "红黑格纹长袖衬衫",
+              "img": "img/products/product-11-1.webp",
+              "productId": 11
+            },
+            {
+              "name": "蓝底白花短袖衬衫",
+              "img": "img/products/product-35-1.webp",
+              "productId": 35
+            },
+            {
+              "name": "绿蓝棕格纹长袖衬衫",
+              "img": "img/products/product-36-1.webp",
+              "productId": 36
+            }
           ]
         },
         {
-          "title": "品牌推荐",
+          "title": "T恤与上衣",
           "items": [
-            { "name": "北面", "img": "img/brand-anta.png" },
-            { "name": "马克华菲", "img": "img/banner3.jpg" }
+            {
+              "name": "白色印花短袖T恤",
+              "img": "img/products/product-13-1.webp",
+              "productId": 13
+            },
+            {
+              "name": "灰黑拼色亨利领长袖上衣",
+              "img": "img/products/product-37-1.png",
+              "productId": 37
+            },
+            {
+              "name": "藏蓝色圆领长袖上衣",
+              "img": "img/products/product-39-1.png",
+              "productId": 39
+            }
+          ]
+        },
+        {
+          "title": "夹克外套",
+          "items": [
+            {
+              "name": "卡其色立领多口袋夹克",
+              "img": "img/products/product-38-1.png",
+              "productId": 38
+            }
           ]
         }
       ]
@@ -93,37 +306,68 @@
       "name": "运动",
       "sections": [
         {
-          "title": "运动精选",
+          "title": "球类与装备",
           "items": [
-            { "name": "运动鞋", "img": "img/goods8.jpg" },
-            { "name": "板鞋", "img": "img/goods12.jpg" },
-            { "name": "运动卫衣", "img": "img/goods7.jpg" }
+            {
+              "name": "棕色篮球",
+              "img": "img/products/product-46-1.webp",
+              "productId": 46
+            },
+            {
+              "name": "白色羽毛球",
+              "img": "img/products/product-47-1.webp",
+              "productId": 47
+            },
+            {
+              "name": "黑白拼块足球",
+              "img": "img/products/product-48-1.webp",
+              "productId": 48
+            },
+            {
+              "name": "荧光黄色网球",
+              "img": "img/products/product-49-1.webp",
+              "productId": 49
+            },
+            {
+              "name": "红框网球拍",
+              "img": "img/products/product-50-1.webp",
+              "productId": 50
+            },
+            {
+              "name": "蓝白拼色排球",
+              "img": "img/products/product-51-1.webp",
+              "productId": 51
+            }
           ]
         },
         {
-          "title": "品牌推荐",
+          "title": "运动鞋精选",
           "items": [
-            { "name": "安踏", "img": "img/brand-anta.png" },
-            { "name": "361°", "img": "img/brand-361.png" },
-            { "name": "Pual Frank", "img": "img/brand-paulfrank.png" }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "内衣",
-      "sections": [
-        {
-          "title": "舒适内衣",
-          "items": [
-            { "name": "无痕套装", "img": "img/goods4.jpg" },
-            { "name": "家居服", "img": "img/floor-3.png" }
-          ]
-        },
-        {
-          "title": "品牌推荐",
-          "items": [
-            { "name": "曼妮芬", "img": "img/goods4.jpg" }
+            {
+              "name": "Future Rider 撞色休闲运动鞋",
+              "img": "img/products/product-8-1.webp",
+              "productId": 8
+            },
+            {
+              "name": "Air Jordan 1 红黑拼色运动鞋",
+              "img": "img/products/product-12-1.webp",
+              "productId": 12
+            },
+            {
+              "name": "白红拼色低帮休闲鞋",
+              "img": "img/products/product-15-1.webp",
+              "productId": 15
+            },
+            {
+              "name": "绿白拼色棒球钉鞋",
+              "img": "img/products/product-44-1.webp",
+              "productId": 44
+            },
+            {
+              "name": "白色红边低帮运动鞋",
+              "img": "img/products/product-45-1.webp",
+              "productId": 45
+            }
           ]
         }
       ]

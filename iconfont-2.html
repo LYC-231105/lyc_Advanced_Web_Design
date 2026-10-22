@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucide 图标字模谱</title>
+<!-- 本地 CDN：Lucide（SVG 方式） -->
+<script src="cdn/lucide/lucide.min.js"></script>
+<style>
+  /* ========== 字模谱 卷二 · 青花与黛青 ========== */
+  :root {
+    --lyc_0817_paper: #F4F5EF;      /* 瓷青纸，与卷一共用 */
+    --lyc_0817_ink: #23271F;        /* 墨 */
+    --lyc_0817_rule: #D9DCCE;       /* 细线 */
+    --lyc_0817_muted: #6E7263;      /* 淡墨 */
+    --lyc_0817_indigo: #33566B;     /* 黛青 */
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--lyc_0817_paper);
+    color: var(--lyc_0817_ink);
+    line-height: 1.7;
+  }
+  ::selection { background: var(--lyc_0817_indigo); color: var(--lyc_0817_paper); }
+  .lyc_0817_container { max-width: 1120px; margin: 0 auto; padding: 0 28px 56px; }
+
+  /* 页眉：书眉 */
+  .lyc_0817_masthead {
+    display: flex; align-items: baseline; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+    padding: 22px 0 18px;
+    border-bottom: 1px solid var(--lyc_0817_rule);
+  }
+  .lyc_0817_masthead_title {
+    font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+    font-size: 16px; font-weight: 600; letter-spacing: 4px;
+  }
+  .lyc_0817_masthead_sub { font-size: 12px; color: var(--lyc_0817_muted); margin-left: 14px; letter-spacing: 1px; }
+  .lyc_0817_home {
+    color: var(--lyc_0817_ink); text-decoration: none; font-size: 13px;
+    border-bottom: 1px solid var(--lyc_0817_rule);
+    padding-bottom: 2px; transition: color .2s, border-color .2s;
+  }
+  .lyc_0817_home svg { width: 13px; height: 13px; margin-right: 6px; vertical-align: -2px; }
+  .lyc_0817_home:hover { color: var(--lyc_0817_indigo); border-color: var(--lyc_0817_indigo); }
+  .lyc_0817_home:focus-visible { outline: 2px solid var(--lyc_0817_indigo); outline-offset: 4px; }
+
+  /* 首屏：铸字样张 */
+  .lyc_0817_hero {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 56px; align-items: center;
+    padding: 72px 0 76px;
+  }
+  .lyc_0817_hero_cell {
+    width: 216px; height: 248px;
+    border: 1px solid var(--lyc_0817_ink);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;
+  }
+  .lyc_0817_hero_cell svg { width: 112px; height: 112px; stroke-width: 1.25; }
+  .lyc_0817_hero_cell:hover { background: var(--lyc_0817_indigo); color: var(--lyc_0817_paper); }
+  .lyc_0817_hero_text h1 {
+    font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+    font-size: clamp(34px, 4.6vw, 52px);
+    font-weight: 600; line-height: 1.35; letter-spacing: 2px;
+    max-width: 14em;
+  }
+  .lyc_0817_hero_text p {
+    margin-top: 20px; max-width: 42em;
+    color: var(--lyc_0817_muted); font-size: 15px; line-height: 2;
+  }
+  .lyc_0817_seal {
+    display: inline-grid; place-items: center;
+    width: 38px; height: 38px; margin-top: 26px;
+    background: var(--lyc_0817_indigo); color: var(--lyc_0817_paper);
+    font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+    font-size: 19px; font-weight: 600;
+    transform: rotate(-3deg);
+  }
+
+  /* 分区：双细线 + 标题 + 数量 */
+  .lyc_0817_section { margin-top: 58px; }
+  .lyc_0817_section_head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-top: 3px double var(--lyc_0817_ink);
+    padding: 14px 2px 12px;
+  }
+  .lyc_0817_section_head h2 {
+    font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+    font-size: 20px; font-weight: 600; letter-spacing: 2px;
+  }
+  .lyc_0817_section_head h2 span {
+    font-size: 12px; color: var(--lyc_0817_muted); margin-left: 10px; letter-spacing: 0;
+  }
+  .lyc_0817_count {
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size: 12px; color: var(--lyc_0817_muted);
+  }
+
+  /* 字模格：共线细线网格 */
+  .lyc_0817_grid {
+    display: grid; gap: 1px;
+    background: var(--lyc_0817_rule);
+    border: 1px solid var(--lyc_0817_rule);
+    grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+  }
+  .lyc_0817_cell {
+    background: var(--lyc_0817_paper);
+    min-height: 112px; padding: 24px 8px 16px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  }
+  .lyc_0817_cell svg { width: 28px; height: 28px; }
+  .lyc_0817_cell_name {
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size: 11px; opacity: .6; word-break: break-all; text-align: center; line-height: 1.5;
+  }
+  .lyc_0817_cell:hover { background: var(--lyc_0817_indigo); color: var(--lyc_0817_paper); }
+
+  /* 演示格：更宽 */
+  .lyc_0817_grid_demo { grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); }
+  .lyc_0817_grid_demo .lyc_0817_cell { min-height: 118px; }
+
+  /* 传统色演示（SVG 用 currentColor 上色） */
+  .lyc_0817_c_cinnabar { color: #A8402F; }  /* 朱砂，与卷一呼应 */
+  .lyc_0817_c_indigo { color: var(--lyc_0817_indigo); }
+  .lyc_0817_c_gamboge { color: #B08417; }   /* 藤黄 */
+  .lyc_0817_c_mineral { color: #4A7A5E; }   /* 石绿 */
+  /* 描边粗细演示（SVG 独有：stroke-width 可由 CSS 控制） */
+  .lyc_0817_w1 svg { stroke-width: 1; }
+  .lyc_0817_w2 svg { stroke-width: 2; }
+  .lyc_0817_w3 svg { stroke-width: 3; }
+
+  /* 页脚：版权页 */
+  .lyc_0817_colophon {
+    margin-top: 72px; padding-top: 20px;
+    border-top: 1px solid var(--lyc_0817_rule);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    font-size: 12px; color: var(--lyc_0817_muted);
+  }
+
+  @media (max-width: 720px) {
+    .lyc_0817_hero { grid-template-columns: 1fr; gap: 36px; padding: 48px 0 52px; }
+    .lyc_0817_hero_cell { width: 168px; height: 196px; }
+    .lyc_0817_hero_cell svg { width: 88px; height: 88px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="lyc_0817_container">
+
+  <header class="lyc_0817_masthead">
+    <div>
+      <span class="lyc_0817_masthead_title">字模谱</span>
+      <span class="lyc_0817_masthead_sub">卷二（Lucide）</span>
+    </div>
+    <a class="lyc_0817_home" href="index.html"><i data-lucide="home"></i>返回首页</a>
+  </header>
+
+  <section class="lyc_0817_hero">
+    <div class="lyc_0817_hero_cell">
+      <i data-lucide="feather"></i>
+      <span class="lyc_0817_cell_name">feather</span>
+    </div>
+    <div class="lyc_0817_hero_text">
+      <h1>Lucide 图标字模谱</h1>
+      <p>图标以内联 SVG 的方式绘制，颜色经由 currentColor、描边粗细经由 stroke-width，都可以用 CSS 直接控制。悬停任意一格，可以看到线条反白的效果。</p>
+      <span class="lyc_0817_seal">青</span>
+    </div>
+  </section>
+
+  <section class="lyc_0817_section">
+    <div class="lyc_0817_section_head">
+      <h2>常用<span>Common</span></h2>
+      <span class="lyc_0817_count">24 枚</span>
+    </div>
+    <div class="lyc_0817_grid" id="lyc_0817_common_grid"></div>
+  </section>
+
+  <section class="lyc_0817_section">
+    <div class="lyc_0817_section_head">
+      <h2>箭头与界面<span>Interface</span></h2>
+      <span class="lyc_0817_count">24 枚</span>
+    </div>
+    <div class="lyc_0817_grid" id="lyc_0817_ui_grid"></div>
+  </section>
+
+  <section class="lyc_0817_section">
+    <div class="lyc_0817_section_head">
+      <h2>尺寸<span>width 与 height 属性</span></h2>
+      <span class="lyc_0817_count">6 级</span>
+    </div>
+    <div class="lyc_0817_grid lyc_0817_grid_demo" id="lyc_0817_size_row"></div>
+  </section>
+
+  <section class="lyc_0817_section">
+    <div class="lyc_0817_section_head">
+      <h2>颜色与描边<span>currentColor 与 stroke-width</span></h2>
+      <span class="lyc_0817_count">7 例</span>
+    </div>
+    <div class="lyc_0817_grid lyc_0817_grid_demo">
+      <div class="lyc_0817_cell lyc_0817_c_cinnabar"><i data-lucide="heart" width="30" height="30"></i><span class="lyc_0817_cell_name">朱砂</span></div>
+      <div class="lyc_0817_cell lyc_0817_c_indigo"><i data-lucide="circle-check" width="30" height="30"></i><span class="lyc_0817_cell_name">黛青</span></div>
+      <div class="lyc_0817_cell lyc_0817_c_gamboge"><i data-lucide="bell" width="30" height="30"></i><span class="lyc_0817_cell_name">藤黄</span></div>
+      <div class="lyc_0817_cell lyc_0817_c_mineral"><i data-lucide="bookmark" width="30" height="30"></i><span class="lyc_0817_cell_name">石绿</span></div>
+      <div class="lyc_0817_cell lyc_0817_w1"><i data-lucide="star" width="30" height="30"></i><span class="lyc_0817_cell_name">stroke-width 1</span></div>
+      <div class="lyc_0817_cell lyc_0817_w2"><i data-lucide="star" width="30" height="30"></i><span class="lyc_0817_cell_name">stroke-width 2</span></div>
+      <div class="lyc_0817_cell lyc_0817_w3"><i data-lucide="star" width="30" height="30"></i><span class="lyc_0817_cell_name">stroke-width 3</span></div>
+    </div>
+  </section>
+
+  <footer class="lyc_0817_colophon">
+    <span>Lucide 0.462.0，以内联 SVG 方式渲染，资源位于本目录 cdn 文件夹。</span>
+    <span>字模谱 卷二</span>
+  </footer>
+</div>
+
+<script>
+  // 图标数据（Lucide 图标的 kebab-case 名称）
+  const lyc_0817_commonIcons = [
+    "home", "user", "settings", "search", "heart", "star",
+    "bell", "mail", "camera", "calendar", "check", "download",
+    "trash-2", "pencil", "lock", "globe", "rocket", "zap",
+    "cloud", "phone", "wifi", "music", "image", "shopping-cart"
+  ];
+  const lyc_0817_uiIcons = [
+    "arrow-left", "arrow-right", "arrow-up", "arrow-down",
+    "chevron-left", "chevron-right", "chevron-up", "chevron-down",
+    "menu", "x", "plus", "minus",
+    "sun", "moon", "eye", "eye-off",
+    "log-in", "log-out", "refresh-cw", "external-link",
+    "map-pin", "bookmark", "message-circle", "share-2"
+  ];
+  const lyc_0817_sizes = [16, 24, 32, 40, 48, 64];
+
+  // 渲染一组字模格
+  function lyc_0817_renderGrid(lyc_0817_elId, lyc_0817_list) {
+    const lyc_0817_grid = document.getElementById(lyc_0817_elId);
+    lyc_0817_list.forEach(function (lyc_0817_name) {
+      const lyc_0817_cell = document.createElement("div");
+      lyc_0817_cell.className = "lyc_0817_cell";
+      lyc_0817_cell.innerHTML =
+        '<i data-lucide="' + lyc_0817_name + '"></i>' +
+        '<span class="lyc_0817_cell_name">' + lyc_0817_name + "</span>";
+      lyc_0817_grid.appendChild(lyc_0817_cell);
+    });
+  }
+
+  lyc_0817_renderGrid("lyc_0817_common_grid", lyc_0817_commonIcons);
+  lyc_0817_renderGrid("lyc_0817_ui_grid", lyc_0817_uiIcons);
+
+  // 渲染尺寸演示
+  const lyc_0817_sizeRow = document.getElementById("lyc_0817_size_row");
+  lyc_0817_sizes.forEach(function (lyc_0817_s) {
+    const lyc_0817_cell = document.createElement("div");
+    lyc_0817_cell.className = "lyc_0817_cell";
+    lyc_0817_cell.innerHTML =
+      '<i data-lucide="star" width="' + lyc_0817_s + '" height="' + lyc_0817_s + '"></i>' +
+      '<span class="lyc_0817_cell_name">' + lyc_0817_s + "px</span>";
+    lyc_0817_sizeRow.appendChild(lyc_0817_cell);
+  });
+
+  // 核心：把所有 <i data-lucide="..."> 替换为内联 SVG
+  lucide.createIcons();
+</script>
+</body>
+</html>

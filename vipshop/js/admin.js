@@ -16,22 +16,18 @@ var AdminStore = {
     KEY: "liang_admin_extra",
     DELETED: "liang_admin_deleted",
     readExtra: function () {
-        try { return JSON.parse(localStorage.getItem(this.KEY)) || []; } catch (e) { return []; }
+        return liangReadList(this.KEY);
     },
     writeExtra: function (arr) { localStorage.setItem(this.KEY, JSON.stringify(arr)); },
     readDeleted: function () {
-        try { return JSON.parse(localStorage.getItem(this.DELETED)) || []; } catch (e) { return []; }
+        return liangReadList(this.DELETED);
     },
     writeDeleted: function (arr) { localStorage.setItem(this.DELETED, JSON.stringify(arr)); }
 };
 
 /* ---------- 合并基础数据与本地新增，过滤已删除 ---------- */
 function mergeGoods() {
-    var deleted = AdminStore.readDeleted();
-    var extra = AdminStore.readExtra();
-    return baseGoods
-        .filter(function (g) { return deleted.indexOf(g.id) === -1; })
-        .concat(extra);
+    return LiangCatalog.merge(baseGoods);
 }
 
 /* ---------- 渲染 ---------- */
@@ -59,9 +55,9 @@ function render(kw) {
             ? "<button class='liang-admin-del' type='button' data-extra='" + g.id + "'>删除</button>"
             : "<button class='liang-admin-del' type='button' data-base='" + g.id + "'>删除</button>";
         return "<div class='liang-admin-row'>"
-            + "<img src='" + g.img + "' alt='" + g.brand + "'>"
-            + "<div class='liang-admin-name'><span>" + g.brand + " " + g.name + "</span>"
-            + "<small>" + (g.category || "未分类") + " · 销量" + (g.sales || 0) + "</small></div>"
+            + "<img src='" + liangEscape(g.img) + "' alt='" + liangEscape(g.name) + "'>"
+            + "<div class='liang-admin-name'><a href='detail.html?id=" + g.id + "'><span>" + liangEscape(g.brand) + " " + liangEscape(g.name) + "</span></a>"
+            + "<small>" + liangEscape(g.category || "未分类") + " · 销量" + (g.sales || 0) + "</small></div>"
             + "<span class='liang-admin-price'>¥" + g.price + "</span>"
             + "<span class='liang-admin-stock'>" + (g.stock || 0) + "</span>"
             + del
@@ -70,8 +66,11 @@ function render(kw) {
 }
 
 /* ---------- 初始化：fetch 商品接口 ---------- */
-liangFetchJSON("data/products.json").then(function (res) {
+liangLoadJSON("data/products.json").then(function (res) {
     baseGoods = res.data;
+    document.getElementById("liangNewImg").innerHTML = baseGoods.map(function (g) {
+        return '<option value="' + liangEscape(g.img) + '">' + liangEscape(g.brand + " " + g.name) + '</option>';
+    }).join("");
     render("");
 }).catch(function (err) {
     console.error(err);
@@ -102,6 +101,7 @@ adminListEl.addEventListener("click", function (e) {
 
 /* ---------- 新增商品弹层 ---------- */
 document.getElementById("liangAdminAddBtn").addEventListener("click", function () {
+    syncPhotoFields();
     mask.classList.add("liang-show");
     sheet.classList.add("liang-show");
 });
@@ -112,19 +112,34 @@ function closeSheet() {
 document.getElementById("liangSheetClose").addEventListener("click", closeSheet);
 mask.addEventListener("click", closeSheet);
 
+function syncPhotoFields() {
+    var path = document.getElementById("liangNewImg").value;
+    var product = baseGoods.find(function (g) { return g.img === path; });
+    if (!product) return;
+    document.getElementById("liangNewBrand").value = product.brand;
+    document.getElementById("liangNewName").value = product.name;
+    document.getElementById("liangNewCategory").value = product.category;
+    document.getElementById("liangNewPreview").src = path;
+    document.getElementById("liangNewPreview").alt = product.name;
+}
+document.getElementById("liangNewImg").addEventListener("change", syncPhotoFields);
+
 document.getElementById("liangNewSaveBtn").addEventListener("click", function () {
     var brand = document.getElementById("liangNewBrand").value.trim();
     var name = document.getElementById("liangNewName").value.trim();
-    var price = parseFloat(document.getElementById("liangNewPrice").value);
-    var stock = parseInt(document.getElementById("liangNewStock").value, 10) || 0;
+    var price = Number(document.getElementById("liangNewPrice").value);
+    var stock = Number(document.getElementById("liangNewStock").value);
     var img = document.getElementById("liangNewImg").value;
 
     if (brand.length < 2) { liangToast("请输入品牌名称"); return; }
     if (name.length < 2) { liangToast("请输入商品名称"); return; }
-    if (!(price > 0)) { liangToast("请输入正确的售价"); return; }
+    if (!Number.isFinite(price) || price <= 0 || price > 999999 || Math.abs(price * 100 - Math.round(price * 100)) > 0.000001) { liangToast("售价应大于0，且最多两位小数"); return; }
+    if (!Number.isInteger(stock) || stock < 0 || stock > 999999) { liangToast("库存须为0到999999的整数"); return; }
+    var source = baseGoods.find(function (g) { return g.img === img; });
+    if (!source) { liangToast("请选择有效的本地商品图"); return; }
 
     var extra = AdminStore.readExtra();
-    var newId = 1001 + extra.length;
+    var newId = Math.max(Date.now(), 1001, ...extra.map(function (g) { return g.id + 1; }));
     extra.push({
         id: newId,
         brand: brand,
@@ -132,10 +147,12 @@ document.getElementById("liangNewSaveBtn").addEventListener("click", function ()
         price: price,
         marketPrice: Math.round(price * 2.5),
         img: img,
-        category: "新品",
+        category: document.getElementById("liangNewCategory").value,
         stock: stock,
         sales: 0,
-        gallery: [img],
+        gallery: source.gallery.slice(),
+        specs: source.specs.slice(),
+        specLabel: source.specLabel || "规格",
         desc: name
     });
     AdminStore.writeExtra(extra);
@@ -146,5 +163,6 @@ document.getElementById("liangNewSaveBtn").addEventListener("click", function ()
     document.getElementById("liangNewName").value = "";
     document.getElementById("liangNewPrice").value = "";
     document.getElementById("liangNewStock").value = "";
+    document.getElementById("liangAdminSearch").value = "";
     render("");
 });

@@ -10,13 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>唯品会特卖商城-分类-24001010817梁钰承</title>
     <link rel="stylesheet" href="css/liang.css">
+    <link rel="icon" href="img/vip-favicon.ico">
 </head>
 <body>
     <div class="liang-app">
 
         <header class="liang-header">
             <div class="liang-header-top">
-                <button class="liang-header-back">‹</button>
+                <button class="liang-header-back" type="button" aria-label="返回上一页">‹</button>
                 <h1 class="liang-header-title">商品分类</h1>
                 <a class="liang-header-right" href="index.html">首页</a>
             </div>
@@ -39,12 +40,12 @@
         </main>
 
         <!-- 底部推荐商品（fetch 商品接口） -->
-        <main class="liang-main">
+        <section class="liang-main" aria-label="分类好物推荐">
             <section class="liang-floor">
                 <div class="liang-floor-head"><h2>分类好物推荐</h2></div>
                 <ul class="liang-goods" id="liangCatGoods"></ul>
             </section>
-        </main>
+        </section>
 
         <nav class="liang-tabbar">
             <a href="index.html">

@@ -4,11 +4,65 @@
   "hour": 20,
   "minute": 0,
   "data": [
-    { "id": 2,  "img": "img/goods2.jpg",  "brand": "MAC 魅可",        "name": "经典子弹头口红 #Chili", "price": 149, "originalPrice": 230, "total": 500, "sold": 436 },
-    { "id": 5,  "img": "img/goods5.jpg",  "brand": "ESTEE LAUDER",    "name": "小棕瓶修护精华套装",    "price": 799, "originalPrice": 1560, "total": 200, "sold": 187 },
-    { "id": 12, "img": "img/goods12.jpg", "brand": "ONITSUKA TIGER",  "name": "MEXICO 66 休闲板鞋",    "price": 329, "originalPrice": 790,  "total": 300, "sold": 121 },
-    { "id": 4,  "img": "img/goods4.jpg",  "brand": "MANIFORM 曼妮芬", "name": "轻塑形无痕内衣套装",    "price": 129, "originalPrice": 399,  "total": 400, "sold": 366 },
-    { "id": 8,  "img": "img/goods8.jpg",  "brand": "SKECHERS 斯凯奇", "name": "复古厚底老爹运动鞋",    "price": 269, "originalPrice": 729,  "total": 260, "sold": 58 },
-    { "id": 10, "img": "img/goods10.jpg", "brand": "ESTEE LAUDER",    "name": "倾慕哑光唇膏 #333",     "price": 199, "originalPrice": 320,  "total": 350, "sold": 294 }
+    {
+      "id": 2,
+      "img": "img/products/product-2-1.webp",
+      "brand": "彩妆精选",
+      "name": "经典红色唇膏",
+      "price": 49,
+      "originalPrice": 129,
+      "total": 500,
+      "sold": 436
+    },
+    {
+      "id": 5,
+      "img": "img/products/product-5-1.webp",
+      "brand": "OLAY 玉兰油",
+      "name": "乳木果保湿沐浴露",
+      "price": 59,
+      "originalPrice": 129,
+      "total": 200,
+      "sold": 187
+    },
+    {
+      "id": 12,
+      "img": "img/products/product-12-1.webp",
+      "brand": "NIKE 耐克",
+      "name": "Air Jordan 1 红黑拼色运动鞋",
+      "price": 329,
+      "originalPrice": 790,
+      "total": 300,
+      "sold": 121
+    },
+    {
+      "id": 4,
+      "img": "img/products/product-4-1.webp",
+      "brand": "女装精选",
+      "name": "红色抹胸长款礼服裙",
+      "price": 299,
+      "originalPrice": 899,
+      "total": 400,
+      "sold": 366
+    },
+    {
+      "id": 8,
+      "img": "img/products/product-8-1.webp",
+      "brand": "PUMA 彪马",
+      "name": "Future Rider 撞色休闲运动鞋",
+      "price": 269,
+      "originalPrice": 729,
+      "total": 260,
+      "sold": 58
+    },
+    {
+      "id": 10,
+      "img": "img/products/product-10-1.webp",
+      "brand": "essence",
+      "name": "Lash Princess 黑色睫毛膏",
+      "price": 39,
+      "originalPrice": 79,
+      "total": 350,
+      "sold": 294
+    }
   ]
 }

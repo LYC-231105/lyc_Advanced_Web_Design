@@ -10,6 +10,8 @@ var errEl = document.getElementById("liangErr");
 var submitBtn = document.getElementById("liangSubmitBtn");
 var pwdField = document.getElementById("liangPwdField");
 var codeField = document.getElementById("liangCodeField");
+var liangCodePhone = "";
+var liangCodeExpires = 0;
 
 /* ---------- JS效果：登录/注册 tab 切换 ---------- */
 document.querySelectorAll(".liang-login-tabs button").forEach(function (btn) {
@@ -37,6 +39,9 @@ document.getElementById("liangCodeBtn").addEventListener("click", function () {
     errEl.textContent = "";
     var left = 60;
     btn.disabled = true;
+    liangCodePhone = document.getElementById("liangPhone").value.trim();
+    liangCodeExpires = Date.now() + 5 * 60 * 1000;
+    btn.textContent = "60s后重发";
     liangToast("验证码已发送（模拟：123456）");
     var timer = setInterval(function () {
         left--;
@@ -66,8 +71,8 @@ document.getElementById("liangLoginForm").addEventListener("submit", function (e
             return;
         }
     } else {
-        if (code !== "123456") {
-            errEl.textContent = "验证码错误（模拟验证码为123456）";
+        if (code !== "123456" || phone !== liangCodePhone || Date.now() > liangCodeExpires) {
+            errEl.textContent = "请先获取验证码，并在5分钟内输入123456";
             return;
         }
     }
@@ -77,7 +82,13 @@ document.getElementById("liangLoginForm").addEventListener("submit", function (e
     }
 
     errEl.textContent = "";
-    LiangUser.write({ phone: phone, nickname: "用户" + phone.slice(7), avatar: "", gender: "男", birthday: "", address: "" });
+    var saved = null;
+    try { saved = JSON.parse(localStorage.getItem("liang_profile_" + phone)); } catch (error) { saved = null; }
+    LiangUser.write(saved || { phone: phone, nickname: "用户" + phone.slice(7), avatar: "", gender: "男", birthday: "", address: "" });
     liangToast(mode === "login" ? "登录成功！" : "注册并登录成功！");
     setTimeout(function () { location.href = "profile.html"; }, 1000);
+});
+
+document.getElementById("liangLoginHelp").addEventListener("click", function () {
+    liangToast("课程演示：输入格式正确的手机号与6—16位演示密码即可登录，请勿使用真实密码。注册验证码为123456，不发送短信。", 6500);
 });

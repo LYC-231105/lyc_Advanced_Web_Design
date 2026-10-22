@@ -28,38 +28,42 @@ liangFetchJSON("data/products.json").then(function (res) {
     var mainImg = document.getElementById("liangMainImg");
     var thumbsEl = document.getElementById("liangThumbs");
     mainImg.src = gallery[0];
+    mainImg.alt = goods.brand + " " + goods.name;
     thumbsEl.innerHTML = gallery.map(function (src, i) {
-        return "<img src='" + src + "' alt='缩略图" + (i + 1) + "' class='" + (i === 0 ? "liang-active" : "") + "'>";
+        return "<button type='button' aria-label='查看商品第" + (i + 1) + "张图片'><img src='" + liangEscape(src) + "' alt='" + liangEscape(goods.name) + " 视角" + (i + 1) + "' class='" + (i === 0 ? "liang-active" : "") + "'></button>";
     }).join("");
 
     /* JS效果7：点击缩略图切换主图 */
     thumbsEl.addEventListener("click", function (e) {
-        if (e.target.tagName !== "IMG") return;
-        mainImg.src = e.target.src;
+        var button = e.target.closest("button");
+        if (!button) return;
+        var image = button.querySelector("img");
+        mainImg.src = image.src;
         thumbsEl.querySelectorAll("img").forEach(function (t) {
-            t.classList.toggle("liang-active", t === e.target);
+            t.classList.toggle("liang-active", t === image);
         });
     });
 
     /* 价格信息 */
-    var off = Math.round((1 - goods.price / goods.marketPrice) * 10);
+    var off = liangDiscount(goods.price, goods.marketPrice);
     document.getElementById("liangPrice").textContent = goods.price;
     document.getElementById("liangMarketPrice").textContent = "¥" + goods.marketPrice;
     document.getElementById("liangOffTag").textContent = off + "折";
     document.getElementById("liangName").textContent = goods.brand + " " + goods.name;
     document.getElementById("liangDesc").textContent = goods.desc;
     document.getElementById("liangStock").textContent = "库存 " + goods.stock + " 件";
-    document.getElementById("liangSpecName").textContent = goods.category === "鞋包" ? "尺码" : "规格";
+    document.getElementById("liangSpecName").textContent = goods.specLabel || "规格";
 
     /* 规格按钮（JS效果8：单选高亮） */
-    var specs = goods.category === "鞋包" ? ["35", "36", "37", "38", "39", "40"] : ["默认规格", "礼盒装"];
-    if (goods.category === "美妆") specs = ["标准装", "礼盒装", "替换装"];
-    if (goods.category === "女装" || goods.category === "男装" || goods.category === "内衣") specs = ["S", "M", "L", "XL"];
+    var specs = goods.specs && goods.specs.length ? goods.specs : ["默认规格"];
     var specsEl = document.getElementById("liangSpecs");
     specsEl.innerHTML = specs.map(function (s, i) {
-        return "<button type='button' class='" + (i === 0 ? "liang-active" : "") + "'>" + s + "</button>";
+        return "<button type='button' class='" + (i === 0 ? "liang-active" : "") + "'>" + liangEscape(s) + "</button>";
     }).join("");
     liangSpec = specs[0];
+    document.getElementById("liangAddCart").disabled = goods.stock <= 0;
+    document.getElementById("liangBuyNow").disabled = goods.stock <= 0;
+    if (goods.stock <= 0) document.getElementById("liangAddCart").textContent = "已售罄";
     specsEl.addEventListener("click", function (e) {
         if (e.target.tagName !== "BUTTON") return;
         liangSpec = e.target.textContent;
@@ -94,7 +98,8 @@ document.getElementById("liangCountMinus").addEventListener("click", function ()
     countEl.textContent = liangBuyCount;
 });
 document.getElementById("liangCountPlus").addEventListener("click", function () {
-    liangBuyCount = Math.min(99, liangBuyCount + 1);
+    if (!goods || goods.stock <= 0) return;
+    liangBuyCount = Math.min(99, goods.stock, liangBuyCount + 1);
     countEl.textContent = liangBuyCount;
 });
 
@@ -116,28 +121,32 @@ mask.addEventListener("click", closeSheet);
 
 document.getElementById("liangAddCart").addEventListener("click", function () {
     if (!goods) return;
-    LiangCart.add({
+    var added = LiangCart.add({
         id: goods.id,
         spec: liangSpec,
         count: liangBuyCount,
         name: goods.name,
         brand: goods.brand,
         price: goods.price,
-        img: goods.img
+        img: goods.img,
+        stock: goods.stock
     });
+    if (!added) return;
     openSheet(goods.brand + " " + goods.name + " × " + liangBuyCount + "（" + liangSpec + "）已加入购物车");
 });
 
 document.getElementById("liangBuyNow").addEventListener("click", function () {
     if (!goods) return;
-    LiangCart.add({
+    var added = LiangCart.add({
         id: goods.id,
         spec: liangSpec,
         count: liangBuyCount,
         name: goods.name,
         brand: goods.brand,
         price: goods.price,
-        img: goods.img
+        img: goods.img,
+        stock: goods.stock
     });
+    if (!added) return;
     location.href = "cart.html";
 });

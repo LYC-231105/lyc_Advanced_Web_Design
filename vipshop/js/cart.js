@@ -25,6 +25,9 @@ function render() {
             + '</li>';
         totalEl.textContent = "¥0";
         settleEl.textContent = "去结算(0)";
+        checkAllEl.checked = false;
+        checkAllEl.indeterminate = false;
+        settleEl.disabled = true;
         return;
     }
 
@@ -33,23 +36,24 @@ function render() {
         var key = g.id + "-" + g.spec;
         var checked = liangChecked[key] !== false;   /* 默认全选 */
         html += '<li class="liang-cart-item">'
-            + '<input type="checkbox" class="liang-cart-check liang-cart-item-check" data-key="' + key + '"' + (checked ? " checked" : "") + '>'
-            + '<a href="detail.html?id=' + g.id + '"><img src="' + g.img + '" alt="' + g.name + '"></a>'
+            + '<input type="checkbox" class="liang-cart-check liang-cart-item-check" data-key="' + liangEscape(key) + '"' + (checked ? " checked" : "") + '>'
+            + '<a href="detail.html?id=' + g.id + '"><img src="' + liangEscape(g.img) + '" alt="' + liangEscape(g.name) + '"></a>'
             + '<div class="liang-cart-body">'
-            + '<h4>' + g.brand + '</h4>'
-            + '<p class="liang-cart-spec">' + g.name + ' | ' + g.spec + '</p>'
+            + '<h4>' + liangEscape(g.brand) + '</h4>'
+            + '<p class="liang-cart-spec">' + liangEscape(g.name) + ' | ' + liangEscape(g.spec) + '</p>'
             + '<div class="liang-cart-price-row">'
             + '<p class="liang-cart-price"><em>¥</em>' + g.price + '</p>'
             + '<div class="liang-cart-count-box">'
-            + '<button type="button" data-act="minus" data-key="' + key + '">−</button>'
+            + '<button type="button" data-act="minus" data-key="' + liangEscape(key) + '">−</button>'
             + '<span>' + g.count + '</span>'
-            + '<button type="button" data-act="plus" data-key="' + key + '">+</button>'
+            + '<button type="button" data-act="plus" data-key="' + liangEscape(key) + '">+</button>'
             + '</div></div></div>'
-            + '<button class="liang-cart-del" type="button" data-act="del" data-key="' + key + '">✕</button>'
+            + '<button class="liang-cart-del" type="button" data-act="del" data-key="' + liangEscape(key) + '">✕</button>'
             + '</li>';
     });
     listEl.innerHTML = html;
     calcTotal();
+    syncCheckAll();
 }
 
 /* ---------- 合计计算（只统计勾选项，JS效果11） ---------- */
@@ -60,12 +64,13 @@ function calcTotal() {
     list.forEach(function (g) {
         var key = g.id + "-" + g.spec;
         if (liangChecked[key] !== false) {
-            total += g.price * g.count;
+            total += Math.round(g.price * 100) * g.count;
             count += g.count;
         }
     });
-    totalEl.textContent = "¥" + total;
+    totalEl.textContent = "¥" + (total / 100).toFixed(2);
     settleEl.textContent = "去结算(" + count + ")";
+    settleEl.disabled = count === 0;
 }
 
 /* ---------- 事件委托：增减 / 删除 / 勾选 ---------- */
@@ -87,7 +92,11 @@ listEl.addEventListener("click", function (e) {
     var list = LiangCart.read();
     var item = list.find(function (g) { return g.id === id && g.spec === spec; });
     if (!item) return;
-    if (act === "plus") item.count = Math.min(99, item.count + 1);
+    if (act === "plus") {
+        var totalCount = list.filter(function (g) { return g.id === id; }).reduce(function (sum, g) { return sum + g.count; }, 0);
+        if (totalCount >= Math.min(99, item.stock || 0)) { liangToast("已达到库存或单款99件的上限"); return; }
+        item.count += 1;
+    }
     if (act === "minus") {
         item.count -= 1;
         if (item.count <= 0) {
@@ -113,7 +122,10 @@ listEl.addEventListener("change", function (e) {
 /* ---------- 全选 / 取消全选 ---------- */
 function syncCheckAll() {
     var list = LiangCart.read();
-    checkAllEl.checked = list.every(function (g) {
+    checkAllEl.checked = list.length > 0 && list.every(function (g) {
+        return liangChecked[g.id + "-" + g.spec] !== false;
+    });
+    checkAllEl.indeterminate = !checkAllEl.checked && list.some(function (g) {
         return liangChecked[g.id + "-" + g.spec] !== false;
     });
 }
@@ -131,11 +143,43 @@ settleEl.addEventListener("click", function () {
         liangToast("购物车是空的，先去逛逛吧");
         return;
     }
-    liangToast("下单成功！感谢在唯品会购物~");
-    LiangCart.write([]);
+    var selected = LiangCart.read().filter(function (g) { return liangChecked[g.id + "-" + g.spec] !== false; });
+    if (!selected.length) { liangToast("请先选择要结算的商品"); return; }
+    var orders = liangReadList("liang_orders");
+    orders.unshift({ id: Date.now(), createdAt: new Date().toLocaleString("zh-CN"),
+        status: "待收货", items: selected,
+        total: selected.reduce(function (sum, g) { return sum + Math.round(g.price * 100) * g.count; }, 0) / 100 });
+    localStorage.setItem("liang_orders", JSON.stringify(orders));
+    liangToast("模拟结算完成，未勾选的商品已保留");
+    LiangCart.write(LiangCart.read().filter(function (g) { return liangChecked[g.id + "-" + g.spec] === false; }));
     liangChecked = {};
     render();
 });
 
-render();
-syncCheckAll();
+/* 校正旧版本购物车的图文、规格与库存；后台删除的商品不再参与结算。 */
+settleEl.disabled = true;
+liangFetchJSON("data/products.json").then(function (res) {
+    var counts = {};
+    var list = LiangCart.read().map(function (item) {
+        var product = res.data.find(function (g) { return g.id === item.id; });
+        if (!product || product.stock <= 0) return null;
+        var count = Math.min(item.count, 99 - (counts[item.id] || 0), product.stock - (counts[item.id] || 0));
+        counts[item.id] = (counts[item.id] || 0) + count;
+        if (count <= 0) return null;
+        return Object.assign({}, item, {
+            name: product.name, brand: product.brand, img: product.img,
+            price: product.price, stock: product.stock, count: count,
+            spec: product.specs && product.specs.indexOf(item.spec) === -1 ? product.specs[0] : item.spec
+        });
+    }).filter(Boolean);
+    var merged = [];
+    list.forEach(function (item) {
+        var previous = merged.find(function (g) { return g.id === item.id && g.spec === item.spec; });
+        if (previous) previous.count += item.count; else merged.push(item);
+    });
+    LiangCart.write(merged);
+    render();
+}).catch(function (err) {
+    console.error(err);
+    liangToast("无法核对商品信息，请刷新后重试");
+});

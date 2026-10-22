@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>移动端底部导航 · SVG 图标</title>
+<!-- 本地 iconfont：SVG symbol 方式（iconfont.js 注入符号表） -->
+<script src="font/iconfont.js"></script>
+<style>
+  /* ========== 移动端底部导航 · SVG 卷（黛青） ========== */
+  :root {
+    --lyc_0817_paper: #F5F7F6;
+    --lyc_0817_card: #FFFFFF;
+    --lyc_0817_ink: #22282B;
+    --lyc_0817_rule: #DDE3E0;
+    --lyc_0817_muted: #7F8A88;
+    --lyc_0817_accent: #33566B;   /* 黛青：本页主色 */
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #E8ECEA;
+    color: var(--lyc_0817_ink);
+    line-height: 1.6;
+  }
+  ::selection { background: var(--lyc_0817_accent); color: #fff; }
+
+  /* 手机视口：桌面端居中 480px */
+  .lyc_0817_phone {
+    max-width: 480px; min-height: 100dvh; margin: 0 auto;
+    background: var(--lyc_0817_paper);
+    position: relative;
+  }
+  @media (min-width: 520px) {
+    .lyc_0817_phone {
+      border-left: 1px solid var(--lyc_0817_rule);
+      border-right: 1px solid var(--lyc_0817_rule);
+      box-shadow: 0 0 40px rgba(34, 40, 43, .06);
+    }
+  }
+
+  /* 顶栏 */
+  .lyc_0817_appbar {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px;
+    background: rgba(245, 247, 246, .92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--lyc_0817_rule);
+  }
+  .lyc_0817_appbar h1 {
+    font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+    font-size: 18px; font-weight: 600; letter-spacing: 2px;
+  }
+  .lyc_0817_home {
+    color: var(--lyc_0817_ink); text-decoration: none; font-size: 13px;
+    border-bottom: 1px solid var(--lyc_0817_rule); padding-bottom: 2px;
+    transition: color .15s, border-color .15s;
+  }
+  .lyc_0817_home:hover { color: var(--lyc_0817_accent); border-color: var(--lyc_0817_accent); }
+  .lyc_0817_home:focus-visible { outline: 2px solid var(--lyc_0817_accent); outline-offset: 4px; }
+
+  /* 内容面板 */
+  .lyc_0817_main { padding: 18px 16px 108px; }
+  .lyc_0817_panel { display: none; }
+  .lyc_0817_panel.lyc_0817_active { display: block; }
+
+  .lyc_0817_intro {
+    font-size: 12px; color: var(--lyc_0817_muted); line-height: 1.9;
+    padding: 2px 4px 14px;
+  }
+
+  .lyc_0817_list { background: var(--lyc_0817_card); border: 1px solid var(--lyc_0817_rule); }
+  .lyc_0817_row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px;
+  }
+  .lyc_0817_row + .lyc_0817_row { border-top: 1px solid var(--lyc_0817_rule); }
+  .lyc_0817_avatar {
+    flex: none; width: 42px; height: 42px; border-radius: 10px;
+    display: grid; place-items: center;
+    background: #E7EDEA; color: var(--lyc_0817_accent);
+  }
+  .lyc_0817_row_text { flex: 1; min-width: 0; }
+  .lyc_0817_row_name { font-size: 15px; font-weight: 600; }
+  .lyc_0817_row_desc {
+    font-size: 12px; color: var(--lyc_0817_muted);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .lyc_0817_row_time { flex: none; font-size: 11px; color: var(--lyc_0817_muted); }
+
+  /* SVG 图标尺寸与着色（currentColor 跟随导航状态） */
+  .lyc_0817_svgicon { width: 24px; height: 24px; fill: currentColor; display: block; }
+  .lyc_0817_avatar .lyc_0817_svgicon { width: 22px; height: 22px; }
+
+  /* ========== 固定底部导航：自适应宽度（每项 flex:1） ========== */
+  .lyc_0817_tabbar {
+    position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 100%; max-width: 480px; z-index: 20;
+    display: flex; align-items: stretch;
+    background: rgba(255, 255, 255, .96);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--lyc_0817_rule);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .lyc_0817_tab {
+    flex: 1;  /* 四项均分，宽度自适应 */
+    appearance: none; border: 0; background: none;
+    font-family: inherit; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    padding: 9px 0 7px;
+    color: var(--lyc_0817_muted);
+    text-decoration: none;
+    transition: color .15s;
+  }
+  .lyc_0817_tab:focus-visible { outline: 2px solid var(--lyc_0817_accent); outline-offset: -2px; }
+  .lyc_0817_tab.lyc_0817_active { color: var(--lyc_0817_accent); }
+  .lyc_0817_tab_label { font-size: 11px; letter-spacing: 1px; }
+
+  .lyc_0817_tab_icon { position: relative; display: grid; place-items: center; }
+
+  /* 右上角数字徽章 */
+  .lyc_0817_badge {
+    position: absolute; top: -6px; right: -12px;
+    min-width: 17px; height: 17px; padding: 0 5px;
+    border-radius: 9px;
+    background: #C0392B; color: #fff;
+    font-size: 10px; font-weight: 600; font-style: normal;
+    line-height: 17px; text-align: center;
+    box-shadow: 0 0 0 2px var(--lyc_0817_paper);
+  }
+  /* 右上角红点 */
+  .lyc_0817_dot {
+    position: absolute; top: -3px; right: -7px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: #C0392B;
+    box-shadow: 0 0 0 2px var(--lyc_0817_paper);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="lyc_0817_phone">
+
+  <header class="lyc_0817_appbar">
+    <h1 id="lyc_0817_title">消息</h1>
+    <a class="lyc_0817_home" href="index.html">返回首页</a>
+  </header>
+
+  <main class="lyc_0817_main">
+    <p class="lyc_0817_intro">底部导航由 iconfont.js 注入的 SVG symbol 渲染，以 <code>&lt;use&gt;</code> 引用，颜色经 currentColor 跟随选中状态。四个项目等分宽度自适应，数字徽章与红点位于图标右上角，点击后清除。</p>
+
+    <!-- 消息面板 -->
+    <section class="lyc_0817_panel lyc_0817_active" id="lyc_0817_panel-msg" role="region" aria-label="消息">
+      <div class="lyc_0817_list">
+        <div class="lyc_0817_row">
+          <span class="lyc_0817_avatar"><svg class="lyc_0817_svgicon" aria-hidden="true"><use href="#icon-message"></use></svg></span>
+          <div class="lyc_0817_row_text">
+            <div class="lyc_0817_row_name">课程通知</div>
+            <div class="lyc_0817_row_desc">下周三的课堂实践改为线上提交</div>
+          </div>
+          <span class="lyc_0817_row_time">10:24</span>
+        </div>
+        <div class="lyc_0817_row">
+          <span class="lyc_0817_avatar"><svg class="lyc_0817_svgicon" aria-hidden="true"><use href="#icon-pinglun"></use></svg></span>
+          <div class="lyc_0817_row_text">
+            <div class="lyc_0817_row_name">学习小组</div>
+            <div class="lyc_0817_row_desc">梁钰承：字模谱卷一已经改好了</div>
+          </div>
+          <span class="lyc_0817_row_time">09:57</span>
+        </div>
+        <div class="lyc_0817_row">
+          <span class="lyc_0817_avatar"><svg class="lyc_0817_svgicon" aria-hidden="true"><use href="#icon-sound"></use></svg></span>
+          <div class="lyc_0817_row_text">
+            <div class="lyc_0817_row_name">语音留言</div>
+            <div class="lyc_0817_row_desc">一条 12 秒的语音消息</div>
+          </div>
+          <span class="lyc_0817_row_time">昨天</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 声音面板 -->
+    <section class="lyc_0817_panel" id="lyc_0817_panel-sound" role="region" aria-label="声音">
+      <div class="lyc_0817_list">
+        <div class="lyc_0817_row">
+          <span class="lyc_0817_avatar"><svg class="lyc_0817_svgicon" aria-hidden="true"><use href="#icon-sound"></use></svg></span>
+          <div class="lyc_0817_row_text">
+            <div class="lyc_0817_row_name">网页设计广播</div>
+            <div class="lyc_0817_row_desc">第 8 期：字体图标的加载原理</div>
+          </div>
+          <span class="lyc_0817_row_time">12 分钟</span>
+        </div>
+        <div class="lyc_0817_row">
+          <span class="lyc_0817_avatar"><svg class="lyc_0817_svgicon" aria-hidden="true"><use href="#icon-sound"></use></svg></span>
+          <div class="lyc_0817_row_text">
+            <div class="lyc_0817_row_name">前端早知道</div>
+            <div class="lyc_0817_row_desc">第 21 期：SVG 与字体图标之争</div>
+          </div>
+          <span class="lyc_0817_row_time">2 天前</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 评论面板 -->
+    <section class="lyc_0817_panel" id="lyc_0817_panel-comment" role="region" aria-label="评论">
+      <div class="lyc_0817_list">
+        <div class="lyc_0817_row">
+          <span class="lyc_0817_avatar"><svg class="lyc_0817_svgicon" aria-hidden="true"><use href="#icon-pinglun"></use></svg></span>
+          <div class="lyc_0817_row_text">
+            <div class="lyc_0817_row_name">王同学</div>
+            <div class="lyc_0817_row_desc">悬停反白的效果太漂亮了，请教一下实现方式</div>
+          </div>
+          <span class="lyc_0817_row_time">1 小时</span>
+        </div>
+        <div class="lyc_0817_row">
+          <span class="lyc_0817_avatar"><svg class="lyc_0817_svgicon" aria-hidden="true"><use href="#icon-pinglun"></use></svg></span>
+          <div class="lyc_0817_row_text">
+            <div class="lyc_0817_row_name">李老师</div>
+            <div class="lyc_0817_row_desc">导航的徽章细节做得不错</div>
+          </div>
+          <span class="lyc_0817_row_time">3 小时</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 固定底部导航：4 项，等分自适应宽度 -->
+  <nav class="lyc_0817_tabbar" aria-label="底部导航">
+    <!-- 项目字体库没有 home 字形，首页项用一段内联 SVG 补充 -->
+    <a class="lyc_0817_tab" href="index.html" aria-label="返回首页">
+      <span class="lyc_0817_tab_icon">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M12 3.1 2.8 10.5V21h6.7v-5.3a2.5 2.5 0 0 1 5 0V21h6.7V10.5L12 3.1z"/></svg>
+      </span>
+      <span class="lyc_0817_tab_label">首页</span>
+    </a>
+    <button class="lyc_0817_tab lyc_0817_active" type="button" data-panel="msg" data-title="消息">
+      <span class="lyc_0817_tab_icon">
+        <svg class="lyc_0817_svgicon" aria-hidden="true"><use href="#icon-message"></use></svg>
+        <b class="lyc_0817_badge">6</b>
+      </span>
+      <span class="lyc_0817_tab_label">消息</span>
+    </button>
+    <button class="lyc_0817_tab" type="button" data-panel="sound" data-title="声音">
+      <span class="lyc_0817_tab_icon">
+        <svg class="lyc_0817_svgicon" aria-hidden="true"><use href="#icon-sound"></use></svg>
+        <i class="lyc_0817_dot" aria-label="有新内容"></i>
+      </span>
+      <span class="lyc_0817_tab_label">声音</span>
+    </button>
+    <button class="lyc_0817_tab" type="button" data-panel="comment" data-title="评论">
+      <span class="lyc_0817_tab_icon">
+        <svg class="lyc_0817_svgicon" aria-hidden="true"><use href="#icon-pinglun"></use></svg>
+        <b class="lyc_0817_badge">99+</b>
+      </span>
+      <span class="lyc_0817_tab_label">评论</span>
+    </button>
+  </nav>
+</div>
+
+<script>
+  // iconfont.js 在 DOMContentLoaded 时把 symbol 表注入页面，
+  // 本监听注册在其后，因此必然在注入完成后执行。
+  document.addEventListener("DOMContentLoaded", function () {
+    // 剥离 symbol 路径上硬编码的 fill 属性，
+    // 让图标颜色改由 currentColor 控制，才能跟随导航选中态变色。
+    document.querySelectorAll("symbol [fill]").forEach(function (lyc_0817_el) {
+      lyc_0817_el.removeAttribute("fill");
+    });
+  });
+
+  // 底部导航交互：切换面板、更新标题、清除徽章（已读）
+  const lyc_0817_tabs = document.querySelectorAll(".lyc_0817_tab[data-panel]");
+  const lyc_0817_title = document.getElementById("lyc_0817_title");
+
+  lyc_0817_tabs.forEach(function (lyc_0817_btn) {
+    lyc_0817_btn.addEventListener("click", function () {
+      document.querySelectorAll(".lyc_0817_tab").forEach(function (lyc_0817_t) {
+        lyc_0817_t.classList.remove("lyc_0817_active");
+      });
+      lyc_0817_btn.classList.add("lyc_0817_active");
+
+      document.querySelectorAll(".lyc_0817_panel").forEach(function (lyc_0817_p) {
+        lyc_0817_p.classList.remove("lyc_0817_active");
+      });
+      document.getElementById("lyc_0817_panel-" + lyc_0817_btn.dataset.panel).classList.add("lyc_0817_active");
+
+      lyc_0817_title.textContent = lyc_0817_btn.dataset.title;
+
+      // 点击后清除该项目的徽章或红点（标记已读）
+      const lyc_0817_mark = lyc_0817_btn.querySelector(".lyc_0817_badge, .lyc_0817_dot");
+      if (lyc_0817_mark) lyc_0817_mark.remove();
+    });
+  });
+</script>
+</body>
+</html>

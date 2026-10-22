@@ -2,8 +2,29 @@
   "code": 200,
   "msg": "轮播图数据接口",
   "data": [
-    { "id": 1, "img": "img/banner1.jpg", "title": "雅诗兰黛 千载难逢", "link": "detail.html?id=5" },
-    { "id": 2, "img": "img/banner2.jpg", "title": "品牌特卖 美妆狂欢", "link": "category.html?cat=美妆" },
-    { "id": 3, "img": "img/banner3.jpg", "title": "马克华菲 情侣款专场", "link": "detail.html?id=11" }
+    {
+      "id": 1,
+      "productId": 10,
+      "img": "img/products/product-10-1.webp",
+      "title": "美妆焕新日常",
+      "subtitle": "essence 睫毛膏 · 精致眼妆",
+      "link": "detail.html?id=10"
+    },
+    {
+      "id": 2,
+      "productId": 8,
+      "img": "img/products/product-8-1.webp",
+      "title": "运动新风尚",
+      "subtitle": "PUMA 撞色运动鞋 · 活力出街",
+      "link": "detail.html?id=8"
+    },
+    {
+      "id": 3,
+      "productId": 9,
+      "img": "img/products/product-9-1.webp",
+      "title": "衣橱焕新计划",
+      "subtitle": "格纹连衣裙 · 轻松搭配",
+      "link": "detail.html?id=9"
+    }
   ]
 }

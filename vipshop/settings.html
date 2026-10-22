@@ -10,13 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>唯品会特卖商城-个人设置-24001010817梁钰承</title>
     <link rel="stylesheet" href="css/liang.css">
+    <link rel="icon" href="img/vip-favicon.ico">
 </head>
 <body>
     <div class="liang-app">
 
         <header class="liang-header">
             <div class="liang-header-top">
-                <button class="liang-header-back">‹</button>
+                <button class="liang-header-back" type="button" aria-label="返回上一页">‹</button>
                 <h1 class="liang-header-title">个人设置</h1>
                 <a class="liang-header-right" href="profile.html">我的</a>
             </div>
@@ -30,13 +31,14 @@
                 <div class="liang-form-item">
                     <label>头像</label>
                     <div class="liang-avatar-picker" id="liangAvatarPicker">
-                        <img src="img/logo.png" data-src="img/logo.png" alt="默认头像" class="liang-active">
-                        <img src="img/goods2.jpg" data-src="img/goods2.jpg" alt="口红头像">
-                        <img src="img/goods12.jpg" data-src="img/goods12.jpg" alt="板鞋头像">
+                        <img src="img/vip-favicon.ico" data-src="img/vip-favicon.ico" alt="默认头像" class="liang-active">
+                        <img src="img/products/product-2-1.webp" data-src="img/products/product-2-1.webp" alt="口红头像">
+                        <img src="img/products/product-12-1.webp" data-src="img/products/product-12-1.webp" alt="板鞋头像">
                         <label class="liang-avatar-upload">
                             本地上传
                             <input type="file" id="liangAvatarFile" accept="image/*">
                         </label>
+                        <img id="liangAvatarPreview" alt="当前头像预览" src="img/vip-favicon.ico" hidden>
                     </div>
                 </div>
 

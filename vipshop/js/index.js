@@ -17,8 +17,11 @@ function liangInitBanner() {
         var html = "";
         var dots = "";
         banners.forEach(function (b, i) {
-            html += '<li><a href="' + b.link + '"><img src="' + b.img + '" alt="' + b.title + '"></a></li>';
-            dots += "<i class='" + (i === 0 ? "liang-active" : "") + "'></i>";
+            html += '<li><a class="liang-banner-card" href="' + b.link + '">' +
+                '<div class="liang-banner-copy"><small>唯品会 · 品牌特卖</small><h2>' + liangEscape(b.title) +
+                '</h2><p>' + liangEscape(b.subtitle) + '</p><span>立即选购 ›</span></div>' +
+                '<img src="' + b.img + '" alt="' + liangEscape(b.subtitle) + '"></a></li>';
+            dots += "<button type='button' aria-label='切换到第" + (i + 1) + "张轮播' class='" + (i === 0 ? "liang-active" : "") + "'></button>";
         });
         listEl.innerHTML = html;
         dotsEl.innerHTML = dots;
@@ -30,12 +33,14 @@ function liangInitBanner() {
         function go(n) {
             index = (n + total) % total;
             listEl.style.transform = "translateX(-" + index * 100 + "%)";
-            dotsEl.querySelectorAll("i").forEach(function (dot, i) {
+            dotsEl.querySelectorAll("button").forEach(function (dot, i) {
                 dot.classList.toggle("liang-active", i === index);
+                dot.setAttribute("aria-pressed", String(i === index));
             });
         }
 
         function autoPlay() {
+            stopPlay();
             timer = setInterval(function () { go(index + 1); }, 3000);
         }
 
@@ -60,11 +65,19 @@ function liangInitBanner() {
 
         /* 圆点点击切换 */
         dotsEl.addEventListener("click", function (e) {
-            if (e.target.tagName === "I") {
+            if (e.target.tagName === "BUTTON") {
                 go(Array.prototype.indexOf.call(dotsEl.children, e.target));
             }
         });
 
+        box.addEventListener("mouseenter", stopPlay);
+        box.addEventListener("mouseleave", autoPlay);
+        box.addEventListener("focusin", stopPlay);
+        box.addEventListener("focusout", autoPlay);
+        document.addEventListener("visibilitychange", function () {
+            if (document.hidden) stopPlay(); else autoPlay();
+        });
+        go(0);
         autoPlay();
     }).catch(function (err) {
         console.error(err);
@@ -82,15 +95,11 @@ function liangInitSeckill() {
     function pad(n) { return n < 10 ? "0" + n : "" + n; }
 
     liangFetchJSON("data/seckill.json").then(function (res) {
-        labelEl.textContent = res.hour + "点场";
+        labelEl.textContent = res.hour + "点结束";
 
         function tick() {
             var now = new Date();
-            var end = new Date();
-            end.setHours(res.hour, res.minute, 0, 0);
-            if (now >= end) {
-                end.setDate(end.getDate() + 1);   /* 已开抢则倒计时到明天同一时间 */
-            }
+            var end = liangSaleDeadline(res);
             var diff = Math.floor((end - now) / 1000);
             hourEl.textContent = pad(Math.floor(diff / 3600));
             minuteEl.textContent = pad(Math.floor(diff % 3600 / 60));
@@ -101,13 +110,14 @@ function liangInitSeckill() {
 
         /* 渲染秒杀商品 */
         var html = "";
-        res.data.forEach(function (item) {
-            var percent = Math.round(item.sold / item.total * 100);
+        /* 首页按唯品会首页的横向商品带展示四件，四列均完整落在当前视口内。 */
+        res.data.slice(0, 4).forEach(function (item) {
+            var percent = Math.min(100, Math.round(item.sold / item.total * 100));
             html += '<li class="liang-seckill-item">'
-                + '<a href="detail.html?id=' + item.id + '"><img src="' + item.img + '" alt="' + item.name + '"></a>'
+                + '<a href="detail.html?id=' + item.id + '"><img src="' + item.img + '" alt="' + liangEscape(item.name) + '"><p class="liang-seckill-name">' + liangEscape(item.name) + '</p></a>'
                 + '<p class="liang-price"><em>¥</em><strong>' + item.price + '</strong></p>'
                 + '<del>¥' + item.originalPrice + '</del>'
-                + '<div class="liang-seckill-progress">已抢' + percent + '%</div>'
+                + '<div class="liang-seckill-progress" style="--liang-progress:' + percent + '%">已抢' + percent + '%</div>'
                 + '</li>';
         });
         document.getElementById("liangSeckillList").innerHTML = html;
@@ -128,21 +138,7 @@ function liangInitGoods() {
             countEl.textContent = "";
             return;
         }
-        var html = "";
-        list.forEach(function (g) {
-            var off = Math.round((1 - g.price / g.marketPrice) * 10);
-            html += '<li class="liang-goods-card">'
-                + '<a href="detail.html?id=' + g.id + '">'
-                + '<img src="' + g.img + '" alt="' + g.brand + '">'
-                + (off >= 5 ? '<span class="liang-goods-discount">' + off + '折</span>' : "")
-                + '</a>'
-                + '<div class="liang-goods-info">'
-                + '<p class="liang-goods-brand">' + g.brand + '</p>'
-                + '<p class="liang-goods-name">' + g.name + '</p>'
-                + '<p class="liang-goods-price"><em>¥</em><strong>' + g.price + '</strong><del>¥' + g.marketPrice + '</del></p>'
-                + '</div></li>';
-        });
-        listEl.innerHTML = html;
+        listEl.innerHTML = list.map(liangProductCard).join("");
         countEl.textContent = "共" + list.length + "件";
     }
 
@@ -155,17 +151,19 @@ function liangInitGoods() {
     });
 
     function doSearch() {
-        var kw = inputEl.value.trim();
+        var kw = inputEl.value.trim().toLowerCase();
         if (!kw) {
             render(allGoods);
             return;
         }
         render(allGoods.filter(function (g) {
-            return g.name.indexOf(kw) > -1 || g.brand.indexOf(kw) > -1 || g.category.indexOf(kw) > -1;
+            return [g.name, g.brand, g.category].join(" ").toLowerCase().indexOf(kw) > -1;
         }));
+        listEl.closest("section").scrollIntoView({ behavior: "smooth", block: "start" });
         liangToast(kw ? "搜索：" + kw : "");
     }
 
+    inputEl.addEventListener("input", function () { if (!inputEl.value.trim()) render(allGoods); });
     btnEl.addEventListener("click", doSearch);
     inputEl.addEventListener("keyup", function (e) {
         if (e.key === "Enter") doSearch();

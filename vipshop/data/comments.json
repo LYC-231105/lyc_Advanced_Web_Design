@@ -1,14 +1,62 @@
 {
   "code": 200,
-  "msg": "商品评价数据接口（按 productId 关联）",
+  "msg": "课程模拟评价，按 productId 关联，不代表真实购买反馈",
   "data": [
-    { "productId": 1, "user": "小*鹿", "stars": 5, "content": "鞋子很轻，上脚超舒服，粉色特别好看，推荐！", "time": "2026-10-02" },
-    { "productId": 1, "user": "Y*u",   "stars": 4, "content": "尺码偏小半码，建议拍大一码，其他都不错。", "time": "2026-09-28" },
-    { "productId": 2, "user": "橙*子", "stars": 5, "content": "小辣椒色永远的神，已经回购第三支了。", "time": "2026-10-05" },
-    { "productId": 2, "user": "一*星", "stars": 5, "content": "正品无疑，和专柜买的一样，唯品会真香。", "time": "2026-09-30" },
-    { "productId": 3, "user": "M*a",   "stars": 5, "content": "大衣质感很好，羊毛的确实暖和，剪裁也合身。", "time": "2026-10-08" },
-    { "productId": 5, "user": "阿*玖", "stars": 5, "content": "比双十一还便宜，套装很划算，夜间修复效果肉眼可见。", "time": "2026-10-01" },
-    { "productId": 5, "user": "W*l",   "stars": 4, "content": "包装完好，日期新鲜，就是快递稍微慢了一点。", "time": "2026-09-25" },
-    { "productId": 12, "user": "路*人", "stars": 5, "content": "鬼塚虎经典款，百搭，鞋码标准不用纠结。", "time": "2026-10-03" }
+    {
+      "productId": 1,
+      "user": "小*鹿",
+      "stars": 5,
+      "content": "黑色高跟凉鞋与图片一致，搭裙子很好看。",
+      "time": "2026-10-02"
+    },
+    {
+      "productId": 1,
+      "user": "Y*u",
+      "stars": 4,
+      "content": "露趾款式很适合夏天，建议按尺码表选购。",
+      "time": "2026-09-28"
+    },
+    {
+      "productId": 2,
+      "user": "橙*子",
+      "stars": 5,
+      "content": "红色唇膏很显气色，包装也很简洁。",
+      "time": "2026-10-05"
+    },
+    {
+      "productId": 2,
+      "user": "一*星",
+      "stars": 5,
+      "content": "颜色和商品图一致，日常使用方便。",
+      "time": "2026-09-30"
+    },
+    {
+      "productId": 3,
+      "user": "M*a",
+      "stars": 5,
+      "content": "波点图案很好看，裙摆很有层次。",
+      "time": "2026-10-08"
+    },
+    {
+      "productId": 5,
+      "user": "阿*玖",
+      "stars": 5,
+      "content": "按压泵头使用方便，瓶身包装完整。",
+      "time": "2026-10-01"
+    },
+    {
+      "productId": 5,
+      "user": "W*l",
+      "stars": 4,
+      "content": "沐浴露收到了，包装没有破损。",
+      "time": "2026-09-25"
+    },
+    {
+      "productId": 12,
+      "user": "路*人",
+      "stars": 5,
+      "content": "红黑拼色很经典，收到的款式与图片一致。",
+      "time": "2026-10-03"
+    }
   ]
 }

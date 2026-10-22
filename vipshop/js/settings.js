@@ -5,7 +5,7 @@
           表单校验、资料保存与回显（localStorage）、退出登录
    ============================================================ */
 
-var liangAvatarSrc = "img/logo.png";   /* 当前选中的头像 */
+var liangAvatarSrc = "img/vip-favicon.ico";   /* 当前选中的头像 */
 
 /* ---------- 回显已保存资料 ---------- */
 var user = LiangUser.read();
@@ -15,6 +15,10 @@ if (user) {
     if (user.birthday) document.getElementById("liangBirthday").value = user.birthday;
     if (user.avatar) {
         liangAvatarSrc = user.avatar;
+        if (user.avatar.indexOf("data:image/") === 0) {
+            document.getElementById("liangAvatarPreview").src = user.avatar;
+            document.getElementById("liangAvatarPreview").hidden = false;
+        }
         document.querySelectorAll("#liangAvatarPicker img").forEach(function (img) {
             img.classList.toggle("liang-active", img.getAttribute("data-src") === user.avatar);
         });
@@ -30,6 +34,7 @@ pickerEl.addEventListener("click", function (e) {
     var img = e.target.closest("img");
     if (!img) return;
     liangAvatarSrc = img.getAttribute("data-src");
+    if (!liangAvatarSrc) { liangAvatarSrc = img.src; return; }
     pickerEl.querySelectorAll("img").forEach(function (t) {
         t.classList.toggle("liang-active", t === img);
     });
@@ -43,12 +48,17 @@ document.getElementById("liangAvatarFile").addEventListener("change", function (
         liangToast("请选择图片文件");
         return;
     }
+    if (file.size > 1024 * 1024) { liangToast("请选择不超过1MB的头像"); return; }
     var reader = new FileReader();
     reader.onload = function () {
         liangAvatarSrc = reader.result;
+        var preview = document.getElementById("liangAvatarPreview");
+        preview.src = reader.result;
+        preview.hidden = false;
         pickerEl.querySelectorAll("img").forEach(function (img) { img.classList.remove("liang-active"); });
         liangToast("头像已选择，记得点击保存");
     };
+    reader.onerror = function () { liangToast("图片读取失败，请重新选择"); };
     reader.readAsDataURL(file);
 });
 
@@ -69,6 +79,8 @@ document.getElementById("liangSaveBtn").addEventListener("click", function () {
     }
 
     var old = LiangUser.read() || {};
+    if (!old.phone) { liangToast("请先登录后保存个人资料"); return; }
+    if (birthday && new Date(birthday + "T00:00:00") > new Date()) { liangToast("生日不能晚于今天"); return; }
     LiangUser.write({
         phone: old.phone || "",
         nickname: nickname,

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数7游戏</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            padding: 30px 20px;
+            color: #222;
+        }
+        h1 { font-size: 22px; text-align: center; margin-bottom: 24px; }
+        #output { font-size: 16px; line-height: 2.2; word-break: break-word; }
+    </style>
+</head>
+<body>
+    <h1>数 7 游戏</h1>
+    <p id="output"></p>
+
+<script>
+    // ==================== 一、上面的知识点 ====================
+    var a = 10, b = 4;
+    // 控制台输出
+    console.log(a + b);
+    console.log(a - b > 0 ? a : b);
+    console.log(true && false, true || false, !true);
+
+    var str = 'hello world', num = 10, ble = true,
+        ud, obj = { name: '张三', age: 20 }, arr = [1, 2, 3, 4, 5];
+    console.log(typeof str, typeof num, typeof ble, typeof ud,
+        typeof obj, typeof arr);
+
+    // 浮点小数不能用二进制精确存储，
+    // js不能用==或者===来判断两个浮点数是否相等
+    console.log(0.1 + 0.2 == 0.3);
+    console.log('1' + 2);
+
+    // NaN表示不是一个数字，isNaN()判断是否是一个数字
+    // NaN和任何变量都不相等，包括它自己
+    console.log("wangyao" - 1);
+    console.log(NaN == NaN);
+
+    // parseInt()向下取整
+    console.log(parseInt(12.9));
+
+    // 如何判定一个数值是不是整数？你有什么方法
+    // 方法一：Number.isInteger() 直接判断
+    // 方法二：对 1 取余，余数是 0 就是整数
+    // 方法三：parseInt() 取整后与原值比较，相等就是整数
+    console.log(Number.isInteger(3.5), Number.isInteger(3));
+    console.log(3.5 % 1 === 0, 3 % 1 === 0);
+    console.log(parseInt(3.5) === 3.5, parseInt(3) === 3);
+
+    // ==================== 二、数7游戏 ====================
+    // 写一个数7游戏，100个数以内，包含7或者7的倍数不显示
+    // 判断规则：7 的倍数，或者数字里带有 7
+    function isPass(n) {
+        return n % 7 === 0 || String(n).indexOf('7') !== -1;
+    }
+
+    // 只保留符合要求的数字，含 7 或 7 的倍数的数字不显示（删除）
+    var result = [];
+    for (var i = 1; i <= 100; i++) {
+        if (!isPass(i)) result.push(i);
+    }
+
+    // 一行生成全部结果
+    document.getElementById('output').innerHTML = result.join(' ');
+</script>
+</body>
+</html>

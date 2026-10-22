@@ -10,24 +10,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>唯品会特卖商城-首页-24001010817梁钰承</title>
     <link rel="stylesheet" href="css/liang.css">
+    <link rel="icon" href="img/vip-favicon.ico">
 </head>
 <body>
-    <div class="liang-app">
+    <div class="liang-app liang-home">
+
+        <div class="liang-home-brand">
+            <a class="liang-home-wordmark" href="index.html">唯品会 <span>VIP.com</span></a>
+            <h1>品牌特卖 <span>100%正品</span></h1>
+            <p>精选大牌 · 每日上新 · 惊喜好价</p>
+        </div>
 
         <!-- 顶部：logo + 搜索框（fetch 热搜词） -->
         <header class="liang-header">
             <div class="liang-search">
-                <a class="liang-search-logo" href="index.html">
-                    <img src="img/logo.png" alt="唯品会logo">
-                </a>
                 <div class="liang-search-box">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2">
                         <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
                     </svg>
-                    <input type="search" id="liangSearchInput" placeholder="搜索商品，当前热搜：羽绒服">
+                    <input type="search" id="liangSearchInput" placeholder="搜索商品，当前热搜：运动鞋">
                 </div>
                 <button class="liang-search-btn" id="liangSearchBtn">搜索</button>
             </div>
+            <nav class="liang-channel-nav" aria-label="商品频道">
+                <a class="liang-active" aria-current="page" href="index.html">推荐</a>
+                <a href="category.html?cat=女装">女装</a>
+                <a href="category.html?cat=美妆">美妆</a>
+                <a href="category.html?cat=运动">运动</a>
+                <a href="category.html?cat=男装">男装</a>
+                <a href="category.html?cat=鞋包">鞋包</a>
+            </nav>
         </header>
 
         <main class="liang-main">
@@ -40,17 +52,23 @@
 
             <!-- 金刚区导航 -->
             <nav class="liang-nav">
-                <a class="liang-nav-item" href="category.html?cat=女装"><img src="img/goods3.jpg" alt="女装"><p>女装</p></a>
-                <a class="liang-nav-item" href="category.html?cat=美妆"><img src="img/goods2.jpg" alt="美妆"><p>美妆</p></a>
-                <a class="liang-nav-item" href="category.html?cat=鞋包"><img src="img/goods12.jpg" alt="鞋包"><p>鞋包</p></a>
-                <a class="liang-nav-item" href="category.html?cat=男装"><img src="img/goods7.jpg" alt="男装"><p>男装</p></a>
-                <a class="liang-nav-item" href="seckill.html"><img src="img/floor-seckill.jpg" alt="秒杀"><p>限时秒杀</p></a>
+                <a class="liang-nav-item" href="category.html?cat=女装"><img src="img/products/product-3-1.webp" alt="女装"><p>女装</p></a>
+                <a class="liang-nav-item" href="category.html?cat=美妆"><img src="img/products/product-2-1.webp" alt="美妆"><p>美妆</p></a>
+                <a class="liang-nav-item" href="category.html?cat=鞋包"><img src="img/products/product-12-1.webp" alt="鞋包"><p>鞋包</p></a>
+                <a class="liang-nav-item" href="category.html?cat=男装"><img src="img/products/product-7-1.webp" alt="男装"><p>男装</p></a>
+                <a class="liang-nav-item" href="seckill.html"><img src="img/products/product-8-1.webp" alt="秒杀"><p>限时秒杀</p></a>
             </nav>
+
+            <section class="liang-deal-channels" aria-label="特卖频道">
+                <a href="seckill.html"><h2><span>◷</span>限时狂秒</h2><p>限时好价</p><img src="img/products/product-10-1.webp" alt="essence 黑色睫毛膏"></a>
+                <a href="category.html?cat=女装"><h2><span>♧</span>衣橱特卖</h2><p>换季好搭配</p><img src="img/products/product-9-1.webp" alt="黑白格纹连衣裙"></a>
+                <a href="category.html?cat=男装"><h2><span>ϟ</span>天天低价</h2><p>又好又划算</p><img src="img/products/product-7-1.webp" alt="蓝黑格纹长袖衬衫"></a>
+            </section>
 
             <!-- 限时秒杀楼层：JS 效果2 倒计时 -->
             <section class="liang-seckill">
                 <div class="liang-seckill-head">
-                    <h2>限时秒杀</h2>
+                    <h2>限时狂秒</h2>
                     <div class="liang-seckill-time">
                         <span id="liangSeckillLabel">20点场</span>
                         <b id="liangHour">00</b>:<b id="liangMinute">00</b>:<b id="liangSecond">00</b>
@@ -63,22 +81,23 @@
             <!-- 品牌特卖楼层 -->
             <section class="liang-floor">
                 <div class="liang-floor-head">
-                    <h2>品牌特卖</h2>
+                    <h2>今日特卖</h2>
                     <a href="category.html">全部品牌 &gt;</a>
                 </div>
+                <p class="liang-floor-subtitle">精选大牌，发现每日好价</p>
                 <div class="liang-brand-floor">
-                    <img src="img/brand-anta.png" alt="安踏">
-                    <img src="img/brand-paulfrank.png" alt="大嘴猴">
-                    <img src="img/brand-361.png" alt="361度">
+                    <a href="category.html?q=PUMA"><img src="img/products/product-8-1.webp" alt="PUMA 撞色运动鞋"><b>PUMA 彪马</b><span>活力出街</span></a>
+                    <a href="category.html?q=NIKE"><img src="img/products/product-12-1.webp" alt="NIKE 红黑运动鞋"><b>NIKE 耐克</b><span>经典运动</span></a>
+                    <a href="category.html?q=OLAY"><img src="img/products/product-5-1.webp" alt="OLAY 沐浴露"><b>OLAY 玉兰油</b><span>日常护理</span></a>
                 </div>
             </section>
 
             <!-- 服务承诺 -->
-            <img class="liang-floor-img liang-floor" src="img/services.jpg" alt="100%正品 86元免邮 退换无忧" style="margin-top:10px">
+            <div class="liang-service-strip" aria-label="购物服务"><span>✓ 正品保障</span><span>✓ 品牌特卖</span><span>✓ 售后无忧</span></div>
 
             <!-- 楼层促销图 -->
-            <img class="liang-floor-img liang-floor" src="img/floor-1.jpg" alt="橙橙疯抢 天天低价">
-            <img class="liang-floor-img liang-floor" src="img/floor-2.jpg" alt="2折低价 物美超值">
+            <a class="liang-promo-strip" href="category.html?cat=女装"><div><h2>衣橱焕新</h2><p>连衣裙精选 · 发现日常好搭配</p></div><span>去看看 ›</span></a>
+            <a class="liang-promo-strip liang-promo-beauty" href="category.html?cat=美妆"><div><h2>美妆好物</h2><p>彩妆与个护 · 精致每一天</p></div><span>立即逛 ›</span></a>
 
             <!-- 猜你喜欢：fetch 商品接口 + JS 效果3 搜索过滤 -->
             <section class="liang-floor">
@@ -91,9 +110,8 @@
 
             <!-- 页脚 -->
             <footer class="liang-footer">
-                <img src="img/qrcode.jpg" alt="唯品会二维码">
                 <p>唯品会特卖商城 · 24001010817 梁钰承</p>
-                <p>高级网页设计I 期末试题作品 | 纯HTML/CSS/JS实现 · 本地mock数据</p>
+                <p>课程设计展示 · 商品与价格为模拟数据</p>
             </footer>
         </main>
 

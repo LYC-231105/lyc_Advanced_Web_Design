@@ -170,7 +170,7 @@ em, i { font-style: normal; }
     gap: 6px;
 }
 
-.liang-banner-dots i {
+.liang-banner-dots button {
     width: 6px;
     height: 6px;
     border-radius: 3px;
@@ -178,7 +178,7 @@ em, i { font-style: normal; }
     transition: all .3s;
 }
 
-.liang-banner-dots i.liang-active {
+.liang-banner-dots button.liang-active {
     width: 16px;
     background: #fff;
 }
@@ -279,19 +279,21 @@ em, i { font-style: normal; }
 }
 
 .liang-seckill-list {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 8px;
     padding: 0 12px 12px;
-    overflow-x: auto;
+    overflow: hidden;
 }
 
 .liang-seckill-item {
-    flex: 0 0 104px;
+    min-width: 0;
 }
 
 .liang-seckill-item img {
-    width: 104px;
-    height: 104px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    height: auto;
     object-fit: cover;
     border-radius: 8px;
     background: #f7f7f7;
@@ -479,12 +481,14 @@ em, i { font-style: normal; }
 .liang-category {
     display: flex;
     background: #fff;
-    min-height: calc(100vh - 100px);
+    height: min(560px, calc(100svh - 150px));
+    min-height: 300px;
 }
 
 .liang-category-aside {
     flex: 0 0 88px;
     background: var(--liang-bg);
+    overflow-y: auto;
 }
 
 .liang-category-aside li {
@@ -503,7 +507,7 @@ em, i { font-style: normal; }
     border-left-color: var(--liang-pink);
 }
 
-.liang-category-content { flex: 1; overflow: hidden; }
+.liang-category-content { flex: 1; min-width: 0; overflow-y: auto; overscroll-behavior: contain; }
 
 .liang-category-section { padding: 12px; }
 
@@ -511,6 +515,10 @@ em, i { font-style: normal; }
     font-size: 14px;
     margin-bottom: 10px;
 }
+
+.liang-category-group + .liang-category-group { margin-top: 22px; }
+.liang-category-group h4 { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #555; margin: 14px 0 10px; }
+.liang-category-group h4 span { font-size: 10px; color: #999; font-weight: normal; }
 
 .liang-category-grid {
     display: flex;
@@ -722,9 +730,10 @@ em, i { font-style: normal; }
     border-radius: 14px 14px 0 0;
     padding: 14px 14px calc(14px + 54px);
     transition: transform .28s ease;
+    visibility: hidden;
 }
 
-.liang-sheet.liang-show { transform: translate(-50%, 0); }
+.liang-sheet.liang-show { transform: translate(-50%, 0); visibility: visible; }
 
 .liang-sheet-close {
     position: absolute;
@@ -1089,8 +1098,7 @@ em, i { font-style: normal; }
 .liang-login {
     position: relative;
     min-height: 100vh;
-    background: url("../img/login-bg.jpg") center top / 100% auto no-repeat,
-                linear-gradient(180deg, #ffd9ec, var(--liang-bg) 46%);
+    background: linear-gradient(180deg, #ffd9ec, var(--liang-bg) 46%);
 }
 
 .liang-login-panel {
@@ -1285,3 +1293,150 @@ em, i { font-style: normal; }
 }
 
 .liang-footer img { width: 82px; margin: 0 auto 6px; }
+
+/* 图文校正：保持原有手机布局，图片完整展示，促销文案使用真实 HTML。 */
+input, select, .liang-search-box { min-width: 0; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 2px solid #8e1455;
+    outline-offset: 3px;
+}
+button:disabled { opacity: .48; cursor: not-allowed; }
+.liang-banner-card { display: flex; align-items: center; height: 202px; padding: 18px 20px 26px; background: linear-gradient(110deg, #ffe0eb, #fff7f9); }
+.liang-banner-list li:nth-child(2) .liang-banner-card { background: linear-gradient(110deg, #dcecff, #f5f9ff); }
+.liang-banner-list li:nth-child(3) .liang-banner-card { background: linear-gradient(110deg, #ece2f6, #fbf9ff); }
+.liang-banner-copy { flex: 1; min-width: 0; position: relative; z-index: 1; }
+.liang-banner-copy small { color: #98506e; font-size: 11px; }
+.liang-banner-copy h2 { font-size: 23px; line-height: 1.4; margin: 8px 0 5px; }
+.liang-banner-copy p { color: #775966; font-size: 11px; line-height: 1.6; }
+.liang-banner-copy span { display: inline-block; margin-top: 12px; padding: 5px 12px; color: #fff; background: var(--liang-pink); border-radius: 16px; font-size: 12px; }
+.liang-banner-card img { width: 42%; height: 162px; object-fit: contain; mix-blend-mode: multiply; }
+.liang-banner-dots button { background: #d3bac8; width: 8px; height: 8px; border-radius: 8px; }
+.liang-banner-dots button.liang-active { background: var(--liang-pink); }
+.liang-service-strip { display: flex; justify-content: space-around; gap: 4px; background: #fff; padding: 13px 8px; margin-top: 10px; color: #a84074; font-size: 11px; }
+.liang-promo-strip { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: 10px 10px 0; padding: 16px; border-radius: 10px; background: #fff0f5; color: #a92d66; }
+.liang-promo-strip h2 { font-size: 18px; }
+.liang-promo-strip p { margin-top: 5px; font-size: 11px; line-height: 1.6; }
+.liang-promo-strip > span { font-size: 12px; white-space: nowrap; }
+.liang-promo-beauty { background: #f1ebff; color: #745098; }
+.liang-brand-floor { margin-top: 0; }
+.liang-brand-floor a { width: calc((100% - 16px) / 3); text-align: center; background: #f8f8fb; border-radius: 8px; padding: 8px 4px; }
+.liang-brand-floor a img { width: 100%; height: 88px; object-fit: contain; mix-blend-mode: multiply; }
+.liang-brand-floor b { display: block; font-size: 12px; margin-top: 5px; }
+.liang-brand-floor span { display: block; font-size: 10px; color: #888; margin-top: 3px; }
+.liang-nav-item img, .liang-goods-card img, .liang-seckill-item img,
+.liang-category-grid img, .liang-cart-item img, .liang-admin-row img,
+.liang-detail-mainimg, .liang-detail-thumbs img { object-fit: contain; background: #fff; }
+.liang-goods-card img { padding: 10px; }
+.liang-detail-mainimg { height: auto; aspect-ratio: 1 / 1; padding: 18px; }
+.liang-detail-thumbs { overflow-x: auto; }
+.liang-detail-thumbs button { flex-shrink: 0; }
+.liang-seckill-name { font-size: 11px; color: #555; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; margin-top: 6px; }
+.liang-seckill-progress { color: #6d1741; background: linear-gradient(90deg, #ffb9d5 var(--liang-progress, 0%), #fff0f6 var(--liang-progress, 0%)); }
+.liang-seckill-head { flex-wrap: wrap; }
+.liang-goods-brand { overflow-wrap: anywhere; }
+.liang-goods-name { display: block; }
+.liang-floor { scroll-margin-top: 100px; }
+.liang-empty { width: 100% !important; padding: 24px 10px; text-align: center; font-size: 12px; line-height: 1.8; color: #888; }
+.liang-category-aside button { display: block; width: 100%; height: 100%; color: inherit; }
+.liang-category-grid li p { line-height: 1.5; font-size: 11px; min-height: 33px; }
+.liang-category-section:last-child { min-height: 100%; }
+.liang-member-rights { margin-top: 10px; padding: 18px; color: #5f4530; background: linear-gradient(110deg, #f8ecd7, #fffcf5); }
+.liang-member-rights h2 { font-size: 16px; }
+.liang-member-rights p { margin-top: 7px; font-size: 12px; }
+.liang-member-rights a { display: inline-block; margin-top: 10px; font-size: 12px; }
+.liang-avatar-picker { flex-wrap: wrap; min-width: 0; padding: 10px 0; }
+.liang-avatar-picker img { width: 42px; height: 42px; object-fit: contain; background: #fff; }
+.liang-avatar-picker img[hidden] { display: none; }
+.liang-avatar-upload { white-space: nowrap; }
+.liang-form-item input, .liang-form-item select { flex: 1; min-width: 0; max-width: 100%; }
+.liang-login-brand { padding: 35px 28px 20px; color: var(--liang-pink); }
+.liang-login-brand img { width: 30px; height: 30px; display: inline-block; vertical-align: middle; margin-right: 8px; }
+.liang-login-brand h1 { display: inline-block; vertical-align: middle; font-size: 30px; }
+.liang-login-brand p { margin-top: 12px; font-size: 13px; color: #b54f80; }
+.liang-login-panel { position: relative; top: auto; padding-top: 20px; padding-bottom: 36px; }
+.liang-login-links button { color: inherit; font-size: inherit; }
+.liang-sheet { max-height: 88vh; overflow-y: auto; padding-bottom: 24px; }
+.liang-admin-preview { width: 46px; height: 46px; object-fit: contain; }
+.liang-admin-row { gap: 6px; }
+.liang-admin-price { flex-basis: 58px; }
+.liang-admin-stock { flex-basis: 32px; }
+.liang-admin-del { flex-basis: 30px; }
+.liang-backtop { right: max(12px, calc(50% - 195px)); }
+@media (max-width: 360px) {
+    .liang-banner-copy h2 { font-size: 20px; }
+    .liang-banner-card { padding-left: 14px; padding-right: 14px; }
+    .liang-goods-price { gap: 3px; }
+    .liang-goods-price strong { font-size: 16px; }
+    .liang-admin-row { padding: 8px 6px; }
+    .liang-admin-row img { width: 34px; height: 34px; }
+    .liang-form-item label { flex-basis: 64px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+}
+.liang-order-nav button { flex: 1; text-align: center; font-size: 12px; color: #555; }
+.liang-order-nav button svg { width: 24px; height: 24px; margin: 0 auto 4px; display: block; }
+.liang-orders-panel { background: #fff; margin-top: 10px; scroll-margin-top: 10px; }
+.liang-orders-panel[hidden] { display: none; }
+.liang-order-card { padding: 12px; margin: 0 10px 10px; border: 1px solid var(--liang-line); border-radius: 8px; font-size: 12px; }
+.liang-order-product { display: flex; align-items: center; gap: 10px; padding: 8px 0; }
+.liang-order-product img { width: 46px; height: 46px; object-fit: contain; }
+.liang-order-card small { color: #888; display: block; margin-top: 6px; }
+
+/* 对照 m.vip.com 的浅粉品牌区、白底频道栏和特卖分区（2026-10-15）。 */
+.liang-home { background: #f5f5f7; }
+.liang-home-brand { padding: 15px 16px 9px; background: linear-gradient(115deg, #fff3fa, #f7e4ff 65%, #fff5fa); }
+.liang-home-wordmark { font-size: 15px; font-weight: 700; color: var(--liang-pink); }
+.liang-home-wordmark span { font-size: 10px; margin-left: 4px; }
+.liang-home-brand h1 { margin-top: 9px; font-size: clamp(22px, 6vw, 27px); letter-spacing: -.5px; color: #171717; }
+.liang-home-brand h1 span { margin-left: 6px; }
+.liang-home-brand p { margin-top: 3px; color: #5f4c60; font-size: 12px; }
+.liang-home .liang-header { background: linear-gradient(115deg, #fff3fa, #fbf1ff, #fff); color: #222; }
+.liang-home .liang-search { padding: 7px 12px 9px; }
+.liang-home .liang-search-box { height: 36px; border-radius: 22px; }
+.liang-home .liang-search-box svg { stroke: var(--liang-pink); width: 18px; height: 18px; }
+.liang-home .liang-search-box input::placeholder { color: #999; }
+.liang-home .liang-search-btn { background: var(--liang-pink); color: #fff; border-radius: 18px; padding: 6px 11px; }
+.liang-channel-nav { display: flex; justify-content: space-around; background: #fff; }
+.liang-channel-nav a { position: relative; flex: 1; text-align: center; padding: 10px 0 12px; font-size: 15px; white-space: nowrap; }
+.liang-channel-nav .liang-active { font-weight: 700; }
+.liang-channel-nav .liang-active::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 21px; height: 3px; border-radius: 3px; background: var(--liang-pink); }
+.liang-home .liang-banner { margin: 9px 10px 0; border-radius: 12px; }
+.liang-home .liang-banner-card { height: 184px; padding: 14px 14px 24px; }
+.liang-home .liang-banner-card img { height: 140px; }
+.liang-home .liang-banner-copy h2 { font-size: 21px; }
+.liang-home .liang-nav { background: transparent; padding-top: 13px; padding-bottom: 0; }
+.liang-home .liang-nav-item img { border-radius: 10px; padding: 4px; }
+.liang-deal-channels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; padding: 0 10px; margin-top: 3px; }
+.liang-deal-channels a { background: linear-gradient(#fff, #fffafb); border-radius: 10px; padding: 10px 5px 5px; text-align: center; min-width: 0; }
+.liang-deal-channels h2 { font-size: 14px; white-space: nowrap; letter-spacing: -.5px; }
+.liang-deal-channels h2 span { color: var(--liang-pink); margin-right: 3px; }
+.liang-deal-channels a:nth-child(2) h2 span { color: #ff3865; }
+.liang-deal-channels a:nth-child(3) h2 span { color: #f7a000; }
+.liang-deal-channels p { font-size: 11px; color: #888; margin: 3px 0 4px; }
+.liang-deal-channels img { width: 100%; height: 85px; object-fit: contain; }
+.liang-home .liang-seckill { margin: 10px 10px 0; border-radius: 10px; }
+.liang-home .liang-seckill-list { padding: 0 8px 12px; gap: 6px; overflow: visible; }
+.liang-home .liang-seckill-head { padding: 12px 8px 9px; gap: 6px; justify-content: space-between; }
+.liang-home .liang-seckill-head h2 { font-size: 16px; color: #222; letter-spacing: -.5px; }
+.liang-home .liang-seckill-time { font-size: 10px; gap: 2px; }
+.liang-home .liang-seckill-time b { min-width: 17px; font-size: 10px; padding: 1px 2px; }
+.liang-home .liang-seckill-item img { border-radius: 6px; object-fit: contain; }
+.liang-home .liang-seckill-name { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; white-space: normal; height: 30px; line-height: 15px; font-size: 10px; }
+.liang-home .liang-seckill-item .liang-price strong { font-size: 15px; }
+.liang-floor-subtitle { padding: 0 12px 8px; font-size: 11px; color: #999; }
+.liang-home .liang-brand-floor { border-radius: 10px; margin: 0 10px; padding: 8px; }
+.liang-home .liang-floor-head h2 { font-size: 18px; }
+.liang-home .liang-goods-card { border-radius: 6px; }
+.liang-home .liang-goods-brand { font-size: 12px; }
+.liang-home .liang-goods-name { color: #555; }
+.liang-home .liang-goods-price strong { font-size: 20px; }
+.liang-home .liang-service-strip { background: transparent; color: #9c6083; font-size: 10px; }
+@media (max-width: 360px) {
+    .liang-home .liang-banner-copy h2 { font-size: 19px; }
+    .liang-deal-channels h2 { font-size: 12px; }
+    .liang-home .liang-seckill-head h2 { font-size: 14px; }
+    .liang-home .liang-seckill-time { font-size: 9px; }
+    .liang-home .liang-seckill-progress { font-size: 9px; }
+}
+

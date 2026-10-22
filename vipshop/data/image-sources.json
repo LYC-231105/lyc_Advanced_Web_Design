@@ -1,0 +1,1194 @@
+[
+  {
+    "file": "img/products/product-1-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/calvin-klein-heel-shoes/1.webp",
+    "sourcePage": "https://dummyjson.com/products/186",
+    "subject": "Calvin Klein Heel Shoes",
+    "downloadDate": "2026-10-15",
+    "sha256": "7c357c91a5c5dda55508f5283af6f5ebd25065d8d9f25b11fb49211d5719385c"
+  },
+  {
+    "file": "img/products/product-1-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/calvin-klein-heel-shoes/2.webp",
+    "sourcePage": "https://dummyjson.com/products/186",
+    "subject": "Calvin Klein Heel Shoes",
+    "downloadDate": "2026-10-15",
+    "sha256": "3acedca6acc26d482dbdbce6c968d1f93a88fdfa84b06b7912873490a638f708"
+  },
+  {
+    "file": "img/products/product-1-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/calvin-klein-heel-shoes/3.webp",
+    "sourcePage": "https://dummyjson.com/products/186",
+    "subject": "Calvin Klein Heel Shoes",
+    "downloadDate": "2026-10-15",
+    "sha256": "f773537d44ea74b889928cc9522bb8d6236e8c223a333511bcb584178a5607dd"
+  },
+  {
+    "file": "img/products/product-1-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/calvin-klein-heel-shoes/4.webp",
+    "sourcePage": "https://dummyjson.com/products/186",
+    "subject": "Calvin Klein Heel Shoes",
+    "downloadDate": "2026-10-15",
+    "sha256": "0cb2ba7836173be748d1bca34ffe07b79ccc1cceb1f625af8d67e0b26812d161"
+  },
+  {
+    "file": "img/products/product-2-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/1.webp",
+    "sourcePage": "https://dummyjson.com/products/4",
+    "subject": "Red Lipstick",
+    "downloadDate": "2026-10-15",
+    "sha256": "278bed35d514122e810fb10c311a5c679b88983dca1b715fc58f848b54a88756"
+  },
+  {
+    "file": "img/products/product-3-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/blue-frock/1.webp",
+    "sourcePage": "https://dummyjson.com/products/162",
+    "subject": "Blue Frock",
+    "downloadDate": "2026-10-15",
+    "sha256": "bf1b0254d2f1ce2311461a3c9741bbe0e79b345bcd868009d5a774c61508f428"
+  },
+  {
+    "file": "img/products/product-3-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/blue-frock/2.webp",
+    "sourcePage": "https://dummyjson.com/products/162",
+    "subject": "Blue Frock",
+    "downloadDate": "2026-10-15",
+    "sha256": "166f385cee4c922c6b68c3b294ff0a9561e4fb299ef735621f8ed7d24010a02d"
+  },
+  {
+    "file": "img/products/product-3-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/blue-frock/3.webp",
+    "sourcePage": "https://dummyjson.com/products/162",
+    "subject": "Blue Frock",
+    "downloadDate": "2026-10-15",
+    "sha256": "ac6f8f07fc2535157e4e33c36aa39e8cf01cf5b3ef206c4acadbc79a32b86457"
+  },
+  {
+    "file": "img/products/product-3-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/blue-frock/4.webp",
+    "sourcePage": "https://dummyjson.com/products/162",
+    "subject": "Blue Frock",
+    "downloadDate": "2026-10-15",
+    "sha256": "ecb04ae761e223b2b7ecde7c026a38f4c36adba5ace794b98fce7639ec1e99a4"
+  },
+  {
+    "file": "img/products/product-4-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/corset-leather-with-skirt/1.webp",
+    "sourcePage": "https://dummyjson.com/products/178",
+    "subject": "Corset Leather With Skirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "8c3958e9849b9eb5f09aa060f6a3823d8461c87b57efcd3014e99b914d3d54d9"
+  },
+  {
+    "file": "img/products/product-4-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/corset-leather-with-skirt/2.webp",
+    "sourcePage": "https://dummyjson.com/products/178",
+    "subject": "Corset Leather With Skirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "e1bebd179ee4668071a2ab740a378fce4a487b7e877f5fdb8bc87a66bc98ab20"
+  },
+  {
+    "file": "img/products/product-4-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/corset-leather-with-skirt/3.webp",
+    "sourcePage": "https://dummyjson.com/products/178",
+    "subject": "Corset Leather With Skirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "3cd045796935405e7ba71ed28c39d459c54ac7e74875b967d594aae0ba025f34"
+  },
+  {
+    "file": "img/products/product-4-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/corset-leather-with-skirt/4.webp",
+    "sourcePage": "https://dummyjson.com/products/178",
+    "subject": "Corset Leather With Skirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "7051d01139c5cbdd6c47bf96a212cea71d5c884b08d1ce4ed99efbcc52101b48"
+  },
+  {
+    "file": "img/products/product-5-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/skin-care/olay-ultra-moisture-shea-butter-body-wash/1.webp",
+    "sourcePage": "https://dummyjson.com/products/119",
+    "subject": "Olay Ultra Moisture Shea Butter Body Wash",
+    "downloadDate": "2026-10-15",
+    "sha256": "8bf707e0babe8c8e9f0d4a9a4d60584b6d37ec25188797cd2802db68bb2ad219"
+  },
+  {
+    "file": "img/products/product-5-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/skin-care/olay-ultra-moisture-shea-butter-body-wash/2.webp",
+    "sourcePage": "https://dummyjson.com/products/119",
+    "subject": "Olay Ultra Moisture Shea Butter Body Wash",
+    "downloadDate": "2026-10-15",
+    "sha256": "7d77fdad8e3a5592ef10cb6449b2a76f62b91e168d72a4748832a9f4e86456db"
+  },
+  {
+    "file": "img/products/product-5-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/skin-care/olay-ultra-moisture-shea-butter-body-wash/3.webp",
+    "sourcePage": "https://dummyjson.com/products/119",
+    "subject": "Olay Ultra Moisture Shea Butter Body Wash",
+    "downloadDate": "2026-10-15",
+    "sha256": "7bf63e8271478ee7c1af9274a870642222102569f2dfd94d22d4bf1dbc5f9375"
+  },
+  {
+    "file": "img/products/product-6-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/black-women's-gown/1.webp",
+    "sourcePage": "https://dummyjson.com/products/177",
+    "subject": "Black Women's Gown",
+    "downloadDate": "2026-10-15",
+    "sha256": "fc54074fab7013cea741db006fe0c696d975878b2888532e47356a9b370b95b4"
+  },
+  {
+    "file": "img/products/product-6-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/black-women's-gown/2.webp",
+    "sourcePage": "https://dummyjson.com/products/177",
+    "subject": "Black Women's Gown",
+    "downloadDate": "2026-10-15",
+    "sha256": "a58d174ec89a5f59b0c1e16d4a3a9cb7bb70f1bbb8d7ae4b69abb35916c71918"
+  },
+  {
+    "file": "img/products/product-6-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/black-women's-gown/3.webp",
+    "sourcePage": "https://dummyjson.com/products/177",
+    "subject": "Black Women's Gown",
+    "downloadDate": "2026-10-15",
+    "sha256": "23e6c69e65a63818f6e660f579b22fe5cb181d88f5c766055d8a1febd9035d1a"
+  },
+  {
+    "file": "img/products/product-6-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/black-women's-gown/4.webp",
+    "sourcePage": "https://dummyjson.com/products/177",
+    "subject": "Black Women's Gown",
+    "downloadDate": "2026-10-15",
+    "sha256": "fc4a2c0583721c1783221826e4b1d46bacc6c68b244062f72b108bbd089437cf"
+  },
+  {
+    "file": "img/products/product-7-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/1.webp",
+    "sourcePage": "https://dummyjson.com/products/83",
+    "subject": "Blue & Black Check Shirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "c6c356d6b07ba4c777c28cf74be8170594733ea88ef9de133fc2b9c0f1771a4f"
+  },
+  {
+    "file": "img/products/product-7-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/2.webp",
+    "sourcePage": "https://dummyjson.com/products/83",
+    "subject": "Blue & Black Check Shirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "a403a92c69a95452ce0ca593ee37e8b876e5cf7b7dfcd3c74e29aa8437ebc75b"
+  },
+  {
+    "file": "img/products/product-7-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/3.webp",
+    "sourcePage": "https://dummyjson.com/products/83",
+    "subject": "Blue & Black Check Shirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "477a6741f7346d068ecf4c3daf19c9c601cf6fe22ec6b75e744a7fbb47de8956"
+  },
+  {
+    "file": "img/products/product-7-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/4.webp",
+    "sourcePage": "https://dummyjson.com/products/83",
+    "subject": "Blue & Black Check Shirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "f446ca5802002d9647759d576cf7a9b0bd4b2fda1f027fd13b940dfcddadd25a"
+  },
+  {
+    "file": "img/products/product-8-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/1.webp",
+    "sourcePage": "https://dummyjson.com/products/90",
+    "subject": "Puma Future Rider Trainers",
+    "downloadDate": "2026-10-15",
+    "sha256": "468185649cb628ee028c8a94a15489a75feef04c0b4380db975b45265a37b53d"
+  },
+  {
+    "file": "img/products/product-8-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/2.webp",
+    "sourcePage": "https://dummyjson.com/products/90",
+    "subject": "Puma Future Rider Trainers",
+    "downloadDate": "2026-10-15",
+    "sha256": "7f5eaf05cf5915e745e7123bfce47ce829edf0f12b55217e9920fc7f6e4e2c75"
+  },
+  {
+    "file": "img/products/product-8-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/3.webp",
+    "sourcePage": "https://dummyjson.com/products/90",
+    "subject": "Puma Future Rider Trainers",
+    "downloadDate": "2026-10-15",
+    "sha256": "a5eea5888cddf45bb9369d4ecbf6681d07fc1c800db3e8ced3062b62d21ada75"
+  },
+  {
+    "file": "img/products/product-8-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/4.webp",
+    "sourcePage": "https://dummyjson.com/products/90",
+    "subject": "Puma Future Rider Trainers",
+    "downloadDate": "2026-10-15",
+    "sha256": "5d475863a6e183e1b037e1171802ecbf27419b6c0d0cad3412cafa07e2628ec1"
+  },
+  {
+    "file": "img/products/product-9-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/tartan-dress/1.webp",
+    "sourcePage": "https://dummyjson.com/products/166",
+    "subject": "Tartan Dress",
+    "downloadDate": "2026-10-15",
+    "sha256": "68b1128678987848232c5edd0a5add056c6fc78ef070426909b181fbbcb44e32"
+  },
+  {
+    "file": "img/products/product-9-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/tartan-dress/2.webp",
+    "sourcePage": "https://dummyjson.com/products/166",
+    "subject": "Tartan Dress",
+    "downloadDate": "2026-10-15",
+    "sha256": "b86ec87d923f35c87db01c93720e3a7efbc86c8dd422605f5ad25d82733d828a"
+  },
+  {
+    "file": "img/products/product-9-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/tartan-dress/3.webp",
+    "sourcePage": "https://dummyjson.com/products/166",
+    "subject": "Tartan Dress",
+    "downloadDate": "2026-10-15",
+    "sha256": "007a8bfbfb61174ebbd08558a0969d94a42ac89a14268ed208ea0b7de1b61def"
+  },
+  {
+    "file": "img/products/product-9-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/tartan-dress/4.webp",
+    "sourcePage": "https://dummyjson.com/products/166",
+    "subject": "Tartan Dress",
+    "downloadDate": "2026-10-15",
+    "sha256": "66b13a83c7f804a9c3dfd71b340e231c16abdf841ce750fa8898cbe27ac02704"
+  },
+  {
+    "file": "img/products/product-10-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp",
+    "sourcePage": "https://dummyjson.com/products/1",
+    "subject": "Essence Mascara Lash Princess",
+    "downloadDate": "2026-10-15",
+    "sha256": "4c9b190e6d218f0ca7aae7523ffc083be9df44c585823796978148f9d81854ee"
+  },
+  {
+    "file": "img/products/product-11-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/1.webp",
+    "sourcePage": "https://dummyjson.com/products/85",
+    "subject": "Man Plaid Shirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "2f88b095657383554b8ac76623f19211a2a8daad86db30067c6732362a02dc95"
+  },
+  {
+    "file": "img/products/product-11-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/2.webp",
+    "sourcePage": "https://dummyjson.com/products/85",
+    "subject": "Man Plaid Shirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "9f00193512ea77c414283e9a182f9014a8873bc075fe623b2ecde16a1fc7353c"
+  },
+  {
+    "file": "img/products/product-11-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/3.webp",
+    "sourcePage": "https://dummyjson.com/products/85",
+    "subject": "Man Plaid Shirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "65e7a883c88becba244ba936f8a715e4ad6770ed7946a4efa78c8b6309c8cc7e"
+  },
+  {
+    "file": "img/products/product-11-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/4.webp",
+    "sourcePage": "https://dummyjson.com/products/85",
+    "subject": "Man Plaid Shirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "8feb02a696ee10ea7163682c9500e6fcbd4945a591ee7419640e39b95f777ebc"
+  },
+  {
+    "file": "img/products/product-12-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/1.webp",
+    "sourcePage": "https://dummyjson.com/products/88",
+    "subject": "Nike Air Jordan 1 Red And Black",
+    "downloadDate": "2026-10-15",
+    "sha256": "c9760ed746558e259ace2b1b0461f3f11c5a62389da666d95a95430a1b0f2033"
+  },
+  {
+    "file": "img/products/product-12-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/2.webp",
+    "sourcePage": "https://dummyjson.com/products/88",
+    "subject": "Nike Air Jordan 1 Red And Black",
+    "downloadDate": "2026-10-15",
+    "sha256": "f51312068e490b855431862ee45dd544747634c2b6c159c7cf6bafcf81c62add"
+  },
+  {
+    "file": "img/products/product-12-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/3.webp",
+    "sourcePage": "https://dummyjson.com/products/88",
+    "subject": "Nike Air Jordan 1 Red And Black",
+    "downloadDate": "2026-10-15",
+    "sha256": "abcbc5da1e88cb3149e63a08608aa67b42561877bf0c582719057b4b3726cf8f"
+  },
+  {
+    "file": "img/products/product-12-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/4.webp",
+    "sourcePage": "https://dummyjson.com/products/88",
+    "subject": "Nike Air Jordan 1 Red And Black",
+    "downloadDate": "2026-10-15",
+    "sha256": "a6b9f9c6637b976464b7c27e913207cad9aa39c7e4870baa0c23ceabc3312588"
+  },
+  {
+    "file": "img/products/product-13-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/gigabyte-aorus-men-tshirt/1.webp",
+    "sourcePage": "https://dummyjson.com/products/84",
+    "subject": "Gigabyte Aorus Men Tshirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "815b2a11ccda4fb9d054e79c5bd14d0ee55c99e76975ca6eaee3a9853cc9a586"
+  },
+  {
+    "file": "img/products/product-13-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/gigabyte-aorus-men-tshirt/2.webp",
+    "sourcePage": "https://dummyjson.com/products/84",
+    "subject": "Gigabyte Aorus Men Tshirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "efd79c42df9459a1f43e67a0c5035f026606da09713eb205edb71ec19330c231"
+  },
+  {
+    "file": "img/products/product-13-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/gigabyte-aorus-men-tshirt/3.webp",
+    "sourcePage": "https://dummyjson.com/products/84",
+    "subject": "Gigabyte Aorus Men Tshirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "21c47829d1ad38dba83aba54eed2f6d6b6ffd50c0542abe50e13af37b7521da6"
+  },
+  {
+    "file": "img/products/product-13-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/gigabyte-aorus-men-tshirt/4.webp",
+    "sourcePage": "https://dummyjson.com/products/84",
+    "subject": "Gigabyte Aorus Men Tshirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "aac030e18cd98f59a7ed85fe486ce9a329e7a3f0d7eb6198d9c3c253a37b052e"
+  },
+  {
+    "file": "img/products/product-14-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/gray-dress/1.webp",
+    "sourcePage": "https://dummyjson.com/products/164",
+    "subject": "Gray Dress",
+    "downloadDate": "2026-10-15",
+    "sha256": "03397e372d73d3e6e750db9cf5569d4f6e88fb5852e8b6671128c42ce47abdc2"
+  },
+  {
+    "file": "img/products/product-14-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/gray-dress/2.webp",
+    "sourcePage": "https://dummyjson.com/products/164",
+    "subject": "Gray Dress",
+    "downloadDate": "2026-10-15",
+    "sha256": "f3efa17feda393b0ed5b69f4f632f77b1c9fa6087168e547e02731ea21cfa2ea"
+  },
+  {
+    "file": "img/products/product-14-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/gray-dress/3.webp",
+    "sourcePage": "https://dummyjson.com/products/164",
+    "subject": "Gray Dress",
+    "downloadDate": "2026-10-15",
+    "sha256": "731492549f97d37797e36a2fa00e7ce62ee6c88e78a32ad28ce209ed9b64cc0b"
+  },
+  {
+    "file": "img/products/product-14-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/gray-dress/4.webp",
+    "sourcePage": "https://dummyjson.com/products/164",
+    "subject": "Gray Dress",
+    "downloadDate": "2026-10-15",
+    "sha256": "0816d5d54981d212bf2a967d1482cfca43d56e7c79ab1e4777739212ba2dc284"
+  },
+  {
+    "file": "img/products/product-15-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-&-red/1.webp",
+    "sourcePage": "https://dummyjson.com/products/91",
+    "subject": "Sports Sneakers Off White & Red",
+    "downloadDate": "2026-10-15",
+    "sha256": "242f84030ee18ca5effdc1599c4b28094aa3c2e30f3272ee21e0ecd12259ba07"
+  },
+  {
+    "file": "img/products/product-15-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-&-red/2.webp",
+    "sourcePage": "https://dummyjson.com/products/91",
+    "subject": "Sports Sneakers Off White & Red",
+    "downloadDate": "2026-10-15",
+    "sha256": "b792a0bfaec56caa992f40c9dc330c4a2613720a82d32cd543839ad773456fb8"
+  },
+  {
+    "file": "img/products/product-15-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-&-red/3.webp",
+    "sourcePage": "https://dummyjson.com/products/91",
+    "subject": "Sports Sneakers Off White & Red",
+    "downloadDate": "2026-10-15",
+    "sha256": "97436db3181b711303e5616a03a12440b39f7eef686e8fa8fbcdb740e1fdb98a"
+  },
+  {
+    "file": "img/products/product-15-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-&-red/4.webp",
+    "sourcePage": "https://dummyjson.com/products/91",
+    "subject": "Sports Sneakers Off White & Red",
+    "downloadDate": "2026-10-15",
+    "sha256": "fac43492cf69101f75a9ebedebdad793adfef665705ab11403636a448f06347c"
+  },
+  {
+    "file": "img/products/product-16-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-bags/blue-women's-handbag/1.webp",
+    "sourcePage": "https://dummyjson.com/products/172",
+    "subject": "Blue Women's Handbag",
+    "downloadDate": "2026-10-15",
+    "sha256": "d835f10e79651a29ebebebb69c456714ed0d3adc7efe30ccff04b78a9be7d24f"
+  },
+  {
+    "file": "img/products/product-16-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-bags/blue-women's-handbag/2.webp",
+    "sourcePage": "https://dummyjson.com/products/172",
+    "subject": "Blue Women's Handbag",
+    "downloadDate": "2026-10-15",
+    "sha256": "68a81db99f90e351a30c555e19827f5a6e8a7b44115d644ceecfaf7518b076a6"
+  },
+  {
+    "file": "img/products/product-16-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-bags/blue-women's-handbag/3.webp",
+    "sourcePage": "https://dummyjson.com/products/172",
+    "subject": "Blue Women's Handbag",
+    "downloadDate": "2026-10-15",
+    "sha256": "3b887a263581175cab8cd504c019a7ff5df4c3d476e5e162f8069e7a149a9e30"
+  },
+  {
+    "file": "img/products/product-17-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-bags/heshe-women's-leather-bag/1.webp",
+    "sourcePage": "https://dummyjson.com/products/173",
+    "subject": "Heshe Women's Leather Bag",
+    "downloadDate": "2026-10-15",
+    "sha256": "cd2a5a804bfb76a50b69cedc1fed88020f99958d917c323bb3a4f0b1a1beb93b"
+  },
+  {
+    "file": "img/products/product-17-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-bags/heshe-women's-leather-bag/2.webp",
+    "sourcePage": "https://dummyjson.com/products/173",
+    "subject": "Heshe Women's Leather Bag",
+    "downloadDate": "2026-10-15",
+    "sha256": "fba39a6b2dfdca6280cec14d0daee1a56f95eb48b4b8bcc33429276b75abb289"
+  },
+  {
+    "file": "img/products/product-17-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-bags/heshe-women's-leather-bag/3.webp",
+    "sourcePage": "https://dummyjson.com/products/173",
+    "subject": "Heshe Women's Leather Bag",
+    "downloadDate": "2026-10-15",
+    "sha256": "85e6346f724b050511c6d5969253be522a2d985c1d9bd58e8a48126c7bd7759f"
+  },
+  {
+    "file": "img/products/product-18-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-bags/prada-women-bag/1.webp",
+    "sourcePage": "https://dummyjson.com/products/174",
+    "subject": "Prada Women Bag",
+    "downloadDate": "2026-10-15",
+    "sha256": "acbe659c763879673d9d107d70426d05d63f8ba678b347cfc9005bf49f9bb4c9"
+  },
+  {
+    "file": "img/products/product-18-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-bags/prada-women-bag/2.webp",
+    "sourcePage": "https://dummyjson.com/products/174",
+    "subject": "Prada Women Bag",
+    "downloadDate": "2026-10-15",
+    "sha256": "c1576680b8ddcdd38e04ae5b2f2bc363956bc80c3b6275c375a6dcb56fabc1fa"
+  },
+  {
+    "file": "img/products/product-18-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-bags/prada-women-bag/3.webp",
+    "sourcePage": "https://dummyjson.com/products/174",
+    "subject": "Prada Women Bag",
+    "downloadDate": "2026-10-15",
+    "sha256": "3a9dae2dbce9f31db2b9cc3d047da2dfb16c517eedd26dcdec11b5d4e48f9158"
+  },
+  {
+    "file": "img/products/product-19-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-bags/white-faux-leather-backpack/1.webp",
+    "sourcePage": "https://dummyjson.com/products/175",
+    "subject": "White Faux Leather Backpack",
+    "downloadDate": "2026-10-15",
+    "sha256": "bcdd9f951790dc029a7926b7a83f1f21b35da885692f72cd79c9e00888d87a06"
+  },
+  {
+    "file": "img/products/product-19-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-bags/white-faux-leather-backpack/2.webp",
+    "sourcePage": "https://dummyjson.com/products/175",
+    "subject": "White Faux Leather Backpack",
+    "downloadDate": "2026-10-15",
+    "sha256": "ab71971f4473902eb5cbc35a292496d9aba73c23d9449badbf7928e30088479f"
+  },
+  {
+    "file": "img/products/product-19-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-bags/white-faux-leather-backpack/3.webp",
+    "sourcePage": "https://dummyjson.com/products/175",
+    "subject": "White Faux Leather Backpack",
+    "downloadDate": "2026-10-15",
+    "sha256": "97c1f73688ab1499294c79c126e8567c45c9a1ea49dc6ae3139cc5ec45ebbf28"
+  },
+  {
+    "file": "img/products/product-20-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-bags/women-handbag-black/1.webp",
+    "sourcePage": "https://dummyjson.com/products/176",
+    "subject": "Women Handbag Black",
+    "downloadDate": "2026-10-15",
+    "sha256": "c94dd2eaeede7780d49959eea345fd1f7bd61ddc351a73700fe30450c5532c8e"
+  },
+  {
+    "file": "img/products/product-20-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-bags/women-handbag-black/2.webp",
+    "sourcePage": "https://dummyjson.com/products/176",
+    "subject": "Women Handbag Black",
+    "downloadDate": "2026-10-15",
+    "sha256": "9fd7113a34a636a27db09d9e57083f46f4b5d3634f5a08883cffb5f16dcde173"
+  },
+  {
+    "file": "img/products/product-20-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-bags/women-handbag-black/3.webp",
+    "sourcePage": "https://dummyjson.com/products/176",
+    "subject": "Women Handbag Black",
+    "downloadDate": "2026-10-15",
+    "sha256": "16092fd11c3cd8e69fe2d25bef5af0db867136a29400a12772a46130dfd94a45"
+  },
+  {
+    "file": "img/products/product-21-1.png",
+    "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png",
+    "sourcePage": "https://fakestoreapi.com/products/1",
+    "subject": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+    "downloadDate": "2026-10-15",
+    "sha256": "6d3065156c583a500d02d4be2060d71f47c24a5d6fd713fb08a6a9b0ac49a07c"
+  },
+  {
+    "file": "img/products/product-22-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/girl-summer-dress/1.webp",
+    "sourcePage": "https://dummyjson.com/products/163",
+    "subject": "Girl Summer Dress",
+    "downloadDate": "2026-10-15",
+    "sha256": "61f623c920216aa4d96e964df7ba5b8dfdf10e19a4493428c9693ab4f40aad30"
+  },
+  {
+    "file": "img/products/product-22-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/girl-summer-dress/2.webp",
+    "sourcePage": "https://dummyjson.com/products/163",
+    "subject": "Girl Summer Dress",
+    "downloadDate": "2026-10-15",
+    "sha256": "35563c0f71807bebe6672ea88124b3a0a8725dcb0cbda39c7aea86efec51a464"
+  },
+  {
+    "file": "img/products/product-22-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/girl-summer-dress/3.webp",
+    "sourcePage": "https://dummyjson.com/products/163",
+    "subject": "Girl Summer Dress",
+    "downloadDate": "2026-10-15",
+    "sha256": "bca6b01a21d4181f26d2d1722881bf99a88104bb8d2b0e7e19ea636d36e22495"
+  },
+  {
+    "file": "img/products/product-22-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/girl-summer-dress/4.webp",
+    "sourcePage": "https://dummyjson.com/products/163",
+    "subject": "Girl Summer Dress",
+    "downloadDate": "2026-10-15",
+    "sha256": "aa4df168ecd3dddc15b4110912ceba0f3c2dd225c94b74416ce476fd825f7226"
+  },
+  {
+    "file": "img/products/product-23-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/short-frock/1.webp",
+    "sourcePage": "https://dummyjson.com/products/165",
+    "subject": "Short Frock",
+    "downloadDate": "2026-10-15",
+    "sha256": "d0148dacab73ef5dc3bcd108c164b3b6000a2a0df22061e93cd931fb510c6555"
+  },
+  {
+    "file": "img/products/product-23-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/short-frock/2.webp",
+    "sourcePage": "https://dummyjson.com/products/165",
+    "subject": "Short Frock",
+    "downloadDate": "2026-10-15",
+    "sha256": "e8bdffa513d45552d761f995451561e42d7bd04bbd70d94d000cd4faf096997d"
+  },
+  {
+    "file": "img/products/product-23-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/short-frock/3.webp",
+    "sourcePage": "https://dummyjson.com/products/165",
+    "subject": "Short Frock",
+    "downloadDate": "2026-10-15",
+    "sha256": "680ebf472c832ed6ff7b5b4d3ce3e157c3b668ac8de8eaa279b0a92244af7ac5"
+  },
+  {
+    "file": "img/products/product-23-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/tops/short-frock/4.webp",
+    "sourcePage": "https://dummyjson.com/products/165",
+    "subject": "Short Frock",
+    "downloadDate": "2026-10-15",
+    "sha256": "21d2222fcb65e5e4333c6b7a5e99b9affdbcc9e342934a193975ef60bc505cbe"
+  },
+  {
+    "file": "img/products/product-24-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/corset-with-black-skirt/1.webp",
+    "sourcePage": "https://dummyjson.com/products/179",
+    "subject": "Corset With Black Skirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "43daca81b0ae5605fe1bcfcafca8329500fb6fb735518076786108f0d2fa4ef7"
+  },
+  {
+    "file": "img/products/product-24-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/corset-with-black-skirt/2.webp",
+    "sourcePage": "https://dummyjson.com/products/179",
+    "subject": "Corset With Black Skirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "3d90922f3485f48274c8d2d3c5fd5aa8bbc9949eb93b2cf3cf518f4b130c5698"
+  },
+  {
+    "file": "img/products/product-24-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/corset-with-black-skirt/3.webp",
+    "sourcePage": "https://dummyjson.com/products/179",
+    "subject": "Corset With Black Skirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "57fb94c309b5ab3890199b56c97465793565f603d2bd523dea40f850094c7bc4"
+  },
+  {
+    "file": "img/products/product-24-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/corset-with-black-skirt/4.webp",
+    "sourcePage": "https://dummyjson.com/products/179",
+    "subject": "Corset With Black Skirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "c4469e3d23fd7e6947e8e83e6d0362f695d1331baf873459c8ff8cadc5e16527"
+  },
+  {
+    "file": "img/products/product-25-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/dress-pea/1.webp",
+    "sourcePage": "https://dummyjson.com/products/180",
+    "subject": "Dress Pea",
+    "downloadDate": "2026-10-15",
+    "sha256": "1dfe39c630397b235941e66229f5a49ebaad36cedd03bc3d3c4384ae59f78f4e"
+  },
+  {
+    "file": "img/products/product-25-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/dress-pea/2.webp",
+    "sourcePage": "https://dummyjson.com/products/180",
+    "subject": "Dress Pea",
+    "downloadDate": "2026-10-15",
+    "sha256": "147b0c6e1ecf19c1e05bacf7047a7e1639bcb0e6641c477c3c68c62cc3781b2b"
+  },
+  {
+    "file": "img/products/product-25-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/dress-pea/3.webp",
+    "sourcePage": "https://dummyjson.com/products/180",
+    "subject": "Dress Pea",
+    "downloadDate": "2026-10-15",
+    "sha256": "0918a7a27a8d921decfd61cf4f04ca3688c15fc0ad73c0fa4d41c984447e93c5"
+  },
+  {
+    "file": "img/products/product-25-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/dress-pea/4.webp",
+    "sourcePage": "https://dummyjson.com/products/180",
+    "subject": "Dress Pea",
+    "downloadDate": "2026-10-15",
+    "sha256": "81b3eebdbc581634cea1e98aa4f94789f5066e568108337c0ed6faf729e80f3f"
+  },
+  {
+    "file": "img/products/product-26-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/marni-red-&-black-suit/1.webp",
+    "sourcePage": "https://dummyjson.com/products/181",
+    "subject": "Marni Red & Black Suit",
+    "downloadDate": "2026-10-15",
+    "sha256": "47b12db842168fda3aca6c5ab74ae2b2e34426c0ef936a95112dbc766a5b5a48"
+  },
+  {
+    "file": "img/products/product-26-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/marni-red-&-black-suit/2.webp",
+    "sourcePage": "https://dummyjson.com/products/181",
+    "subject": "Marni Red & Black Suit",
+    "downloadDate": "2026-10-15",
+    "sha256": "91ac6ff762691ac45338517d8faed10929d042a8d0c8a3b0dd4489bbad11f333"
+  },
+  {
+    "file": "img/products/product-26-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/marni-red-&-black-suit/3.webp",
+    "sourcePage": "https://dummyjson.com/products/181",
+    "subject": "Marni Red & Black Suit",
+    "downloadDate": "2026-10-15",
+    "sha256": "cdb5aae408be7a833b7b668c1349c13545ccf77483a1ea6649b48d08516ffe43"
+  },
+  {
+    "file": "img/products/product-26-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-dresses/marni-red-&-black-suit/4.webp",
+    "sourcePage": "https://dummyjson.com/products/181",
+    "subject": "Marni Red & Black Suit",
+    "downloadDate": "2026-10-15",
+    "sha256": "c6ec731b8188d7b7828dc38fb6e676497eb92158e790518a9caf651373477354"
+  },
+  {
+    "file": "img/products/product-27-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/1.webp",
+    "sourcePage": "https://dummyjson.com/products/2",
+    "subject": "Eyeshadow Palette with Mirror",
+    "downloadDate": "2026-10-15",
+    "sha256": "8af18a1b9c65e70aa1f0d019690366f42733469fcca124b669ccf7ba9770e2e6"
+  },
+  {
+    "file": "img/products/product-28-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/beauty/powder-canister/1.webp",
+    "sourcePage": "https://dummyjson.com/products/3",
+    "subject": "Powder Canister",
+    "downloadDate": "2026-10-15",
+    "sha256": "2194fcc9c89ec12c5f1e20693682a26a4a8b19968f1698a4a0899d80499972bd"
+  },
+  {
+    "file": "img/products/product-29-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/beauty/red-nail-polish/1.webp",
+    "sourcePage": "https://dummyjson.com/products/5",
+    "subject": "Red Nail Polish",
+    "downloadDate": "2026-10-15",
+    "sha256": "0e32f4e4a2bde87add285a060840d78eb1e5e771e5866af74d585603de6f7bf7"
+  },
+  {
+    "file": "img/products/product-30-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/1.webp",
+    "sourcePage": "https://dummyjson.com/products/6",
+    "subject": "Calvin Klein CK One",
+    "downloadDate": "2026-10-15",
+    "sha256": "33a06ed35111202988074b703de2067d0869509f9084a15fe737a72fcf91bc91"
+  },
+  {
+    "file": "img/products/product-30-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/2.webp",
+    "sourcePage": "https://dummyjson.com/products/6",
+    "subject": "Calvin Klein CK One",
+    "downloadDate": "2026-10-15",
+    "sha256": "32e263893931a81136e40ac16c4b75dd20c7a0eeb810bdf546768a3352d9fd94"
+  },
+  {
+    "file": "img/products/product-30-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/3.webp",
+    "sourcePage": "https://dummyjson.com/products/6",
+    "subject": "Calvin Klein CK One",
+    "downloadDate": "2026-10-15",
+    "sha256": "9c6c1f41fff5370f4fa5f744f85b25c3c1430d8437663ce6d30a3666c5832f64"
+  },
+  {
+    "file": "img/products/product-31-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/1.webp",
+    "sourcePage": "https://dummyjson.com/products/7",
+    "subject": "Chanel Coco Noir Eau De",
+    "downloadDate": "2026-10-15",
+    "sha256": "0cb6e50f86454c4dafac67f929c3bde215917edb1c71e67bb2d6821d166167e9"
+  },
+  {
+    "file": "img/products/product-31-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/2.webp",
+    "sourcePage": "https://dummyjson.com/products/7",
+    "subject": "Chanel Coco Noir Eau De",
+    "downloadDate": "2026-10-15",
+    "sha256": "2ac0056dd5ea50d5e086f9b6f67fa6769367946f3c9052d1ba0a78cb5a7fa741"
+  },
+  {
+    "file": "img/products/product-31-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/3.webp",
+    "sourcePage": "https://dummyjson.com/products/7",
+    "subject": "Chanel Coco Noir Eau De",
+    "downloadDate": "2026-10-15",
+    "sha256": "7fa54fb146db1e52481d53b1e4a9c5533e42e03a71800a5812ca02a3eae959e9"
+  },
+  {
+    "file": "img/products/product-32-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/fragrances/dior-j'adore/1.webp",
+    "sourcePage": "https://dummyjson.com/products/8",
+    "subject": "Dior J'adore",
+    "downloadDate": "2026-10-15",
+    "sha256": "7523c50c1bd3a0271181ea46029a3b2ff7b6183dbef39c37dcad67b6e433c011"
+  },
+  {
+    "file": "img/products/product-32-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/fragrances/dior-j'adore/2.webp",
+    "sourcePage": "https://dummyjson.com/products/8",
+    "subject": "Dior J'adore",
+    "downloadDate": "2026-10-15",
+    "sha256": "d7d767c5c46f98014a93a5de524a727a727647510a63a0616e2e7fb542d152f9"
+  },
+  {
+    "file": "img/products/product-32-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/fragrances/dior-j'adore/3.webp",
+    "sourcePage": "https://dummyjson.com/products/8",
+    "subject": "Dior J'adore",
+    "downloadDate": "2026-10-15",
+    "sha256": "ecb7b931e61b05e78cc2569b43747a5d860906ab603873ed17c199b2c3abfe4b"
+  },
+  {
+    "file": "img/products/product-33-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/skin-care/attitude-super-leaves-hand-soap/1.webp",
+    "sourcePage": "https://dummyjson.com/products/118",
+    "subject": "Attitude Super Leaves Hand Soap",
+    "downloadDate": "2026-10-15",
+    "sha256": "c5a206936392b935b51fa070efbf3c735e42633497f206cd15032454e9c8f7ce"
+  },
+  {
+    "file": "img/products/product-33-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/skin-care/attitude-super-leaves-hand-soap/2.webp",
+    "sourcePage": "https://dummyjson.com/products/118",
+    "subject": "Attitude Super Leaves Hand Soap",
+    "downloadDate": "2026-10-15",
+    "sha256": "602ffd07a17246446904470e3f3743e82fe05159ea2353491c783c22338e89f7"
+  },
+  {
+    "file": "img/products/product-33-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/skin-care/attitude-super-leaves-hand-soap/3.webp",
+    "sourcePage": "https://dummyjson.com/products/118",
+    "subject": "Attitude Super Leaves Hand Soap",
+    "downloadDate": "2026-10-15",
+    "sha256": "a0bcb35317230c0a436c60f3da3510d50934c3b764a8a8caa36697c4a2c95c02"
+  },
+  {
+    "file": "img/products/product-34-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/skin-care/vaseline-men-body-and-face-lotion/1.webp",
+    "sourcePage": "https://dummyjson.com/products/120",
+    "subject": "Vaseline Men Body and Face Lotion",
+    "downloadDate": "2026-10-15",
+    "sha256": "892387a38302eddbf5ea92404a58c511eca705820e2554fd3f01b452afde650e"
+  },
+  {
+    "file": "img/products/product-34-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/skin-care/vaseline-men-body-and-face-lotion/2.webp",
+    "sourcePage": "https://dummyjson.com/products/120",
+    "subject": "Vaseline Men Body and Face Lotion",
+    "downloadDate": "2026-10-15",
+    "sha256": "90baacbb3bba4d3ed916a9f87ca51552e9b1b32b7381901acdc1bac81f7b178b"
+  },
+  {
+    "file": "img/products/product-34-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/skin-care/vaseline-men-body-and-face-lotion/3.webp",
+    "sourcePage": "https://dummyjson.com/products/120",
+    "subject": "Vaseline Men Body and Face Lotion",
+    "downloadDate": "2026-10-15",
+    "sha256": "759ff4640c3aaf8ff7035c5b51e9b1b4921ab7a4cf929342c06054202de84a36"
+  },
+  {
+    "file": "img/products/product-35-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/man-short-sleeve-shirt/1.webp",
+    "sourcePage": "https://dummyjson.com/products/86",
+    "subject": "Man Short Sleeve Shirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "a919351e54b801189bb176a72b9fc12de1d1116df8e9801516c143dfa79a3a45"
+  },
+  {
+    "file": "img/products/product-35-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/man-short-sleeve-shirt/2.webp",
+    "sourcePage": "https://dummyjson.com/products/86",
+    "subject": "Man Short Sleeve Shirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "a0c6cf758b417a7704c0a46c8dfea371daac86a2cad800a5270656ea92513f3f"
+  },
+  {
+    "file": "img/products/product-35-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/man-short-sleeve-shirt/3.webp",
+    "sourcePage": "https://dummyjson.com/products/86",
+    "subject": "Man Short Sleeve Shirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "90ece6fa63daffa71894b9645a08eb6266344285123ace90ffc0a1135b729b8d"
+  },
+  {
+    "file": "img/products/product-35-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/man-short-sleeve-shirt/4.webp",
+    "sourcePage": "https://dummyjson.com/products/86",
+    "subject": "Man Short Sleeve Shirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "2eedbeaeede7e51d342c76f77978f399f29642bdbb7f82fa783b7e2d83bb5b23"
+  },
+  {
+    "file": "img/products/product-36-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/men-check-shirt/1.webp",
+    "sourcePage": "https://dummyjson.com/products/87",
+    "subject": "Men Check Shirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "59ca6183bd3f6d9f478f7f7572d20246423c58928b206279508f15ef8cc99a6f"
+  },
+  {
+    "file": "img/products/product-36-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/men-check-shirt/2.webp",
+    "sourcePage": "https://dummyjson.com/products/87",
+    "subject": "Men Check Shirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "02f0ec4dcab54b25bcc6452c5690a7ff499a738594a6a9ff160555ec02342c28"
+  },
+  {
+    "file": "img/products/product-36-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/men-check-shirt/3.webp",
+    "sourcePage": "https://dummyjson.com/products/87",
+    "subject": "Men Check Shirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "ef5b23a615deb60b7c7e3ee6c2b8a67eba4c72d1e4492dfbb15634c50db218ba"
+  },
+  {
+    "file": "img/products/product-36-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shirts/men-check-shirt/4.webp",
+    "sourcePage": "https://dummyjson.com/products/87",
+    "subject": "Men Check Shirt",
+    "downloadDate": "2026-10-15",
+    "sha256": "63e3cfa0c667983dc18e184ff98965e4d288a4f9ab654d70fd42fc450cc406a2"
+  },
+  {
+    "file": "img/products/product-37-1.png",
+    "url": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_t.png",
+    "sourcePage": "https://fakestoreapi.com/products/2",
+    "subject": "Mens Casual Premium Slim Fit T-Shirts ",
+    "downloadDate": "2026-10-15",
+    "sha256": "1917d2be4ebe601e04269bc784f3bc80b3dabd90a3291e1c0aa1982652185b9a"
+  },
+  {
+    "file": "img/products/product-38-1.png",
+    "url": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_t.png",
+    "sourcePage": "https://fakestoreapi.com/products/3",
+    "subject": "Mens Cotton Jacket",
+    "downloadDate": "2026-10-15",
+    "sha256": "054e749fb2c4831d7a8ac1841f20bf66e9f6f071133640507cc657242d0a630b"
+  },
+  {
+    "file": "img/products/product-39-1.png",
+    "url": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_t.png",
+    "sourcePage": "https://fakestoreapi.com/products/4",
+    "subject": "Mens Casual Slim Fit",
+    "downloadDate": "2026-10-15",
+    "sha256": "f5a71308ff9328a096d546dcb09dfd9c63d5da21c299a5906e3ccc746205457d"
+  },
+  {
+    "file": "img/products/product-40-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/black-&-brown-slipper/1.webp",
+    "sourcePage": "https://dummyjson.com/products/185",
+    "subject": "Black & Brown Slipper",
+    "downloadDate": "2026-10-15",
+    "sha256": "5a6d34b95e1a2c535415714f22937b0976b68d7790511e4935c3abad3c945fed"
+  },
+  {
+    "file": "img/products/product-40-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/black-&-brown-slipper/2.webp",
+    "sourcePage": "https://dummyjson.com/products/185",
+    "subject": "Black & Brown Slipper",
+    "downloadDate": "2026-10-15",
+    "sha256": "2adac911abb9d3425845ae62ae3212fef52e21279221a174b18ec7dfe3782092"
+  },
+  {
+    "file": "img/products/product-40-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/black-&-brown-slipper/3.webp",
+    "sourcePage": "https://dummyjson.com/products/185",
+    "subject": "Black & Brown Slipper",
+    "downloadDate": "2026-10-15",
+    "sha256": "7ca9b10105c1e07c22f80dfd8e1719f2198d007bab8ab6a433c2d00ca7009ba0"
+  },
+  {
+    "file": "img/products/product-40-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/black-&-brown-slipper/4.webp",
+    "sourcePage": "https://dummyjson.com/products/185",
+    "subject": "Black & Brown Slipper",
+    "downloadDate": "2026-10-15",
+    "sha256": "4852d296237e4c3ce83c391cdd3f6b49843aaa5b5658a62754f50efc6b5f78b9"
+  },
+  {
+    "file": "img/products/product-41-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/golden-shoes-woman/1.webp",
+    "sourcePage": "https://dummyjson.com/products/187",
+    "subject": "Golden Shoes Woman",
+    "downloadDate": "2026-10-15",
+    "sha256": "0e2de324ab3900ae4b1d684782e8c46c9674ea0dfbd1042160b214b10f686ac8"
+  },
+  {
+    "file": "img/products/product-41-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/golden-shoes-woman/2.webp",
+    "sourcePage": "https://dummyjson.com/products/187",
+    "subject": "Golden Shoes Woman",
+    "downloadDate": "2026-10-15",
+    "sha256": "459e0c0b3c9f4a6f8fdcd15f73a00b95f9aa00fdeced8fe43f130adaf17d83c3"
+  },
+  {
+    "file": "img/products/product-41-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/golden-shoes-woman/3.webp",
+    "sourcePage": "https://dummyjson.com/products/187",
+    "subject": "Golden Shoes Woman",
+    "downloadDate": "2026-10-15",
+    "sha256": "b4db323c2ed294ce7eafe30eb4832c8d0a47302f82444c56ccc92a3ff9e9e6bf"
+  },
+  {
+    "file": "img/products/product-41-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/golden-shoes-woman/4.webp",
+    "sourcePage": "https://dummyjson.com/products/187",
+    "subject": "Golden Shoes Woman",
+    "downloadDate": "2026-10-15",
+    "sha256": "ad729885ce1448c7f8c7aed12b381ee4629c2c73306f80c2f418bd3e84867687"
+  },
+  {
+    "file": "img/products/product-42-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/pampi-shoes/1.webp",
+    "sourcePage": "https://dummyjson.com/products/188",
+    "subject": "Pampi Shoes",
+    "downloadDate": "2026-10-15",
+    "sha256": "49450cd305005d788b56113adf4fb6efc0e0ade124bb82e86380f813f51e723a"
+  },
+  {
+    "file": "img/products/product-42-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/pampi-shoes/2.webp",
+    "sourcePage": "https://dummyjson.com/products/188",
+    "subject": "Pampi Shoes",
+    "downloadDate": "2026-10-15",
+    "sha256": "7717bb799f8b68bf4830c2926d21a78be9ccf903525241f10a0ae3dfa8504774"
+  },
+  {
+    "file": "img/products/product-42-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/pampi-shoes/3.webp",
+    "sourcePage": "https://dummyjson.com/products/188",
+    "subject": "Pampi Shoes",
+    "downloadDate": "2026-10-15",
+    "sha256": "2a59c24f68a1ef236c612e5c1686bb058a0c57cd3a560d63944b343ed0f6b361"
+  },
+  {
+    "file": "img/products/product-42-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/pampi-shoes/4.webp",
+    "sourcePage": "https://dummyjson.com/products/188",
+    "subject": "Pampi Shoes",
+    "downloadDate": "2026-10-15",
+    "sha256": "b9d300ec16c4ab02a5fff3c9cfbc6df083a2775b3442c1f2ebd1fb5297cffd91"
+  },
+  {
+    "file": "img/products/product-43-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/red-shoes/1.webp",
+    "sourcePage": "https://dummyjson.com/products/189",
+    "subject": "Red Shoes",
+    "downloadDate": "2026-10-15",
+    "sha256": "cc624e32ef3acb394e121f1d0d7bb509b67a83b7c5e7c03db4f09b102975a44f"
+  },
+  {
+    "file": "img/products/product-43-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/red-shoes/2.webp",
+    "sourcePage": "https://dummyjson.com/products/189",
+    "subject": "Red Shoes",
+    "downloadDate": "2026-10-15",
+    "sha256": "41a59d0d6b0cb0ef9e053c08fa4463a8bcac190822298d74fc568da401528fa1"
+  },
+  {
+    "file": "img/products/product-43-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/red-shoes/3.webp",
+    "sourcePage": "https://dummyjson.com/products/189",
+    "subject": "Red Shoes",
+    "downloadDate": "2026-10-15",
+    "sha256": "3259fc246ff66d064cc671eb19a02677960de7ff87949b0a8f7e276b4c55487a"
+  },
+  {
+    "file": "img/products/product-43-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/womens-shoes/red-shoes/4.webp",
+    "sourcePage": "https://dummyjson.com/products/189",
+    "subject": "Red Shoes",
+    "downloadDate": "2026-10-15",
+    "sha256": "7de1d5f3f53ed16170f157f910e1e4989c972cd35f5dce975bcd7b9360dd6e42"
+  },
+  {
+    "file": "img/products/product-44-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/1.webp",
+    "sourcePage": "https://dummyjson.com/products/89",
+    "subject": "Nike Baseball Cleats",
+    "downloadDate": "2026-10-15",
+    "sha256": "68ebcbf250580bec27e8e38e312416fbfde678bc1d628e74603d5c95edb2b77f"
+  },
+  {
+    "file": "img/products/product-44-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/2.webp",
+    "sourcePage": "https://dummyjson.com/products/89",
+    "subject": "Nike Baseball Cleats",
+    "downloadDate": "2026-10-15",
+    "sha256": "c50faad89cd2f7acf25e3ddb27f6aad74435431091fe2cce9f3cb7c2f025801f"
+  },
+  {
+    "file": "img/products/product-44-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/3.webp",
+    "sourcePage": "https://dummyjson.com/products/89",
+    "subject": "Nike Baseball Cleats",
+    "downloadDate": "2026-10-15",
+    "sha256": "5ae7488ddcff6106a2ceb6ee7b47a5ca836052e1232fb946d034278c54cb8b01"
+  },
+  {
+    "file": "img/products/product-44-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/4.webp",
+    "sourcePage": "https://dummyjson.com/products/89",
+    "subject": "Nike Baseball Cleats",
+    "downloadDate": "2026-10-15",
+    "sha256": "b678ceefd05f66b019f003efcd75d595f66c25e3388d97af604240f928622916"
+  },
+  {
+    "file": "img/products/product-45-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/1.webp",
+    "sourcePage": "https://dummyjson.com/products/92",
+    "subject": "Sports Sneakers Off White Red",
+    "downloadDate": "2026-10-15",
+    "sha256": "974d72147d0fd1b62e2d87f7d64e86b7884ac0190ee5fce32bcb0b3e67471ab7"
+  },
+  {
+    "file": "img/products/product-45-2.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/2.webp",
+    "sourcePage": "https://dummyjson.com/products/92",
+    "subject": "Sports Sneakers Off White Red",
+    "downloadDate": "2026-10-15",
+    "sha256": "62a3368d08bc6bce69632402b595bf382dcd3dfe8234596f7344868e34e59f74"
+  },
+  {
+    "file": "img/products/product-45-3.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/3.webp",
+    "sourcePage": "https://dummyjson.com/products/92",
+    "subject": "Sports Sneakers Off White Red",
+    "downloadDate": "2026-10-15",
+    "sha256": "fac43492cf69101f75a9ebedebdad793adfef665705ab11403636a448f06347c"
+  },
+  {
+    "file": "img/products/product-45-4.webp",
+    "url": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/4.webp",
+    "sourcePage": "https://dummyjson.com/products/92",
+    "subject": "Sports Sneakers Off White Red",
+    "downloadDate": "2026-10-15",
+    "sha256": "23e96e146d63b4adac405038591bd1c6bc9b83eff1a3a7e3f2c35b4d22fbe2d1"
+  },
+  {
+    "file": "img/products/product-46-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/sports-accessories/basketball/1.webp",
+    "sourcePage": "https://dummyjson.com/products/140",
+    "subject": "Basketball",
+    "downloadDate": "2026-10-15",
+    "sha256": "d39efb5baaa1ca6d63f9042016c6e52ff5ee986f7a50023fc818dea8955a81ba"
+  },
+  {
+    "file": "img/products/product-47-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/sports-accessories/feather-shuttlecock/1.webp",
+    "sourcePage": "https://dummyjson.com/products/146",
+    "subject": "Feather Shuttlecock",
+    "downloadDate": "2026-10-15",
+    "sha256": "cb29552e05589d759af1d209b24978de5fd3189434358f46b67a8b9122069371"
+  },
+  {
+    "file": "img/products/product-48-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/sports-accessories/football/1.webp",
+    "sourcePage": "https://dummyjson.com/products/147",
+    "subject": "Football",
+    "downloadDate": "2026-10-15",
+    "sha256": "2b4e14ac21bb1109068ca02dbc47d2741f9042a1d237d1c2929c202c6afab901"
+  },
+  {
+    "file": "img/products/product-49-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/sports-accessories/tennis-ball/1.webp",
+    "sourcePage": "https://dummyjson.com/products/151",
+    "subject": "Tennis Ball",
+    "downloadDate": "2026-10-15",
+    "sha256": "7bcad833cea3f04b04dc8a30be34aa823c8dd4c15821c07f44165ccda89440d3"
+  },
+  {
+    "file": "img/products/product-50-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/sports-accessories/tennis-racket/1.webp",
+    "sourcePage": "https://dummyjson.com/products/152",
+    "subject": "Tennis Racket",
+    "downloadDate": "2026-10-15",
+    "sha256": "747a22293decfda1e5a8ffcfcdf7b964b3d74ac43573123f8a9fd50144e8b2b2"
+  },
+  {
+    "file": "img/products/product-51-1.webp",
+    "url": "https://cdn.dummyjson.com/product-images/sports-accessories/volleyball/1.webp",
+    "sourcePage": "https://dummyjson.com/products/153",
+    "subject": "Volleyball",
+    "downloadDate": "2026-10-15",
+    "sha256": "1498a5f8e82b17dee5fec470329b5303b2b35c0edb60aa8e5c67f7c1c7d7153e"
+  },
+  {
+    "file": "img/vip-favicon.ico",
+    "url": "https://www.vip.com/favicon.ico",
+    "sourcePage": "https://www.vip.com/",
+    "subject": "唯品会官网 favicon",
+    "downloadDate": "2026-10-15",
+    "sha256": "bb13d3b13ead92bd6c7ba6f654ec9016710a5c92c6e7ca2942c3207e3d9d9539"
+  }
+]

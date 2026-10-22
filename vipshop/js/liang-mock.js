@@ -1,14 +1,1911 @@
-/* ============================================================
-   唯品会特卖商城 - 内置 mock 数据（离线兜底）
-   24001010817 梁钰承
-   说明：正常情况下数据通过 fetch 访问 data/*.json 接口；
-   当页面以 file:// 协议直接打开（fetch 被浏览器拦截）时，
-   自动回退到本文件内嵌的数据，保证离线也能完整浏览。
-   ============================================================ */
-var LiangMockData = {
-  "data/banners.json": {"code": 200, "msg": "轮播图数据接口", "data": [{"id": 1, "img": "img/banner1.jpg", "title": "雅诗兰黛 千载难逢", "link": "detail.html?id=5"}, {"id": 2, "img": "img/banner2.jpg", "title": "品牌特卖 美妆狂欢", "link": "category.html?cat=美妆"}, {"id": 3, "img": "img/banner3.jpg", "title": "马克华菲 情侣款专场", "link": "detail.html?id=11"}]},
-  "data/products.json": {"code": 200, "msg": "商品列表数据接口", "data": [{"id": 1, "brand": "SKECHERS 斯凯奇", "name": "女士休闲厚底凉鞋 粉色 显高显腿长", "price": 199, "marketPrice": 599, "img": "img/goods1.jpg", "category": "鞋包", "stock": 86, "sales": 1263, "gallery": ["img/goods1.jpg", "img/goods8.jpg", "img/goods12.jpg"], "desc": "软底厚底设计，上脚轻盈舒适，夏日出行百搭单品。"}, {"id": 2, "brand": "MAC 魅可", "name": "经典子弹头口红 #Chili 小辣椒", "price": 149, "marketPrice": 230, "img": "img/goods2.jpg", "category": "美妆", "stock": 312, "sales": 8621, "gallery": ["img/goods2.jpg", "img/goods10.jpg", "img/goods5.jpg"], "desc": "人气断货色号，哑光雾面质地，显白不挑皮。"}, {"id": 3, "brand": "EIFINI 伊芙丽", "name": "100%羊毛双面呢大衣 通勤气质外套", "price": 899, "marketPrice": 2699, "img": "img/goods3.jpg", "category": "女装", "stock": 45, "sales": 523, "gallery": ["img/goods3.jpg", "img/goods6.jpg", "img/goods9.jpg"], "desc": "精选澳大利亚羊毛，双面呢工艺，保暖挺括不臃肿。"}, {"id": 4, "brand": "MANIFORM 曼妮芬", "name": "轻塑形无痕内衣套装 亲肤透气", "price": 129, "marketPrice": 399, "img": "img/goods4.jpg", "category": "内衣", "stock": 208, "sales": 3412, "gallery": ["img/goods4.jpg"], "desc": "一体织无痕工艺，零束缚感，久穿不勒。"}, {"id": 5, "brand": "ESTEE LAUDER 雅诗兰黛", "name": "小棕瓶特润修护精华套装 补水保湿", "price": 799, "marketPrice": 1560, "img": "img/goods5.jpg", "category": "美妆", "stock": 64, "sales": 2087, "gallery": ["img/goods5.jpg", "img/goods2.jpg", "img/goods10.jpg"], "desc": "经典小棕瓶精华+眼霜组合，夜间密集修护，紧致淡纹。"}, {"id": 6, "brand": "EP YAYING 雅莹", "name": "收腰显瘦连衣裙 气质通勤裙", "price": 659, "marketPrice": 2199, "img": "img/goods6.jpg", "category": "女装", "stock": 37, "sales": 286, "gallery": ["img/goods6.jpg", "img/goods9.jpg", "img/goods3.jpg"], "desc": "立体裁剪收腰版型，上身显高显瘦，气质出众。"}, {"id": 7, "brand": "THE NORTH FACE 北面", "name": "情侣款连帽卫衣 加绒保暖上衣", "price": 399, "marketPrice": 898, "img": "img/goods7.jpg", "category": "男装", "stock": 92, "sales": 1345, "gallery": ["img/goods7.jpg"], "desc": "经典品牌logo印花，内里加绒，情侣出街必备。"}, {"id": 8, "brand": "SKECHERS 斯凯奇", "name": "复古厚底老爹运动鞋 粉色增高", "price": 269, "marketPrice": 729, "img": "img/goods8.jpg", "category": "鞋包", "stock": 118, "sales": 2314, "gallery": ["img/goods8.jpg", "img/goods1.jpg", "img/goods12.jpg"], "desc": "4cm隐形增高，记忆棉鞋垫，走路像踩棉花。"}, {"id": 9, "brand": "MO&CO.", "name": "全棉POLO领针织连衣裙 减龄百搭", "price": 459, "marketPrice": 1299, "img": "img/goods9.jpg", "category": "女装", "stock": 53, "sales": 612, "gallery": ["img/goods9.jpg", "img/goods6.jpg"], "desc": "精选全棉针织面料，POLO领减龄设计，活力满满。"}, {"id": 10, "brand": "ESTEE LAUDER 雅诗兰黛", "name": "倾慕哑光唇膏 #333 干枫叶色", "price": 199, "marketPrice": 320, "img": "img/goods10.jpg", "category": "美妆", "stock": 156, "sales": 5432, "gallery": ["img/goods10.jpg", "img/goods2.jpg"], "desc": "秋冬人气干枫叶色，雾面哑光，持久不脱色。"}, {"id": 11, "brand": "d'zzit 地素", "name": "复古刺绣牛仔夹克外套 情侣款", "price": 559, "marketPrice": 1799, "img": "img/goods11.jpg", "category": "男装", "stock": 41, "sales": 389, "gallery": ["img/goods11.jpg", "img/goods7.jpg"], "desc": "复古水洗工艺，精致刺绣点缀，版型挺括有型。"}, {"id": 12, "brand": "ONITSUKA TIGER 鬼塚虎", "name": "MEXICO 66 中性休闲板鞋", "price": 329, "marketPrice": 790, "img": "img/goods12.jpg", "category": "鞋包", "stock": 77, "sales": 1899, "gallery": ["img/goods12.jpg", "img/goods8.jpg", "img/goods1.jpg"], "desc": "经典复刻鞋型，低帮轻便，男女同款百搭。"}, {"id": 13, "brand": "MARK FAIRWHALE 马克华菲", "name": "情侣款印花T恤 纯棉短袖", "price": 129, "marketPrice": 399, "img": "img/banner3.jpg", "category": "男装", "stock": 230, "sales": 2871, "gallery": ["img/banner3.jpg", "img/goods7.jpg"], "desc": "210g重磅纯棉，情侣印花设计，舒适透气。"}, {"id": 14, "brand": "JNBY 江南布衣", "name": "轻盈蓬松白鸭绒羽绒服 保暖外套", "price": 899, "marketPrice": 3299, "img": "img/goods14.jpg", "category": "女装", "stock": 28, "sales": 198, "gallery": ["img/goods14.jpg"], "desc": "90%白鸭绒填充，轻盈蓬松，锁温不钻绒。"}, {"id": 15, "brand": "ECCO 爱步", "name": "柔酷7号男士休闲皮鞋 商务通勤", "price": 799, "marketPrice": 2199, "img": "img/goods15.jpg", "category": "鞋包", "stock": 35, "sales": 267, "gallery": ["img/goods15.jpg", "img/goods12.jpg"], "desc": "头层牛皮鞋面，PU缓震大底，久站不累脚。"}]},
-  "data/seckill.json": {"code": 200, "msg": "限时秒杀数据接口（hour 为当日开抢时间，24小时制）", "hour": 20, "minute": 0, "data": [{"id": 2, "img": "img/goods2.jpg", "brand": "MAC 魅可", "name": "经典子弹头口红 #Chili", "price": 149, "originalPrice": 230, "total": 500, "sold": 436}, {"id": 5, "img": "img/goods5.jpg", "brand": "ESTEE LAUDER", "name": "小棕瓶修护精华套装", "price": 799, "originalPrice": 1560, "total": 200, "sold": 187}, {"id": 12, "img": "img/goods12.jpg", "brand": "ONITSUKA TIGER", "name": "MEXICO 66 休闲板鞋", "price": 329, "originalPrice": 790, "total": 300, "sold": 121}, {"id": 4, "img": "img/goods4.jpg", "brand": "MANIFORM 曼妮芬", "name": "轻塑形无痕内衣套装", "price": 129, "originalPrice": 399, "total": 400, "sold": 366}, {"id": 8, "img": "img/goods8.jpg", "brand": "SKECHERS 斯凯奇", "name": "复古厚底老爹运动鞋", "price": 269, "originalPrice": 729, "total": 260, "sold": 58}, {"id": 10, "img": "img/goods10.jpg", "brand": "ESTEE LAUDER", "name": "倾慕哑光唇膏 #333", "price": 199, "originalPrice": 320, "total": 350, "sold": 294}]},
-  "data/categories.json": {"code": 200, "msg": "分类数据接口", "data": [{"name": "女装", "sections": [{"title": "当季热卖", "items": [{"name": "呢子大衣", "img": "img/goods3.jpg"}, {"name": "连衣裙", "img": "img/goods6.jpg"}, {"name": "针织裙", "img": "img/goods9.jpg"}, {"name": "羽绒服", "img": "img/goods14.jpg"}, {"name": "卫衣", "img": "img/goods7.jpg"}, {"name": "牛仔外套", "img": "img/goods11.jpg"}]}, {"title": "品牌推荐", "items": [{"name": "伊芙丽", "img": "img/banner2.jpg"}, {"name": "EP雅莹", "img": "img/banner1.jpg"}, {"name": "江南布衣", "img": "img/floor-1.jpg"}]}]}, {"name": "美妆", "sections": [{"title": "热销彩妆", "items": [{"name": "口红", "img": "img/goods2.jpg"}, {"name": "唇膏", "img": "img/goods10.jpg"}, {"name": "护肤套装", "img": "img/goods5.jpg"}, {"name": "香氛", "img": "img/floor-2.jpg"}]}, {"title": "大牌专区", "items": [{"name": "雅诗兰黛", "img": "img/banner1.jpg"}, {"name": "MAC魅可", "img": "img/goods2.jpg"}]}]}, {"name": "鞋包", "sections": [{"title": "人气鞋款", "items": [{"name": "凉鞋", "img": "img/goods1.jpg"}, {"name": "老爹鞋", "img": "img/goods8.jpg"}, {"name": "休闲板鞋", "img": "img/goods12.jpg"}, {"name": "商务皮鞋", "img": "img/goods15.jpg"}]}, {"title": "品牌推荐", "items": [{"name": "斯凯奇", "img": "img/goods8.jpg"}, {"name": "鬼塚虎", "img": "img/goods12.jpg"}, {"name": "爱步", "img": "img/goods15.jpg"}]}]}, {"name": "男装", "sections": [{"title": "热卖男装", "items": [{"name": "卫衣", "img": "img/goods7.jpg"}, {"name": "牛仔夹克", "img": "img/goods11.jpg"}, {"name": "T恤", "img": "img/banner3.jpg"}]}, {"title": "品牌推荐", "items": [{"name": "北面", "img": "img/brand-anta.png"}, {"name": "马克华菲", "img": "img/banner3.jpg"}]}]}, {"name": "运动", "sections": [{"title": "运动精选", "items": [{"name": "运动鞋", "img": "img/goods8.jpg"}, {"name": "板鞋", "img": "img/goods12.jpg"}, {"name": "运动卫衣", "img": "img/goods7.jpg"}]}, {"title": "品牌推荐", "items": [{"name": "安踏", "img": "img/brand-anta.png"}, {"name": "361°", "img": "img/brand-361.png"}, {"name": "Pual Frank", "img": "img/brand-paulfrank.png"}]}]}, {"name": "内衣", "sections": [{"title": "舒适内衣", "items": [{"name": "无痕套装", "img": "img/goods4.jpg"}, {"name": "家居服", "img": "img/floor-3.png"}]}, {"title": "品牌推荐", "items": [{"name": "曼妮芬", "img": "img/goods4.jpg"}]}]}]},
-  "data/comments.json": {"code": 200, "msg": "商品评价数据接口（按 productId 关联）", "data": [{"productId": 1, "user": "小*鹿", "stars": 5, "content": "鞋子很轻，上脚超舒服，粉色特别好看，推荐！", "time": "2026-10-02"}, {"productId": 1, "user": "Y*u", "stars": 4, "content": "尺码偏小半码，建议拍大一码，其他都不错。", "time": "2026-09-28"}, {"productId": 2, "user": "橙*子", "stars": 5, "content": "小辣椒色永远的神，已经回购第三支了。", "time": "2026-10-05"}, {"productId": 2, "user": "一*星", "stars": 5, "content": "正品无疑，和专柜买的一样，唯品会真香。", "time": "2026-09-30"}, {"productId": 3, "user": "M*a", "stars": 5, "content": "大衣质感很好，羊毛的确实暖和，剪裁也合身。", "time": "2026-10-08"}, {"productId": 5, "user": "阿*玖", "stars": 5, "content": "比双十一还便宜，套装很划算，夜间修复效果肉眼可见。", "time": "2026-10-01"}, {"productId": 5, "user": "W*l", "stars": 4, "content": "包装完好，日期新鲜，就是快递稍微慢了一点。", "time": "2026-09-25"}, {"productId": 12, "user": "路*人", "stars": 5, "content": "鬼塚虎经典款，百搭，鞋码标准不用纠结。", "time": "2026-10-03"}]},
+/* Generated by tools/build_mock.py. Edit data/*.json, then rebuild. */
+window.LiangMockData = {
+  "data/banners.json": {
+    "code": 200,
+    "msg": "轮播图数据接口",
+    "data": [
+      {
+        "id": 1,
+        "productId": 10,
+        "img": "img/products/product-10-1.webp",
+        "title": "美妆焕新日常",
+        "subtitle": "essence 睫毛膏 · 精致眼妆",
+        "link": "detail.html?id=10"
+      },
+      {
+        "id": 2,
+        "productId": 8,
+        "img": "img/products/product-8-1.webp",
+        "title": "运动新风尚",
+        "subtitle": "PUMA 撞色运动鞋 · 活力出街",
+        "link": "detail.html?id=8"
+      },
+      {
+        "id": 3,
+        "productId": 9,
+        "img": "img/products/product-9-1.webp",
+        "title": "衣橱焕新计划",
+        "subtitle": "格纹连衣裙 · 轻松搭配",
+        "link": "detail.html?id=9"
+      }
+    ]
+  },
+  "data/products.json": {
+    "code": 200,
+    "msg": "商品列表数据接口",
+    "data": [
+      {
+        "id": 1,
+        "brand": "Calvin Klein",
+        "name": "黑色露趾高跟凉鞋",
+        "price": 199,
+        "marketPrice": 599,
+        "img": "img/products/product-1-1.webp",
+        "category": "鞋包",
+        "stock": 86,
+        "sales": 1263,
+        "gallery": [
+          "img/products/product-1-1.webp",
+          "img/products/product-1-2.webp",
+          "img/products/product-1-3.webp",
+          "img/products/product-1-4.webp"
+        ],
+        "desc": "黑色鞋面，露趾设计，细跟与后跟带。",
+        "specs": [
+          "35",
+          "36",
+          "37",
+          "38",
+          "39"
+        ],
+        "tags": [
+          "鞋包"
+        ],
+        "specLabel": "尺码"
+      },
+      {
+        "id": 2,
+        "brand": "彩妆精选",
+        "name": "经典红色唇膏",
+        "price": 49,
+        "marketPrice": 129,
+        "img": "img/products/product-2-1.webp",
+        "category": "美妆",
+        "stock": 312,
+        "sales": 8621,
+        "gallery": [
+          "img/products/product-2-1.webp"
+        ],
+        "desc": "红色膏体，黑金色外壳，经典旋出式包装。",
+        "specs": [
+          "红色"
+        ],
+        "tags": [
+          "美妆"
+        ],
+        "specLabel": "规格"
+      },
+      {
+        "id": 3,
+        "brand": "女装精选",
+        "name": "蓝色波点无袖连衣裙",
+        "price": 159,
+        "marketPrice": 399,
+        "img": "img/products/product-3-1.webp",
+        "category": "女装",
+        "stock": 45,
+        "sales": 523,
+        "gallery": [
+          "img/products/product-3-1.webp",
+          "img/products/product-3-2.webp",
+          "img/products/product-3-3.webp",
+          "img/products/product-3-4.webp"
+        ],
+        "desc": "浅色底布搭配蓝色圆点，收腰与蓬松裙摆设计。",
+        "specs": [
+          "S",
+          "M",
+          "L"
+        ],
+        "tags": [
+          "女装"
+        ],
+        "specLabel": "尺码"
+      },
+      {
+        "id": 4,
+        "brand": "女装精选",
+        "name": "红色抹胸长款礼服裙",
+        "price": 299,
+        "marketPrice": 899,
+        "img": "img/products/product-4-1.webp",
+        "category": "女装",
+        "stock": 208,
+        "sales": 3412,
+        "gallery": [
+          "img/products/product-4-1.webp",
+          "img/products/product-4-2.webp",
+          "img/products/product-4-3.webp",
+          "img/products/product-4-4.webp"
+        ],
+        "desc": "红色抹胸设计，收腰剪裁，长款垂坠裙摆。",
+        "specs": [
+          "S",
+          "M",
+          "L"
+        ],
+        "tags": [
+          "女装"
+        ],
+        "specLabel": "尺码"
+      },
+      {
+        "id": 5,
+        "brand": "OLAY 玉兰油",
+        "name": "乳木果保湿沐浴露",
+        "price": 59,
+        "marketPrice": 129,
+        "img": "img/products/product-5-1.webp",
+        "category": "美妆",
+        "stock": 64,
+        "sales": 2087,
+        "gallery": [
+          "img/products/product-5-1.webp",
+          "img/products/product-5-2.webp",
+          "img/products/product-5-3.webp"
+        ],
+        "desc": "白色瓶身配金色按压泵头，乳木果系列身体清洁产品。",
+        "specs": [
+          "标准瓶装"
+        ],
+        "tags": [
+          "美妆"
+        ],
+        "specLabel": "规格"
+      },
+      {
+        "id": 6,
+        "brand": "女装精选",
+        "name": "黑底花卉印花长裙",
+        "price": 259,
+        "marketPrice": 799,
+        "img": "img/products/product-6-1.webp",
+        "category": "女装",
+        "stock": 37,
+        "sales": 286,
+        "gallery": [
+          "img/products/product-6-1.webp",
+          "img/products/product-6-2.webp",
+          "img/products/product-6-3.webp",
+          "img/products/product-6-4.webp"
+        ],
+        "desc": "黑色底色搭配彩色花卉，短袖与长裙摆设计。",
+        "specs": [
+          "S",
+          "M",
+          "L",
+          "XL"
+        ],
+        "tags": [
+          "女装"
+        ],
+        "specLabel": "尺码"
+      },
+      {
+        "id": 7,
+        "brand": "男装精选",
+        "name": "蓝黑格纹长袖衬衫",
+        "price": 129,
+        "marketPrice": 299,
+        "img": "img/products/product-7-1.webp",
+        "category": "男装",
+        "stock": 92,
+        "sales": 1345,
+        "gallery": [
+          "img/products/product-7-1.webp",
+          "img/products/product-7-2.webp",
+          "img/products/product-7-3.webp",
+          "img/products/product-7-4.webp"
+        ],
+        "desc": "蓝黑色细格纹，翻领与前开扣设计。",
+        "specs": [
+          "M",
+          "L",
+          "XL"
+        ],
+        "tags": [
+          "男装"
+        ],
+        "specLabel": "尺码"
+      },
+      {
+        "id": 8,
+        "brand": "PUMA 彪马",
+        "name": "Future Rider 撞色休闲运动鞋",
+        "price": 269,
+        "marketPrice": 729,
+        "img": "img/products/product-8-1.webp",
+        "category": "运动",
+        "stock": 118,
+        "sales": 2314,
+        "gallery": [
+          "img/products/product-8-1.webp",
+          "img/products/product-8-2.webp",
+          "img/products/product-8-3.webp",
+          "img/products/product-8-4.webp"
+        ],
+        "desc": "黄蓝红多色拼接鞋面，白色鞋带，低帮系带款式。",
+        "specs": [
+          "39",
+          "40",
+          "41",
+          "42",
+          "43"
+        ],
+        "tags": [
+          "鞋包",
+          "运动"
+        ],
+        "specLabel": "尺码"
+      },
+      {
+        "id": 9,
+        "brand": "女装精选",
+        "name": "黑白格纹蝴蝶结连衣裙",
+        "price": 159,
+        "marketPrice": 399,
+        "img": "img/products/product-9-1.webp",
+        "category": "女装",
+        "stock": 53,
+        "sales": 612,
+        "gallery": [
+          "img/products/product-9-1.webp",
+          "img/products/product-9-2.webp",
+          "img/products/product-9-3.webp",
+          "img/products/product-9-4.webp"
+        ],
+        "desc": "黑白格纹无袖裙，腰间黑色蝴蝶结装饰。",
+        "specs": [
+          "S",
+          "M",
+          "L"
+        ],
+        "tags": [
+          "女装"
+        ],
+        "specLabel": "尺码"
+      },
+      {
+        "id": 10,
+        "brand": "essence",
+        "name": "Lash Princess 黑色睫毛膏",
+        "price": 39,
+        "marketPrice": 79,
+        "img": "img/products/product-10-1.webp",
+        "category": "美妆",
+        "stock": 156,
+        "sales": 5432,
+        "gallery": [
+          "img/products/product-10-1.webp"
+        ],
+        "desc": "黑色瓶身配绿色装饰，刷头用于睫毛上妆。",
+        "specs": [
+          "黑色"
+        ],
+        "tags": [
+          "美妆"
+        ],
+        "specLabel": "规格"
+      },
+      {
+        "id": 11,
+        "brand": "男装精选",
+        "name": "红黑格纹长袖衬衫",
+        "price": 139,
+        "marketPrice": 329,
+        "img": "img/products/product-11-1.webp",
+        "category": "男装",
+        "stock": 41,
+        "sales": 389,
+        "gallery": [
+          "img/products/product-11-1.webp",
+          "img/products/product-11-2.webp",
+          "img/products/product-11-3.webp",
+          "img/products/product-11-4.webp"
+        ],
+        "desc": "红黑大格纹，翻领设计，胸前带口袋。",
+        "specs": [
+          "M",
+          "L",
+          "XL"
+        ],
+        "tags": [
+          "男装"
+        ],
+        "specLabel": "尺码"
+      },
+      {
+        "id": 12,
+        "brand": "NIKE 耐克",
+        "name": "Air Jordan 1 红黑拼色运动鞋",
+        "price": 329,
+        "marketPrice": 790,
+        "img": "img/products/product-12-1.webp",
+        "category": "运动",
+        "stock": 77,
+        "sales": 1899,
+        "gallery": [
+          "img/products/product-12-1.webp",
+          "img/products/product-12-2.webp",
+          "img/products/product-12-3.webp",
+          "img/products/product-12-4.webp"
+        ],
+        "desc": "红、黑、白拼色鞋面，系带设计，高帮轮廓。",
+        "specs": [
+          "39",
+          "40",
+          "41",
+          "42",
+          "43"
+        ],
+        "tags": [
+          "鞋包",
+          "运动"
+        ],
+        "specLabel": "尺码"
+      },
+      {
+        "id": 13,
+        "brand": "AORUS",
+        "name": "白色印花短袖T恤",
+        "price": 99,
+        "marketPrice": 199,
+        "img": "img/products/product-13-1.webp",
+        "category": "男装",
+        "stock": 230,
+        "sales": 2871,
+        "gallery": [
+          "img/products/product-13-1.webp",
+          "img/products/product-13-2.webp",
+          "img/products/product-13-3.webp",
+          "img/products/product-13-4.webp"
+        ],
+        "desc": "白色圆领短袖，正面带灰黑色图案与 AORUS 字样。",
+        "specs": [
+          "M",
+          "L",
+          "XL"
+        ],
+        "tags": [
+          "男装"
+        ],
+        "specLabel": "尺码"
+      },
+      {
+        "id": 14,
+        "brand": "女装精选",
+        "name": "浅灰色无袖长款连衣裙",
+        "price": 199,
+        "marketPrice": 599,
+        "img": "img/products/product-14-1.webp",
+        "category": "女装",
+        "stock": 28,
+        "sales": 198,
+        "gallery": [
+          "img/products/product-14-1.webp",
+          "img/products/product-14-2.webp",
+          "img/products/product-14-3.webp",
+          "img/products/product-14-4.webp"
+        ],
+        "desc": "浅灰色无袖设计，腰部收褶，长款裙摆。",
+        "specs": [
+          "S",
+          "M",
+          "L"
+        ],
+        "tags": [
+          "女装"
+        ],
+        "specLabel": "尺码"
+      },
+      {
+        "id": 15,
+        "brand": "运动精选",
+        "name": "白红拼色低帮休闲鞋",
+        "price": 229,
+        "marketPrice": 599,
+        "img": "img/products/product-15-1.webp",
+        "category": "鞋包",
+        "stock": 35,
+        "sales": 267,
+        "gallery": [
+          "img/products/product-15-1.webp",
+          "img/products/product-15-2.webp",
+          "img/products/product-15-3.webp",
+          "img/products/product-15-4.webp"
+        ],
+        "desc": "白色鞋面搭配红色箭头图案，低帮系带设计。",
+        "specs": [
+          "39",
+          "40",
+          "41",
+          "42",
+          "43"
+        ],
+        "tags": [
+          "鞋包",
+          "运动"
+        ],
+        "specLabel": "尺码"
+      },
+      {
+        "id": 16,
+        "brand": "包袋精选",
+        "name": "深蓝色双提手手提包",
+        "category": "鞋包",
+        "price": 169,
+        "marketPrice": 399,
+        "stock": 88,
+        "sales": 392,
+        "img": "img/products/product-16-1.webp",
+        "gallery": [
+          "img/products/product-16-1.webp",
+          "img/products/product-16-2.webp",
+          "img/products/product-16-3.webp"
+        ],
+        "specLabel": "颜色",
+        "specs": [
+          "深蓝色"
+        ],
+        "desc": "方形包身搭配双提手，深蓝色外观，适合日常通勤搭配。",
+        "tags": [
+          "鞋包",
+          "包袋",
+          "手提包"
+        ]
+      },
+      {
+        "id": 17,
+        "brand": "包袋精选",
+        "name": "棕色拉链双提手手提包",
+        "category": "鞋包",
+        "price": 159,
+        "marketPrice": 359,
+        "stock": 91,
+        "sales": 409,
+        "img": "img/products/product-17-1.webp",
+        "gallery": [
+          "img/products/product-17-1.webp",
+          "img/products/product-17-2.webp",
+          "img/products/product-17-3.webp"
+        ],
+        "specLabel": "颜色",
+        "specs": [
+          "棕色"
+        ],
+        "desc": "棕色包身，双提手搭配前侧横向拉链口袋。",
+        "tags": [
+          "鞋包",
+          "包袋",
+          "手提包"
+        ]
+      },
+      {
+        "id": 18,
+        "brand": "包袋精选",
+        "name": "浅蓝绿色通勤手提包",
+        "category": "鞋包",
+        "price": 179,
+        "marketPrice": 429,
+        "stock": 94,
+        "sales": 426,
+        "img": "img/products/product-18-1.webp",
+        "gallery": [
+          "img/products/product-18-1.webp",
+          "img/products/product-18-2.webp",
+          "img/products/product-18-3.webp"
+        ],
+        "specLabel": "颜色",
+        "specs": [
+          "浅蓝绿色"
+        ],
+        "desc": "浅蓝绿色方形包身与同色双提手，外观简洁。",
+        "tags": [
+          "鞋包",
+          "包袋",
+          "手提包"
+        ]
+      },
+      {
+        "id": 19,
+        "brand": "包袋精选",
+        "name": "白色翻盖双肩背包",
+        "category": "鞋包",
+        "price": 139,
+        "marketPrice": 329,
+        "stock": 97,
+        "sales": 443,
+        "img": "img/products/product-19-1.webp",
+        "gallery": [
+          "img/products/product-19-1.webp",
+          "img/products/product-19-2.webp",
+          "img/products/product-19-3.webp"
+        ],
+        "specLabel": "颜色",
+        "specs": [
+          "白色"
+        ],
+        "desc": "白色翻盖包身，搭配提手与细肩带。",
+        "tags": [
+          "鞋包",
+          "包袋",
+          "双肩包"
+        ]
+      },
+      {
+        "id": 20,
+        "brand": "包袋精选",
+        "name": "黑色简约双提手手提包",
+        "category": "鞋包",
+        "price": 189,
+        "marketPrice": 459,
+        "stock": 100,
+        "sales": 460,
+        "img": "img/products/product-20-1.webp",
+        "gallery": [
+          "img/products/product-20-1.webp",
+          "img/products/product-20-2.webp",
+          "img/products/product-20-3.webp"
+        ],
+        "specLabel": "颜色",
+        "specs": [
+          "黑色"
+        ],
+        "desc": "黑色挺括包身，双提手与金属色扣饰。",
+        "tags": [
+          "鞋包",
+          "包袋",
+          "手提包"
+        ]
+      },
+      {
+        "id": 21,
+        "brand": "Fjällräven",
+        "name": "藏蓝色翻盖双肩背包",
+        "category": "鞋包",
+        "price": 299,
+        "marketPrice": 699,
+        "stock": 103,
+        "sales": 477,
+        "img": "img/products/product-21-1.png",
+        "gallery": [
+          "img/products/product-21-1.png"
+        ],
+        "specLabel": "颜色",
+        "specs": [
+          "藏蓝色"
+        ],
+        "desc": "藏蓝色双肩背包，翻盖双带设计，正面带品牌标识。",
+        "tags": [
+          "鞋包",
+          "包袋",
+          "双肩包"
+        ]
+      },
+      {
+        "id": 22,
+        "brand": "女装精选",
+        "name": "黑白植物印花无袖长裙",
+        "category": "女装",
+        "price": 189,
+        "marketPrice": 459,
+        "stock": 106,
+        "sales": 494,
+        "img": "img/products/product-22-1.webp",
+        "gallery": [
+          "img/products/product-22-1.webp",
+          "img/products/product-22-2.webp",
+          "img/products/product-22-3.webp",
+          "img/products/product-22-4.webp"
+        ],
+        "specLabel": "尺码",
+        "specs": [
+          "S",
+          "M",
+          "L"
+        ],
+        "desc": "浅色底搭配黑色植物图案，无袖收腰长裙。",
+        "tags": [
+          "女装",
+          "连衣裙"
+        ]
+      },
+      {
+        "id": 23,
+        "brand": "女装精选",
+        "name": "灰绿色抹胸层叠短裙",
+        "category": "女装",
+        "price": 169,
+        "marketPrice": 399,
+        "stock": 109,
+        "sales": 511,
+        "img": "img/products/product-23-1.webp",
+        "gallery": [
+          "img/products/product-23-1.webp",
+          "img/products/product-23-2.webp",
+          "img/products/product-23-3.webp",
+          "img/products/product-23-4.webp"
+        ],
+        "specLabel": "尺码",
+        "specs": [
+          "S",
+          "M",
+          "L"
+        ],
+        "desc": "灰绿色抹胸裙，收腰设计搭配层叠裙摆。",
+        "tags": [
+          "女装",
+          "连衣裙"
+        ]
+      },
+      {
+        "id": 24,
+        "brand": "女装精选",
+        "name": "黑色抹胸长款礼服裙",
+        "category": "女装",
+        "price": 279,
+        "marketPrice": 799,
+        "stock": 112,
+        "sales": 528,
+        "img": "img/products/product-24-1.webp",
+        "gallery": [
+          "img/products/product-24-1.webp",
+          "img/products/product-24-2.webp",
+          "img/products/product-24-3.webp",
+          "img/products/product-24-4.webp"
+        ],
+        "specLabel": "尺码",
+        "specs": [
+          "S",
+          "M",
+          "L"
+        ],
+        "desc": "黑色抹胸长裙，腰部收束，裙摆自然垂落。",
+        "tags": [
+          "女装",
+          "礼服",
+          "连衣裙"
+        ]
+      },
+      {
+        "id": 25,
+        "brand": "女装精选",
+        "name": "浅色细波点无袖连衣裙",
+        "category": "女装",
+        "price": 159,
+        "marketPrice": 399,
+        "stock": 115,
+        "sales": 545,
+        "img": "img/products/product-25-1.webp",
+        "gallery": [
+          "img/products/product-25-1.webp",
+          "img/products/product-25-2.webp",
+          "img/products/product-25-3.webp",
+          "img/products/product-25-4.webp"
+        ],
+        "specLabel": "尺码",
+        "specs": [
+          "S",
+          "M",
+          "L"
+        ],
+        "desc": "浅色底搭配深色小波点，无袖上身与蓬松裙摆。",
+        "tags": [
+          "女装",
+          "连衣裙"
+        ]
+      },
+      {
+        "id": 26,
+        "brand": "女装精选",
+        "name": "酒红色撞色长袖长裙",
+        "category": "女装",
+        "price": 239,
+        "marketPrice": 659,
+        "stock": 118,
+        "sales": 562,
+        "img": "img/products/product-26-1.webp",
+        "gallery": [
+          "img/products/product-26-1.webp",
+          "img/products/product-26-2.webp",
+          "img/products/product-26-3.webp",
+          "img/products/product-26-4.webp"
+        ],
+        "specLabel": "尺码",
+        "specs": [
+          "S",
+          "M",
+          "L"
+        ],
+        "desc": "酒红色长裙，双袖采用不同颜色，领口有金色装饰。",
+        "tags": [
+          "女装",
+          "礼服",
+          "连衣裙"
+        ]
+      },
+      {
+        "id": 27,
+        "brand": "彩妆精选",
+        "name": "多色眼影盘带镜款",
+        "category": "美妆",
+        "price": 79,
+        "marketPrice": 199,
+        "stock": 121,
+        "sales": 579,
+        "img": "img/products/product-27-1.webp",
+        "gallery": [
+          "img/products/product-27-1.webp"
+        ],
+        "specLabel": "规格",
+        "specs": [
+          "多色盘"
+        ],
+        "desc": "黑色翻盖盒内含多色眼影，盒盖配有镜面。",
+        "tags": [
+          "美妆",
+          "彩妆",
+          "眼影"
+        ]
+      },
+      {
+        "id": 28,
+        "brand": "彩妆精选",
+        "name": "米色粉饼圆盒带镜款",
+        "category": "美妆",
+        "price": 59,
+        "marketPrice": 159,
+        "stock": 124,
+        "sales": 596,
+        "img": "img/products/product-28-1.webp",
+        "gallery": [
+          "img/products/product-28-1.webp"
+        ],
+        "specLabel": "规格",
+        "specs": [
+          "米色"
+        ],
+        "desc": "黑色圆形翻盖盒，米色粉饼搭配内置镜面。",
+        "tags": [
+          "美妆",
+          "彩妆",
+          "粉饼"
+        ]
+      },
+      {
+        "id": 29,
+        "brand": "彩妆精选",
+        "name": "红色指甲油",
+        "category": "美妆",
+        "price": 29,
+        "marketPrice": 79,
+        "stock": 127,
+        "sales": 613,
+        "img": "img/products/product-29-1.webp",
+        "gallery": [
+          "img/products/product-29-1.webp"
+        ],
+        "specLabel": "颜色",
+        "specs": [
+          "红色"
+        ],
+        "desc": "红色指甲油，透明瓶身搭配黑色瓶盖。",
+        "tags": [
+          "美妆",
+          "彩妆",
+          "美甲"
+        ]
+      },
+      {
+        "id": 30,
+        "brand": "Calvin Klein",
+        "name": "CK One 淡香水",
+        "category": "美妆",
+        "price": 199,
+        "marketPrice": 499,
+        "stock": 130,
+        "sales": 630,
+        "img": "img/products/product-30-1.webp",
+        "gallery": [
+          "img/products/product-30-1.webp",
+          "img/products/product-30-2.webp",
+          "img/products/product-30-3.webp"
+        ],
+        "specLabel": "规格",
+        "specs": [
+          "单瓶装"
+        ],
+        "desc": "磨砂质感瓶身，银色瓶盖，正面带有 ck one 标识。",
+        "tags": [
+          "美妆",
+          "香水"
+        ]
+      },
+      {
+        "id": 31,
+        "brand": "CHANEL",
+        "name": "COCO NOIR 香水",
+        "category": "美妆",
+        "price": 699,
+        "marketPrice": 1299,
+        "stock": 133,
+        "sales": 647,
+        "img": "img/products/product-31-1.webp",
+        "gallery": [
+          "img/products/product-31-1.webp",
+          "img/products/product-31-2.webp",
+          "img/products/product-31-3.webp"
+        ],
+        "specLabel": "规格",
+        "specs": [
+          "单瓶装"
+        ],
+        "desc": "黑色方形香水瓶，黑色瓶盖，瓶身带金色文字与边框。",
+        "tags": [
+          "美妆",
+          "香水"
+        ]
+      },
+      {
+        "id": 32,
+        "brand": "Dior",
+        "name": "J’adore 真我香水",
+        "category": "美妆",
+        "price": 599,
+        "marketPrice": 1099,
+        "stock": 136,
+        "sales": 664,
+        "img": "img/products/product-32-1.webp",
+        "gallery": [
+          "img/products/product-32-1.webp",
+          "img/products/product-32-2.webp",
+          "img/products/product-32-3.webp"
+        ],
+        "specLabel": "规格",
+        "specs": [
+          "单瓶装"
+        ],
+        "desc": "水滴形瓶身搭配金色细长瓶颈，瓶内为浅金色液体。",
+        "tags": [
+          "美妆",
+          "香水"
+        ]
+      },
+      {
+        "id": 33,
+        "brand": "ATTITUDE",
+        "name": "植物图案泵装洗手液",
+        "category": "美妆",
+        "price": 39,
+        "marketPrice": 99,
+        "stock": 139,
+        "sales": 681,
+        "img": "img/products/product-33-1.webp",
+        "gallery": [
+          "img/products/product-33-1.webp",
+          "img/products/product-33-2.webp",
+          "img/products/product-33-3.webp"
+        ],
+        "specLabel": "规格",
+        "specs": [
+          "单瓶装"
+        ],
+        "desc": "白色瓶身搭配黑色按压泵头，标签印有植物图案。",
+        "tags": [
+          "美妆",
+          "身体护理",
+          "洗手液"
+        ]
+      },
+      {
+        "id": 34,
+        "brand": "Vaseline",
+        "name": "Men 男士润肤乳",
+        "category": "美妆",
+        "price": 49,
+        "marketPrice": 119,
+        "stock": 142,
+        "sales": 698,
+        "img": "img/products/product-34-1.webp",
+        "gallery": [
+          "img/products/product-34-1.webp",
+          "img/products/product-34-2.webp",
+          "img/products/product-34-3.webp"
+        ],
+        "specLabel": "规格",
+        "specs": [
+          "单瓶装"
+        ],
+        "desc": "深蓝色瓶身，正面带 Vaseline Men 标识。",
+        "tags": [
+          "美妆",
+          "身体护理",
+          "润肤乳"
+        ]
+      },
+      {
+        "id": 35,
+        "brand": "男装精选",
+        "name": "蓝底白花短袖衬衫",
+        "category": "男装",
+        "price": 99,
+        "marketPrice": 259,
+        "stock": 145,
+        "sales": 715,
+        "img": "img/products/product-35-1.webp",
+        "gallery": [
+          "img/products/product-35-1.webp",
+          "img/products/product-35-2.webp",
+          "img/products/product-35-3.webp",
+          "img/products/product-35-4.webp"
+        ],
+        "specLabel": "尺码",
+        "specs": [
+          "M",
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "desc": "蓝色底布搭配白色花卉图案，翻领短袖设计。",
+        "tags": [
+          "男装",
+          "衬衫"
+        ]
+      },
+      {
+        "id": 36,
+        "brand": "男装精选",
+        "name": "绿蓝棕格纹长袖衬衫",
+        "category": "男装",
+        "price": 119,
+        "marketPrice": 299,
+        "stock": 148,
+        "sales": 732,
+        "img": "img/products/product-36-1.webp",
+        "gallery": [
+          "img/products/product-36-1.webp",
+          "img/products/product-36-2.webp",
+          "img/products/product-36-3.webp",
+          "img/products/product-36-4.webp"
+        ],
+        "specLabel": "尺码",
+        "specs": [
+          "M",
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "desc": "绿、蓝、棕色格纹搭配，翻领长袖，前襟纽扣设计。",
+        "tags": [
+          "男装",
+          "衬衫"
+        ]
+      },
+      {
+        "id": 37,
+        "brand": "男装精选",
+        "name": "灰黑拼色亨利领长袖上衣",
+        "category": "男装",
+        "price": 89,
+        "marketPrice": 229,
+        "stock": 151,
+        "sales": 749,
+        "img": "img/products/product-37-1.png",
+        "gallery": [
+          "img/products/product-37-1.png"
+        ],
+        "specLabel": "尺码",
+        "specs": [
+          "M",
+          "L",
+          "XL"
+        ],
+        "desc": "灰色衣身搭配黑色插肩长袖，领口有短排扣。",
+        "tags": [
+          "男装",
+          "上衣",
+          "长袖"
+        ]
+      },
+      {
+        "id": 38,
+        "brand": "男装精选",
+        "name": "卡其色立领多口袋夹克",
+        "category": "男装",
+        "price": 199,
+        "marketPrice": 499,
+        "stock": 154,
+        "sales": 766,
+        "img": "img/products/product-38-1.png",
+        "gallery": [
+          "img/products/product-38-1.png"
+        ],
+        "specLabel": "尺码",
+        "specs": [
+          "M",
+          "L",
+          "XL"
+        ],
+        "desc": "卡其色立领夹克，胸前翻盖口袋，拉链门襟。",
+        "tags": [
+          "男装",
+          "夹克",
+          "外套"
+        ]
+      },
+      {
+        "id": 39,
+        "brand": "男装精选",
+        "name": "藏蓝色圆领长袖上衣",
+        "category": "男装",
+        "price": 79,
+        "marketPrice": 199,
+        "stock": 157,
+        "sales": 783,
+        "img": "img/products/product-39-1.png",
+        "gallery": [
+          "img/products/product-39-1.png"
+        ],
+        "specLabel": "尺码",
+        "specs": [
+          "M",
+          "L",
+          "XL"
+        ],
+        "desc": "藏蓝色纯色长袖上衣，圆领与修身轮廓。",
+        "tags": [
+          "男装",
+          "上衣",
+          "长袖"
+        ]
+      },
+      {
+        "id": 40,
+        "brand": "女鞋精选",
+        "name": "黑色尖头高跟鞋棕色内里款",
+        "category": "鞋包",
+        "price": 159,
+        "marketPrice": 399,
+        "stock": 160,
+        "sales": 800,
+        "img": "img/products/product-40-1.webp",
+        "gallery": [
+          "img/products/product-40-1.webp",
+          "img/products/product-40-2.webp",
+          "img/products/product-40-3.webp",
+          "img/products/product-40-4.webp"
+        ],
+        "specLabel": "尺码",
+        "specs": [
+          "35",
+          "36",
+          "37",
+          "38",
+          "39"
+        ],
+        "desc": "黑色尖头鞋面搭配棕色内里，低帮高跟设计。",
+        "tags": [
+          "鞋包",
+          "女鞋",
+          "高跟鞋"
+        ]
+      },
+      {
+        "id": 41,
+        "brand": "女鞋精选",
+        "name": "金色尖头高跟鞋",
+        "category": "鞋包",
+        "price": 189,
+        "marketPrice": 459,
+        "stock": 163,
+        "sales": 817,
+        "img": "img/products/product-41-1.webp",
+        "gallery": [
+          "img/products/product-41-1.webp",
+          "img/products/product-41-2.webp",
+          "img/products/product-41-3.webp",
+          "img/products/product-41-4.webp"
+        ],
+        "specLabel": "尺码",
+        "specs": [
+          "35",
+          "36",
+          "37",
+          "38",
+          "39"
+        ],
+        "desc": "金色光泽鞋面，尖头低帮与细跟设计。",
+        "tags": [
+          "鞋包",
+          "女鞋",
+          "高跟鞋"
+        ]
+      },
+      {
+        "id": 42,
+        "brand": "女鞋精选",
+        "name": "黑色尖头高跟鞋米色内里款",
+        "category": "鞋包",
+        "price": 169,
+        "marketPrice": 429,
+        "stock": 166,
+        "sales": 834,
+        "img": "img/products/product-42-1.webp",
+        "gallery": [
+          "img/products/product-42-1.webp",
+          "img/products/product-42-2.webp",
+          "img/products/product-42-3.webp",
+          "img/products/product-42-4.webp"
+        ],
+        "specLabel": "尺码",
+        "specs": [
+          "35",
+          "36",
+          "37",
+          "38",
+          "39"
+        ],
+        "desc": "黑色尖头高跟鞋，搭配浅米色内里。",
+        "tags": [
+          "鞋包",
+          "女鞋",
+          "高跟鞋"
+        ]
+      },
+      {
+        "id": 43,
+        "brand": "女鞋精选",
+        "name": "红色尖头高跟鞋",
+        "category": "鞋包",
+        "price": 179,
+        "marketPrice": 459,
+        "stock": 169,
+        "sales": 851,
+        "img": "img/products/product-43-1.webp",
+        "gallery": [
+          "img/products/product-43-1.webp",
+          "img/products/product-43-2.webp",
+          "img/products/product-43-3.webp",
+          "img/products/product-43-4.webp"
+        ],
+        "specLabel": "尺码",
+        "specs": [
+          "35",
+          "36",
+          "37",
+          "38",
+          "39"
+        ],
+        "desc": "红色鞋面与尖头轮廓，低帮高跟设计。",
+        "tags": [
+          "鞋包",
+          "女鞋",
+          "高跟鞋"
+        ]
+      },
+      {
+        "id": 44,
+        "brand": "NIKE",
+        "name": "绿白拼色棒球钉鞋",
+        "category": "运动",
+        "price": 299,
+        "marketPrice": 699,
+        "stock": 172,
+        "sales": 868,
+        "img": "img/products/product-44-1.webp",
+        "gallery": [
+          "img/products/product-44-1.webp",
+          "img/products/product-44-2.webp",
+          "img/products/product-44-3.webp",
+          "img/products/product-44-4.webp"
+        ],
+        "specLabel": "尺码",
+        "specs": [
+          "39",
+          "40",
+          "41",
+          "42",
+          "43"
+        ],
+        "desc": "绿白拼色系带棒球鞋，鞋底带有防滑鞋钉。",
+        "tags": [
+          "运动",
+          "鞋包",
+          "运动鞋",
+          "棒球"
+        ]
+      },
+      {
+        "id": 45,
+        "brand": "运动精选",
+        "name": "白色红边低帮运动鞋",
+        "category": "运动",
+        "price": 229,
+        "marketPrice": 599,
+        "stock": 175,
+        "sales": 885,
+        "img": "img/products/product-45-1.webp",
+        "gallery": [
+          "img/products/product-45-1.webp",
+          "img/products/product-45-2.webp",
+          "img/products/product-45-3.webp",
+          "img/products/product-45-4.webp"
+        ],
+        "specLabel": "尺码",
+        "specs": [
+          "39",
+          "40",
+          "41",
+          "42",
+          "43"
+        ],
+        "desc": "白色系带低帮鞋，鞋跟与鞋底边缘带红色点缀。",
+        "tags": [
+          "运动",
+          "鞋包",
+          "运动鞋"
+        ]
+      },
+      {
+        "id": 46,
+        "brand": "Wilson",
+        "name": "棕色篮球",
+        "category": "运动",
+        "price": 89,
+        "marketPrice": 199,
+        "stock": 178,
+        "sales": 902,
+        "img": "img/products/product-46-1.webp",
+        "gallery": [
+          "img/products/product-46-1.webp"
+        ],
+        "specLabel": "规格",
+        "specs": [
+          "单只装"
+        ],
+        "desc": "棕色球面，黑色分割线，带 Wilson 标识。",
+        "tags": [
+          "运动",
+          "球类",
+          "篮球"
+        ]
+      },
+      {
+        "id": 47,
+        "brand": "运动精选",
+        "name": "白色羽毛球",
+        "category": "运动",
+        "price": 9,
+        "marketPrice": 25,
+        "stock": 181,
+        "sales": 919,
+        "img": "img/products/product-47-1.webp",
+        "gallery": [
+          "img/products/product-47-1.webp"
+        ],
+        "specLabel": "规格",
+        "specs": [
+          "单只装"
+        ],
+        "desc": "白色羽毛裙，圆头球托，适合羽毛球运动展示。",
+        "tags": [
+          "运动",
+          "球类",
+          "羽毛球"
+        ]
+      },
+      {
+        "id": 48,
+        "brand": "运动精选",
+        "name": "黑白拼块足球",
+        "category": "运动",
+        "price": 69,
+        "marketPrice": 169,
+        "stock": 184,
+        "sales": 936,
+        "img": "img/products/product-48-1.webp",
+        "gallery": [
+          "img/products/product-48-1.webp"
+        ],
+        "specLabel": "规格",
+        "specs": [
+          "单只装"
+        ],
+        "desc": "经典黑白拼块球面，圆形足球外观。",
+        "tags": [
+          "运动",
+          "球类",
+          "足球"
+        ]
+      },
+      {
+        "id": 49,
+        "brand": "运动精选",
+        "name": "荧光黄色网球",
+        "category": "运动",
+        "price": 12,
+        "marketPrice": 29,
+        "stock": 187,
+        "sales": 953,
+        "img": "img/products/product-49-1.webp",
+        "gallery": [
+          "img/products/product-49-1.webp"
+        ],
+        "specLabel": "规格",
+        "specs": [
+          "单只装"
+        ],
+        "desc": "荧光黄色球面，搭配白色弧形接缝。",
+        "tags": [
+          "运动",
+          "球类",
+          "网球"
+        ]
+      },
+      {
+        "id": 50,
+        "brand": "运动精选",
+        "name": "红框网球拍",
+        "category": "运动",
+        "price": 129,
+        "marketPrice": 329,
+        "stock": 190,
+        "sales": 970,
+        "img": "img/products/product-50-1.webp",
+        "gallery": [
+          "img/products/product-50-1.webp"
+        ],
+        "specLabel": "规格",
+        "specs": [
+          "单支装"
+        ],
+        "desc": "红色椭圆拍框，浅色拍线与黑色握柄。",
+        "tags": [
+          "运动",
+          "球拍",
+          "网球"
+        ]
+      },
+      {
+        "id": 51,
+        "brand": "运动精选",
+        "name": "蓝白拼色排球",
+        "category": "运动",
+        "price": 59,
+        "marketPrice": 139,
+        "stock": 193,
+        "sales": 987,
+        "img": "img/products/product-51-1.webp",
+        "gallery": [
+          "img/products/product-51-1.webp"
+        ],
+        "specLabel": "规格",
+        "specs": [
+          "单只装"
+        ],
+        "desc": "蓝色、白色与灰色弧形拼块组成球面。",
+        "tags": [
+          "运动",
+          "球类",
+          "排球"
+        ]
+      }
+    ]
+  },
+  "data/seckill.json": {
+    "code": 200,
+    "msg": "限时秒杀数据接口（hour 为当日开抢时间，24小时制）",
+    "hour": 20,
+    "minute": 0,
+    "data": [
+      {
+        "id": 2,
+        "img": "img/products/product-2-1.webp",
+        "brand": "彩妆精选",
+        "name": "经典红色唇膏",
+        "price": 49,
+        "originalPrice": 129,
+        "total": 500,
+        "sold": 436
+      },
+      {
+        "id": 5,
+        "img": "img/products/product-5-1.webp",
+        "brand": "OLAY 玉兰油",
+        "name": "乳木果保湿沐浴露",
+        "price": 59,
+        "originalPrice": 129,
+        "total": 200,
+        "sold": 187
+      },
+      {
+        "id": 12,
+        "img": "img/products/product-12-1.webp",
+        "brand": "NIKE 耐克",
+        "name": "Air Jordan 1 红黑拼色运动鞋",
+        "price": 329,
+        "originalPrice": 790,
+        "total": 300,
+        "sold": 121
+      },
+      {
+        "id": 4,
+        "img": "img/products/product-4-1.webp",
+        "brand": "女装精选",
+        "name": "红色抹胸长款礼服裙",
+        "price": 299,
+        "originalPrice": 899,
+        "total": 400,
+        "sold": 366
+      },
+      {
+        "id": 8,
+        "img": "img/products/product-8-1.webp",
+        "brand": "PUMA 彪马",
+        "name": "Future Rider 撞色休闲运动鞋",
+        "price": 269,
+        "originalPrice": 729,
+        "total": 260,
+        "sold": 58
+      },
+      {
+        "id": 10,
+        "img": "img/products/product-10-1.webp",
+        "brand": "essence",
+        "name": "Lash Princess 黑色睫毛膏",
+        "price": 39,
+        "originalPrice": 79,
+        "total": 350,
+        "sold": 294
+      }
+    ]
+  },
+  "data/categories.json": {
+    "code": 200,
+    "msg": "分类数据接口：商品图、名称、链接按 productId 关联",
+    "data": [
+      {
+        "name": "女装",
+        "sections": [
+          {
+            "title": "日常连衣裙",
+            "items": [
+              {
+                "name": "蓝色波点无袖连衣裙",
+                "img": "img/products/product-3-1.webp",
+                "productId": 3
+              },
+              {
+                "name": "黑底花卉印花长裙",
+                "img": "img/products/product-6-1.webp",
+                "productId": 6
+              },
+              {
+                "name": "黑白格纹蝴蝶结连衣裙",
+                "img": "img/products/product-9-1.webp",
+                "productId": 9
+              },
+              {
+                "name": "浅灰色无袖长款连衣裙",
+                "img": "img/products/product-14-1.webp",
+                "productId": 14
+              },
+              {
+                "name": "黑白植物印花无袖长裙",
+                "img": "img/products/product-22-1.webp",
+                "productId": 22
+              },
+              {
+                "name": "灰绿色抹胸层叠短裙",
+                "img": "img/products/product-23-1.webp",
+                "productId": 23
+              },
+              {
+                "name": "浅色细波点无袖连衣裙",
+                "img": "img/products/product-25-1.webp",
+                "productId": 25
+              }
+            ]
+          },
+          {
+            "title": "礼服与长裙",
+            "items": [
+              {
+                "name": "红色抹胸长款礼服裙",
+                "img": "img/products/product-4-1.webp",
+                "productId": 4
+              },
+              {
+                "name": "黑色抹胸长款礼服裙",
+                "img": "img/products/product-24-1.webp",
+                "productId": 24
+              },
+              {
+                "name": "酒红色撞色长袖长裙",
+                "img": "img/products/product-26-1.webp",
+                "productId": 26
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "美妆",
+        "sections": [
+          {
+            "title": "人气彩妆",
+            "items": [
+              {
+                "name": "经典红色唇膏",
+                "img": "img/products/product-2-1.webp",
+                "productId": 2
+              },
+              {
+                "name": "Lash Princess 黑色睫毛膏",
+                "img": "img/products/product-10-1.webp",
+                "productId": 10
+              },
+              {
+                "name": "多色眼影盘带镜款",
+                "img": "img/products/product-27-1.webp",
+                "productId": 27
+              },
+              {
+                "name": "米色粉饼圆盒带镜款",
+                "img": "img/products/product-28-1.webp",
+                "productId": 28
+              },
+              {
+                "name": "红色指甲油",
+                "img": "img/products/product-29-1.webp",
+                "productId": 29
+              }
+            ]
+          },
+          {
+            "title": "香水精选",
+            "items": [
+              {
+                "name": "CK One 淡香水",
+                "img": "img/products/product-30-1.webp",
+                "productId": 30
+              },
+              {
+                "name": "COCO NOIR 香水",
+                "img": "img/products/product-31-1.webp",
+                "productId": 31
+              },
+              {
+                "name": "J’adore 真我香水",
+                "img": "img/products/product-32-1.webp",
+                "productId": 32
+              }
+            ]
+          },
+          {
+            "title": "身体护理",
+            "items": [
+              {
+                "name": "乳木果保湿沐浴露",
+                "img": "img/products/product-5-1.webp",
+                "productId": 5
+              },
+              {
+                "name": "植物图案泵装洗手液",
+                "img": "img/products/product-33-1.webp",
+                "productId": 33
+              },
+              {
+                "name": "Men 男士润肤乳",
+                "img": "img/products/product-34-1.webp",
+                "productId": 34
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "鞋包",
+        "sections": [
+          {
+            "title": "包袋精选",
+            "items": [
+              {
+                "name": "深蓝色双提手手提包",
+                "img": "img/products/product-16-1.webp",
+                "productId": 16
+              },
+              {
+                "name": "棕色拉链双提手手提包",
+                "img": "img/products/product-17-1.webp",
+                "productId": 17
+              },
+              {
+                "name": "浅蓝绿色通勤手提包",
+                "img": "img/products/product-18-1.webp",
+                "productId": 18
+              },
+              {
+                "name": "白色翻盖双肩背包",
+                "img": "img/products/product-19-1.webp",
+                "productId": 19
+              },
+              {
+                "name": "黑色简约双提手手提包",
+                "img": "img/products/product-20-1.webp",
+                "productId": 20
+              },
+              {
+                "name": "藏蓝色翻盖双肩背包",
+                "img": "img/products/product-21-1.png",
+                "productId": 21
+              }
+            ]
+          },
+          {
+            "title": "女鞋精选",
+            "items": [
+              {
+                "name": "黑色露趾高跟凉鞋",
+                "img": "img/products/product-1-1.webp",
+                "productId": 1
+              },
+              {
+                "name": "黑色尖头高跟鞋棕色内里款",
+                "img": "img/products/product-40-1.webp",
+                "productId": 40
+              },
+              {
+                "name": "金色尖头高跟鞋",
+                "img": "img/products/product-41-1.webp",
+                "productId": 41
+              },
+              {
+                "name": "黑色尖头高跟鞋米色内里款",
+                "img": "img/products/product-42-1.webp",
+                "productId": 42
+              },
+              {
+                "name": "红色尖头高跟鞋",
+                "img": "img/products/product-43-1.webp",
+                "productId": 43
+              }
+            ]
+          },
+          {
+            "title": "运动休闲鞋",
+            "items": [
+              {
+                "name": "Future Rider 撞色休闲运动鞋",
+                "img": "img/products/product-8-1.webp",
+                "productId": 8
+              },
+              {
+                "name": "Air Jordan 1 红黑拼色运动鞋",
+                "img": "img/products/product-12-1.webp",
+                "productId": 12
+              },
+              {
+                "name": "白红拼色低帮休闲鞋",
+                "img": "img/products/product-15-1.webp",
+                "productId": 15
+              },
+              {
+                "name": "绿白拼色棒球钉鞋",
+                "img": "img/products/product-44-1.webp",
+                "productId": 44
+              },
+              {
+                "name": "白色红边低帮运动鞋",
+                "img": "img/products/product-45-1.webp",
+                "productId": 45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "男装",
+        "sections": [
+          {
+            "title": "衬衫精选",
+            "items": [
+              {
+                "name": "蓝黑格纹长袖衬衫",
+                "img": "img/products/product-7-1.webp",
+                "productId": 7
+              },
+              {
+                "name": "红黑格纹长袖衬衫",
+                "img": "img/products/product-11-1.webp",
+                "productId": 11
+              },
+              {
+                "name": "蓝底白花短袖衬衫",
+                "img": "img/products/product-35-1.webp",
+                "productId": 35
+              },
+              {
+                "name": "绿蓝棕格纹长袖衬衫",
+                "img": "img/products/product-36-1.webp",
+                "productId": 36
+              }
+            ]
+          },
+          {
+            "title": "T恤与上衣",
+            "items": [
+              {
+                "name": "白色印花短袖T恤",
+                "img": "img/products/product-13-1.webp",
+                "productId": 13
+              },
+              {
+                "name": "灰黑拼色亨利领长袖上衣",
+                "img": "img/products/product-37-1.png",
+                "productId": 37
+              },
+              {
+                "name": "藏蓝色圆领长袖上衣",
+                "img": "img/products/product-39-1.png",
+                "productId": 39
+              }
+            ]
+          },
+          {
+            "title": "夹克外套",
+            "items": [
+              {
+                "name": "卡其色立领多口袋夹克",
+                "img": "img/products/product-38-1.png",
+                "productId": 38
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "运动",
+        "sections": [
+          {
+            "title": "球类与装备",
+            "items": [
+              {
+                "name": "棕色篮球",
+                "img": "img/products/product-46-1.webp",
+                "productId": 46
+              },
+              {
+                "name": "白色羽毛球",
+                "img": "img/products/product-47-1.webp",
+                "productId": 47
+              },
+              {
+                "name": "黑白拼块足球",
+                "img": "img/products/product-48-1.webp",
+                "productId": 48
+              },
+              {
+                "name": "荧光黄色网球",
+                "img": "img/products/product-49-1.webp",
+                "productId": 49
+              },
+              {
+                "name": "红框网球拍",
+                "img": "img/products/product-50-1.webp",
+                "productId": 50
+              },
+              {
+                "name": "蓝白拼色排球",
+                "img": "img/products/product-51-1.webp",
+                "productId": 51
+              }
+            ]
+          },
+          {
+            "title": "运动鞋精选",
+            "items": [
+              {
+                "name": "Future Rider 撞色休闲运动鞋",
+                "img": "img/products/product-8-1.webp",
+                "productId": 8
+              },
+              {
+                "name": "Air Jordan 1 红黑拼色运动鞋",
+                "img": "img/products/product-12-1.webp",
+                "productId": 12
+              },
+              {
+                "name": "白红拼色低帮休闲鞋",
+                "img": "img/products/product-15-1.webp",
+                "productId": 15
+              },
+              {
+                "name": "绿白拼色棒球钉鞋",
+                "img": "img/products/product-44-1.webp",
+                "productId": 44
+              },
+              {
+                "name": "白色红边低帮运动鞋",
+                "img": "img/products/product-45-1.webp",
+                "productId": 45
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "data/comments.json": {
+    "code": 200,
+    "msg": "课程模拟评价，按 productId 关联，不代表真实购买反馈",
+    "data": [
+      {
+        "productId": 1,
+        "user": "小*鹿",
+        "stars": 5,
+        "content": "黑色高跟凉鞋与图片一致，搭裙子很好看。",
+        "time": "2026-10-02"
+      },
+      {
+        "productId": 1,
+        "user": "Y*u",
+        "stars": 4,
+        "content": "露趾款式很适合夏天，建议按尺码表选购。",
+        "time": "2026-09-28"
+      },
+      {
+        "productId": 2,
+        "user": "橙*子",
+        "stars": 5,
+        "content": "红色唇膏很显气色，包装也很简洁。",
+        "time": "2026-10-05"
+      },
+      {
+        "productId": 2,
+        "user": "一*星",
+        "stars": 5,
+        "content": "颜色和商品图一致，日常使用方便。",
+        "time": "2026-09-30"
+      },
+      {
+        "productId": 3,
+        "user": "M*a",
+        "stars": 5,
+        "content": "波点图案很好看，裙摆很有层次。",
+        "time": "2026-10-08"
+      },
+      {
+        "productId": 5,
+        "user": "阿*玖",
+        "stars": 5,
+        "content": "按压泵头使用方便，瓶身包装完整。",
+        "time": "2026-10-01"
+      },
+      {
+        "productId": 5,
+        "user": "W*l",
+        "stars": 4,
+        "content": "沐浴露收到了，包装没有破损。",
+        "time": "2026-09-25"
+      },
+      {
+        "productId": 12,
+        "user": "路*人",
+        "stars": 5,
+        "content": "红黑拼色很经典，收到的款式与图片一致。",
+        "time": "2026-10-03"
+      }
+    ]
+  }
 };

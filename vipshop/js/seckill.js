@@ -9,15 +9,15 @@ liangFetchJSON("data/seckill.json").then(function (res) {
     /* 渲染秒杀商品网格 */
     var html = "";
     res.data.forEach(function (item) {
-        var off = Math.round((1 - item.price / item.originalPrice) * 10);
+        var off = liangDiscount(item.price, item.originalPrice);
         var percent = Math.min(100, Math.round(item.sold / item.total * 100));
         html += '<li class="liang-goods-card">'
-            + '<a href="detail.html?id=' + item.id + '"><img src="' + item.img + '" alt="' + item.name + '"></a>'
+            + '<a href="detail.html?id=' + item.id + '"><img src="' + liangEscape(item.img) + '" alt="' + liangEscape(item.name) + '"></a>'
             + '<div class="liang-goods-info">'
-            + '<p class="liang-goods-brand">' + item.brand + '</p>'
-            + '<p class="liang-goods-name">' + item.name + '</p>'
+            + '<p class="liang-goods-brand">' + liangEscape(item.brand) + '</p>'
+            + '<p class="liang-goods-name">' + liangEscape(item.name) + '</p>'
             + '<p class="liang-goods-price"><em>¥</em><strong>' + item.price + '</strong><del>¥' + item.originalPrice + '</del></p>'
-            + '<div class="liang-seckill-progress">已抢' + percent + '%</div>'
+            + '<div class="liang-seckill-progress" style="--liang-progress:' + percent + '%">已抢' + percent + '%</div>'
             + '</div>'
             + '<span class="liang-goods-discount">' + off + '折</span>'
             + '</li>';
@@ -28,9 +28,7 @@ liangFetchJSON("data/seckill.json").then(function (res) {
     function pad(n) { return n < 10 ? "0" + n : "" + n; }
     function tick() {
         var now = new Date();
-        var end = new Date();
-        end.setHours(res.hour, res.minute, 0, 0);
-        if (now >= end) end.setDate(end.getDate() + 1);
+        var end = liangSaleDeadline(res);
         var diff = Math.floor((end - now) / 1000);
         document.getElementById("liangHour").textContent = pad(Math.floor(diff / 3600));
         document.getElementById("liangMinute").textContent = pad(Math.floor(diff % 3600 / 60));
