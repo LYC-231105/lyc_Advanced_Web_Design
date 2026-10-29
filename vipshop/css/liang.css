@@ -414,7 +414,21 @@ em, i { font-style: normal; }
     position: relative;
 }
 
-.liang-tabbar a svg { width: 22px; height: 22px; }
+/* iconfont 下载原图保存在 img/icons，滤镜只统一显示颜色，不改变 SVG 路径。 */
+.liang-nav-icon {
+    display: block;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%);
+    opacity: .6;
+}
+
+.liang-tabbar a.liang-active .liang-nav-icon {
+    filter: brightness(0) saturate(100%) invert(16%) sepia(100%) saturate(5900%) hue-rotate(318deg) brightness(96%) contrast(110%);
+    opacity: 1;
+}
 
 .liang-tabbar a.liang-active { color: var(--liang-pink); }
 
@@ -782,7 +796,7 @@ em, i { font-style: normal; }
     color: #666;
 }
 
-.liang-detail-bar .liang-bar-icon svg { width: 20px; height: 20px; }
+.liang-detail-bar .liang-bar-icon .liang-nav-icon { width: 20px; height: 20px; }
 
 .liang-bar-cart {
     flex: 1;

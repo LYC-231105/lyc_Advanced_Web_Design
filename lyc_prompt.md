@@ -82,3 +82,34 @@
 > 好的，执行吧
 
 ---
+
+## 记录 9
+
+- **时间**: 2026-10-26 14:32:49
+- **使用模型**: GLM-5.3-Flash
+- **提示词内容**:
+
+> 目标效果为：`https://spontaneous-valkyrie-4e4229.netlify.app/target`，，我的姓名缩写：lyc，学号缩写：0817，，按照我给出的内容，帮我完成
+> （附件：data.js、starter-level1.html、starter-level2.html、任务说明截图）
+
+---
+
+## 记录 10
+
+- **时间**: 2026-10-29 14:18:10
+- **使用模型**: GLM-5.3-Flash
+- **提示词内容**:
+
+> 创建技能skill：提交到github，将本项目提交commit并push到`https://github.com/LYC-231105/lyc_Advanced_Web_Design`，使用已设置公钥。
+
+---
+
+## 记录 11
+
+- **时间**: 2026-10-29 14:39:39
+- **使用模型**: GLM-5.3-Flash
+- **提示词内容**:
+
+> 提交到github
+
+---
