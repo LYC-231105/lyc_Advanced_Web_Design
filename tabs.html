@@ -24,7 +24,9 @@
   .lyc_0817_tab-nav{display:flex;list-style:none;background:#fff}
   .lyc_0817_tab-item{position:relative;flex:1;display:flex;align-items:center;justify-content:center;height:40px;background:var(--lyc_0817_gray);color:var(--lyc_0817_ink);font-size:13px;font-weight:700;cursor:pointer;user-select:none}
   .lyc_0817_tab-item.lyc_0817_active{background:#fff;color:var(--lyc_0817_orange);border-bottom:1px solid var(--lyc_0817_orange)}
-  .lyc_0817_tab-item.lyc_0817_active::after{content:"";position:absolute;left:50%;bottom:-6px;width:20px;height:5px;margin-left:-10px;pointer-events:none;background:url("img/lyc_0817_tabs/lin.jpg") no-repeat;background-size:150px 41px;background-position:center -36px}
+  /* 在橙线中央切出与 lin.jpg 尖角等宽的缺口，使 V 形尖角与横线相连，避免出现"横线下悬挂三角形"的错位效果 */
+  .lyc_0817_tab-item.lyc_0817_active::before{content:"";position:absolute;left:50%;bottom:-1px;width:9px;height:1px;margin-left:-4.5px;background:#fff}
+  .lyc_0817_tab-item.lyc_0817_active::after{content:"";position:absolute;left:50%;bottom:-6px;width:20px;height:5px;margin-left:-9px;pointer-events:none;background:url("img/lyc_0817_tabs/lin.jpg") no-repeat;background-size:150px 41px;background-position:center -36px}
 
   .lyc_0817_tab-pane{display:none;padding:10px 0 0}
   .lyc_0817_tab-pane.lyc_0817_active{display:block}
