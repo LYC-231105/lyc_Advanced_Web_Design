@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新闻点击排行 · Tab 选项卡 · lyc_0817</title>
+<!-- lyc_0817 · 2026-11-02 14:23:14 · DeepSeek-V4.1-Flash · 新闻点击排行选项卡页 —— 国内/省内/国际/最热四类新闻 Tab 切换，国内新闻默认选中；选项卡逻辑放在 js/lyc_0817_tabs.js 外部引用，组件可复用 -->
+<style>
+  :root{
+    --lyc-0817-orange:#e35b0d;
+    --lyc-0817-orange-deep:#c23f00;
+    --lyc-0817-ink:#2b2f36;
+    --lyc-0817-soft:#8a8f99;
+    --lyc-0817-line:#e6e6e6;
+    --lyc-0817-bg:#f2f3f5;
+    --lyc-0817-card:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Microsoft YaHei","PingFang SC","Segoe UI",system-ui,sans-serif;
+    background:var(--lyc-0817-bg);color:var(--lyc-0817-ink);line-height:1.6;padding:30px 16px;
+  }
+  .lyc_0817_page{max-width:900px;margin:0 auto}
+
+  /* 页头 */
+  .lyc_0817_head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}
+  .lyc_0817_head h1{font-size:22px;font-weight:700;line-height:1.25;padding-left:12px;border-left:4px solid var(--lyc-0817-orange)}
+  .lyc_0817_sub{display:block;margin-top:7px;padding-left:16px;font-size:12px;font-weight:400;color:var(--lyc-0817-soft);letter-spacing:.5px}
+  .lyc_0817_back{flex:none;font-size:13px;color:var(--lyc-0817-orange);text-decoration:none;padding:5px 14px;border:1px solid rgba(227,91,13,.45);border-radius:20px;background:var(--lyc-0817-card);transition:background .2s,color .2s,border-color .2s}
+  .lyc_0817_back:hover{background:var(--lyc-0817-orange);border-color:var(--lyc-0817-orange);color:#fff}
+
+  /* 主体：左选项卡 + 右素材参考 */
+  .lyc_0817_layout{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:22px;align-items:start}
+
+  /* 选项卡组件（可复用结构：.lyc_0817_tab-panel > 标题栏 + .lyc_0817_tab-nav + .lyc_0817_tab-pane） */
+  .lyc_0817_tab-panel{background:var(--lyc-0817-card);border:1px solid #e3e5e8;border-top:3px solid var(--lyc-0817-orange);border-radius:6px;box-shadow:0 6px 20px rgba(30,40,60,.06);overflow:hidden}
+  .lyc_0817_panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px 10px;border-bottom:1px solid var(--lyc-0817-line)}
+  .lyc_0817_title-img{display:block;width:auto;height:30px}
+  .lyc_0817_update{flex:none;font-size:12px;color:#9aa0a8}
+
+  .lyc_0817_tab-nav{display:flex;list-style:none;background:#fafafa;border-bottom:1px solid #ececec}
+  .lyc_0817_tab-item{position:relative;flex:1;padding:12px 6px 14px;text-align:center;font-size:15px;color:#5c6270;cursor:pointer;user-select:none;transition:color .18s,background .18s}
+  .lyc_0817_tab-item:hover{background:var(--lyc-0817-card);color:var(--lyc-0817-orange)}
+  .lyc_0817_tab-item.lyc_0817_active{background:var(--lyc-0817-card);color:var(--lyc-0817-orange);font-weight:700}
+  /* 选中态底部指示线：课堂素材 lin.jpg（橙色横线 + 下凹小尖角） */
+  .lyc_0817_tab-item.lyc_0817_active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:12px;pointer-events:none;background:url("img/lyc_0817_tabs/lin.jpg") center bottom / 100% 12px no-repeat}
+
+  .lyc_0817_tab-pane{display:none;padding:6px 20px 12px}
+  .lyc_0817_tab-pane.lyc_0817_active{display:block}
+
+  .lyc_0817_list{list-style:none}
+  .lyc_0817_list li{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px dashed #ececec;font-size:14px}
+  .lyc_0817_list li:last-child{border-bottom:0}
+  .lyc_0817_rank{flex:none;width:20px;height:20px;border:1px solid #f0d5c4;border-radius:3px;background:#fdf6f1;color:#b6744c;font:12px/19px Arial,Helvetica,sans-serif;text-align:center}
+  .lyc_0817_list li:nth-child(-n+3) .lyc_0817_rank{background:var(--lyc-0817-orange);border-color:var(--lyc-0817-orange);color:#fff;font-weight:700}
+  .lyc_0817_title{flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:#33383f}
+  .lyc_0817_list li:hover .lyc_0817_title{color:var(--lyc-0817-orange)}
+  .lyc_0817_count{flex:none;font:12px Arial,Helvetica,sans-serif;color:#a2a8b1}
+
+  /* 右侧素材参考卡片 */
+  .lyc_0817_ref{position:sticky;top:24px;padding:15px 16px 16px;background:var(--lyc-0817-card);border:1px solid #e3e5e8;border-radius:6px}
+  .lyc_0817_ref h2{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--lyc-0817-line);font-size:15px;font-weight:700;color:#33383f}
+  .lyc_0817_sq{flex:none;width:12px;height:12px}
+  .lyc_0817_ref-img{display:block;width:100%;height:auto;border:1px solid var(--lyc-0817-line);border-radius:4px}
+  .lyc_0817_ref p{margin-top:10px;font-size:12px;color:var(--lyc-0817-soft);line-height:1.9}
+  .lyc_0817_assets{margin-top:8px;padding-left:2px;list-style:none;font-size:12px;color:#7a828c}
+  .lyc_0817_assets li{padding:4px 0;border-bottom:1px dotted var(--lyc-0817-line)}
+  .lyc_0817_assets li:last-child{border-bottom:0}
+  .lyc_0817_assets code{font-family:Consolas,Monaco,monospace;color:var(--lyc-0817-orange-deep)}
+
+  .lyc_0817_foot{padding:22px 0 6px;text-align:center;font-size:12px;color:#9aa0a8;letter-spacing:.5px}
+
+  @media (max-width:820px){
+    .lyc_0817_layout{grid-template-columns:minmax(0,1fr)}
+    .lyc_0817_ref{position:static}
+  }
+  @media (max-width:520px){
+    body{padding:22px 12px}
+    .lyc_0817_head h1{font-size:19px}
+    .lyc_0817_title-img{height:26px}
+    .lyc_0817_tab-item{padding:11px 4px 13px;font-size:13.5px}
+    .lyc_0817_tab-pane{padding:4px 14px 10px}
+    .lyc_0817_list li{gap:8px;font-size:13px}
+    .lyc_0817_count{font-size:11px}
+  }
+</style>
+</head>
+<body>
+<div class="lyc_0817_page">
+  <!-- 页头 -->
+  <header class="lyc_0817_head">
+    <div>
+      <h1>新闻点击排行</h1>
+      <span class="lyc_0817_sub">国内 / 省内 / 国际 / 最热 · Tab 选项卡切换</span>
+    </div>
+    <a class="lyc_0817_back" href="index.html">返回首页</a>
+  </header>
+
+  <div class="lyc_0817_layout">
+    <!-- 选项卡组件实例：如需第二组选项卡，复制整块结构并更换 id / data-tab 即可复用同一份 JS -->
+    <section class="lyc_0817_tab-panel" id="lyc_0817_newsTabs">
+      <!-- 标题栏：课堂素材 tit06.jpg 作为「点击排行」标题图 -->
+      <div class="lyc_0817_panel-head">
+        <img class="lyc_0817_title-img" src="img/lyc_0817_tabs/tit06.jpg" alt="点击排行">
+        <span class="lyc_0817_update">更新于 2026-11-02 14:20</span>
+      </div>
+
+      <ul class="lyc_0817_tab-nav" id="lyc_0817_newsNav">
+        <li class="lyc_0817_tab-item lyc_0817_active" data-tab="lyc_0817_paneDomestic">国内新闻</li>
+        <li class="lyc_0817_tab-item" data-tab="lyc_0817_paneProvince">省内新闻</li>
+        <li class="lyc_0817_tab-item" data-tab="lyc_0817_paneWorld">国际新闻</li>
+        <li class="lyc_0817_tab-item" data-tab="lyc_0817_paneHot">最热新闻</li>
+      </ul>
+
+      <!-- 面板 1：国内新闻（默认选中） -->
+      <div class="lyc_0817_tab-pane lyc_0817_active" id="lyc_0817_paneDomestic">
+        <ol class="lyc_0817_list">
+          <li><span class="lyc_0817_rank">1</span><span class="lyc_0817_title">全国秋粮收购全面展开 主产区仓容准备充足</span><span class="lyc_0817_count">356322</span></li>
+          <li><span class="lyc_0817_rank">2</span><span class="lyc_0817_title">多地发布新能源汽车以旧换新补贴细则</span><span class="lyc_0817_count">311246</span></li>
+          <li><span class="lyc_0817_rank">3</span><span class="lyc_0817_title">京广高铁全线达速运行 部分城际时间再压缩</span><span class="lyc_0817_count">295883</span></li>
+          <li><span class="lyc_0817_rank">4</span><span class="lyc_0817_title">10 月制造业 PMI 回升至扩张区间</span><span class="lyc_0817_count">266061</span></li>
+          <li><span class="lyc_0817_rank">5</span><span class="lyc_0817_title">全国冬小麦播种进度过半 苗情总体良好</span><span class="lyc_0817_count">243936</span></li>
+          <li><span class="lyc_0817_rank">6</span><span class="lyc_0817_title">国家医保药品目录调整启动 关注罕见病用药</span><span class="lyc_0817_count">224346</span></li>
+          <li><span class="lyc_0817_rank">7</span><span class="lyc_0817_title">多所高校公布 2027 年硕士研究生招生简章</span><span class="lyc_0817_count">172694</span></li>
+          <li><span class="lyc_0817_rank">8</span><span class="lyc_0817_title">寒潮蓝色预警发布 中东部将迎大范围降温</span><span class="lyc_0817_count">128789</span></li>
+        </ol>
+      </div>
+
+      <!-- 面板 2：省内新闻 -->
+      <div class="lyc_0817_tab-pane" id="lyc_0817_paneProvince">
+        <ol class="lyc_0817_list">
+          <li><span class="lyc_0817_rank">1</span><span class="lyc_0817_title">省科技馆新馆本周六开馆 首批预约通道开放</span><span class="lyc_0817_count">156322</span></li>
+          <li><span class="lyc_0817_rank">2</span><span class="lyc_0817_title">全省高速公路服务区充电桩实现全覆盖</span><span class="lyc_0817_count">141246</span></li>
+          <li><span class="lyc_0817_rank">3</span><span class="lyc_0817_title">我省三地入选国家文旅融合发展示范区</span><span class="lyc_0817_count">129883</span></li>
+          <li><span class="lyc_0817_rank">4</span><span class="lyc_0817_title">省运会青少年组游泳比赛落幕 产生 42 枚金牌</span><span class="lyc_0817_count">116061</span></li>
+          <li><span class="lyc_0817_rank">5</span><span class="lyc_0817_title">秋季招聘会启动 现场提供岗位 1.2 万个</span><span class="lyc_0817_count">103936</span></li>
+          <li><span class="lyc_0817_rank">6</span><span class="lyc_0817_title">省级财政下达 3.6 亿元支持高标准农田建设</span><span class="lyc_0817_count">94346</span></li>
+          <li><span class="lyc_0817_rank">7</span><span class="lyc_0817_title">省内首条智慧公交示范线路投入运营</span><span class="lyc_0817_count">82694</span></li>
+          <li><span class="lyc_0817_rank">8</span><span class="lyc_0817_title">多地举办菊花文化节 带动乡村旅游升温</span><span class="lyc_0817_count">68789</span></li>
+        </ol>
+      </div>
+
+      <!-- 面板 3：国际新闻 -->
+      <div class="lyc_0817_tab-pane" id="lyc_0817_paneWorld">
+        <ol class="lyc_0817_list">
+          <li><span class="lyc_0817_rank">1</span><span class="lyc_0817_title">联合国气候变化大会开幕 聚焦减排资金落实</span><span class="lyc_0817_count">256322</span></li>
+          <li><span class="lyc_0817_rank">2</span><span class="lyc_0817_title">多国央行维持利率不变 市场关注政策转向</span><span class="lyc_0817_count">241246</span></li>
+          <li><span class="lyc_0817_rank">3</span><span class="lyc_0817_title">国际空间站完成新一批货物补给对接</span><span class="lyc_0817_count">229883</span></li>
+          <li><span class="lyc_0817_rank">4</span><span class="lyc_0817_title">全球航空客运量恢复至 2019 年同期 98%</span><span class="lyc_0817_count">216061</span></li>
+          <li><span class="lyc_0817_rank">5</span><span class="lyc_0817_title">主要产油国宣布延长自愿减产措施</span><span class="lyc_0817_count">203936</span></li>
+          <li><span class="lyc_0817_rank">6</span><span class="lyc_0817_title">欧盟公布新一轮数字基础设施投资计划</span><span class="lyc_0817_count">194346</span></li>
+          <li><span class="lyc_0817_rank">7</span><span class="lyc_0817_title">南半球多国遭遇极端高温 农业生产受影响</span><span class="lyc_0817_count">182694</span></li>
+          <li><span class="lyc_0817_rank">8</span><span class="lyc_0817_title">国际海事组织通过船舶减排新规</span><span class="lyc_0817_count">168789</span></li>
+        </ol>
+      </div>
+
+      <!-- 面板 4：最热新闻 -->
+      <div class="lyc_0817_tab-pane" id="lyc_0817_paneHot">
+        <ol class="lyc_0817_list">
+          <li><span class="lyc_0817_rank">1</span><span class="lyc_0817_title">今冬首场大范围寒潮来袭 多地发布降温预警</span><span class="lyc_0817_count">986532</span></li>
+          <li><span class="lyc_0817_rank">2</span><span class="lyc_0817_title">神舟乘组在轨完成第三批科学实验</span><span class="lyc_0817_count">752418</span></li>
+          <li><span class="lyc_0817_rank">3</span><span class="lyc_0817_title">全国铁路今起实行冬季运行图</span><span class="lyc_0817_count">634091</span></li>
+          <li><span class="lyc_0817_rank">4</span><span class="lyc_0817_title">数字人民币试点新增 12 个城市</span><span class="lyc_0817_count">418762</span></li>
+          <li><span class="lyc_0817_rank">5</span><span class="lyc_0817_title">国产大飞机新增多条商业航线</span><span class="lyc_0817_count">392145</span></li>
+          <li><span class="lyc_0817_rank">6</span><span class="lyc_0817_title">多地博物馆推出夜间开放专场</span><span class="lyc_0817_count">356788</span></li>
+          <li><span class="lyc_0817_rank">7</span><span class="lyc_0817_title">冬季取暖用电负荷创新高 电网运行平稳</span><span class="lyc_0817_count">301726</span></li>
+          <li><span class="lyc_0817_rank">8</span><span class="lyc_0817_title">校园足球联赛全国总决赛落幕</span><span class="lyc_0817_count">268903</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 右侧参考区：课堂素材 1.jpg 原版效果截图，标题前小方块使用课堂素材 k.jpg -->
+    <aside class="lyc_0817_ref">
+      <h2><img class="lyc_0817_sq" src="img/lyc_0817_tabs/k.jpg" alt="">原版效果参考</h2>
+      <img class="lyc_0817_ref-img" src="img/lyc_0817_tabs/1.jpg" alt="课堂素材 1.jpg：原版点击排行版式截图">
+      <p>课堂素材 <code>1.jpg</code>：原版「点击排行」版式截图 —— 橙色序号、点击量靠右对齐，选项卡下方一道橙色指示线。</p>
+      <ul class="lyc_0817_assets">
+        <li><code>tit06.jpg</code> · 面板标题图</li>
+        <li><code>lin.jpg</code> · 选项卡选中指示线</li>
+        <li><code>k.jpg</code> · 小方块图标</li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer class="lyc_0817_foot">高级网页设计课堂实践 · Tab 选项卡 · lyc_0817 · 素材来自课堂测试/2</footer>
+</div>
+
+<!-- 外部引用：选项卡 JS 单独放在 js 文件夹中，可复用于多组选项卡 -->
+<script src="js/lyc_0817_tabs.js"></script>
+</body>
+</html>
