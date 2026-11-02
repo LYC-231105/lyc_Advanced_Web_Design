@@ -21,6 +21,7 @@
 - 请用移动端视口查看（如 iPhone 12 Pro）；页面在 ~420px 容器中居中显示。
 
 ## 关键约定（仓库专属）
+- 课堂示例页命名：CSS 类名、id、CSS 自定义属性、JS 变量/函数统一以 `lyc_0817` 开头（如 `.lyc_0817_tab-nav`、`lyc_0817_newsTabs`、`--lyc_0817_orange`、`lyc_0817_initTabs`）。
 - 命名：布局类选择器以 `liang-` 前缀（如 `liang-main`、`liang-header`），变量/函数/id 以 `liang`/`Liang` 前缀。
 - CSS：以 Flexbox 为主，使用 CSS 变量，禁用 table/float 布局。全局样式在 `vipshop/css/liang.css`。
 - JS：原生 ES5+，不用框架。公共工具在 `vipshop/js/liang-common.js`（fetch 封装/Toast/购物车/返回顶部）。各页面脚本：`index.js`、`category.js`、`seckill.js`、`detail.js`、`cart.js`、`profile.js`、`settings.js`、`login.js`、`admin.js`。

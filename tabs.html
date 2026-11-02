@@ -7,41 +7,41 @@
 <!-- lyc_0817 · 2026-11-02 14:23:14 · DeepSeek-V4.1-Flash · 新闻点击排行选项卡页 —— 国内/省内/国际/最热四类新闻 Tab 切换，国内新闻默认选中；选项卡逻辑放在 js/lyc_0817_tabs.js 外部引用，组件可复用 -->
 <style>
   :root{
-    --lyc-0817-orange:#e35b0d;
-    --lyc-0817-orange-deep:#c23f00;
-    --lyc-0817-ink:#2b2f36;
-    --lyc-0817-soft:#8a8f99;
-    --lyc-0817-line:#e6e6e6;
-    --lyc-0817-bg:#f2f3f5;
-    --lyc-0817-card:#ffffff;
+    --lyc_0817_orange:#e35b0d;
+    --lyc_0817_orange_deep:#c23f00;
+    --lyc_0817_ink:#2b2f36;
+    --lyc_0817_soft:#8a8f99;
+    --lyc_0817_line:#e6e6e6;
+    --lyc_0817_bg:#f2f3f5;
+    --lyc_0817_card:#ffffff;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{
     font-family:"Microsoft YaHei","PingFang SC","Segoe UI",system-ui,sans-serif;
-    background:var(--lyc-0817-bg);color:var(--lyc-0817-ink);line-height:1.6;padding:30px 16px;
+    background:var(--lyc_0817_bg);color:var(--lyc_0817_ink);line-height:1.6;padding:30px 16px;
   }
   .lyc_0817_page{max-width:900px;margin:0 auto}
 
   /* 页头 */
   .lyc_0817_head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}
-  .lyc_0817_head h1{font-size:22px;font-weight:700;line-height:1.25;padding-left:12px;border-left:4px solid var(--lyc-0817-orange)}
-  .lyc_0817_sub{display:block;margin-top:7px;padding-left:16px;font-size:12px;font-weight:400;color:var(--lyc-0817-soft);letter-spacing:.5px}
-  .lyc_0817_back{flex:none;font-size:13px;color:var(--lyc-0817-orange);text-decoration:none;padding:5px 14px;border:1px solid rgba(227,91,13,.45);border-radius:20px;background:var(--lyc-0817-card);transition:background .2s,color .2s,border-color .2s}
-  .lyc_0817_back:hover{background:var(--lyc-0817-orange);border-color:var(--lyc-0817-orange);color:#fff}
+  .lyc_0817_head h1{font-size:22px;font-weight:700;line-height:1.25;padding-left:12px;border-left:4px solid var(--lyc_0817_orange)}
+  .lyc_0817_sub{display:block;margin-top:7px;padding-left:16px;font-size:12px;font-weight:400;color:var(--lyc_0817_soft);letter-spacing:.5px}
+  .lyc_0817_back{flex:none;font-size:13px;color:var(--lyc_0817_orange);text-decoration:none;padding:5px 14px;border:1px solid rgba(227,91,13,.45);border-radius:20px;background:var(--lyc_0817_card);transition:background .2s,color .2s,border-color .2s}
+  .lyc_0817_back:hover{background:var(--lyc_0817_orange);border-color:var(--lyc_0817_orange);color:#fff}
 
   /* 主体：左选项卡 + 右素材参考 */
   .lyc_0817_layout{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:22px;align-items:start}
 
   /* 选项卡组件（可复用结构：.lyc_0817_tab-panel > 标题栏 + .lyc_0817_tab-nav + .lyc_0817_tab-pane） */
-  .lyc_0817_tab-panel{background:var(--lyc-0817-card);border:1px solid #e3e5e8;border-top:3px solid var(--lyc-0817-orange);border-radius:6px;box-shadow:0 6px 20px rgba(30,40,60,.06);overflow:hidden}
-  .lyc_0817_panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px 10px;border-bottom:1px solid var(--lyc-0817-line)}
+  .lyc_0817_tab-panel{background:var(--lyc_0817_card);border:1px solid #e3e5e8;border-top:3px solid var(--lyc_0817_orange);border-radius:6px;box-shadow:0 6px 20px rgba(30,40,60,.06);overflow:hidden}
+  .lyc_0817_panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px 10px;border-bottom:1px solid var(--lyc_0817_line)}
   .lyc_0817_title-img{display:block;width:auto;height:30px}
   .lyc_0817_update{flex:none;font-size:12px;color:#9aa0a8}
 
   .lyc_0817_tab-nav{display:flex;list-style:none;background:#fafafa;border-bottom:1px solid #ececec}
   .lyc_0817_tab-item{position:relative;flex:1;padding:12px 6px 14px;text-align:center;font-size:15px;color:#5c6270;cursor:pointer;user-select:none;transition:color .18s,background .18s}
-  .lyc_0817_tab-item:hover{background:var(--lyc-0817-card);color:var(--lyc-0817-orange)}
-  .lyc_0817_tab-item.lyc_0817_active{background:var(--lyc-0817-card);color:var(--lyc-0817-orange);font-weight:700}
+  .lyc_0817_tab-item:hover{background:var(--lyc_0817_card);color:var(--lyc_0817_orange)}
+  .lyc_0817_tab-item.lyc_0817_active{background:var(--lyc_0817_card);color:var(--lyc_0817_orange);font-weight:700}
   /* 选中态底部指示线：课堂素材 lin.jpg（橙色横线 + 下凹小尖角） */
   .lyc_0817_tab-item.lyc_0817_active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:12px;pointer-events:none;background:url("img/lyc_0817_tabs/lin.jpg") center bottom / 100% 12px no-repeat}
 
@@ -52,21 +52,21 @@
   .lyc_0817_list li{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px dashed #ececec;font-size:14px}
   .lyc_0817_list li:last-child{border-bottom:0}
   .lyc_0817_rank{flex:none;width:20px;height:20px;border:1px solid #f0d5c4;border-radius:3px;background:#fdf6f1;color:#b6744c;font:12px/19px Arial,Helvetica,sans-serif;text-align:center}
-  .lyc_0817_list li:nth-child(-n+3) .lyc_0817_rank{background:var(--lyc-0817-orange);border-color:var(--lyc-0817-orange);color:#fff;font-weight:700}
+  .lyc_0817_list li:nth-child(-n+3) .lyc_0817_rank{background:var(--lyc_0817_orange);border-color:var(--lyc_0817_orange);color:#fff;font-weight:700}
   .lyc_0817_title{flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:#33383f}
-  .lyc_0817_list li:hover .lyc_0817_title{color:var(--lyc-0817-orange)}
+  .lyc_0817_list li:hover .lyc_0817_title{color:var(--lyc_0817_orange)}
   .lyc_0817_count{flex:none;font:12px Arial,Helvetica,sans-serif;color:#a2a8b1}
 
   /* 右侧素材参考卡片 */
-  .lyc_0817_ref{position:sticky;top:24px;padding:15px 16px 16px;background:var(--lyc-0817-card);border:1px solid #e3e5e8;border-radius:6px}
-  .lyc_0817_ref h2{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--lyc-0817-line);font-size:15px;font-weight:700;color:#33383f}
+  .lyc_0817_ref{position:sticky;top:24px;padding:15px 16px 16px;background:var(--lyc_0817_card);border:1px solid #e3e5e8;border-radius:6px}
+  .lyc_0817_ref h2{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--lyc_0817_line);font-size:15px;font-weight:700;color:#33383f}
   .lyc_0817_sq{flex:none;width:12px;height:12px}
-  .lyc_0817_ref-img{display:block;width:100%;height:auto;border:1px solid var(--lyc-0817-line);border-radius:4px}
-  .lyc_0817_ref p{margin-top:10px;font-size:12px;color:var(--lyc-0817-soft);line-height:1.9}
+  .lyc_0817_ref-img{display:block;width:100%;height:auto;border:1px solid var(--lyc_0817_line);border-radius:4px}
+  .lyc_0817_ref p{margin-top:10px;font-size:12px;color:var(--lyc_0817_soft);line-height:1.9}
   .lyc_0817_assets{margin-top:8px;padding-left:2px;list-style:none;font-size:12px;color:#7a828c}
-  .lyc_0817_assets li{padding:4px 0;border-bottom:1px dotted var(--lyc-0817-line)}
+  .lyc_0817_assets li{padding:4px 0;border-bottom:1px dotted var(--lyc_0817_line)}
   .lyc_0817_assets li:last-child{border-bottom:0}
-  .lyc_0817_assets code{font-family:Consolas,Monaco,monospace;color:var(--lyc-0817-orange-deep)}
+  .lyc_0817_assets code{font-family:Consolas,Monaco,monospace;color:var(--lyc_0817_orange_deep)}
 
   .lyc_0817_foot{padding:22px 0 6px;text-align:center;font-size:12px;color:#9aa0a8;letter-spacing:.5px}
 
