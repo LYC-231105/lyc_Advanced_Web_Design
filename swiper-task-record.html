@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swiper 课堂任务 · 第 6 点「三关进阶」完成记录</title>
+<!--
+  lyc_0817 · 2026-11-08 14:30:00 · DeepSeek-V4.1-Flash · Swiper 三关进阶记录页 ——
+  将 swiper-task-record.md 转为可直接在浏览器阅读的 HTML 页面，作为课堂任务第 6 点
+  （任务一 提示词工程师 / 任务二 creative 仿写 / 任务三 综合创作 + 答辩）的访问入口。
+  内容与 .md 原文一致，样式沿用 swiper-task.html 的深蓝科技风。
+-->
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:#f6f8fc;color:#1f2937;line-height:1.8}
+  .wrap{max-width:960px;margin:0 auto;padding:40px 20px 60px}
+
+  /* 头部 */
+  .head{background:linear-gradient(135deg,#0f2b5b,#1d5bbf);border-radius:20px;padding:34px 38px;color:#fff;margin-bottom:24px;box-shadow:0 12px 30px rgba(15,43,91,.3)}
+  .head .badge{display:inline-block;padding:5px 14px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);font-size:13px;letter-spacing:2px;margin-bottom:14px}
+  .head h1{font-size:26px;letter-spacing:1px;line-height:1.5}
+  .head h1 b{color:#ffd166}
+  .head p{margin-top:12px;font-size:14px;color:#d9e3f5}
+
+  /* 章节 */
+  .sec{background:#fff;border-radius:18px;padding:28px 32px;margin-bottom:22px;border:1px solid #e8ecf5;box-shadow:0 4px 14px rgba(31,41,55,.06);position:relative;overflow:hidden}
+  .sec::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(#0f2b5b,#1d5bbf)}
+  .sec h2{font-size:20px;color:#111827;margin-bottom:14px;padding-left:8px}
+  .sec h3{font-size:16px;color:#0f2b5b;margin:18px 0 8px}
+  .sec p{font-size:14.5px;color:#374151;margin-bottom:10px}
+  .sec ul{margin:8px 0 12px 22px;font-size:14.5px;color:#374151}
+  .sec ul li{margin-bottom:6px}
+  .sec b{color:#0f2b5b}
+
+  /* 提示词 / 代码块 */
+  .prompt{background:#fffbea;border:1px solid #fde68a;border-left:4px solid #e8890c;border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px;color:#7c5e10}
+  .prompt b{color:#b45309}
+  pre{background:#1e293b;color:#e2e8f0;border-radius:12px;padding:18px 20px;overflow-x:auto;margin:12px 0;font-size:13.5px;font-family:Consolas,"Courier New",monospace;line-height:1.6}
+  pre code{color:inherit}
+  code{background:#eef2ff;color:#1d4ed8;padding:1px 7px;border-radius:5px;font-family:Consolas,monospace;font-size:13px}
+  pre code{background:none;padding:0;color:inherit}
+
+  /* 结果标签 */
+  .tag{display:inline-block;padding:3px 12px;border-radius:999px;font-size:13px;font-weight:bold;margin-right:8px}
+  .tag-ok{background:#dcfce7;color:#15803d;border:1px solid #16a34a}
+  .tag-fail{background:#fee2e2;color:#b91c1c;border:1px solid #ef4444}
+
+  /* 表格 */
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid #e5e7eb;padding:10px 14px;text-align:left}
+  th{background:#f0f4ff;color:#0f2b5b}
+  tr:nth-child(even) td{background:#fafbfc}
+
+  /* 返回链接 */
+  .back{text-align:center;margin-top:28px}
+  .back a{display:inline-block;text-decoration:none;color:#0f2b5b;font-size:14.5px;font-weight:bold;background:#fff;border:1px solid #dbe4ff;border-radius:999px;padding:10px 26px;margin:0 8px;transition:transform .2s,box-shadow .2s}
+  .back a:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(15,43,91,.15)}
+
+  footer{text-align:center;margin-top:30px;color:#9ca3af;font-size:13px;line-height:2}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <span class="badge">高 职 · 高 级 网 页 设 计 · 课 堂 任 务 记 录</span>
+    <h1>Swiper 课堂任务 · 第 6 点<b>「课堂任务 + 思政升华 三关进阶」</b>完成记录</h1>
+    <p>记录时间：2026-11-05 14:45:10 · 模型：DeepSeek-V4.1-Flash · 作答文件：<code style="background:rgba(255,255,255,.15);color:#ffd166">swiper-task.html</code></p>
+    <p>第 4 点学生任务原 4 个任务（拖动、圆点箭头、自动播放、六种效果）均已完成并通过验证，本记录聚焦第 6 点的三关进阶。</p>
+  </div>
+
+  <!-- 任务一 -->
+  <div class="sec">
+    <h2>任务一 · 提示词工程师（让 AI 听懂需求）</h2>
+    <p><b>目标</b>：让 AI 输出 <code>#wySw4</code> 的配置——循环、自动播放 3.2 秒、拖动后不停、圆点可点、初始 <code>cube</code>。</p>
+
+    <h3>第 1 轮提示词（故意写得比较简单）</h3>
+    <div class="prompt">帮我写 <code>#wySw4</code> 的 Swiper 初始化配置：要循环播放、自动播放、底部圆点，效果用 cube。</div>
+
+    <h3>第 1 轮 AI 回答</h3>
+<pre><code>var swiper = new Swiper('#wySw4', {
+  loop: true,
+  effect: 'cube',
+  autoplay: true,
+  pagination: { clickable: true }
+});</code></pre>
+
+    <p><span class="tag tag-fail">验证结果：不通过</span>圆点没有渲染（<code>pagination</code> 缺少 <code>el</code>）；自动播放用默认 3000ms 且 <code>disableOnInteraction</code> 默认 <code>true</code>，手动拖动后自动播放会停止，不符合"3.2 秒 + 拖动后继续"。</p>
+
+    <h3>第 2 轮提示词（补齐约束）</h3>
+    <div class="prompt">请只使用 Swiper 11，初始化 <code>#wySw4</code>：<code>loop: true</code>；<code>autoplay</code> 的 <code>delay: 3200</code>、<code>disableOnInteraction: false</code>；分页器指定 <code>el: '#wyPag4'</code> 且 <code>clickable: true</code>；<code>effect: 'cube'</code>。请给出可直接粘贴的完整配置。</div>
+
+    <h3>第 2 轮 AI 回答（最终采用）</h3>
+<pre><code>var lyc_0817_swiper4 = new Swiper('#wySw4', {
+  loop: true,
+  speed: 800,
+  effect: 'cube',
+  grabCursor: true,
+  autoplay: { delay: 3200, disableOnInteraction: false },
+  pagination: { el: '#wyPag4', clickable: true }
+});</code></pre>
+
+    <p><span class="tag tag-ok">验证结果：通过</span>实测参数：<code>loop: true</code>、<code>delay: 3200</code>、<code>disableOnInteraction: false</code>、<code>pagination.el: '#wyPag4'</code>、<code>clickable: true</code>、<code>effect: 'cube'</code>、分页圆点 6 个、自动播放运行中；<code>cube</code> 转动画面见截图。</p>
+
+    <p><b>一句话结论</b>：两轮提示词补齐了容器选择器、动画时长与交互后继续播放这三条约束后，配置与需求完全一致。</p>
+    <p>验证截图：<code>.screenshots/swiper-task/task1-verify-cube.png</code></p>
+  </div>
+
+  <!-- 任务二 -->
+  <div class="sec">
+    <h2>任务二 · 仿写官方 creative 特效（课堂未讲的第 7 种 effect）</h2>
+    <p><b>参考文件</b>：<code>swiper/demo/257-effect-creative.html</code>（Swiper 11 官方 creative 示例）。</p>
+
+    <h3>官方示例要点</h3>
+<pre><code>effect: 'creative',
+creativeEffect: {
+  prev: { shadow: true, translate: [0, 0, -400] },
+  next: { translate: ['100%', 0, 0] }
+}</code></pre>
+
+    <h3>本次实现（第 7 个按钮「creative 电影墙」）</h3>
+    <p>按钮：<code>&lt;button data-fx="creative"&gt;creative 电影墙（课堂未讲·拓展）&lt;/button&gt;</code></p>
+    <p>配置：在 <code>lyc_0817_config4(effect)</code> 中按 effect 追加 <code>creativeEffect</code>，并通过原有的"销毁 → 重建"逻辑生效。</p>
+<pre><code>if (lyc_0817_effect === 'creative') {
+  lyc_0817_cfg.creativeEffect = {
+    prev: {
+      shadow: true,
+      origin: 'center left',
+      translate: ['-35%', 0, -250],   // 左移、后退到 z 轴 -250
+      rotate: [0, 12, -10],           // 带一点侧向角度
+      scale: 0.75,                    // 缩小
+      opacity: 0.65
+    },
+    next: {
+      translate: ['100%', 0, 0],      // 从右侧画框外进入
+      scale: 1.15                     // 放大入场
+    }
+  };
+}</code></pre>
+
+    <p><span class="tag tag-ok">验证结果：通过</span>效果按钮共 7 个，<code>effect</code> 为 <code>creative</code>，<code>prev/next</code> 参数生效，分页圆点保持 6 个；动画中间帧可见"上一张缩小左移带角度、下一张从右侧放大进入"，截图见 <code>task2-creative.png</code>。</p>
+
+    <h3>prev / next 的 transform 各控制什么？</h3>
+    <ul>
+      <li><b>prev</b>：控制<b>正在离场的上一张</b>在切换过程中的终态——<code>translate</code> 决定位移（<code>['-35%', 0, -250]</code> 表示向左 35%、后退 250px）、<code>rotate</code> 决定旋转角度、<code>scale</code> 决定缩小比例、<code>opacity</code> 决定淡出程度，<code>origin</code> 决定以哪个点为变换中心。</li>
+      <li><b>next</b>：控制<b>即将入场的下一张</b>在进场前的位置与形态——<code>translate: ['100%', 0, 0]</code> 表示先停在画框右侧一整屏外，<code>scale: 1.15</code> 表示从放大状态收回到原始大小；随着切换进度推进，两者的 transform 会插值回到默认状态（<code>translate 0</code>、<code>scale 1</code>、<code>opacity 1</code>）。</li>
+    </ul>
+    <p>验证截图：<code>.screenshots/swiper-task/task2-creative.png</code></p>
+  </div>
+
+  <!-- 任务三 -->
+  <div class="sec">
+    <h2>任务三 · 综合创作 + 技术答辩（超级加分项）</h2>
+
+    <h3>① 第六件展品「爱达·魔都号」</h3>
+    <ul>
+      <li>图片：AI 生成（横版 16:9，最终 1280×720，约 184KB），保存为 <code>swiper-imgs/aida_modu.jpg</code>。</li>
+      <li>生图提示词要点：<code>photorealistic aerial photograph of "Adora Magic City" (爱达·魔都号), China's first domestically built large cruise ship, sailing on deep blue ocean at golden hour, 16:9 landscape, cinematic travel photography, no text</code>。</li>
+      <li>四个演示台均补上第六张 slide（每台 6 张，圆点同步变为 6 个），slide 结构与原有展品一致。</li>
+    </ul>
+<pre><code>&lt;div class="swiper-slide"&gt;
+  &lt;img src="swiper-imgs/aida_modu.jpg" alt="爱达·魔都号"&gt;
+  &lt;div class="wy-cap"&gt;&lt;h3&gt;爱达·魔都号&lt;/h3&gt;&lt;p&gt;第六件展品 · AI 生成图片&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    <p><span class="tag tag-ok">验证结果：通过</span>四个轮播 slide 数量均为 6；第六张图片加载成功（<code>naturalWidth 1280 / naturalHeight 720</code>，16:9）；截图见 <code>task3-aida-slide.png</code>。</p>
+
+    <h3>② 新增一项课堂没讲的能力：键盘方向键切换（Keyboard 模块）</h3>
+    <p>选择理由：Swiper 的 <code>zoom</code> 需要手势与容器配置、<code>mousewheel</code> 会抢占整页滚动，而 <code>keyboard</code> 改动小、对课堂展示友好，也便于现场答辩演示。</p>
+<pre><code>keyboard: {
+  enabled: true,
+  onlyInViewport: true   // 只在轮播进入可视区时响应，避免影响整页滚动
+}</code></pre>
+    <p><span class="tag tag-ok">验证结果：通过</span>先暂停自动播放排除干扰，按 <code>→</code> 后 <code>realIndex</code> 从 0 → 1；<code>onlyInViewport</code> 保证页面滚动时不误触。该能力仅挂在 <code>#wySw4</code>，不影响其它三个演示台。</p>
+
+    <h3>③ 与 AI 的关键对话记录（摘要）</h3>
+    <ul>
+      <li><b>提示词</b>："给 <code>#wySw4</code> 增加第 7 个按钮，点击后切换到 Swiper 的 creative 效果，上一张缩小左移、下一张放大进入。"<br><b>AI 回答</b>：给出 <code>creativeEffect.prev/next</code> 配置，并提醒必须沿用"销毁旧实例再重建"的切换流程，不能只改参数。</li>
+      <li><b>提示词</b>："生成一张爱达·魔都号邮轮的横版 16:9 图片，写实摄影风格，用于轮播第六张展品。"<br><b>AI 回答</b>：生成 <code>aida_modu.jpg</code>（2560×1440），并建议压缩到 1280×720 以减小体积。</li>
+      <li><b>提示词</b>："在效果实验台上加一个课堂上没讲过的 Swiper 能力，要求不干扰页面滚动。"<br><b>AI 回答</b>：推荐 <code>keyboard</code> + <code>onlyInViewport: true</code>，给出配置并说明与自动播放的共存方式。</li>
+    </ul>
+
+    <h3>④ 答辩准备（四问速答）</h3>
+    <ul>
+      <li><b>为什么 creative 不用改 HTML？</b>它仍然基于标准三层结构，只是把切换动画交给 <code>creativeEffect</code> 计算 transform。</li>
+      <li><b>为什么换效果要 destroy 再 new？</b>Swiper 在初始化时就把 effect 对应的模块、样式和参数固定到实例上，运行期改 <code>params.effect</code> 不会重新装配效果模块，只能销毁重建。</li>
+      <li><b>键盘会不会影响其它轮播？</b>不会，配置只写在 <code>#wySw4</code> 的实例上，<code>onlyInViewport</code> 还限定只有它出现在视口时才响应。</li>
+      <li><b>新增第六张图会让页面变慢吗？</b>图片已压缩为 1280×720、约 184KB，且与原有图片同目录本地加载，不依赖外部 CDN。</li>
+    </ul>
+  </div>
+
+  <!-- 交付物清单 -->
+  <div class="sec">
+    <h2>交付物清单</h2>
+    <table>
+      <thead><tr><th>文件</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><code>swiper-task.html</code></td><td>已完成全部任务与三关进阶的可运行页面</td></tr>
+        <tr><td><code>swiper-task-record.html</code></td><td>本记录页（提示词 / creative 讲解 / 对话 / 答辩）</td></tr>
+        <tr><td><code>swiper-imgs/aida_modu.jpg</code></td><td>AI 生成的第六件展品图片（1280×720）</td></tr>
+        <tr><td><code>.screenshots/swiper-task/task1-verify-cube.png</code></td><td>任务一 cube 验证截图</td></tr>
+        <tr><td><code>.screenshots/swiper-task/task2-creative.png</code></td><td>任务二 creative 动画中间帧</td></tr>
+        <tr><td><code>.screenshots/swiper-task/task3-aida-slide.png</code></td><td>任务三 第六件展品截图</td></tr>
+      </tbody>
+    </table>
+    <p><b>注</b>：第 4 点任务 4 要求"初始效果为 slide"，因此页面打开时 <code>#wySw4</code> 仍为 <code>slide</code>，<code>cube</code> 与 <code>creative</code> 通过按钮切换验证（任务一的 cube 配置已单独粘贴验证并截图存档）。</p>
+  </div>
+
+  <div class="back">
+    <a href="swiper-task.html">← 返回 Swiper 课堂任务页</a>
+    <a href="index.html">← 返回课堂实践中心</a>
+  </div>
+
+  <footer>Swiper 课堂任务 · 第 6 点三关进阶完成记录 · 高级网页设计 · 2026-2027-1</footer>
+</div>
+</body>
+</html>
