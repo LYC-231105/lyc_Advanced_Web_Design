@@ -3,214 +3,382 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Swiper 课堂任务 · 第 6 点「三关进阶」完成记录</title>
+<title>Swiper 三关进阶 · 提示词与 AI 对话记录 · 验证与答辩</title>
 <!--
-  lyc_0817 · 2026-11-08 14:30:00 · DeepSeek-V4.1-Flash · Swiper 三关进阶记录页 ——
-  将 swiper-task-record.md 转为可直接在浏览器阅读的 HTML 页面，作为课堂任务第 6 点
-  （任务一 提示词工程师 / 任务二 creative 仿写 / 任务三 综合创作 + 答辩）的访问入口。
-  内容与 .md 原文一致，样式沿用 swiper-task.html 的深蓝科技风。
+  lyc_0817 · 2026-11-09 14:40:00 · Claude Opus 5.5 · Swiper 三关进阶记录页（返工重写）——
+  课堂任务「任务一 提示词工程师 / 任务二 creative 仿写 / 任务三 综合创作 + 技术答辩」的提示词访问入口。
+  收录每轮提示词与 AI 原始回答（回答方：Claude Haiku 5.5，逐字保留，只省略与问题无关的部分并注明），
+  亲自粘贴进 swiper-task.html 后的验证截图与一句话结论，以及三组答辩抽问的回答。
+  对应页面：swiper-task.html（「三关进阶 · 现场验证与答辩台」可现场演示）。
 -->
 <style>
+  /* lyc_0817 · 2026-11-09 14:40:00 · Claude Opus 5.5 · 记录页样式 —— 沿用 swiper-task.html 的深蓝科技风，Flex 布局 */
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:#f6f8fc;color:#1f2937;line-height:1.8}
-  .wrap{max-width:960px;margin:0 auto;padding:40px 20px 60px}
-
-  /* 头部 */
-  .head{background:linear-gradient(135deg,#0f2b5b,#1d5bbf);border-radius:20px;padding:34px 38px;color:#fff;margin-bottom:24px;box-shadow:0 12px 30px rgba(15,43,91,.3)}
-  .head .badge{display:inline-block;padding:5px 14px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);font-size:13px;letter-spacing:2px;margin-bottom:14px}
-  .head h1{font-size:26px;letter-spacing:1px;line-height:1.5}
-  .head h1 b{color:#ffd166}
-  .head p{margin-top:12px;font-size:14px;color:#d9e3f5}
-
-  /* 章节 */
-  .sec{background:#fff;border-radius:18px;padding:28px 32px;margin-bottom:22px;border:1px solid #e8ecf5;box-shadow:0 4px 14px rgba(31,41,55,.06);position:relative;overflow:hidden}
-  .sec::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(#0f2b5b,#1d5bbf)}
-  .sec h2{font-size:20px;color:#111827;margin-bottom:14px;padding-left:8px}
-  .sec h3{font-size:16px;color:#0f2b5b;margin:18px 0 8px}
-  .sec p{font-size:14.5px;color:#374151;margin-bottom:10px}
-  .sec ul{margin:8px 0 12px 22px;font-size:14.5px;color:#374151}
-  .sec ul li{margin-bottom:6px}
-  .sec b{color:#0f2b5b}
-
-  /* 提示词 / 代码块 */
-  .prompt{background:#fffbea;border:1px solid #fde68a;border-left:4px solid #e8890c;border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px;color:#7c5e10}
-  .prompt b{color:#b45309}
-  pre{background:#1e293b;color:#e2e8f0;border-radius:12px;padding:18px 20px;overflow-x:auto;margin:12px 0;font-size:13.5px;font-family:Consolas,"Courier New",monospace;line-height:1.6}
-  pre code{color:inherit}
-  code{background:#eef2ff;color:#1d4ed8;padding:1px 7px;border-radius:5px;font-family:Consolas,monospace;font-size:13px}
+  :root{--lyc_0817_navy:#0f2b5b;--lyc_0817_blue:#1d5bbf;--lyc_0817_orange:#e8890c}
+  body{font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:#f6f8fc;color:#1f2937;line-height:1.85}
+  .lyc_0817_wrap{max-width:980px;margin:0 auto;padding:36px 20px 60px}
+  .lyc_0817_head{background:linear-gradient(135deg,var(--lyc_0817_navy),var(--lyc_0817_blue));border-radius:20px;padding:32px 36px;color:#fff;margin-bottom:18px;box-shadow:0 12px 30px rgba(15,43,91,.3)}
+  .lyc_0817_head .lyc_0817_badge{display:inline-block;padding:4px 14px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);font-size:13px;letter-spacing:2px;margin-bottom:12px}
+  .lyc_0817_head h1{font-size:25px;line-height:1.5}
+  .lyc_0817_head h1 b{color:#ffd166}
+  .lyc_0817_head p{margin-top:10px;font-size:14px;color:#d9e3f5}
+  .lyc_0817_toc{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+  .lyc_0817_toc a{flex:1 1 200px;text-decoration:none;background:#fff;border:1px solid #dbe4ff;border-radius:12px;padding:12px 16px;color:var(--lyc_0817_navy);font-size:14px;font-weight:bold}
+  .lyc_0817_toc a small{display:block;font-weight:normal;color:#64748b;font-size:12.5px}
+  .lyc_0817_toc a:hover{box-shadow:0 6px 16px rgba(15,43,91,.12)}
+  .lyc_0817_sec{background:#fff;border-radius:18px;padding:26px 30px;margin-bottom:22px;border:1px solid #e8ecf5;box-shadow:0 4px 14px rgba(31,41,55,.06);position:relative;overflow:hidden}
+  .lyc_0817_sec::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(var(--lyc_0817_navy),var(--lyc_0817_blue))}
+  .lyc_0817_sec h2{font-size:20px;color:#111827;margin-bottom:10px}
+  .lyc_0817_sec h3{font-size:16px;color:var(--lyc_0817_navy);margin:22px 0 8px;padding-top:12px;border-top:1px dashed #e5e7eb}
+  .lyc_0817_sec h4{font-size:14.5px;color:#334155;margin:14px 0 6px}
+  .lyc_0817_sec p,.lyc_0817_sec li{font-size:14.5px;color:#374151}
+  .lyc_0817_sec p{margin-bottom:8px}
+  .lyc_0817_sec ul,.lyc_0817_sec ol{margin:6px 0 10px 22px}
+  .lyc_0817_sec li{margin-bottom:5px}
+  .lyc_0817_sec b{color:var(--lyc_0817_navy)}
+  code{background:#eef2ff;color:#1d4ed8;padding:1px 6px;border-radius:5px;font-family:Consolas,monospace;font-size:13px}
+  pre{background:#1e293b;color:#e2e8f0;border-radius:12px;padding:16px 18px;overflow-x:auto;margin:10px 0;font-size:13px;font-family:Consolas,"Courier New",monospace;line-height:1.65}
   pre code{background:none;padding:0;color:inherit}
-
-  /* 结果标签 */
-  .tag{display:inline-block;padding:3px 12px;border-radius:999px;font-size:13px;font-weight:bold;margin-right:8px}
-  .tag-ok{background:#dcfce7;color:#15803d;border:1px solid #16a34a}
-  .tag-fail{background:#fee2e2;color:#b91c1c;border:1px solid #ef4444}
-
-  /* 表格 */
-  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
-  th,td{border:1px solid #e5e7eb;padding:10px 14px;text-align:left}
-  th{background:#f0f4ff;color:#0f2b5b}
-  tr:nth-child(even) td{background:#fafbfc}
-
-  /* 返回链接 */
-  .back{text-align:center;margin-top:28px}
-  .back a{display:inline-block;text-decoration:none;color:#0f2b5b;font-size:14.5px;font-weight:bold;background:#fff;border:1px solid #dbe4ff;border-radius:999px;padding:10px 26px;margin:0 8px;transition:transform .2s,box-shadow .2s}
-  .back a:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(15,43,91,.15)}
-
-  footer{text-align:center;margin-top:30px;color:#9ca3af;font-size:13px;line-height:2}
+  .lyc_0817_prompt{background:#fffbea;border:1px solid #fde68a;border-left:4px solid var(--lyc_0817_orange);border-radius:10px;padding:12px 16px;margin:10px 0;font-size:14px;color:#7c5e10;white-space:pre-wrap}
+  .lyc_0817_prompt::before{content:"🧑‍🎓 我的提示词";display:block;font-weight:bold;color:#b45309;margin-bottom:4px}
+  .lyc_0817_ai{background:#f1f5ff;border:1px solid #c7d8f8;border-left:4px solid var(--lyc_0817_blue);border-radius:10px;padding:12px 16px;margin:10px 0;font-size:14px;color:#1e3a8a}
+  .lyc_0817_ai::before{content:"🤖 AI 回答（原文）";display:block;font-weight:bold;color:var(--lyc_0817_blue);margin-bottom:4px}
+  .lyc_0817_ai p,.lyc_0817_ai li{color:#1e3a8a;font-size:13.8px}
+  .lyc_0817_tag{display:inline-block;padding:2px 12px;border-radius:999px;font-size:13px;font-weight:bold;margin-right:8px}
+  .lyc_0817_ok{background:#dcfce7;color:#15803d;border:1px solid #16a34a}
+  .lyc_0817_bad{background:#fee2e2;color:#b91c1c;border:1px solid #ef4444}
+  .lyc_0817_qa{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px 16px;margin:10px 0}
+  .lyc_0817_qa .lyc_0817_q{font-weight:bold;color:#b45309;margin-bottom:4px}
+  .lyc_0817_shot{margin:12px 0;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;background:#f8fafc}
+  .lyc_0817_shot img{display:block;width:100%}
+  .lyc_0817_shot span{display:block;font-size:12.5px;color:#64748b;padding:6px 12px}
+  .lyc_0817_shots{display:flex;flex-wrap:wrap;gap:12px}
+  .lyc_0817_shots .lyc_0817_shot{flex:1 1 300px}
+  .lyc_0817_conclusion{background:#fffbea;border:1px solid #fde68a;border-radius:10px;padding:10px 14px;color:#7c5e10;font-size:14px;margin:8px 0}
+  .lyc_0817_list{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .lyc_0817_list div{display:flex;gap:12px;font-size:14px;border-bottom:1px solid #f1f5f9;padding:6px 0}
+  .lyc_0817_list div code{flex:none}
+  .lyc_0817_back{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:24px}
+  .lyc_0817_back a{text-decoration:none;color:var(--lyc_0817_navy);font-size:14.5px;font-weight:bold;background:#fff;border:1px solid #dbe4ff;border-radius:999px;padding:10px 24px}
+  footer{text-align:center;margin-top:28px;color:#9ca3af;font-size:13px}
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="lyc_0817_wrap">
 
-  <div class="head">
-    <span class="badge">高 职 · 高 级 网 页 设 计 · 课 堂 任 务 记 录</span>
-    <h1>Swiper 课堂任务 · 第 6 点<b>「课堂任务 + 思政升华 三关进阶」</b>完成记录</h1>
-    <p>记录时间：2026-11-05 14:45:10 · 模型：DeepSeek-V4.1-Flash · 作答文件：<code style="background:rgba(255,255,255,.15);color:#ffd166">swiper-task.html</code></p>
-    <p>第 4 点学生任务原 4 个任务（拖动、圆点箭头、自动播放、六种效果）均已完成并通过验证，本记录聚焦第 6 点的三关进阶。</p>
+  <div class="lyc_0817_head">
+    <span class="lyc_0817_badge">高 职 · 高 级 网 页 设 计 · 三 关 进 阶 记 录</span>
+    <h1>Swiper 大国重器光影展 · <b>提示词与 AI 对话记录</b>（任务一 / 二 / 三）</h1>
+    <p>作答页面：<code style="background:rgba(255,255,255,.15);color:#ffd166">swiper-task.html</code>（页面底部「三关进阶 · 现场验证与答辩台」可现场演示每项验证）　·　记录整理：2026-11-09</p>
+    <p>说明：下面的「AI 回答」都是把提示词真实发给 AI（Claude Haiku 5.5）后拿到的原始回答，未改动措辞；回答太长的地方只删去与问题无关的段落，并标注「……（略）」。</p>
   </div>
 
-  <!-- 任务一 -->
-  <div class="sec">
-    <h2>任务一 · 提示词工程师（让 AI 听懂需求）</h2>
-    <p><b>目标</b>：让 AI 输出 <code>#wySw4</code> 的配置——循环、自动播放 3.2 秒、拖动后不停、圆点可点、初始 <code>cube</code>。</p>
+  <div class="lyc_0817_toc">
+    <a href="#lyc_0817_task1">任务一 · 提示词工程师<small>两轮提示词 · 粘贴验证 · 答辩三问</small></a>
+    <a href="#lyc_0817_task2">任务二 · creative 电影墙<small>读官方 demo 257 · 追问 prev/next · 20 度</small></a>
+    <a href="#lyc_0817_task3">任务三 · 综合创作 + 答辩<small>爱达·魔都号 · 键盘控制 · 答辩四连问</small></a>
+  </div>
 
-    <h3>第 1 轮提示词（故意写得比较简单）</h3>
-    <div class="prompt">帮我写 <code>#wySw4</code> 的 Swiper 初始化配置：要循环播放、自动播放、底部圆点，效果用 cube。</div>
+  <!-- ============ 任务一 ============ -->
+  <div class="lyc_0817_sec" id="lyc_0817_task1">
+    <h2>任务一 · 提示词工程师：让 AI 听懂需求 ⭐⭐</h2>
+    <p><b>需求拆解</b>：让 AI 生成 <code>new Swiper('#wySw4', {...})</code> 配置，要求 ① 无缝循环；② 每 3.2 秒自动翻页，手动操作后不停止；③ 圆点分页器可点击；④ 初始效果为 cube。</p>
 
-    <h3>第 1 轮 AI 回答</h3>
-<pre><code>var swiper = new Swiper('#wySw4', {
+    <h3>第 1 轮提示词（写得比较随意，故意没说细节）</h3>
+    <div class="lyc_0817_prompt">帮我写一个 Swiper 轮播的初始化代码，容器是 #wySw4，要能循环播放、自动翻页、下面有小圆点，效果用立方体那种。</div>
+    <div class="lyc_0817_ai">
+      <p>这段代码把 <code>#wySw4</code> 初始化成立方体（cube）效果的轮播，能循环播放、自动翻页，下面有可以点击的小圆点。</p>
+      <p><b>HTML 结构</b>（Swiper 需要固定的三层结构，小圆点容器要放在 <code>#wySw4</code> 里面）：</p>
+<pre><code>&lt;link rel="stylesheet" href="css/swiper-bundle.min.css"&gt;
+
+&lt;div class="swiper" id="wySw4"&gt;
+  &lt;div class="swiper-wrapper"&gt;
+    &lt;div class="swiper-slide"&gt;&lt;img src="img/swiper/1.jpg" alt="轮播图1"&gt;&lt;/div&gt;
+    &lt;div class="swiper-slide"&gt;&lt;img src="img/swiper/2.jpg" alt="轮播图2"&gt;&lt;/div&gt;
+    &lt;div class="swiper-slide"&gt;&lt;img src="img/swiper/3.jpg" alt="轮播图3"&gt;&lt;/div&gt;
+    &lt;div class="swiper-slide"&gt;&lt;img src="img/swiper/4.jpg" alt="轮播图4"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- 分页小圆点 --&gt;
+  &lt;div class="swiper-pagination"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script src="js/swiper-bundle.min.js"&gt;&lt;/script&gt;</code></pre>
+      <p><b>CSS</b>（立方体效果要求容器有明确的宽高）：</p>
+<pre><code>#wySw4 {
+  width: 300px;
+  height: 300px;
+}
+#wySw4 .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}</code></pre>
+      <p><b>JS 初始化</b>：</p>
+<pre><code>var lyc_0817_wySw4 = new Swiper('#wySw4', {
+  loop: true,                     // 循环播放
+  effect: 'cube',                 // 立方体翻转效果
+  grabCursor: true,               // 鼠标悬停时显示抓手光标
+  speed: 800,                     // 翻转一次用时（毫秒）
+  cubeEffect: {
+    shadow: true,                 // 立方体底部投影
+    slideShadows: true,           // 每一面的阴影
+    shadowOffset: 20,             // 投影偏移
+    shadowScale: 0.94             // 投影缩放
+  },
+  autoplay: {
+    delay: 3000,                  // 每 3 秒自动翻一页
+    disableOnInteraction: false,  // 用户拖动后继续自动播放
+    pauseOnMouseEnter: true       // 鼠标移上去时暂停
+  },
+  pagination: {
+    el: '#wySw4 .swiper-pagination', // 小圆点容器
+    clickable: true                  // 点击小圆点可以跳到对应的页
+  }
+});</code></pre>
+      <ul>
+        <li><b>宽高必须写死</b>：立方体效果的容器宽高要固定。宽度设成 100%、高度又没写时，翻转会变形或者看不见。</li>
+        <li>……（略：版本说明、资源本地化、script 放置位置等通用提示）</li>
+      </ul>
+    </div>
+    <h4>把第 1 轮代码亲自粘进页面验证</h4>
+    <p><span class="lyc_0817_tag lyc_0817_bad">不通过</span>粘贴后实测：<code>delay = 3000</code>，不是 3.2 秒；鼠标停在轮播上 5 秒，<code>autoplay.paused = true</code>，一直不翻页；附带的 CSS 把展台压成了 300×300 的小方块；附带的 HTML 图片路径 <code>img/swiper/1.jpg</code> 在项目里不存在。</p>
+    <div class="lyc_0817_shot"><img src=".screenshots/swiper-task/task1-round1-problem.png" alt="第 1 轮代码粘贴后展台变成 300×300"><span>截图：第 1 轮代码粘进页面后，展台被压成 300×300，鼠标悬停后自动播放暂停</span></div>
+    <div class="lyc_0817_conclusion">一句话结论：第 1 轮 AI 只“猜对了一半”，3.2 秒没写对，悬停暂停违反了“手动操作后不停止”，附带的 HTML/CSS 还会破坏现有页面，所以不能直接采用。</div>
+
+    <h3>第 2 轮提示词（逐条写清楚数值、容器和限制）</h3>
+    <div class="lyc_0817_prompt">你上一版有几处不符合我的需求，我说清楚一点：
+1. 页面的 HTML 和 CSS 已经写好了，不要动，也不要改宽高、图片路径，我只要一段 `new Swiper('#wySw4', {...})`，可以直接粘到页面底部的 &lt;script&gt; 里。页面里分页器的容器是 `&lt;div class="swiper-pagination" id="wyPag4"&gt;&lt;/div&gt;`，请直接用 `#wyPag4`。
+2. 必须是无缝循环 loop。
+3. 自动翻页间隔是 3.2 秒，也就是 3200 毫秒，不是 3 秒。
+4. 用户手动拖动、点圆点之后自动播放不能停；鼠标放上去也不要暂停（不要加 pauseOnMouseEnter）。
+5. 圆点分页器要能点击跳转。
+6. 初始效果是 cube（立方体），切换速度 800 毫秒。
+请只给最终可粘贴的 JS，并逐条说明每个需求对应哪个参数。</div>
+    <div class="lyc_0817_ai">
+      <p>这一版只给可以直接粘贴的 JS，放到页面底部的 <code>&lt;script&gt;</code> 里就能用，HTML 和 CSS 都不用改：</p>
+<pre><code>var lyc_0817_wySw4 = new Swiper('#wySw4', {
   loop: true,
   effect: 'cube',
-  autoplay: true,
-  pagination: { clickable: true }
+  speed: 800,
+  autoplay: {
+    delay: 3200,
+    disableOnInteraction: false
+  },
+  pagination: {
+    el: '#wyPag4',
+    clickable: true
+  }
 });</code></pre>
+      <ol>
+        <li><b>只初始化，不动页面</b>：代码里没有任何宽高或图片路径的设置，只调用 <code>new Swiper('#wySw4', {...})</code>。分页器用的是 <code>pagination.el: '#wyPag4'</code>，直接指向你页面里那个 <code>&lt;div class="swiper-pagination" id="wyPag4"&gt;</code>。</li>
+        <li><b>无缝循环</b>：<code>loop: true</code>。播到最后一张后会接着回到第一张，中间不会倒退。</li>
+        <li><b>3.2 秒自动翻页</b>：<code>autoplay.delay: 3200</code>，单位是毫秒。</li>
+        <li><b>拖动、点圆点后不停，鼠标悬停也不暂停</b>：<code>autoplay.disableOnInteraction: false</code> 管手动操作。它的默认值是 <code>true</code>，也就是你一拖或一点，自动播放就停了。设成 <code>false</code> 后会继续播。鼠标悬停这条，我按你的要求没有写 <code>pauseOnMouseEnter</code>。它的默认值是 <code>false</code>，所以鼠标放上去不会暂停。</li>
+        <li><b>圆点可点击跳转</b>：<code>pagination.clickable: true</code>。</li>
+        <li><b>立方体效果，切换 800 毫秒</b>：<code>effect: 'cube'</code> 设定效果，<code>speed: 800</code> 设定每次切换用时。</li>
+      </ol>
+      <p>……（略：粘贴位置提示）</p>
+    </div>
 
-    <p><span class="tag tag-fail">验证结果：不通过</span>圆点没有渲染（<code>pagination</code> 缺少 <code>el</code>）；自动播放用默认 3000ms 且 <code>disableOnInteraction</code> 默认 <code>true</code>，手动拖动后自动播放会停止，不符合"3.2 秒 + 拖动后继续"。</p>
+    <h4>把第 2 轮代码亲自粘进页面验证</h4>
+    <p>第 2 轮代码已原样粘进 <code>swiper-task.html</code> 的 <code>lyc_0817_config4()</code>（因为任务 4 的按钮要销毁重建，所以写成配置函数；初始化时传入 <code>'cube'</code>）。页面「需求验证面板」的「一键自测」会逐项读取实例参数，并实际操作轮播：</p>
+    <div class="lyc_0817_list">
+      <div><code>① 无缝循环</code><span>在第 6 张（最后一张）调用 <code>slideNext()</code>，来到第 1 张 ✅</span></div>
+      <div><code>② 3.2 秒 + 手动后不停</code><span><code>delay = 3200</code>、<code>disableOnInteraction = false</code>；模拟一次拖动后 <code>autoplay.running = true</code>，4.01 秒后又自动翻了一页（0.8 秒动画 + 3.2 秒停留）✅</span></div>
+      <div><code>③ 圆点可点击</code><span><code>el = #wyPag4</code>、<code>clickable = true</code>，共 6 个圆点；点击第 3 个后 <code>realIndex = 2</code> ✅</span></div>
+      <div><code>④ 初始 cube</code><span>页面一打开 <code>params.effect = 'cube'</code>，容器带 <code>swiper-cube</code> 类 ✅</span></div>
+    </div>
+    <div class="lyc_0817_shots">
+      <div class="lyc_0817_shot"><img src=".screenshots/swiper-task/task1-verify-panel.png" alt="需求验证面板 4 项全部通过"><span>截图：需求验证面板，4 项全部通过</span></div>
+      <div class="lyc_0817_shot"><img src=".screenshots/swiper-task/task1-cube-initial.png" alt="页面打开即为 cube 立方体"><span>截图：页面打开即为 cube，翻转中的立方体</span></div>
+    </div>
+    <div class="lyc_0817_conclusion">一句话结论：第 2 轮配置粘进页面后，cube 初始效果、无缝循环、可点击圆点、3.2 秒自动翻页且拖动后不停 4 项全部实测通过。</div>
 
-    <h3>第 2 轮提示词（补齐约束）</h3>
-    <div class="prompt">请只使用 Swiper 11，初始化 <code>#wySw4</code>：<code>loop: true</code>；<code>autoplay</code> 的 <code>delay: 3200</code>、<code>disableOnInteraction: false</code>；分页器指定 <code>el: '#wyPag4'</code> 且 <code>clickable: true</code>；<code>effect: 'cube'</code>。请给出可直接粘贴的完整配置。</div>
+    <h3>答辩抽问</h3>
+    <div class="lyc_0817_qa"><p class="lyc_0817_q">问：你的第一版提示词漏掉了哪个需求？</p>
+      <p>漏了三个：只说了“自动翻页”，没说 <b>3.2 秒</b>；没说<b>手动操作后不能停</b>；只说“下面有小圆点”，没说<b>圆点要能点击</b>。另外也没交代页面已有的分页器 <code>#wyPag4</code>，以及“只要 JS、别动 HTML/CSS”。</p></div>
+    <div class="lyc_0817_qa"><p class="lyc_0817_q">问：你是怎么在第二轮里“说清楚”的？</p>
+      <p>① 每个需求单独编号，一条一个要求；② 写出具体数值和单位：“3.2 秒，也就是 3200 毫秒，不是 3 秒”；③ 把容器写死：分页器直接用 <code>#wyPag4</code>；④ 把反面要求也写出来：鼠标悬停也不要暂停，不要加 <code>pauseOnMouseEnter</code>；⑤ 限定输出范围：只要一段可粘贴的 <code>new Swiper</code>，并逐条说明每个需求对应哪个参数，方便我核对。</p></div>
+    <div class="lyc_0817_qa"><p class="lyc_0817_q">问：AI 第一次给的代码错在哪？</p>
+      <p>① <code>delay: 3000</code>，是 3 秒，不是 3.2 秒；② 自作主张加了 <code>pauseOnMouseEnter: true</code>，鼠标一放上去自动播放就暂停（实测 5 秒都不翻页），违反“手动操作后不停止”；③ 附带的 CSS 把 <code>#wySw4</code> 写死成 300×300，附带的 HTML 图片路径 <code>img/swiper/1.jpg</code> 根本不存在，照抄会把页面弄坏。<code>disableOnInteraction: false</code> 和 <code>clickable: true</code> 这两项它碰巧写对了，但那是它自己猜的，我的提示词里并没有要求，所以不能指望下次也猜对。</p></div>
+  </div>
 
-    <h3>第 2 轮 AI 回答（最终采用）</h3>
-<pre><code>var lyc_0817_swiper4 = new Swiper('#wySw4', {
+  <!-- ============ 任务二 ============ -->
+  <div class="lyc_0817_sec" id="lyc_0817_task2">
+    <h2>任务二 · creative 仿写：课堂没讲，AI 教你 ⭐⭐⭐</h2>
+    <p><b>官方示例</b>：<code>swiper/demo/257-effect-creative.html</code> 里有 6 个 creative 写法，共同点都是 <code>effect: "creative"</code> 加 <code>creativeEffect: { prev: {...}, next: {...} }</code>。例如第 1 个是 <code>prev: { shadow: true, translate: [0, 0, -400] }</code>、<code>next: { translate: ["100%", 0, 0] }</code>；第 6 个用 <code>origin</code> 加 <code>rotate: [0, 100, 0]</code> 做成翻书效果。</p>
+
+    <h3>第 1 次对话：请 AI 读懂 creativeEffect 并给出电影墙配置</h3>
+    <div class="lyc_0817_prompt">我在学 Swiper 11，课堂只讲了 slide/fade/cube/coverflow/flip/cards 六种 effect。官方示例 257-effect-creative.html 里有这样几段：（贴了第 1 个和第 6 个 creative 配置）
+我的页面里已经有一个轮播 #wySw4（loop、autoplay 3200ms、分页器 #wyPag4），有一排按钮用 data-fx 切换 effect（切换时先 destroy 再 new）。我想加第 7 个按钮「creative 电影墙」，效果要求：上一张缩小、往左移、并且带一点角度；下一张放大、从右边移进来，整体要像电影院选片墙那样能看到旁边的海报。请帮我写 creativeEffect 的配置，并解释一下 translate、rotate、scale 这几个数组/数值分别是什么意思。</div>
+    <div class="lyc_0817_ai">
+      <p><b>creative 是怎么动的</b>：你只需要描述两种状态——<code>prev</code>：上一张（在当前这张左边，Swiper 内部 progress = +1）应该长什么样；<code>next</code>：下一张（在当前这张右边，progress = -1）应该长什么样。当前这张始终是原样（progress = 0）。拖动或自动播放时，Swiper 按 progress 在原样和 <code>prev</code>/<code>next</code> 之间线性插值。</p>
+      <p>下一张放大、从右边移进来 → <code>next</code> 在右边时也是缩小的（<code>scale &lt; 1</code>，X 为正）。它滑到中间时会从 0.8 左右放大回 1，看起来就是“放大着移进来”。如果把 <code>next</code> 的 <code>scale</code> 设成大于 1，右边那张会比中间那张还大，不像选片墙。</p>
+<pre><code>var wyCreativeWall = {
+  limitProgress: 2,        // 左右各算 2 张；第 2 张的变换是第 1 张的 2 倍
+  perspective: true,
+  prev: {
+    translate: ["-50%", 0, -150], // X 往左移半个 slide 宽，Y 不动，Z 往屏幕里推 150px
+    rotate: [0, 18, -4],          // 绕 Y 转 18°，绕 Z 逆时针歪 4°
+    scale: 0.82, opacity: 0.75, origin: "center center"
+  },
+  next: {
+    translate: ["50%", 0, -150], rotate: [0, -18, 4],
+    scale: 0.82, opacity: 0.75, origin: "center center"
+  }
+};</code></pre>
+      <p><b>“看到旁边海报”的关键：CSS</b>——creative 会把所有 slide 叠到同一个位置，再分别做 transform，所以 <code>slidesPerView</code> 对它基本没用。要露出两边，比较稳的做法是：slide 保持 100% 宽、背景透明，里面的海报只占约 58% 宽并居中……</p>
+<pre><code>#wySw4.wy-fx-creative { height: 360px; }
+#wySw4.wy-fx-creative .swiper-slide img {
+  width: 58%; aspect-ratio: 2 / 3; object-fit: cover; ……
+}</code></pre>
+      <p>……（略：data-fx 切换函数，与我页面已有逻辑相同）</p>
+      <p><b>translate</b>：<code>[X, Y, Z]</code> 位移，写字符串可以用 "%"，相对于 slide 自身的宽或高；Z 只能写数字（px）。<b>rotate</b>：<code>[X, Y, Z]</code> 单位是度，绕 Y 轴是左右转、像开门。<b>scale</b>：1 是原尺寸，0.82 是缩到 82%。最终生成的顺序是 <code>translate3d() rotateX() rotateY() rotateZ() scale()</code>。</p>
+    </div>
+
+    <h4>我没有照搬的地方（AI 这一版的问题）</h4>
+    <ul>
+      <li><b>2:3 竖图裁切不适合本展</b>：我的展品图都是 16:9 横图，裁成 2:3 后天宫、魔都号的主体会被切掉；而且字幕条 <code>.wy-cap</code> 仍是整张宽，和缩窄后的海报对不上。</li>
+      <li><b>“slidesPerView 对 creative 基本没用”这句不准确</b>：我查了 <code>swiper/swiper-bundle.js</code> 第 9280 行，creative 在 <code>centeredSlides: true</code> 时会把 wrapper 平移到中间，所以我直接把 slide 缩到 62% 宽，配合 <code>slidesPerView: 'auto'</code> 和 <code>centeredSlides: true</code>，两侧自然露出相邻海报。</li>
+      <li><b>漏了 speed</b>：AI 的配置没有 <code>speed: 800</code>，我保留了原来的 800ms。</li>
+      <li><b>角度只给上一张</b>：需求说“上一张带角度，下一张放大进场”，所以我只给 <code>prev</code> 加了 Y 轴旋转，<code>next</code> 不转，只是先缩小、进场时放大；绕 Z 轴的歪斜去掉了，画面更平整。</li>
+    </ul>
+    <p><b>最终实现</b>（<code>swiper-task.html</code> → <code>lyc_0817_config4()</code>，按钮文字为「creative 电影墙」）：</p>
+<pre><code>if (lyc_0817_effect === 'creative') {
+  lyc_0817_cfg.slidesPerView = 'auto';      // 配合 CSS：#wySw4.lyc_0817_wall .swiper-slide{width:62%}
+  lyc_0817_cfg.centeredSlides = true;
+  lyc_0817_cfg.creativeEffect = {
+    limitProgress: 2,
+    prev: { shadow: true, origin: 'right center', translate: ['-72%', 0, -160],
+            rotate: [0, 30, 0], scale: 0.8, opacity: 0.85 },   // 上一张：缩小 + 左移 + 转 30°
+    next: { shadow: true, origin: 'left center',  translate: ['78%', 0, -100],
+            scale: 0.86 }                                      // 下一张：右侧等待，进场时 0.86 → 1 放大
+  };
+}</code></pre>
+    <div class="lyc_0817_shots">
+      <div class="lyc_0817_shot"><img src=".screenshots/swiper-task/task2-creative-wall.png" alt="电影墙静止画面"><span>截图：电影墙静止画面，左边是缩小、带角度的上一张，右边是等待进场的下一张</span></div>
+      <div class="lyc_0817_shot"><img src=".screenshots/swiper-task/task2-creative-moving.png" alt="电影墙切换中间帧"><span>截图：切换中间帧，当前张向左缩小转开，下一张从右侧放大进场</span></div>
+    </div>
+
+    <h3>第 2 次对话：实现后追问 prev / next 的 transform</h3>
+    <div class="lyc_0817_prompt">我按你的思路做完了，不过没用"slide 100% 宽 + 图片 58% 竖图"的办法——我的图片都是 16:9 横图……我实际用的是：给 slide 设 width:62%，配置里加 slidesPerView:'auto' + centeredSlides:true，并且保留了 speed:800。最终参数：（贴上面的 prev / next）
+1. 在我这套参数里，prev 和 next 的 transform 分别控制什么？切换过程中它们是怎么变化的？
+2. translate 里的百分号（'-72%'、'78%'）是相对谁计算的？是容器宽度还是 slide 自身宽度？
+3. 如果老师让我"把卡片改成转 20 度"，我应该改哪个数？改完画面会有什么变化？</div>
+    <div class="lyc_0817_ai">
+      <p><b>1.</b> <code>prev</code> 管当前卡左边的卡（progress = +1）。它往左移自身宽度的 72%，往屏幕里退 160px，以自己的右边缘为轴绕 Y 轴转 30°，缩到 0.8，不透明度 0.85，再叠一层阴影。<code>next</code> 管右边的卡（progress = -1）。它往右移 78%，往里退 100px，缩到 0.86，不旋转，也带阴影。切换的 800ms 里，Swiper 按 progress 做线性插值：当前卡往左走，progress 从 0 变到 1，参数从原样逐渐变成 <code>prev</code> 的值；右边的卡进场，progress 从 -1 变到 0，参数从 <code>next</code> 的值逐渐恢复原样，也就是一边放大一边移到中间。<code>limitProgress: 2</code>：两侧第 2 张按 2 倍计算，左 2 是 <code>-144%</code>、Z 退 320px、转 60°、scale 0.6……</p>
+      <p><b>2.</b> 相对 slide 自身的宽度，不是容器宽度。Swiper 生成的是 <code>translate3d(calc(-72% * progress), …)</code>，CSS 的 translate 百分比按元素自身尺寸算。你的 slide 宽 62%，所以 <code>-72%</code> 约等于容器宽度的 44.6%，<code>78%</code> 约等于容器宽度的 48.4%。Z 轴不能用百分比，只能写 px 数字。</p>
+      <p><b>3.</b> 把 <code>prev</code> 的 <code>rotate: [0, 30, 0]</code> 改成 <code>[0, 20, 0]</code>。改完左边的卡仍以右边缘为轴，但转得浅了，梯形透视变弱，看起来更接近正面；投影宽度会略微变宽（cos20° ≈ 0.94，cos30° ≈ 0.87），所以卡片会往左多露出一点；左 2 那张从 60° 变成 40°。如果老师的意思是两边都转 20 度，就在 <code>next</code> 里加 <code>rotate: [0, -20, 0]</code>。</p>
+    </div>
+
+    <h4>用自己的话写下：prev / next 的 transform 各控制什么？</h4>
+    <div class="lyc_0817_conclusion">
+      <b>prev</b> 管“刚看完、退到左边的那张”：translate 让它往左挪、往后退，rotate 让它像门一样侧过去，scale 让它变小。<b>next</b> 管“排在右边、下一个要上场的那张”：translate 让它先待在右边，scale 让它先小一点。切换时 Swiper 不是一下跳过去，而是按进度把当前张慢慢变成 prev 的样子，同时把 next 慢慢变回原样，所以看起来就是“上一张缩小左移带角度、下一张放大右移进场”。
+    </div>
+
+    <h3>答辩抽问</h3>
+    <div class="lyc_0817_qa"><p class="lyc_0817_q">问：transform 里的百分号是相对谁的？</p>
+      <p>相对<b>slide 自己</b>的尺寸：X 方向的 % 按 slide 自身宽度算，Y 方向的 % 按 slide 自身高度算，不是按容器算。证据：Swiper 源码把它拼成 <code>translate3d(calc(-72% * progress), …)</code> 写在 slide 元素自己的 <code>style.transform</code> 上，而 CSS 规定 translate 的百分比相对元素自身的边框盒。本页 slide 宽 62%，所以 <code>-72%</code> 实际约是容器宽度的 44.6%。Z 方向不能写 %，只能写像素。</p></div>
+    <div class="lyc_0817_qa"><p class="lyc_0817_q">问：改一个数值让卡片转 20 度试试？</p>
+      <p>把 <code>prev.rotate</code> 的第二个数（绕 Y 轴）从 30 改成 20。页面「任务二 · transform 调试台」点「一键改成 20 度」即可现场演示。实测上一张的 transform 变成 <code>… rotateY(20deg) … scale(0.8)</code>，左侧海报侧转变浅、更接近正面，露出的面积稍大；左边第 2 张从 60° 变成 40°。</p></div>
+    <div class="lyc_0817_shots">
+      <div class="lyc_0817_shot"><img src=".screenshots/swiper-task/task2-rotate-20.png" alt="rotate 改成 20 度后"><span>截图：rotate 改成 20 度后的电影墙</span></div>
+      <div class="lyc_0817_shot"><img src=".screenshots/swiper-task/task2-debug-panel.png" alt="调试台显示生效参数"><span>截图：调试台显示实例里实际生效的 creativeEffect（rotate: [0,20,0]）</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 任务三 ============ -->
+  <div class="lyc_0817_sec" id="lyc_0817_task3">
+    <h2>任务三 · 综合创作 + 技术答辩：超纲加分项 ⭐⭐⭐</h2>
+
+    <h3>① 第六件展品「爱达·魔都号」（AI 生成图片，横版 16:9）</h3>
+    <ul>
+      <li>图片：<code>swiper-imgs/aida_modu.jpg</code>，由 AI 生图生成，实测 <code>naturalWidth × naturalHeight = 1280 × 720</code>，正好 16:9。</li>
+      <li>生图提示词：<code>photorealistic aerial photograph of "Adora Magic City" (爱达·魔都号), China's first domestically built large cruise ship, sailing on deep blue ocean at golden hour, 16:9 landscape, cinematic travel photography, no text</code></li>
+      <li>四个演示台（<code>#wySw1</code>—<code>#wySw4</code>）都加了第 6 张 slide，结构与其他展品一致：<code>swiper-slide</code> → <code>img</code>（含 alt）+ <code>.wy-cap</code>（h3 标题 + p 简介）。实测四个轮播都是 6 张，圆点 6 个。</li>
+    </ul>
+<pre><code>&lt;div class="swiper-slide"&gt;
+  &lt;img src="swiper-imgs/aida_modu.jpg" alt="爱达·魔都号"&gt;
+  &lt;div class="wy-cap"&gt;&lt;h3&gt;爱达·魔都号&lt;/h3&gt;&lt;p&gt;2024 年 1 月商业首航 · 首艘国产大型邮轮&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <h3>② 新增课堂没讲过的能力：keyboard 键盘控制</h3>
+    <p>选择理由：mousewheel 会抢走整页滚动；zoom 要改 HTML 结构（加 <code>swiper-zoom-container</code>）；keyboard 只要加一段配置，答辩时按方向键就能现场演示。</p>
+    <h4>关键对话 1：请 AI 加键盘控制</h4>
+    <div class="lyc_0817_prompt">我有一个 Swiper 11 轮播页面（大国重器光影展），用的是 swiper-bundle.min.js。轮播 #wySw4 现在的配置是：（贴 loop / speed 800 / cube / autoplay 3200 / #wyPag4 配置）
+页面里一共有 4 个轮播。我想给 #wySw4 加上「键盘方向键 ← → 切换」的功能，课上没讲过。请给我加了键盘控制之后的完整配置，并解释新加的参数是什么作用。</div>
+    <div class="lyc_0817_ai">
+      <p>要实现「键盘 ← → 切换」，只需在配置里加一个 <code>keyboard</code> 参数。你用的是 <code>swiper-bundle.min.js</code>，它已经包含 Keyboard 模块，所以不用另外引入文件，也不用注册模块。</p>
+<pre><code>new Swiper('#wySw4', {
   loop: true,
   speed: 800,
   effect: 'cube',
   grabCursor: true,
   autoplay: { delay: 3200, disableOnInteraction: false },
-  pagination: { el: '#wyPag4', clickable: true }
+  pagination: { el: '#wyPag4', clickable: true },
+
+  // 新增：键盘控制
+  keyboard: {
+    enabled: true,          // 开启键盘控制
+    onlyInViewport: true,   // 只有轮播出现在可视区域内时才响应按键
+    pageUpDown: false       // 不让 PageUp / PageDown 键切换
+  }
 });</code></pre>
+      <ul>
+        <li><b>多个轮播会不会一起动？</b>键盘事件监听在整个页面上……只想控制 #wySw4，就只给它加 <code>keyboard</code>，其他 3 个不加；保留 <code>onlyInViewport: true</code>，这样 #wySw4 滚出屏幕后，按方向键不会让它在看不见的地方继续翻。</li>
+        <li><b>和自动播放的关系</b>：你设了 <code>disableOnInteraction: false</code>，用键盘切换后自动播放会继续，不会停下来。</li>
+        <li><b>输入框里不受影响</b>：光标在 <code>input</code> / <code>textarea</code> 里打字时，Swiper 会忽略方向键，不会误切换。</li>
+        <li>……（略：loop / cube 兼容说明、测试方法）</li>
+      </ul>
+    </div>
+    <h4>关键对话 2：追问 delay 的实际效果（为答辩第 4 问准备）</h4>
+    <div class="lyc_0817_prompt">键盘功能加上了，能用。答辩时老师可能会让我"现场把 delay 改成某个值并解释预期变化"。我的配置是 speed: 800、autoplay.delay: 3200。
+1. 如果把 delay 改成 1000，两次自动翻页之间实际要隔多久？是 1 秒，还是要加上 800ms 的切换动画？请说明理由。
+2. 页面已经跑起来了，不刷新、不重建实例，怎么在控制台里让新的 delay 立刻生效？</div>
+    <div class="lyc_0817_ai">
+      <p><b>1. 大约 1800ms，也就是 delay 1000 加上动画 800。</b>Swiper 11 的自动播放不是固定每隔 <code>delay</code> 翻一次，而是：倒计时 <code>delay</code> 毫秒，然后翻页；翻页动画播放 <code>speed</code> 毫秒；动画结束（触发 <code>transitionEnd</code>）后，才开始下一轮 <code>delay</code> 倒计时。所以现在的配置是 3200 + 800 ≈ 4000ms；改成 1000 后是 1000 + 800 ≈ 1800ms。</p>
+<pre><code>var s = document.querySelector('#wySw4').swiper; // 取到已经创建好的实例
+s.params.autoplay.delay = 1000;                  // 改参数
+s.autoplay.stop();                               // 停掉当前这一轮倒计时
+s.autoplay.start();                              // 用新的 delay 重新开始</code></pre>
+      <p>只改 <code>s.params.autoplay.delay</code> 也会生效，但要等正在走的这一轮旧倒计时结束，下一轮才用新值；加上 <code>stop()</code> 和 <code>start()</code>，新值就马上生效。</p>
+    </div>
+    <div class="lyc_0817_shots">
+      <div class="lyc_0817_shot"><img src=".screenshots/swiper-task/task3-aida-keyboard.png" alt="第六件展品与键盘回显"><span>截图：第六件展品爱达·魔都号；先按 ← 再按 →，回显“→ (39) → 第 6 张”</span></div>
+      <div class="lyc_0817_shot"><img src=".screenshots/swiper-task/task3-delay-1000.png" alt="delay 改成 1000 后实测间隔"><span>截图：delay 改成 1000 后，实测间隔 1.83 秒（预期 ≈ 1.80 秒）</span></div>
+    </div>
 
-    <p><span class="tag tag-ok">验证结果：通过</span>实测参数：<code>loop: true</code>、<code>delay: 3200</code>、<code>disableOnInteraction: false</code>、<code>pagination.el: '#wyPag4'</code>、<code>clickable: true</code>、<code>effect: 'cube'</code>、分页圆点 6 个、自动播放运行中；<code>cube</code> 转动画面见截图。</p>
-
-    <p><b>一句话结论</b>：两轮提示词补齐了容器选择器、动画时长与交互后继续播放这三条约束后，配置与需求完全一致。</p>
-    <p>验证截图：<code>.screenshots/swiper-task/task1-verify-cube.png</code></p>
+    <h3>③ 答辩四连问</h3>
+    <div class="lyc_0817_qa"><p class="lyc_0817_q">问 1：这段代码什么意思？</p>
+      <p><code>keyboard</code> 打开 Swiper 自带的键盘模块：<code>enabled: true</code> 表示横向轮播按 → 下一张、按 ← 上一张；<code>onlyInViewport: true</code> 表示只有 <code>#wySw4</code> 出现在屏幕里时才响应，滚走之后按键不会让它偷偷翻页；<code>pageUpDown: false</code> 把 PageUp / PageDown 留给页面滚动。我另外加了 <code>on.keyPress</code> 事件，在轮播下方显示“最近一次按键 → 第几张”，方便现场确认按键确实被轮播接收。</p></div>
+    <div class="lyc_0817_qa"><p class="lyc_0817_q">问 2：AI 第一次给的哪里不对？你改了什么？</p>
+      <p>① AI 给的是一个独立的 <code>new Swiper('#wySw4', {...})</code>，没有赋值给变量。但我的页面点效果按钮时要先 <code>destroy</code> 再 <code>new</code>，照抄的话一换效果键盘功能就没了，旧实例也没法销毁。所以我把 <code>keyboard</code> 写进公共配置函数 <code>lyc_0817_config4()</code>，每次重建都带上，实例保存在 <code>lyc_0817_swiper4</code>。② 任务二里 AI 建议把图裁成 2:3 竖图，还说“slidesPerView 对 creative 没用”。我查源码后改用 62% 宽 slide 加 <code>centeredSlides</code>，保留了 16:9 横图，也补回了它漏掉的 <code>speed: 800</code>。③ 任务一里 AI 第 1 轮写成了 3000ms，还加了 <code>pauseOnMouseEnter</code>，第 2 轮按我的约束改正了。</p></div>
+    <div class="lyc_0817_qa"><p class="lyc_0817_q">问 3：新参数的作用？</p>
+      <p><code>keyboard.enabled</code>：开启方向键翻页；<code>keyboard.onlyInViewport</code>：只在轮播可见时响应（页面上有 4 个轮播，只有 <code>#wySw4</code> 开了键盘，不会互相干扰）；<code>keyboard.pageUpDown</code>：是否让 PageUp/PageDown 也翻页，这里关掉；<code>on.keyPress(swiper, keyCode)</code>：Swiper 每处理一次按键就触发，37 是 ←，39 是 →。另外，任务二新增的 <code>slidesPerView: 'auto'</code> 和 <code>centeredSlides: true</code> 让窄海报居中、两侧露出邻居，<code>creativeEffect.limitProgress: 2</code> 让左右各显示 2 张。</p></div>
+    <div class="lyc_0817_qa"><p class="lyc_0817_q">问 4：现场把 delay 改成指定值，并解释预期变化</p>
+      <p>操作：在页面「任务三 · 现场修改 autoplay.delay」输入新值，点「应用 delay」；或在控制台执行 <code>lyc_0817_swiper4.params.autoplay.delay = 1000; lyc_0817_swiper4.autoplay.stop(); lyc_0817_swiper4.autoplay.start();</code>。</p>
+      <p>预期：两次自动翻页的间隔 ≈ <b>delay + speed</b>。因为 Swiper 是在切换动画（speed = 800ms）结束后才开始下一轮 delay 倒计时（源码里 <code>beforeTransitionStart</code> 时暂停、动画结束后恢复）。实测结果：delay = 3200 时间隔 4.04 秒（预期 4.0 秒）；delay = 1000 时间隔 1.83 秒（预期 1.8 秒）。delay 越小翻得越快，但最短也不会快于 0.8 秒的动画时长；如果老师给的是 5000，预期间隔就是约 5.8 秒。</p></div>
   </div>
 
-  <!-- 任务二 -->
-  <div class="sec">
-    <h2>任务二 · 仿写官方 creative 特效（课堂未讲的第 7 种 effect）</h2>
-    <p><b>参考文件</b>：<code>swiper/demo/257-effect-creative.html</code>（Swiper 11 官方 creative 示例）。</p>
-
-    <h3>官方示例要点</h3>
-<pre><code>effect: 'creative',
-creativeEffect: {
-  prev: { shadow: true, translate: [0, 0, -400] },
-  next: { translate: ['100%', 0, 0] }
-}</code></pre>
-
-    <h3>本次实现（第 7 个按钮「creative 电影墙」）</h3>
-    <p>按钮：<code>&lt;button data-fx="creative"&gt;creative 电影墙（课堂未讲·拓展）&lt;/button&gt;</code></p>
-    <p>配置：在 <code>lyc_0817_config4(effect)</code> 中按 effect 追加 <code>creativeEffect</code>，并通过原有的"销毁 → 重建"逻辑生效。</p>
-<pre><code>if (lyc_0817_effect === 'creative') {
-  lyc_0817_cfg.creativeEffect = {
-    prev: {
-      shadow: true,
-      origin: 'center left',
-      translate: ['-35%', 0, -250],   // 左移、后退到 z 轴 -250
-      rotate: [0, 12, -10],           // 带一点侧向角度
-      scale: 0.75,                    // 缩小
-      opacity: 0.65
-    },
-    next: {
-      translate: ['100%', 0, 0],      // 从右侧画框外进入
-      scale: 1.15                     // 放大入场
-    }
-  };
-}</code></pre>
-
-    <p><span class="tag tag-ok">验证结果：通过</span>效果按钮共 7 个，<code>effect</code> 为 <code>creative</code>，<code>prev/next</code> 参数生效，分页圆点保持 6 个；动画中间帧可见"上一张缩小左移带角度、下一张从右侧放大进入"，截图见 <code>task2-creative.png</code>。</p>
-
-    <h3>prev / next 的 transform 各控制什么？</h3>
-    <ul>
-      <li><b>prev</b>：控制<b>正在离场的上一张</b>在切换过程中的终态——<code>translate</code> 决定位移（<code>['-35%', 0, -250]</code> 表示向左 35%、后退 250px）、<code>rotate</code> 决定旋转角度、<code>scale</code> 决定缩小比例、<code>opacity</code> 决定淡出程度，<code>origin</code> 决定以哪个点为变换中心。</li>
-      <li><b>next</b>：控制<b>即将入场的下一张</b>在进场前的位置与形态——<code>translate: ['100%', 0, 0]</code> 表示先停在画框右侧一整屏外，<code>scale: 1.15</code> 表示从放大状态收回到原始大小；随着切换进度推进，两者的 transform 会插值回到默认状态（<code>translate 0</code>、<code>scale 1</code>、<code>opacity 1</code>）。</li>
-    </ul>
-    <p>验证截图：<code>.screenshots/swiper-task/task2-creative.png</code></p>
+  <!-- ============ 交付物 ============ -->
+  <div class="lyc_0817_sec">
+    <h2>提交物清单</h2>
+    <div class="lyc_0817_list">
+      <div><code>swiper-task.html</code><span>能运行的页面：初始 cube、7 个效果按钮（含 creative 电影墙）、6 件展品、键盘 ← →，以及底部「三关进阶 · 现场验证与答辩台」</span></div>
+      <div><code>swiper-task-record.html</code><span>本页：提示词访问入口（每轮提示词 + AI 原始回答 + 验证 + 答辩）</span></div>
+      <div><code>swiper-task-record.md</code><span>与本页内容一致的 Markdown 版，方便在 GitHub 上直接阅读</span></div>
+      <div><code>swiper-imgs/aida_modu.jpg</code><span>AI 生成的第六件展品图片（1280×720，16:9）</span></div>
+      <div><code>.screenshots/swiper-task/</code><span>本页引用的全部验证截图</span></div>
+    </div>
+    <p>本地运行：在项目根目录执行 <code>python -m http.server 8080</code>，打开 <code>http://localhost:8080/swiper-task.html</code>。</p>
   </div>
 
-  <!-- 任务三 -->
-  <div class="sec">
-    <h2>任务三 · 综合创作 + 技术答辩（超级加分项）</h2>
-
-    <h3>① 第六件展品「爱达·魔都号」</h3>
-    <ul>
-      <li>图片：AI 生成（横版 16:9，最终 1280×720，约 184KB），保存为 <code>swiper-imgs/aida_modu.jpg</code>。</li>
-      <li>生图提示词要点：<code>photorealistic aerial photograph of "Adora Magic City" (爱达·魔都号), China's first domestically built large cruise ship, sailing on deep blue ocean at golden hour, 16:9 landscape, cinematic travel photography, no text</code>。</li>
-      <li>四个演示台均补上第六张 slide（每台 6 张，圆点同步变为 6 个），slide 结构与原有展品一致。</li>
-    </ul>
-<pre><code>&lt;div class="swiper-slide"&gt;
-  &lt;img src="swiper-imgs/aida_modu.jpg" alt="爱达·魔都号"&gt;
-  &lt;div class="wy-cap"&gt;&lt;h3&gt;爱达·魔都号&lt;/h3&gt;&lt;p&gt;第六件展品 · AI 生成图片&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-    <p><span class="tag tag-ok">验证结果：通过</span>四个轮播 slide 数量均为 6；第六张图片加载成功（<code>naturalWidth 1280 / naturalHeight 720</code>，16:9）；截图见 <code>task3-aida-slide.png</code>。</p>
-
-    <h3>② 新增一项课堂没讲的能力：键盘方向键切换（Keyboard 模块）</h3>
-    <p>选择理由：Swiper 的 <code>zoom</code> 需要手势与容器配置、<code>mousewheel</code> 会抢占整页滚动，而 <code>keyboard</code> 改动小、对课堂展示友好，也便于现场答辩演示。</p>
-<pre><code>keyboard: {
-  enabled: true,
-  onlyInViewport: true   // 只在轮播进入可视区时响应，避免影响整页滚动
-}</code></pre>
-    <p><span class="tag tag-ok">验证结果：通过</span>先暂停自动播放排除干扰，按 <code>→</code> 后 <code>realIndex</code> 从 0 → 1；<code>onlyInViewport</code> 保证页面滚动时不误触。该能力仅挂在 <code>#wySw4</code>，不影响其它三个演示台。</p>
-
-    <h3>③ 与 AI 的关键对话记录（摘要）</h3>
-    <ul>
-      <li><b>提示词</b>："给 <code>#wySw4</code> 增加第 7 个按钮，点击后切换到 Swiper 的 creative 效果，上一张缩小左移、下一张放大进入。"<br><b>AI 回答</b>：给出 <code>creativeEffect.prev/next</code> 配置，并提醒必须沿用"销毁旧实例再重建"的切换流程，不能只改参数。</li>
-      <li><b>提示词</b>："生成一张爱达·魔都号邮轮的横版 16:9 图片，写实摄影风格，用于轮播第六张展品。"<br><b>AI 回答</b>：生成 <code>aida_modu.jpg</code>（2560×1440），并建议压缩到 1280×720 以减小体积。</li>
-      <li><b>提示词</b>："在效果实验台上加一个课堂上没讲过的 Swiper 能力，要求不干扰页面滚动。"<br><b>AI 回答</b>：推荐 <code>keyboard</code> + <code>onlyInViewport: true</code>，给出配置并说明与自动播放的共存方式。</li>
-    </ul>
-
-    <h3>④ 答辩准备（四问速答）</h3>
-    <ul>
-      <li><b>为什么 creative 不用改 HTML？</b>它仍然基于标准三层结构，只是把切换动画交给 <code>creativeEffect</code> 计算 transform。</li>
-      <li><b>为什么换效果要 destroy 再 new？</b>Swiper 在初始化时就把 effect 对应的模块、样式和参数固定到实例上，运行期改 <code>params.effect</code> 不会重新装配效果模块，只能销毁重建。</li>
-      <li><b>键盘会不会影响其它轮播？</b>不会，配置只写在 <code>#wySw4</code> 的实例上，<code>onlyInViewport</code> 还限定只有它出现在视口时才响应。</li>
-      <li><b>新增第六张图会让页面变慢吗？</b>图片已压缩为 1280×720、约 184KB，且与原有图片同目录本地加载，不依赖外部 CDN。</li>
-    </ul>
-  </div>
-
-  <!-- 交付物清单 -->
-  <div class="sec">
-    <h2>交付物清单</h2>
-    <table>
-      <thead><tr><th>文件</th><th>说明</th></tr></thead>
-      <tbody>
-        <tr><td><code>swiper-task.html</code></td><td>已完成全部任务与三关进阶的可运行页面</td></tr>
-        <tr><td><code>swiper-task-record.html</code></td><td>本记录页（提示词 / creative 讲解 / 对话 / 答辩）</td></tr>
-        <tr><td><code>swiper-imgs/aida_modu.jpg</code></td><td>AI 生成的第六件展品图片（1280×720）</td></tr>
-        <tr><td><code>.screenshots/swiper-task/task1-verify-cube.png</code></td><td>任务一 cube 验证截图</td></tr>
-        <tr><td><code>.screenshots/swiper-task/task2-creative.png</code></td><td>任务二 creative 动画中间帧</td></tr>
-        <tr><td><code>.screenshots/swiper-task/task3-aida-slide.png</code></td><td>任务三 第六件展品截图</td></tr>
-      </tbody>
-    </table>
-    <p><b>注</b>：第 4 点任务 4 要求"初始效果为 slide"，因此页面打开时 <code>#wySw4</code> 仍为 <code>slide</code>，<code>cube</code> 与 <code>creative</code> 通过按钮切换验证（任务一的 cube 配置已单独粘贴验证并截图存档）。</p>
-  </div>
-
-  <div class="back">
+  <div class="lyc_0817_back">
     <a href="swiper-task.html">← 返回 Swiper 课堂任务页</a>
     <a href="index.html">← 返回课堂实践中心</a>
   </div>
-
-  <footer>Swiper 课堂任务 · 第 6 点三关进阶完成记录 · 高级网页设计 · 2026-2027-1</footer>
+  <footer>Swiper 三关进阶 · 提示词与 AI 对话记录 · 高级网页设计 · 2026-2027-1</footer>
 </div>
 </body>
 </html>
