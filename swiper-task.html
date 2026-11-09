@@ -1,27 +1,14 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Swiper 课堂操作任务 · 大国重器光影展 · 补全 JS</title>
-<!--
-  lyc_0817 · 2026-11-05 14:23:12 · DeepSeek-V4.1-Flash · Swiper 课堂任务页 ——
-  基于课堂练习「Swiper 轮播组件 · 大国重器光影展（学生版）」的本地副本。
-  四个任务已全部完成：任务 1 最小轮播可拖动；任务 2 循环 + 600ms + 圆点 + 箭头；
-  任务 3 每 2.6 秒自动翻页；任务 4 自动播放 + 六种 effect 实时切换（销毁重建）。
-  课堂任务第 6 点三关进阶也已完成：任务一 两轮提示词验证（见 swiper-task-record.html / .md）；
-  任务二 新增第七种 creative「电影墙」效果（仿写官方 demo 257）；任务三 新增第六件展品
-  「爱达·魔都号」（AI 生成 16:9 图片）并加入课堂未讲的键盘 ← → 切换能力。
-  图片使用项目内置的 swiper-imgs/，Swiper 11 使用项目内置的 swiper/ 本地包（避免 CDN 网络不稳定）。
-
-  lyc_0817 · 2026-11-09 14:10:00 · Claude Opus 5.5 · 三关进阶返工修订 ——
-  ① 任务一：#lycSw4 初始效果改为 cube（第 2 轮提示词得到的配置原样粘入），新增「需求验证面板」逐项实测；
-  ② 任务二：第 7 个按钮改名「creative 电影墙」，改为居中窄海报 + 两侧露出的选片墙布局，新增 rotate 角度调试；
-  ③ 任务三：键盘 ← → 增加按键回显，新增 delay 现场修改 + 实测翻页间隔，供答辩四连问现场演示；
-  ④ 每个任务旁给出提示词记录入口 swiper-task-record.html#lyc_0817_task1 / 2 / 3。
--->
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Swiper 三项任务 · 大国重器光影展</title>
+<!-- lyc_0817 · 2026-11-09 21:11:01 · GPT-6 · 三项任务分离 —— 任务一验证配置，任务二调试效果，任务三键盘导览、护照奖励与调速；每项使用独立实例。 -->
 <!-- Swiper 11.0.3 官方组件包（项目内置本地副本，原练习通过 CDN 引入） -->
-<link rel="stylesheet" href="swiper/swiper-bundle.min.css">
+<link href="swiper/swiper-bundle.min.css" rel="stylesheet"/>
+<link href="css/lyc_0817_task3.css" rel="stylesheet"/>
 <script src="swiper/swiper-bundle.min.js"></script>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
@@ -95,11 +82,8 @@
 
   /* lyc_0817 · 2026-11-09 14:10:00 · Claude Opus 5.5 · 三关进阶样式 —— 电影墙布局、验证面板、调试台、提示词入口 */
   /* 电影墙：slide 缩窄到 62% 并居中（centeredSlides），两侧露出上一张 / 下一张海报 */
-  #lycSw4.lyc_0817_wall{background:radial-gradient(ellipse at center,#1c2b4a 0%,#070d1a 75%)}
-  #lycSw4.lyc_0817_wall .swiper-slide{width:62%;border-radius:12px;overflow:hidden}
-  .lyc_0817_kbd{margin:12px 0 0;font-size:13px;color:#475569;text-align:center;line-height:2}
-  .lyc_0817_kbd kbd{display:inline-block;min-width:26px;padding:0 7px;border:1px solid #cbd5e1;border-bottom-width:3px;border-radius:6px;background:#fff;font-family:Consolas,monospace;font-size:12.5px;color:#0f2b5b}
-  .lyc_0817_kbd b{color:#e8890c}
+  #lyc_0817_task2Swiper.lyc_0817_wall{background:radial-gradient(ellipse at center,#1c2b4a 0%,#070d1a 75%)}
+  #lyc_0817_task2Swiper.lyc_0817_wall .swiper-slide{width:62%;border-radius:12px;overflow:hidden}
   .lyc_0817_entry{display:inline-block;font-size:13px;color:#1d5bbf;text-decoration:none;border-bottom:1px dashed #1d5bbf}
   .lyc_0817_panel{border:1px solid #dbe4ff;border-radius:14px;padding:18px 20px;margin:18px 0 6px;background:#f8faff}
   .lyc_0817_panel h3{font-size:15.5px;color:#0f2b5b;margin-bottom:8px}
@@ -128,542 +112,133 @@
   footer{text-align:center;margin-top:34px;color:#9ca3af;font-size:13px;line-height:2}
 </style>
 </head>
-<body>
-<div class="lyc-wrap">
-
-  <div class="lyc-head">
-    <span class="lyc-badge">高 职 · 高 级 网 页 设 计 · 课 堂 操 作 任 务</span>
-    <h1>Swiper 轮播组件 · <b>大国重器光影展（学生版）</b></h1>
-    <p>HTML 骨架和 CSS 样式已经全部搭好，图片也备齐了——但这个页面的轮播<b>一个都不会动</b>！
-    因为所有 <b>&lt;script&gt; 里的 JS 初始化代码都被抽走了</b>。你的任务：把 4 个轮播全部"救活"。</p>
-    <div class="lyc-goals"><i>任务 1 · 救活最小轮播</i><i>任务 2 · 装上圆点和箭头</i><i>任务 3 · 让它自己翻页</i><i>任务 4 · 六种效果随心换</i></div>
-  </div>
-
-  <div class="lyc-rule">
-    <b>📋 任务说明（先读再动手）：</b><br>
-    ① Swiper 组件库已引入（页面第 15、16 行，使用项目内置的 swiper/ 本地包），<b>不需要</b>再写引入代码；<br>
-    ② 每个"演示台"下面的绿色卡片就是该任务的要求，JS 代码统一写在页面最底部的 <code>&lt;script&gt;</code> 区域内；<br>
-    ③ 每完成一个任务就<b>刷新页面验证</b>：能拖、能点、会自己翻，才算通过；<br>
-    ④ 控制台（F12）报错是你要最好的朋友——先读报错，再改代码。
-  </div>
-
-  <!-- 任务 1 -->
-  <div class="lyc-sec">
-    <div class="lyc-sec-head">
-      <span class="lyc-no">1</span>
-      <h2>救活最小轮播<small>三行 JS · 让照片可以拖动</small></h2>
-    </div>
-    <p class="lyc-txt">下面是"最小轮播"骨架：三层结构齐全，但因为没有初始化，照片<b>僵在第一张</b>。请写出初始化代码，让它至少<b>可以按住拖动</b>。</p>
-    <div class="lyc-req">
-      <h3>✍️ 任务 1 要求</h3>
-      <p>在页面底部 <code>&lt;script&gt;</code> 中初始化 <code>#lycSw1</code>，让它成为可拖动的轮播（最基础写法，一个空配置对象即可）。</p>
-      <span class="lyc-star">⭐ 验证标准：按住鼠标左右拖动，照片能跟着手走</span>
-    </div>
-    <div class="lyc-demo">
-      <span class="lyc-demo-tag">🎛️ 演示一 · 最小轮播（救活后按住拖一拖）</span>
-      <div class="lyc-swiper">
-        <div class="swiper" id="lycSw1">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="swiper-imgs/tiangong_1.jpg" alt="天宫空间站"><div class="lyc-cap"><h3>天宫空间站</h3><p>2022 年全面建成 · 中国人的太空家园</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/fuxing_1.jpg" alt="复兴号动车组"><div class="lyc-cap"><h3>复兴号动车组</h3><p>350 km/h · 世界商业运营最高时速</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/c919_1.jpg" alt="C919大飞机"><div class="lyc-cap"><h3>C919 大飞机</h3><p>2023 年商业首航 · 国产干线客机翱翔蓝天</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/fendouzhe_1.jpg" alt="奋斗者号"><div class="lyc-cap"><h3>奋斗者号</h3><p>10909 米 · 触碰地球第四极马里亚纳海沟</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/fast_1.jpg" alt="中国天眼"><div class="lyc-cap"><h3>中国天眼 FAST</h3><p>500 米口径 · 世界最大单口径射电望远镜</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/aida_modu.jpg" alt="爱达·魔都号"><div class="lyc-cap"><h3>爱达·魔都号</h3><p>2024 年 1 月商业首航 · 首艘国产大型邮轮</p></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 任务 2 -->
-  <div class="lyc-sec">
-    <div class="lyc-sec-head">
-      <span class="lyc-no">2</span>
-      <h2>装上遥控器<small>pagination 圆点 + navigation 箭头</small></h2>
-    </div>
-    <p class="lyc-txt">HTML 里已经埋好了三个"遥控器"元素：<code>#lycPag2</code>（圆点）、<code>#lycPrev2</code> / <code>#lycNext2</code>（左右箭头）。请通过配置让它们"通电"。</p>
-    <div class="lyc-req">
-      <h3>✍️ 任务 2 要求</h3>
-      <p>初始化 <code>#lycSw2</code>，实现 4 个效果：<b>① 无缝循环</b>（loop）<b>② 切换动画时长 600 毫秒</b>（speed）<b>③ 圆点分页器且可点击跳转</b>（pagination，别漏 el）<b>④ 两侧箭头可切换</b>（navigation）。</p>
-      <span class="lyc-star">⭐ 验证标准：点圆点能跳转、点箭头能翻页、最后一张继续往后翻会回到第一张</span>
-    </div>
-    <div class="lyc-demo">
-      <span class="lyc-demo-tag">🎛️ 演示二 · 圆点可点 + 箭头可切</span>
-      <div class="lyc-swiper">
-        <div class="swiper" id="lycSw2">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="swiper-imgs/tiangong_1.jpg" alt="天宫空间站"><div class="lyc-cap"><h3>天宫空间站</h3><p>三舱结构 · 神舟乘组常年值守</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/fuxing_1.jpg" alt="复兴号动车组"><div class="lyc-cap"><h3>复兴号动车组</h3><p>京张高铁智能驾驶 · 百年京张到智能京张</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/c919_1.jpg" alt="C919大飞机"><div class="lyc-cap"><h3>C919 大飞机</h3><p>让中国人的大飞机梦照进现实</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/fendouzhe_1.jpg" alt="奋斗者号"><div class="lyc-cap"><h3>奋斗者号</h3><p>坐底万米 · 深海探测进入"中国时代"</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/fast_1.jpg" alt="中国天眼"><div class="lyc-cap"><h3>中国天眼 FAST</h3><p>南仁东先生 22 年铸就的观天巨目</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/aida_modu.jpg" alt="爱达·魔都号"><div class="lyc-cap"><h3>爱达·魔都号</h3><p>13.5 万总吨 · 中国造船摘取"皇冠明珠"</p></div></div>
-          </div>
-          <div class="swiper-pagination" id="lycPag2"></div>
-          <div class="swiper-button-prev" id="lycPrev2"></div>
-          <div class="swiper-button-next" id="lycNext2"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 任务 3 -->
-  <div class="lyc-sec">
-    <div class="lyc-sec-head">
-      <span class="lyc-no">3</span>
-      <h2>让它自己翻页<small>autoplay 自动播放 + loop 无缝续播</small></h2>
-    </div>
-    <p class="lyc-txt">网页 Banner 最常见的形态：<b>自己会翻页</b>。<code>autoplay.delay</code> 控制每张停留的毫秒数，<code>disableOnInteraction: false</code> 表示用户手动滑动之后自动播放<b>不停止</b>。</p>
-    <div class="lyc-req">
-      <h3>✍️ 任务 3 要求</h3>
-      <p>初始化 <code>#lycSw3</code>，实现：<b>① 循环播放</b> <b>② 每 2.6 秒自动翻页</b> <b>③ 用户拖动之后自动播放继续</b> <b>④ 保留底部圆点分页器（#lycPag3）</b>。</p>
-      <span class="lyc-star">⭐ 验证标准：什么都不做它会自己翻；拖一下松手后，它还能接着自动翻</span>
-    </div>
-    <div class="lyc-demo">
-      <span class="lyc-demo-tag">🎛️ 演示三 · 每 2.6 秒自动翻页（救活后什么都不用做，看着就行）</span>
-      <div class="lyc-swiper">
-        <div class="swiper" id="lycSw3">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="swiper-imgs/tiangong_1.jpg" alt="天宫空间站"><div class="lyc-cap"><h3>天宫空间站</h3><p>巡天遥看一千河</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/fuxing_1.jpg" alt="复兴号动车组"><div class="lyc-cap"><h3>复兴号动车组</h3><p>中国速度 · 风驰电掣</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/c919_1.jpg" alt="C919大飞机"><div class="lyc-cap"><h3>C919 大飞机</h3><p>蓝天之上 · 大国担当</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/fendouzhe_1.jpg" alt="奋斗者号"><div class="lyc-cap"><h3>奋斗者号</h3><p>万米深潜 · 无畏探索</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/fast_1.jpg" alt="中国天眼"><div class="lyc-cap"><h3>中国天眼 FAST</h3><p>仰望星空 · 脚踏实地</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/aida_modu.jpg" alt="爱达·魔都号"><div class="lyc-cap"><h3>爱达·魔都号</h3><p>海上移动的城市 · 中国智造</p></div></div>
-          </div>
-          <div class="swiper-pagination" id="lycPag3"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 任务 4 -->
-  <div class="lyc-sec">
-    <div class="lyc-sec-head">
-      <span class="lyc-no">4</span>
-      <h2>六种效果随心换<small>effect 参数 + 进阶：按钮实时切换</small></h2>
-    </div>
-    <p class="lyc-txt">改一个 <code>effect</code> 参数，轮播立刻换一种"性格"：slide / fade / cube / coverflow / flip / cards。上面的 6 个按钮已经绑好了点击事件（读取 <code>btn.dataset.fx</code>），JS 还需要你补两段。</p>
-    <div class="lyc-req">
-      <h3>✍️ 任务 4 要求</h3>
-      <p><b>基础分</b>：初始化 <code>#lycSw4</code>，实现循环 + 自动播放（3.2 秒）+ 圆点分页器（#lycPag4），初始效果为 <code>'slide'</code>，动画时长 800 毫秒。</p>
-      <p><b>进阶分</b>：补全按钮点击事件中的 TODO——实现点击按钮<b>切换效果</b>。提示：Swiper 动态换 effect 不能只改参数，需要<b>先销毁旧实例再重建</b>（destroy + new）。</p>
-      <span class="lyc-star">⭐ 验证标准：基础分——轮播自动翻页；进阶分——点 cube 按钮变 3D 立方体、点 fade 变淡入淡出</span>
-      <p><b>三关进阶 · 任务一调整</b>：按任务一需求「初始效果为 cube」，页面打开时 <code>#lycSw4</code> 直接以 <code>cube</code> 启动（第 2 轮提示词得到的配置已原样粘入）；点 slide 按钮仍可切回平推。</p>
-    </div>
-    <div class="lyc-fx">
-      <button data-fx="slide">slide 平推（稳重）</button>
-      <button data-fx="fade">fade 淡入淡出（优雅）</button>
-      <button class="lyc-on" data-fx="cube">cube 3D 立方体（初始·炫酷）</button>
-      <button data-fx="coverflow">coverflow 画廊堆叠（沉浸）</button>
-      <button data-fx="flip">flip 翻页（复古）</button>
-      <button data-fx="cards">cards 卡片（俏皮）</button>
-      <button data-fx="creative">creative 电影墙</button>
-    </div>
-    <div class="lyc-demo">
-      <span class="lyc-demo-tag">🎛️ 演示四 · 效果实验台（初始 cube · 点按钮切换 effect · 键盘 ← → 可翻页）</span>
-      <div class="lyc-swiper">
-        <div class="swiper" id="lycSw4">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="swiper-imgs/tiangong_1.jpg" alt="天宫空间站"><div class="lyc-cap"><h3>天宫空间站</h3><p>试试上面的效果按钮</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/fuxing_1.jpg" alt="复兴号动车组"><div class="lyc-cap"><h3>复兴号动车组</h3><p>同一组照片，六种讲述方式</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/c919_1.jpg" alt="C919大飞机"><div class="lyc-cap"><h3>C919 大飞机</h3><p>企业官网爱用 fade</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/fendouzhe_1.jpg" alt="奋斗者号"><div class="lyc-cap"><h3>奋斗者号</h3><p>游戏网站爱用 cube</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/fast_1.jpg" alt="中国天眼"><div class="lyc-cap"><h3>中国天眼 FAST</h3><p>相册页面爱用 coverflow</p></div></div>
-            <div class="swiper-slide"><img src="swiper-imgs/aida_modu.jpg" alt="爱达·魔都号"><div class="lyc-cap"><h3>爱达·魔都号</h3><p>第六件展品 · AI 生成图片</p></div></div>
-          </div>
-          <div class="swiper-pagination" id="lycPag4"></div>
-        </div>
-      </div>
-      <p class="lyc_0817_kbd">⌨️ 任务三新增能力：轮播在屏幕内时按 <kbd>←</kbd> <kbd>→</kbd> 切换 · 最近一次按键：<b id="lyc_0817_lastKey">（还没按）</b> · 当前效果：<b id="lyc_0817_curFx">cube</b> · 实测自动翻页间隔：<b id="lyc_0817_gap">测量中…</b></p>
-    </div>
-  </div>
-
-  <!-- lyc_0817 · 2026-11-09 14:10:00 · Claude Opus 5.5 · 三关进阶区 —— 任务一验证面板 / 任务二 creative 调试 / 任务三 delay 现场修改，均直接操作上面的 #lycSw4 -->
-  <div class="lyc-sec" id="lyc_0817_advance">
-    <div class="lyc-sec-head">
-      <span class="lyc-no">★</span>
-      <h2>三关进阶 · 现场验证与答辩台<small>任务一 提示词工程师 · 任务二 creative 电影墙 · 任务三 综合创作 + 技术答辩</small></h2>
-    </div>
-    <p class="lyc-txt">下面三个面板都直接操作上方「演示四」的 <code>#lycSw4</code>。每轮提示词、AI 原始回答和答辩问题的回答都在 <a class="lyc_0817_entry" href="swiper-task-record.html" target="_blank">📝 提示词与 AI 对话记录</a>。</p>
-
-    <div class="lyc_0817_panel" id="lyc_0817_task1">
-      <h3>任务一 · 提示词工程师：需求验证面板（第 2 轮配置已粘入页面）</h3>
-      <p>点「一键自测」后，脚本会先用 cube 重建轮播，然后点击第 3 个圆点、模拟一次鼠标拖动、从最后一张继续往后翻，并逐项读取 <code>lyc_0817_swiper4</code> 的实际参数和运行状态。</p>
-      <div class="lyc_0817_row">
-        <button class="lyc_0817_btn" id="lyc_0817_selfTest">▶ 一键自测 4 项需求</button>
-        <a class="lyc_0817_entry" href="swiper-task-record.html#lyc_0817_task1" target="_blank">查看任务一两轮提示词 →</a>
-      </div>
-      <div class="lyc_0817_checks" id="lyc_0817_checks">
-        <div class="lyc_0817_check"><span class="lyc_0817_mark">?</span><div class="lyc_0817_body"><b>① 无缝循环</b><small>等待自测…</small></div></div>
-        <div class="lyc_0817_check"><span class="lyc_0817_mark">?</span><div class="lyc_0817_body"><b>② 3.2 秒自动翻页，手动操作后不停止</b><small>等待自测…</small></div></div>
-        <div class="lyc_0817_check"><span class="lyc_0817_mark">?</span><div class="lyc_0817_body"><b>③ 圆点分页器可点击</b><small>等待自测…</small></div></div>
-        <div class="lyc_0817_check"><span class="lyc_0817_mark">?</span><div class="lyc_0817_body"><b>④ 初始效果为 cube</b><small>等待自测…</small></div></div>
-      </div>
-      <div class="lyc_0817_conclusion" id="lyc_0817_t1Conclusion">一句话结论：等待自测。</div>
-    </div>
-
-    <div class="lyc_0817_panel" id="lyc_0817_task2">
-      <h3>任务二 · creative 电影墙：transform 调试台</h3>
-      <p>上一张：缩小、左移，并绕 Y 轴转一个角度；下一张：先在右侧以 0.86 倍大小等待，进场时放大到 1。改下面的角度后点「应用」，轮播会切到 creative 并用新角度重建。答辩时可以直接点「一键改成 20 度」。</p>
-      <div class="lyc_0817_row">
-        <label for="lyc_0817_rotateInput">prev.rotate 的 Y 角度（度）</label>
-        <input type="number" id="lyc_0817_rotateInput" value="30" step="5">
-        <button class="lyc_0817_btn" id="lyc_0817_rotateApply">应用并切到 creative</button>
-        <button class="lyc_0817_btn lyc_0817_ghost" id="lyc_0817_rotate20">一键改成 20 度</button>
-        <a class="lyc_0817_entry" href="swiper-task-record.html#lyc_0817_task2" target="_blank">查看任务二 AI 对话 →</a>
-      </div>
-      <div class="lyc_0817_out" id="lyc_0817_creativeOut">切到 creative 后，这里会显示当前生效的 creativeEffect 配置。</div>
-    </div>
-
-    <div class="lyc_0817_panel" id="lyc_0817_task3">
-      <h3>任务三 · 技术答辩：现场修改 autoplay.delay</h3>
-      <p>输入新的 delay 后点「应用」，脚本会修改 <code>lyc_0817_swiper4.params.autoplay.delay</code> 并重启自动播放，上方的「实测自动翻页间隔」随之更新。预期间隔约为 <b>delay + speed（800ms 动画）</b>，因为 Swiper 要等切换动画结束后才重新开始倒计时。</p>
-      <div class="lyc_0817_row">
-        <label for="lyc_0817_delayInput">autoplay.delay（毫秒）</label>
-        <input type="number" id="lyc_0817_delayInput" value="3200" step="100" min="300">
-        <button class="lyc_0817_btn" id="lyc_0817_delayApply">应用 delay</button>
-        <button class="lyc_0817_btn lyc_0817_ghost" id="lyc_0817_delayReset">恢复 3200</button>
-        <a class="lyc_0817_entry" href="swiper-task-record.html#lyc_0817_task3" target="_blank">查看任务三 AI 对话与答辩 →</a>
-      </div>
-      <div class="lyc_0817_out" id="lyc_0817_delayOut">当前 delay = 3200ms，speed = 800ms，预期翻页间隔 ≈ 4000ms。</div>
-      <div class="lyc_0817_conclusion">实测相邻两次自动翻页的间隔：<b id="lyc_0817_gap2">测量中…（等两次自动翻页）</b></div>
-    </div>
-  </div>
-
-  <div class="lyc-back">
-    <a href="index.html">← 返回课堂实践中心</a>
-    <a href="swiper-task-record.html">📝 提示词与 AI 对话记录（任务一 / 二 / 三）</a>
-  </div>
-
-  <footer>Swiper 课堂操作任务 · 大国重器光影展（学生版） · 高级网页设计 · 2026-2027-1</footer>
+<body><div class="lyc-wrap">
+<div class="lyc-head"><span class="lyc-badge">高级网页设计 · Swiper 课堂实践</span><h1>Swiper 轮播组件 · <b>大国重器光影展</b></h1><p>三个任务，三块独立演示区：从精确描述需求，到探索自定义转场，再到完成互动光影展。</p><div class="lyc-goals"><a href="#lyc_0817_task1">任务一 · 提示词与配置验证</a><a href="#lyc_0817_task2">任务二 · creative 效果创作</a><a href="#lyc_0817_task3">任务三 · 互动光影展与奖励</a></div></div>
+<div class="lyc-rule"><b>使用说明：</b>每个任务都有自己的轮播和操作区。任务一检查配置是否符合需求；任务二切换效果并调整 creative 角度；任务三使用方向键导览、调节翻页速度，并收集印章兑换纪念证书。</div>
+<!-- lyc_0817 · 2026-11-09 21:29:37 · GPT-6 · 原版课堂知识回顾 —— 汇总组件引入、三层结构、导航与自动播放，不新增重复演示台。 -->
+<details class="lyc_0817_lesson"><summary>课堂知识回顾 · 展开查看 Swiper 基础结构与参数</summary><div class="lyc_0817_lessonbody">
+<p>本作品基于<a href="https://spontaneous-valkyrie-4e4229.netlify.app/swiper-lesson" target="_blank" rel="noopener">原版课堂讲解</a>完成。原版先讲组件库、骨架、导航、自动播放和效果，再安排三项作业；本页将知识说明与三个独立任务对应起来。</p>
+<h3>① 引入组件与三层骨架</h3><p>Swiper 是原生 JavaScript 轮播组件库，需要同时引入 CSS 和 JS。本项目使用本地的 swiper/ 文件，离线也能运行。结构从外到内为 <code>.swiper</code> 容器、<code>.swiper-wrapper</code> 轨道、<code>.swiper-slide</code> 单张内容。</p>
+<pre><code>&lt;link rel="stylesheet" href="swiper/swiper-bundle.min.css"&gt;
+&lt;script src="swiper/swiper-bundle.min.js"&gt;&lt;/script&gt;
+&lt;div class="swiper"&gt;
+  &lt;div class="swiper-wrapper"&gt;
+    &lt;div class="swiper-slide"&gt;照片、标题和简介&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<h3>② 拖动、圆点与箭头</h3><p>初始化后可用鼠标或触摸滑动；<code>pagination</code> 指向圆点容器，<code>clickable: true</code> 允许点圆点跳转；<code>navigation</code> 中的 prevEl / nextEl 指定上一张、下一张按钮。原版最小轮播的动画时长为 500ms，分页导航示例为 600ms。任务三展台可直接体验拖动、圆点和箭头。</p>
+<h3>③ 自动播放与循环</h3><p><code>loop</code> 控制首尾循环，<code>autoplay.delay</code> 控制每张停留时间，<code>speed</code> 控制切换动画时长；<code>disableOnInteraction: false</code> 让手动翻页后自动播放继续。原版基础自动播放示例的 delay 为 2600ms、speed 为 700ms；效果实验台为 3200ms 与 800ms，本页的作业轮播按后者设置。</p>
+<h3>④ 效果与布局参数</h3><p>原版演示 slide、fade、cube、coverflow、flip、cards 六种效果，任务二增加 creative。<code>slidesPerView</code> 控制可见张数，<code>spaceBetween</code> 控制间距；动态更换 effect 时需销毁旧实例再重建。</p>
+</div></details>
+<!-- lyc_0817 · 2026-11-09 21:11:01 · GPT-6 · 任务一独立卡片 —— 仅负责提示词配置与四项需求验证。 -->
+<section class="lyc-sec" id="lyc_0817_task1"><div class="lyc-sec-head"><span class="lyc-no">一</span><h2>任务一 · 提示词工程师<small>把需求说清楚，再验证 AI 给出的配置</small></h2></div><p class="lyc-txt">目标：<b>无缝循环、每张停留 3.2 秒、手动操作后继续播放、圆点可点击、初始 cube 效果</b>。下面的自测只检查本任务的轮播。</p><div class="lyc-req"><h3>提交要求 · 两轮提示词与实测证据</h3><p>至少保留两轮提示词及 AI 回答，写清第一轮遗漏和第二轮修订；把配置放入页面逐项验证，用截图和一句话结论说明结果。</p><span class="lyc-star">答辩准备：第一轮哪里说得不够清楚？第二轮补了什么？AI 的初稿有哪些问题？</span></div><div class="lyc-demo">
+<span class="lyc-demo-tag">任务一演示 · cube 立方体轮播 · 可拖动、可点圆点</span>
+<div class="lyc-swiper">
+<div class="swiper" id="lycSw4">
+<div class="swiper-wrapper">
+<div class="swiper-slide"><img alt="天宫空间站" src="swiper-imgs/tiangong_1.jpg"/><div class="lyc-cap"><h3>天宫空间站</h3><p>三舱构型 · 探索太空的家园</p></div></div>
+<div class="swiper-slide"><img alt="复兴号动车组" src="swiper-imgs/fuxing_1.jpg"/><div class="lyc-cap"><h3>复兴号动车组</h3><p>中国速度 · 连接城市与远方</p></div></div>
+<div class="swiper-slide"><img alt="C919大飞机" src="swiper-imgs/c919_1.jpg"/><div class="lyc-cap"><h3>C919 大飞机</h3><p>国产干线客机 · 飞向广阔蓝天</p></div></div>
+<div class="swiper-slide"><img alt="奋斗者号" src="swiper-imgs/fendouzhe_1.jpg"/><div class="lyc-cap"><h3>奋斗者号</h3><p>万米深潜 · 探索海洋深处</p></div></div>
+<div class="swiper-slide"><img alt="中国天眼" src="swiper-imgs/fast_1.jpg"/><div class="lyc-cap"><h3>中国天眼 FAST</h3><p>五百米口径 · 倾听宇宙回响</p></div></div>
 </div>
-
-<script>
-  /* lyc_0817 · 2026-11-05 14:23:12 · DeepSeek-V4.1-Flash · Swiper 课堂任务作答区 —— 初始化四个演示台轮播（任务 1—4 全部完成） */
-
-  // ── 任务 1：初始化 #lycSw1，让它至少可以拖动 ──
-  /* lyc_0817 · 2026-11-05 14:05:56 · DeepSeek-V4.1-Flash · 最小轮播初始化 —— 传入空配置对象即可获得基础拖动能力 */
-  var lyc_0817_swiper1 = new Swiper('#lycSw1', {});
-
-  // ── 任务 2：初始化 #lycSw2，循环 + 600ms + 圆点可点 + 箭头切换 ──
-  /* lyc_0817 · 2026-11-05 14:05:56 · DeepSeek-V4.1-Flash · 带遥控器的轮播初始化 —— loop 无缝循环、speed 600ms、分页圆点可点击、左右箭头切换 */
-  var lyc_0817_swiper2 = new Swiper('#lycSw2', {
-    loop: true,                     // ① 无缝循环：最后一张继续往后翻会回到第一张
-    speed: 600,                     // ② 切换动画时长 600 毫秒
-    pagination: {                   // ③ 圆点分页器
-      el: '#lycPag2',                //    指定容器，漏写 el 圆点就不会出现
-      clickable: true               //    允许点击圆点直接跳转
-    },
-    navigation: {                   // ④ 两侧箭头
-      prevEl: '#lycPrev2',
-      nextEl: '#lycNext2'
-    }
-  });
-
-  // ── 任务 3：初始化 #lycSw3，循环 + 2.6 秒自动翻页 + 拖动后不停 + 圆点 ──
-  /* lyc_0817 · 2026-11-05 14:23:12 · DeepSeek-V4.1-Flash · 自动播放轮播初始化 —— loop 循环、每 2.6 秒自动翻页、拖动后继续播放、底部圆点可点 */
-  var lyc_0817_swiper3 = new Swiper('#lycSw3', {
-    loop: true,                     // ① 循环播放
-    autoplay: {
-      delay: 2600,                  // ② 每 2.6 秒翻一页
-      disableOnInteraction: false   // ③ 用户拖动后自动播放不停止
-    },
-    pagination: {
-      el: '#lycPag3',                // ④ 底部圆点分页器
-      clickable: true
-    }
-  });
-
-  // ── 任务 4：初始化 #lycSw4，循环 + 3.2 秒自动播放 + 圆点 + 初始 effect ──
-  /* lyc_0817 · 2026-11-09 14:10:00 · Claude Opus 5.5 · 效果实验台运行状态 —— 记录当前 effect，以及答辩时可现场修改的 delay 与 creative 角度 */
-  var lyc_0817_state = { effect: 'cube', delay: 3200, prevRotateY: 30 };
-  var lyc_0817_swiper4 = null;
-  var lyc_0817_meter = { lastAt: 0, listeners: [] };
-  // 点圆点同样属于手动操作，也要清空计时
-  document.getElementById('lycPag4').addEventListener('click', function () { lyc_0817_meter.lastAt = 0; });
-
-  /* lyc_0817 · 2026-11-09 14:10:00 · Claude Opus 5.5 · 效果实验台配置函数 —— 任务一第 2 轮配置 + 任务三键盘能力 + 任务二 creative 电影墙参数，初始化和切换效果时共用 */
-  function lyc_0817_config4(lyc_0817_effect) {
-    var lyc_0817_cfg = {
-      // ↓↓ 任务一：第 2 轮提示词得到的配置，原样粘入（初始调用时 effect 传 'cube'）↓↓
-      loop: true,                                   // ① 无缝循环
-      effect: lyc_0817_effect,                      // ④ 初始效果 cube（按钮切换时换成别的值）
-      speed: 800,
-      autoplay: {
-        delay: lyc_0817_state.delay,                // ② 每 3200ms 自动翻页（答辩时可现场修改）
-        disableOnInteraction: false                 // ② 手动拖动 / 点圆点 / 按键后自动播放不停
-      },
-      pagination: {
-        el: '#lycPag4',                              // ③ 指定圆点容器
-        clickable: true                             // ③ 圆点可点击跳转
-      },
-      // ↑↑ 任务一配置结束 ↑↑
-      grabCursor: true,
-
-      // 任务三：课堂没讲过的 Keyboard 模块，按 ← → 切换
-      keyboard: {
-        enabled: true,
-        onlyInViewport: true,                       // 只有轮播在屏幕内时才响应，不会在看不见时偷偷翻页
-        pageUpDown: false                           // PageUp / PageDown 留给页面滚动
-      },
-
-      on: {
-        // 手动拖动 / 按键会打断计时，清空上一次自动翻页的时间，避免把手动操作算进间隔
-        touchStart: function () {
-          lyc_0817_meter.lastAt = 0;
-        },
-        // 每次自动翻页触发一次，相邻两次的时间差就是实测间隔
-        autoplay: function () {
-          var lyc_0817_now = Date.now();
-          if (lyc_0817_meter.lastAt) {
-            lyc_0817_showGap(lyc_0817_now - lyc_0817_meter.lastAt);
-          }
-          lyc_0817_meter.lastAt = lyc_0817_now;
-          lyc_0817_meter.listeners.splice(0).forEach(function (fn) { fn(lyc_0817_now); });
-        },
-        // 键盘按键回显（只显示方向键）
-        keyPress: function (lyc_0817_sw, lyc_0817_keyCode) {
-          var lyc_0817_names = { 37: '← (37)', 38: '↑ (38)', 39: '→ (39)', 40: '↓ (40)' };
-          lyc_0817_meter.lastAt = 0;
-          if (lyc_0817_names[lyc_0817_keyCode]) {
-            document.getElementById('lyc_0817_lastKey').textContent =
-              lyc_0817_names[lyc_0817_keyCode] + ' → 第 ' + (lyc_0817_sw.realIndex + 1) + ' 张';
-          }
-        }
-      }
-    };
-
-    // 任务二：第 7 种效果 creative「电影墙」（课堂未讲，仿写官方 demo 257）
-    // 布局：slide 缩到 62% 宽并居中（CSS 类 lyc_0817_wall + centeredSlides），左右两侧露出相邻海报
-    // prev 控制上一张：左移 72%（相对 slide 自身宽度）、后退 160px、绕 Y 轴转 prevRotateY 度、缩到 0.8
-    // next 控制下一张：停在右侧 78%、后退 100px、缩到 0.86；进场时 scale 由 0.86 放大回 1
-    if (lyc_0817_effect === 'creative') {
-      lyc_0817_cfg.slidesPerView = 'auto';
-      lyc_0817_cfg.centeredSlides = true;
-      lyc_0817_cfg.creativeEffect = {
-        limitProgress: 2,                           // 左右各显示 2 张，第 2 张按 2 倍幅度变换
-        prev: {
-          shadow: true,
-          origin: 'right center',
-          translate: ['-72%', 0, -160],
-          rotate: [0, lyc_0817_state.prevRotateY, 0],
-          scale: 0.8,
-          opacity: 0.85
-        },
-        next: {
-          shadow: true,
-          origin: 'left center',
-          translate: ['78%', 0, -100],
-          scale: 0.86
-        }
-      };
-    }
-
-    return lyc_0817_cfg;
-  }
-
-  /* lyc_0817 · 2026-11-09 14:10:00 · Claude Opus 5.5 · 效果实验台重建函数 —— 高亮按钮 → 销毁旧实例 → 切换电影墙样式 → 用新 effect 重建 → 刷新面板读数 */
-  function lyc_0817_build4(lyc_0817_effect) {
-    document.querySelectorAll('.lyc-fx button').forEach(function (lyc_0817_btn) {
-      lyc_0817_btn.classList.toggle('lyc-on', lyc_0817_btn.dataset.fx === lyc_0817_effect);
-    });
-    if (lyc_0817_swiper4) lyc_0817_swiper4.destroy(true, true);   // 第二个 true：清掉旧效果留下的行内样式
-    document.getElementById('lycSw4').classList.toggle('lyc_0817_wall', lyc_0817_effect === 'creative');
-    lyc_0817_state.effect = lyc_0817_effect;
-    lyc_0817_meter.lastAt = 0;
-    lyc_0817_swiper4 = new Swiper('#lycSw4', lyc_0817_config4(lyc_0817_effect));
-
-    document.getElementById('lyc_0817_curFx').textContent = lyc_0817_effect;
-    document.getElementById('lyc_0817_gap').textContent = '测量中…';
-    document.getElementById('lyc_0817_gap2').textContent = '测量中…（等两次自动翻页）';
-    document.getElementById('lyc_0817_creativeOut').textContent = lyc_0817_effect === 'creative'
-      ? lyc_0817_fmtCreative(lyc_0817_swiper4.params.creativeEffect)
-      : '当前效果是 ' + lyc_0817_effect + '，点「应用并切到 creative」查看电影墙参数。';
-  }
-
-  /* lyc_0817 · 2026-11-09 14:10:00 · Claude Opus 5.5 · creative 参数展示 —— 把实例里实际生效的 prev / next 按一行一个对象的格式输出，便于答辩对照 */
-  function lyc_0817_fmtCreative(lyc_0817_ce) {
-    function lyc_0817_one(lyc_0817_o) {
-      return '{ translate: ' + JSON.stringify(lyc_0817_o.translate) + ', rotate: ' + JSON.stringify(lyc_0817_o.rotate) +
-        ', scale: ' + lyc_0817_o.scale + ', opacity: ' + lyc_0817_o.opacity +
-        (lyc_0817_o.origin ? ", origin: '" + lyc_0817_o.origin + "'" : '') + (lyc_0817_o.shadow ? ', shadow: true' : '') + ' }';
-    }
-    return 'effect: \'creative\'（实例中实际生效的参数）\n' +
-      'limitProgress: ' + lyc_0817_ce.limitProgress + '\n' +
-      'prev: ' + lyc_0817_one(lyc_0817_ce.prev) + '\n' +
-      'next: ' + lyc_0817_one(lyc_0817_ce.next);
-  }
-
-  /* lyc_0817 · 2026-11-09 14:10:00 · Claude Opus 5.5 · 实测间隔显示 —— 把两次自动翻页的时间差与预期值 delay + speed 对比 */
-  function lyc_0817_showGap(lyc_0817_ms) {
-    var lyc_0817_expect = lyc_0817_state.delay + lyc_0817_swiper4.params.speed;
-    var lyc_0817_text = (lyc_0817_ms / 1000).toFixed(2) + ' 秒（预期 ≈ ' + (lyc_0817_expect / 1000).toFixed(2) + ' 秒）';
-    document.getElementById('lyc_0817_gap').textContent = lyc_0817_text;
-    document.getElementById('lyc_0817_gap2').textContent = lyc_0817_text;
-  }
-
-  /* lyc_0817 · 2026-11-09 14:10:00 · Claude Opus 5.5 · 效果实验台初始化 —— 按任务一需求，初始 effect 为 cube */
-  lyc_0817_build4('cube');
-
-  // ── 任务 4 进阶：补全按钮点击事件，实现效果实时切换 ──
-  // 提示 1：动态换 effect 只改参数是无效的，必须销毁旧实例再重建（destroy + new）
-  // 提示 2：按钮上已有 data-fx 属性，用 btn.dataset.fx 读取要切换的效果名
-  document.querySelectorAll('.lyc-fx button').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      /* lyc_0817 · 2026-11-09 14:10:00 · Claude Opus 5.5 · 轮播效果实时切换 —— TODO 1 高亮、TODO 2 destroy、TODO 3 new 都在 lyc_0817_build4 中完成 */
-      lyc_0817_build4(btn.dataset.fx);
-    });
-  });
-
-  /* lyc_0817 · 2026-11-09 14:10:00 · Claude Opus 5.5 · 自测工具函数 —— 延时、等待下一次自动翻页、模拟一次鼠标拖动 */
-  function lyc_0817_wait(lyc_0817_ms) {
-    return new Promise(function (resolve) { setTimeout(resolve, lyc_0817_ms); });
-  }
-  function lyc_0817_waitAutoplay(lyc_0817_timeout) {
-    return new Promise(function (resolve) {
-      var lyc_0817_timer = setTimeout(function () { resolve(0); }, lyc_0817_timeout);
-      lyc_0817_meter.listeners.push(function (lyc_0817_at) { clearTimeout(lyc_0817_timer); resolve(lyc_0817_at); });
-    });
-  }
-  function lyc_0817_fakeDrag() {
-    var lyc_0817_target = lyc_0817_swiper4.slides[lyc_0817_swiper4.activeIndex];
-    var lyc_0817_rect = lyc_0817_swiper4.el.getBoundingClientRect();
-    var lyc_0817_y = lyc_0817_rect.top + lyc_0817_rect.height / 2;
-    var lyc_0817_x = lyc_0817_rect.left + lyc_0817_rect.width * 0.75;
-    function lyc_0817_fire(lyc_0817_node, lyc_0817_type, lyc_0817_cx) {
-      lyc_0817_node.dispatchEvent(new PointerEvent(lyc_0817_type, {
-        bubbles: true, cancelable: true, pointerId: 1, pointerType: 'mouse', isPrimary: true,
-        button: 0, buttons: lyc_0817_type === 'pointerup' ? 0 : 1, clientX: lyc_0817_cx, clientY: lyc_0817_y
-      }));
-    }
-    // 像真人一样每 20ms 移动一次，共 8 步，最后松手（瞬间完成的假拖动会让 Swiper 卡在暂停状态，不能代表真实操作）
-    return new Promise(function (resolve) {
-      var lyc_0817_step = 0;
-      lyc_0817_fire(lyc_0817_target, 'pointerdown', lyc_0817_x);
-      var lyc_0817_timer = setInterval(function () {
-        lyc_0817_step++;
-        if (lyc_0817_step <= 8) {
-          lyc_0817_fire(document, 'pointermove', lyc_0817_x - lyc_0817_step * 30);
-        } else {
-          clearInterval(lyc_0817_timer);
-          lyc_0817_fire(document, 'pointerup', lyc_0817_x - 240);
-          resolve();
-        }
-      }, 20);
-    });
-  }
-
-  /* lyc_0817 · 2026-11-09 14:10:00 · Claude Opus 5.5 · 任务一需求验证面板 —— 逐项实测 loop / 3.2 秒 + 手动后不停 / 圆点可点 / cube，并给出一句话结论 */
-  function lyc_0817_setCheck(lyc_0817_i, lyc_0817_ok, lyc_0817_detail) {
-    var lyc_0817_item = document.querySelectorAll('#lyc_0817_checks .lyc_0817_check')[lyc_0817_i];
-    lyc_0817_item.classList.toggle('lyc_0817_ok', lyc_0817_ok);
-    lyc_0817_item.classList.toggle('lyc_0817_bad', !lyc_0817_ok);
-    lyc_0817_item.querySelector('.lyc_0817_mark').textContent = lyc_0817_ok ? '✓' : '✗';
-    lyc_0817_item.querySelector('small').innerHTML = lyc_0817_detail;
-    return lyc_0817_ok;
-  }
-  document.getElementById('lyc_0817_selfTest').addEventListener('click', function () {
-    var lyc_0817_btn = this;
-    var lyc_0817_results = [];
-    var lyc_0817_sw, lyc_0817_p;
-    lyc_0817_btn.disabled = true;
-    lyc_0817_btn.textContent = '自测中，约 8 秒…';
-    document.getElementById('lyc_0817_t1Conclusion').textContent = '一句话结论：自测进行中…';
-    lyc_0817_state.delay = 3200;
-    lyc_0817_build4('cube');
-    lyc_0817_wait(400).then(function () {
-      // ④ 初始效果 cube
-      lyc_0817_sw = lyc_0817_swiper4;
-      lyc_0817_p = lyc_0817_sw.params;
-      // 测 ①③④ 时先停掉自动播放，避免自动翻页和脚本翻页撞在一起导致读数不准；测 ② 前再重新启动
-      lyc_0817_sw.autoplay.stop();
-      lyc_0817_results[3] = lyc_0817_setCheck(3, lyc_0817_p.effect === 'cube' && lyc_0817_sw.el.classList.contains('swiper-cube'),
-        'params.effect = <code>' + lyc_0817_p.effect + '</code>，容器 class 含 <code>swiper-cube</code>：' + lyc_0817_sw.el.classList.contains('swiper-cube'));
-      // ③ 点击第 3 个圆点
-      var lyc_0817_bullets = document.querySelectorAll('#lycPag4 .swiper-pagination-bullet');
-      lyc_0817_bullets[2].click();
-      return lyc_0817_wait(1100).then(function () {
-        lyc_0817_results[2] = lyc_0817_setCheck(2, lyc_0817_p.pagination.clickable === true && lyc_0817_bullets.length === 6 && lyc_0817_sw.realIndex === 2,
-          'pagination.el = <code>' + lyc_0817_p.pagination.el + '</code>，clickable = <code>' + lyc_0817_p.pagination.clickable +
-          '</code>，圆点 ' + lyc_0817_bullets.length + ' 个；点第 3 个圆点后 realIndex = ' + lyc_0817_sw.realIndex + '（期望 2）');
-      });
-    }).then(function () {
-      // ① 无缝循环：跳到第 6 张再往后翻
-      lyc_0817_sw.slideToLoop(5, 0);
-      return lyc_0817_wait(150).then(function () {
-        var lyc_0817_from = lyc_0817_sw.realIndex;
-        lyc_0817_sw.slideNext();
-        return lyc_0817_wait(1100).then(function () {
-          lyc_0817_results[0] = lyc_0817_setCheck(0, lyc_0817_p.loop === true && lyc_0817_from === 5 && lyc_0817_sw.realIndex === 0,
-            'loop = <code>' + lyc_0817_p.loop + '</code>；在第 ' + (lyc_0817_from + 1) + ' 张（最后一张）调用 slideNext() 后来到第 ' + (lyc_0817_sw.realIndex + 1) + ' 张（期望第 1 张）');
-        });
-      });
-    }).then(function () {
-      // ② 重新启动自动播放，300ms 后模拟一次手动拖动，再等下一次自动翻页
-      lyc_0817_sw.autoplay.start();
-      var lyc_0817_before, lyc_0817_after, lyc_0817_dragAt;
-      return lyc_0817_wait(300).then(function () {
-        lyc_0817_before = lyc_0817_sw.realIndex;
-        return lyc_0817_fakeDrag();
-      }).then(function () {
-        lyc_0817_dragAt = Date.now();
-        lyc_0817_after = lyc_0817_sw.realIndex;
-        return lyc_0817_waitAutoplay(6000);
-      }).then(function (lyc_0817_at) {
-        var lyc_0817_cost = lyc_0817_at ? lyc_0817_at - lyc_0817_dragAt : 0;
-        lyc_0817_results[1] = lyc_0817_setCheck(1, lyc_0817_p.autoplay.delay === 3200 && lyc_0817_p.autoplay.disableOnInteraction === false &&
-            lyc_0817_sw.autoplay.running && lyc_0817_at > 0,
-          'autoplay.delay = <code>' + lyc_0817_p.autoplay.delay + '</code>，disableOnInteraction = <code>' + lyc_0817_p.autoplay.disableOnInteraction +
-          '</code>；模拟拖动（第 ' + (lyc_0817_before + 1) + ' → ' + '第 ' + (lyc_0817_after + 1) + ' 张）后 autoplay.running = ' + lyc_0817_sw.autoplay.running +
-          (lyc_0817_at ? '，拖动后 ' + (lyc_0817_cost / 1000).toFixed(2) + ' 秒又自动翻了一页（800ms 拖动动画 + 3200ms 停留）' : '，6 秒内没有自动翻页'));
-      });
-    }).then(function () {
-      var lyc_0817_pass = lyc_0817_results.filter(Boolean).length;
-      document.getElementById('lyc_0817_t1Conclusion').textContent = lyc_0817_pass === 4
-        ? '一句话结论：4 项需求实测全部通过——第 2 轮配置粘进页面后，cube 初始效果、无缝循环、可点击圆点、3.2 秒自动翻页且拖动后不停，全部符合要求。'
-        : '一句话结论：' + lyc_0817_pass + ' / 4 项通过，请查看标红的项目。';
-      lyc_0817_btn.disabled = false;
-      lyc_0817_btn.textContent = '▶ 再测一次';
-    });
-  });
-
-  /* lyc_0817 · 2026-11-09 14:10:00 · Claude Opus 5.5 · 任务二 creative 角度调试 —— 修改 prev.rotate 的 Y 角度后重建为 creative（答辩：改成 20 度） */
-  function lyc_0817_applyRotate(lyc_0817_deg) {
-    lyc_0817_state.prevRotateY = lyc_0817_deg;
-    document.getElementById('lyc_0817_rotateInput').value = lyc_0817_deg;
-    lyc_0817_build4('creative');
-  }
-  document.getElementById('lyc_0817_rotateApply').addEventListener('click', function () {
-    var lyc_0817_v = parseFloat(document.getElementById('lyc_0817_rotateInput').value);
-    lyc_0817_applyRotate(isNaN(lyc_0817_v) ? 30 : lyc_0817_v);
-  });
-  document.getElementById('lyc_0817_rotate20').addEventListener('click', function () {
-    lyc_0817_applyRotate(20);
-  });
-
-  /* lyc_0817 · 2026-11-09 14:10:00 · Claude Opus 5.5 · 任务三 delay 现场修改 —— 改 params.autoplay.delay 后 stop + start 让新值立即生效，并提示预期间隔 */
-  function lyc_0817_applyDelay(lyc_0817_ms) {
-    lyc_0817_state.delay = lyc_0817_ms;
-    document.getElementById('lyc_0817_delayInput').value = lyc_0817_ms;
-    lyc_0817_swiper4.params.autoplay.delay = lyc_0817_ms;
-    lyc_0817_swiper4.autoplay.stop();
-    lyc_0817_swiper4.autoplay.start();
-    lyc_0817_meter.lastAt = 0;
-    document.getElementById('lyc_0817_gap').textContent = '测量中…';
-    document.getElementById('lyc_0817_gap2').textContent = '测量中…（等两次自动翻页）';
-    document.getElementById('lyc_0817_delayOut').textContent =
-      '当前 delay = ' + lyc_0817_ms + 'ms，speed = ' + lyc_0817_swiper4.params.speed + 'ms，预期翻页间隔 ≈ ' +
-      (lyc_0817_ms + lyc_0817_swiper4.params.speed) + 'ms（每张停留 ' + (lyc_0817_ms / 1000) + ' 秒 + 切换动画 0.8 秒）。';
-  }
-  document.getElementById('lyc_0817_delayApply').addEventListener('click', function () {
-    var lyc_0817_v = parseInt(document.getElementById('lyc_0817_delayInput').value, 10);
-    lyc_0817_applyDelay(isNaN(lyc_0817_v) || lyc_0817_v < 300 ? 3200 : lyc_0817_v);
-  });
-  document.getElementById('lyc_0817_delayReset').addEventListener('click', function () {
-    lyc_0817_applyDelay(3200);
-  });
-</script>
-</body>
-</html>
+<div class="swiper-pagination" id="lycPag4"></div>
+</div>
+</div>
+</div><div class="lyc_0817_panel" id="lyc_0817_task1Verification">
+<h3>需求验证：检查提示词生成的配置</h3>
+<p>一键检查当前任务自己的轮播：立方体效果、可点击圆点、首尾循环，以及手动拖动后自动播放是否继续。自测不会更改任务二、三。</p>
+<div class="lyc_0817_row">
+<button class="lyc_0817_btn" id="lyc_0817_selfTest">▶ 一键自测 4 项需求</button>
+<a class="lyc_0817_entry" href="swiper-task-record.html#lyc_0817_task1" target="_blank">查看任务一两轮提示词 →</a>
+</div>
+<div class="lyc_0817_checks" id="lyc_0817_checks">
+<div class="lyc_0817_check"><span class="lyc_0817_mark">?</span><div class="lyc_0817_body"><b>① 无缝循环</b><small>等待自测…</small></div></div>
+<div class="lyc_0817_check"><span class="lyc_0817_mark">?</span><div class="lyc_0817_body"><b>② 3.2 秒自动翻页，手动操作后不停止</b><small>等待自测…</small></div></div>
+<div class="lyc_0817_check"><span class="lyc_0817_mark">?</span><div class="lyc_0817_body"><b>③ 圆点分页器可点击</b><small>等待自测…</small></div></div>
+<div class="lyc_0817_check"><span class="lyc_0817_mark">?</span><div class="lyc_0817_body"><b>④ 初始效果为 cube</b><small>等待自测…</small></div></div>
+</div>
+<div class="lyc_0817_conclusion" id="lyc_0817_t1Conclusion">一句话结论：等待自测。</div>
+</div></section>
+<!-- lyc_0817 · 2026-11-09 21:11:01 · GPT-6 · 任务二独立卡片 —— 效果切换与 creative 参数实验，不启用键盘和计时面板。 -->
+<section class="lyc-sec" id="lyc_0817_task2"><div class="lyc-sec-head"><span class="lyc-no">二</span><h2>任务二 · creative 电影墙<small>仿写官方示例，探索 translate、rotate 与 scale</small></h2></div><p class="lyc-txt">初始为 slide 平推，每张停留 3.2 秒，切换动画 0.8 秒，手动操作后继续自动播放。点击按钮比较七种转场。选中 <b>creative 电影墙</b>后，两侧露出相邻海报；用下方调试区改变上一张卡片的角度，观察变化。</p><div class="lyc-fx">
+<button class="lyc-on" data-fx="slide">slide 平推（稳重）</button>
+<button data-fx="fade">fade 淡入淡出（优雅）</button>
+<button data-fx="cube">cube 3D 立方体</button>
+<button data-fx="coverflow">coverflow 画廊堆叠（沉浸）</button>
+<button data-fx="flip">flip 翻页（复古）</button>
+<button data-fx="cards">cards 卡片（俏皮）</button>
+<button data-fx="creative">creative 电影墙</button>
+</div><div class="lyc-demo">
+<span class="lyc-demo-tag">任务二演示 · 默认 slide · 七种效果切换 · 自动播放</span>
+<div class="lyc-swiper">
+<div class="swiper" id="lyc_0817_task2Swiper">
+<div class="swiper-wrapper">
+<div class="swiper-slide"><img alt="天宫空间站" src="swiper-imgs/tiangong_1.jpg"/><div class="lyc-cap"><h3>天宫空间站</h3><p>试试上面的效果按钮</p></div></div>
+<div class="swiper-slide"><img alt="复兴号动车组" src="swiper-imgs/fuxing_1.jpg"/><div class="lyc-cap"><h3>复兴号动车组</h3><p>同一组照片，七种讲述方式</p></div></div>
+<div class="swiper-slide"><img alt="C919大飞机" src="swiper-imgs/c919_1.jpg"/><div class="lyc-cap"><h3>C919 大飞机</h3><p>企业官网爱用 fade</p></div></div>
+<div class="swiper-slide"><img alt="奋斗者号" src="swiper-imgs/fendouzhe_1.jpg"/><div class="lyc-cap"><h3>奋斗者号</h3><p>游戏网站爱用 cube</p></div></div>
+<div class="swiper-slide"><img alt="中国天眼" src="swiper-imgs/fast_1.jpg"/><div class="lyc-cap"><h3>中国天眼 FAST</h3><p>相册页面爱用 coverflow</p></div></div>
+</div>
+<div class="swiper-pagination" id="lyc_0817_task2Pagination"></div>
+</div>
+</div>
+</div><div class="lyc_0817_panel" id="lyc_0817_task2Controls">
+<h3>creative 参数调试：上一张卡片的旋转角度</h3><p><a class="lyc_0817_entry" href="swiper/demo/257-effect-creative.html" target="_blank">打开项目内置的官方 creative 示例 →</a></p>
+<p>上一张：缩小、左移，并绕 Y 轴转一个角度；下一张：先在右侧以 0.86 倍大小等待，进场时放大到 1。改下面的角度后点「应用」，轮播会切到 creative 并用新角度重建。答辩时可以直接点「一键改成 20 度」。</p>
+<p><b>用自己的话解释：</b>prev 描述左侧上一张离开中心后的状态；next 描述右侧下一张进入中心前的状态。translate 的 X/Y 百分比相对单张 slide 自身的宽/高，Z 数值为像素；rotate 的三个值依次控制 X/Y/Z 轴旋转角度，scale 控制缩放倍率。当前 next 的 scale 为 0.86，进场时恢复到 1，因此看起来逐渐放大。</p>
+<div class="lyc_0817_row">
+<label for="lyc_0817_rotateInput">prev.rotate 的 Y 角度（度）</label>
+<input id="lyc_0817_rotateInput" step="5" type="number" value="30"/>
+<button class="lyc_0817_btn" id="lyc_0817_rotateApply">应用并切到 creative</button>
+<button class="lyc_0817_btn lyc_0817_ghost" id="lyc_0817_rotate20">一键改成 20 度</button>
+<a class="lyc_0817_entry" href="swiper-task-record.html#lyc_0817_task2" target="_blank">查看任务二 AI 对话 →</a>
+</div>
+<div class="lyc_0817_out" id="lyc_0817_creativeOut">切到 creative 后，这里会显示当前生效的 creativeEffect 配置。</div>
+</div></section>
+<section class="lyc-sec lyc_0817_task3card" id="lyc_0817_task3">
+<div class="lyc-sec-head"><span class="lyc-no">三</span><h2>任务三 · 综合创作 + 技术答辩<small>六件大国重器 · 键盘导览 · 观展护照</small></h2></div>
+<p class="lyc-txt">从九天之上到万米深海，用五张实景照片与一张 AI 生成邮轮图感受中国力量。保留<b>方向键切换与现场调速</b>，新增<b>观展护照</b>：为当前展品盖章，集齐六枚印章，解锁「大国重器探索官」称号与专属纪念证书。</p>
+<div class="lyc-req"><h3>任务三 · 功能与展示</h3><p>① 完整加入第六件展品「爱达·魔都号」，使用 AI 生成的 16:9 图片；② 按 ← → 切换并回显按键；③ 修改 delay 并观察实测间隔；④ 主动盖章并保存收集进度。</p><span class="lyc-star">照片已下载至本地 · <a class="lyc_0817_entry" href="swiper-task3-record.html">查看任务三提示词、图片来源与答辩四问 →</a></span></div>
+<section aria-label="六件大国重器轮播展览" id="lyc_0817_gallery">
+<div class="lyc_0817_galleryhead"><span><i></i> 光影展览 · 自动导览</span><span id="lyc_0817_counter">01 / 06</span></div>
+<div class="lyc_0817_stage">
+<div aria-label="大国重器图片轮播" aria-roledescription="轮播" class="swiper lyc_0817_swiper" id="lyc_0817_exhibition" role="region">
+<div class="swiper-wrapper" id="lyc_0817_slides"></div>
+<button aria-label="上一件展品" class="lyc_0817_arrow lyc_0817_prev" id="lyc_0817_prev" type="button">‹</button>
+<button aria-label="下一件展品" class="lyc_0817_arrow lyc_0817_next" id="lyc_0817_next" type="button">›</button>
+<div class="swiper-pagination" id="lyc_0817_pagination"></div>
+</div>
+</div>
+<div class="lyc_0817_playbar"><div><button aria-pressed="false" id="lyc_0817_play" type="button">暂停导览</button><span id="lyc_0817_countdown">正在加载…</span></div><p>键盘 <kbd>←</kbd> <kbd>→</kbd> 切换 <span id="lyc_0817_key">· 等待按键</span></p></div>
+<div aria-hidden="true" class="lyc_0817_progress"><div id="lyc_0817_progressfill"></div></div>
+<div aria-label="展品快速导航" class="lyc_0817_catalog" id="lyc_0817_catalog"></div>
+<noscript><p>请启用 JavaScript 以查看六件展品及交互导览。</p></noscript>
+</section>
+<section aria-labelledby="lyc_0817_passportTitle" class="lyc_0817_passport" id="lyc_0817_passport">
+<div class="lyc_0817_passportcopy"><p class="lyc_0817_eyebrow">新增创新功能 / 我的观展护照</p><h2 id="lyc_0817_passportTitle">让每一次探索，都留下印记。</h2><p>看到喜欢的展品，就为它盖一枚章。集齐六枚，即可解锁探索官称号，下载专属纪念证书。</p><button class="lyc_0817_primary" id="lyc_0817_stamp" type="button">为当前展品盖章</button></div>
+<div class="lyc_0817_passportbody"><div class="lyc_0817_passportheading"><b id="lyc_0817_stampCount">已集齐 0 / 6</b><button id="lyc_0817_reset" type="button">重置护照</button></div><div class="lyc_0817_stamps" id="lyc_0817_stamps"></div><p id="lyc_0817_passportMessage" role="status">第一枚印章，等你点亮。</p><p class="lyc_0817_muted" id="lyc_0817_storageMessage">护照进度保存在当前浏览器，下次打开可继续收集。</p></div>
+</section>
+<!-- lyc_0817 · 2026-11-09 21:11:01 · GPT-6 · 集章奖励 —— 集齐六枚后解锁探索官称号，可自定义昵称并下载 PNG 纪念证书。 -->
+<section aria-labelledby="lyc_0817_rewardTitle" class="lyc_0817_reward">
+<p class="lyc_0817_eyebrow">集章奖励 / 给探索者的纪念</p>
+<div class="lyc_0817_rewardhead"><h2 id="lyc_0817_rewardTitle">解锁「大国重器探索官」</h2><span id="lyc_0817_rewardBadge">尚未解锁</span></div>
+<p id="lyc_0817_rewardMessage" role="status">集齐六枚展品印章，即可领取专属称号和可下载的纪念证书。</p>
+<div hidden="" id="lyc_0817_rewardContent">
+<div aria-label="大国重器探索官纪念证书预览，六件展品全部点亮" class="lyc_0817_certificate" role="img">
+<p>大国重器光影展 · 观展纪念</p><span class="lyc_0817_medal">★</span><h3>大国重器探索官</h3><p>九天揽月 · 驰骋神州 · 探秘深蓝</p><b>六件展品，全部点亮 · 06 / 06</b>
+</div>
+<div class="lyc_0817_rewardactions"><label for="lyc_0817_rewardName">证书上的昵称</label><input autocomplete="off" id="lyc_0817_rewardName" maxlength="12" placeholder="最多 12 个字" type="text" value="光影探索者"/><button class="lyc_0817_primary" id="lyc_0817_downloadReward" type="button">下载我的纪念证书 ↓</button></div>
+<p class="lyc_0817_muted" id="lyc_0817_downloadMessage" role="status">证书为 PNG 图片，可保存到本地或分享给朋友。</p>
+</div>
+</section>
+<section aria-labelledby="lyc_0817_labTitle" class="lyc_0817_lab">
+<div><p class="lyc_0817_eyebrow">任务三 / 播放速度设置</p><h2 id="lyc_0817_labTitle">一张照片，想看多久？</h2><p>这里控制上方照片自动切换的快慢。<b>1000 毫秒 = 1 秒</b>，数值越小，翻页越快。例如填 3200，每张先停留 3.2 秒，再用 0.8 秒切换到下一张，总共约 4 秒。</p><p>操作：输入时间 → 点击“应用时间” → 观察上方轮播。如果已暂停，请先点“继续导览”。</p></div>
+<form id="lyc_0817_delayForm"><label for="lyc_0817_delay">停留时间 delay（毫秒）</label><div class="lyc_0817_formrow"><input id="lyc_0817_delay" max="20000" min="300" required="" step="100" type="number" value="3200"><button class="lyc_0817_primary" type="submit">应用时间</button><button id="lyc_0817_restore" type="button">恢复默认</button></div><p id="lyc_0817_delayMessage" role="status">停留 3200ms ＋ 动画 800ms，预期间隔约 4.0 秒。</p><p class="lyc_0817_measure">实测自动翻页间隔：<strong id="lyc_0817_measured">等待两次连续自动翻页…</strong></p></form>
+</section>
+<details class="lyc_0817_defense"><summary>任务三答辩准备 · 点击查看四个问题</summary><p>① 这段初始化和事件代码分别做了什么？② AI 初稿哪里不符合需求，实际修改了什么？③ keyboard 的新参数有什么作用？④ 现场修改 delay 后，两次自动翻页的间隔如何变化？</p><p><a class="lyc_0817_entry" href="swiper-task3-record.html">查看本次实现的逐题解释与关键对话 →</a></p></details>
+<div class="lyc_0817_task3links"><a class="lyc_0817_entry" href="swiper-task3-record.html#lyc_0817_sources">查看照片来源 →</a><a class="lyc_0817_entry" href="swiper-task3-record.html">任务三提示词与答辩记录 →</a></div>
+</section>
+<div class="lyc-back"><a href="index.html">← 返回课堂实践中心</a><a href="swiper-task-record.html">任务一、二提示词记录</a><a href="swiper-task3-record.html">任务三提示词与答辩记录</a></div>
+<footer>Swiper 三项任务 · 大国重器光影展 · 高级网页设计 · lyc_0817</footer>
+</div><script src="js/lyc_0817_swiper_tasks.js"></script><script src="js/lyc_0817_task3.js"></script></body></html>
