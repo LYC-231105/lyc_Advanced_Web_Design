@@ -8,16 +8,16 @@
 
 ## 任务一 · 提示词工程师：让 AI 听懂需求
 
-**需求拆解**：生成 `new Swiper('#wySw4', {...})`：① 无缝循环；② 3.2 秒自动翻页，手动操作后不停止；③ 圆点分页器可点击；④ 初始效果为 cube。
+**需求拆解**：生成 `new Swiper('#lycSw4', {...})`：① 无缝循环；② 3.2 秒自动翻页，手动操作后不停止；③ 圆点分页器可点击；④ 初始效果为 cube。
 
 ### 第 1 轮提示词
 
-> 帮我写一个 Swiper 轮播的初始化代码，容器是 #wySw4，要能循环播放、自动翻页、下面有小圆点，效果用立方体那种。
+> 帮我写一个 Swiper 轮播的初始化代码，容器是 #lycSw4，要能循环播放、自动翻页、下面有小圆点，效果用立方体那种。
 
 ### 第 1 轮 AI 回答（节选：JS 部分原文，另附有 HTML 和 CSS）
 
 ```js
-var lyc_0817_wySw4 = new Swiper('#wySw4', {
+var lyc_0817_lycSw4 = new Swiper('#lycSw4', {
   loop: true,                     // 循环播放
   effect: 'cube',                 // 立方体翻转效果
   grabCursor: true,
@@ -29,13 +29,13 @@ var lyc_0817_wySw4 = new Swiper('#wySw4', {
     pauseOnMouseEnter: true       // 鼠标移上去时暂停
   },
   pagination: {
-    el: '#wySw4 .swiper-pagination',
+    el: '#lycSw4 .swiper-pagination',
     clickable: true
   }
 });
 ```
 
-AI 同时给了 CSS `#wySw4 { width: 300px; height: 300px; }`，以及图片路径为 `img/swiper/1.jpg` 等的 HTML 结构。
+AI 同时给了 CSS `#lycSw4 { width: 300px; height: 300px; }`，以及图片路径为 `img/swiper/1.jpg` 等的 HTML 结构。
 
 **粘进页面验证：不通过。** `delay = 3000`，不是 3.2 秒；鼠标停在轮播上 5 秒，`autoplay.paused = true`，一直不翻页；附带的 CSS 把展台压成 300×300；附带 HTML 里的图片路径在项目中不存在。
 截图：`.screenshots/swiper-task/task1-round1-problem.png`
@@ -44,7 +44,7 @@ AI 同时给了 CSS `#wySw4 { width: 300px; height: 300px; }`，以及图片路�
 ### 第 2 轮提示词
 
 > 你上一版有几处不符合我的需求，我说清楚一点：
-> 1. 页面的 HTML 和 CSS 已经写好了，不要动，也不要改宽高、图片路径，我只要一段 `new Swiper('#wySw4', {...})`，可以直接粘到页面底部的 `<script>` 里。页面里分页器的容器是 `<div class="swiper-pagination" id="wyPag4"></div>`，请直接用 `#wyPag4`。
+> 1. 页面的 HTML 和 CSS 已经写好了，不要动，也不要改宽高、图片路径，我只要一段 `new Swiper('#lycSw4', {...})`，可以直接粘到页面底部的 `<script>` 里。页面里分页器的容器是 `<div class="swiper-pagination" id="lycPag4"></div>`，请直接用 `#lycPag4`。
 > 2. 必须是无缝循环 loop。
 > 3. 自动翻页间隔是 3.2 秒，也就是 3200 毫秒，不是 3 秒。
 > 4. 用户手动拖动、点圆点之后自动播放不能停；鼠标放上去也不要暂停（不要加 pauseOnMouseEnter）。
@@ -55,12 +55,12 @@ AI 同时给了 CSS `#wySw4 { width: 300px; height: 300px; }`，以及图片路�
 ### 第 2 轮 AI 回答（最终采用）
 
 ```js
-var lyc_0817_wySw4 = new Swiper('#wySw4', {
+var lyc_0817_lycSw4 = new Swiper('#lycSw4', {
   loop: true,
   effect: 'cube',
   speed: 800,
   autoplay: { delay: 3200, disableOnInteraction: false },
-  pagination: { el: '#wyPag4', clickable: true }
+  pagination: { el: '#lycPag4', clickable: true }
 });
 ```
 
@@ -74,7 +74,7 @@ AI 逐条说明：`loop: true` 负责无缝循环；`autoplay.delay: 3200` 对�
 |---|---|
 | ① 无缝循环 | 在第 6 张调用 `slideNext()`，来到第 1 张 ✅ |
 | ② 3.2 秒，手动后不停 | `delay=3200`、`disableOnInteraction=false`；模拟拖动后 `autoplay.running=true`，4.01 秒后又自动翻页（0.8 秒动画 + 3.2 秒停留）✅ |
-| ③ 圆点可点击 | `el=#wyPag4`、`clickable=true`，共 6 个圆点；点第 3 个后 `realIndex=2` ✅ |
+| ③ 圆点可点击 | `el=#lycPag4`、`clickable=true`，共 6 个圆点；点第 3 个后 `realIndex=2` ✅ |
 | ④ 初始 cube | 页面打开即 `effect='cube'`，容器带 `swiper-cube` 类 ✅ |
 
 截图：`task1-verify-panel.png`、`task1-cube-initial.png`
@@ -82,8 +82,8 @@ AI 逐条说明：`loop: true` 负责无缝循环；`autoplay.delay: 3200` 对�
 
 ### 答辩抽问
 
-- **第一版漏掉了哪个需求？** 漏了三个：没说 3.2 秒；没说手动操作后不能停；没说圆点要能点击。另外也没交代分页器 `#wyPag4`，以及“只要 JS、不要动 HTML/CSS”。
-- **第二轮怎么“说清楚”的？** 需求逐条编号；写出具体数值（3200 毫秒，不是 3 秒）；把容器写死（`#wyPag4`）；把反面要求也写出来（不要 `pauseOnMouseEnter`）；限定输出范围，并要求逐条说明对应哪个参数。
+- **第一版漏掉了哪个需求？** 漏了三个：没说 3.2 秒；没说手动操作后不能停；没说圆点要能点击。另外也没交代分页器 `#lycPag4`，以及“只要 JS、不要动 HTML/CSS”。
+- **第二轮怎么“说清楚”的？** 需求逐条编号；写出具体数值（3200 毫秒，不是 3 秒）；把容器写死（`#lycPag4`）；把反面要求也写出来（不要 `pauseOnMouseEnter`）；限定输出范围，并要求逐条说明对应哪个参数。
 - **AI 第一次的代码错在哪？** `delay: 3000`；多加了 `pauseOnMouseEnter: true`，鼠标悬停就暂停；附带的 CSS 和 HTML 会破坏现有页面（300×300，图片路径不存在）。`disableOnInteraction: false` 和 `clickable` 是它碰巧猜对的，不能指望下次也猜对。
 
 ---
@@ -115,7 +115,7 @@ AI 回答要点（原文节选）：
 
 ```js
 if (lyc_0817_effect === 'creative') {
-  lyc_0817_cfg.slidesPerView = 'auto';      // CSS：#wySw4.lyc_0817_wall .swiper-slide{width:62%}
+  lyc_0817_cfg.slidesPerView = 'auto';      // CSS：#lycSw4.lyc_0817_wall .swiper-slide{width:62%}
   lyc_0817_cfg.centeredSlides = true;
   lyc_0817_cfg.creativeEffect = {
     limitProgress: 2,
@@ -151,21 +151,21 @@ AI 回答（原文节选）：
 ### ① 第六件展品「爱达·魔都号」
 
 - `swiper-imgs/aida_modu.jpg`：AI 生图，1280×720（16:9）。提示词：`photorealistic aerial photograph of "Adora Magic City" (爱达·魔都号), China's first domestically built large cruise ship, sailing on deep blue ocean at golden hour, 16:9 landscape, cinematic travel photography, no text`
-- 4 个演示台都已加入完整的第 6 张 slide（`img` + alt + `.wy-cap` 标题和简介），实测每个轮播 6 张、6 个圆点。
+- 4 个演示台都已加入完整的第 6 张 slide（`img` + alt + `.lyc-cap` 标题和简介），实测每个轮播 6 张、6 个圆点。
 
 ### ② 新能力：keyboard 键盘控制
 
 **关键对话 1**
 
-> ……页面里一共有 4 个轮播。我想给 #wySw4 加上「键盘方向键 ← → 切换」的功能，课上没讲过。请给我加了键盘控制之后的完整配置，并解释新加的参数是什么作用。
+> ……页面里一共有 4 个轮播。我想给 #lycSw4 加上「键盘方向键 ← → 切换」的功能，课上没讲过。请给我加了键盘控制之后的完整配置，并解释新加的参数是什么作用。
 
 AI 回答（节选）：
 
 ```js
-new Swiper('#wySw4', {
+new Swiper('#lycSw4', {
   loop: true, speed: 800, effect: 'cube', grabCursor: true,
   autoplay: { delay: 3200, disableOnInteraction: false },
-  pagination: { el: '#wyPag4', clickable: true },
+  pagination: { el: '#lycPag4', clickable: true },
   keyboard: {
     enabled: true,          // 开启键盘控制
     onlyInViewport: true,   // 只有轮播出现在可视区域内时才响应按键
@@ -174,7 +174,7 @@ new Swiper('#wySw4', {
 });
 ```
 
-“只想控制 #wySw4，就只给它加 `keyboard`，其他 3 个不加……用键盘切换后自动播放会继续……光标在 input / textarea 里打字时，Swiper 会忽略方向键。”
+“只想控制 #lycSw4，就只给它加 `keyboard`，其他 3 个不加……用键盘切换后自动播放会继续……光标在 input / textarea 里打字时，Swiper 会忽略方向键。”
 
 **关键对话 2**
 
@@ -183,7 +183,7 @@ new Swiper('#wySw4', {
 AI 回答（节选）：“大约 1800ms，也就是 delay 1000 加上动画 800……动画结束（触发 `transitionEnd`）后，才开始下一轮 `delay` 倒计时。”
 
 ```js
-var s = document.querySelector('#wySw4').swiper;
+var s = document.querySelector('#lycSw4').swiper;
 s.params.autoplay.delay = 1000;
 s.autoplay.stop();
 s.autoplay.start();
@@ -193,7 +193,7 @@ s.autoplay.start();
 
 ### ③ 答辩四连问
 
-1. **这段代码什么意思？** `keyboard.enabled` 让 ← → 翻页；`onlyInViewport` 让 `#wySw4` 只在屏幕里时才响应；`pageUpDown: false` 把 PageUp/PageDown 留给页面滚动；`on.keyPress` 在轮播下方回显“最近一次按键 → 第几张”。
+1. **这段代码什么意思？** `keyboard.enabled` 让 ← → 翻页；`onlyInViewport` 让 `#lycSw4` 只在屏幕里时才响应；`pageUpDown: false` 把 PageUp/PageDown 留给页面滚动；`on.keyPress` 在轮播下方回显“最近一次按键 → 第几张”。
 2. **AI 第一次哪里不对，我改了什么？** AI 给的 `new Swiper` 没赋值给变量。我的页面换效果时要先 destroy 再 new，照抄的话一换效果键盘就丢了，所以我把 `keyboard` 写进公共配置函数 `lyc_0817_config4()`，实例保存在 `lyc_0817_swiper4`。另外：任务二 AI 建议裁成 2:3 竖图、说 slidesPerView 没用，我改成 62% 宽加 `centeredSlides`，并补回 `speed: 800`；任务一第 1 轮的 3000ms 和 `pauseOnMouseEnter` 在第 2 轮改正。
 3. **新参数的作用？** `keyboard.enabled / onlyInViewport / pageUpDown`、`on.keyPress(swiper, keyCode)`（37 是 ←，39 是 →）；任务二新增的 `slidesPerView: 'auto'`、`centeredSlides: true`、`creativeEffect.limitProgress: 2`。
 4. **现场把 delay 改成指定值？** 在页面「任务三 · 现场修改 autoplay.delay」输入并应用，或者在控制台改 `params.autoplay.delay` 再 `stop()` + `start()`。预期间隔 ≈ delay + speed，因为动画结束后才重新倒计时。实测：delay=3200 时间隔 4.04 秒；delay=1000 时间隔 1.83 秒。若改成 5000，预期约 5.8 秒。
