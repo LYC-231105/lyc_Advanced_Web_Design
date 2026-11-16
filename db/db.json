@@ -1,0 +1,72 @@
+{
+  "poems": [
+  {
+    "content": "你看是不是变了！",
+    "pic": "https://gitee.com/wangyao_jsj/project2024_01/raw/master/img/6.jpg",
+    "title": "短歌行",
+    "author": "曹操"
+  },
+  {
+    "content": "雨前初见花间蕊，雨后全无叶底花。",
+    "pic": "https://gitee.com/wangyao_jsj/project2024_01/raw/master/img/2.jpg",
+    "title": "雨晴",
+    "author": "王驾"
+  },
+  {
+    "content": "花近高楼伤客心，万方多难此登临。",
+    "pic": "https://gitee.com/wangyao_jsj/project2024_01/raw/master/img/3.jpg",
+    "title": "脊楼",
+    "author": "杜甫"
+  },
+  {
+    "content": "纤云弄巧，飞星传恨，银汉迢迢暗度。",
+    "pic": "https://gitee.com/wangyao_jsj/project2024_01/raw/master/img/4.jpg",
+    "title": "鹊桥仙·纤云弄巧",
+    "author": "秦观"
+  },
+  {
+    "content": "日照香炉生紫烟，遥看瀑布挂前川。飞流直下三千尺，疑是银河落九天。",
+    "pic": "img/poems/lushan-waterfall.jpg",
+    "title": "望庐山瀑布",
+    "author": "李白"
+  },
+  {
+    "content": "春眠不觉晓，处处闻啼鸟。夜来风雨声，花落知多少。",
+    "pic": "img/poems/spring-peach.jpg",
+    "title": "春晓",
+    "author": "孟浩然"
+  }
+  ],
+  "authors": [
+  {
+    "name": "曹操",
+    "dynasty": "东汉末年",
+    "intro": "建安文学的代表人物，诗风慷慨悲凉。"
+  },
+  {
+    "name": "王驾",
+    "dynasty": "唐代",
+    "intro": "晚唐诗人，擅长以眼前小景写惜春之情。"
+  },
+  {
+    "name": "杜甫",
+    "dynasty": "唐代",
+    "intro": "被尊为“诗圣”，作品沉郁顿挫，关切家国。"
+  },
+  {
+    "name": "秦观",
+    "dynasty": "北宋",
+    "intro": "婉约派词人，语言清丽，情致深婉。"
+  },
+  {
+    "name": "李白",
+    "dynasty": "唐代",
+    "intro": "被称为“诗仙”，想象奇绝，气象壮阔。"
+  },
+  {
+    "name": "孟浩然",
+    "dynasty": "唐代",
+    "intro": "山水田园诗代表，语言清淡自然。"
+  }
+  ]
+}

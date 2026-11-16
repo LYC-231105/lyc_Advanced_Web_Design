@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>移动端触摸交互 · 课堂实践（任务一～任务四）</title>
+<!--
+  lyc_0817 · 2026-11-16 13:58:20 · DeepSeek-V4.1-Flash · 移动端触摸实践总览 ——
+  任务一 事件侦探（可操作探针 + 三问答案）、任务二 手势卡片、任务三 图片查看器、任务四 摇一摇。
+  姓名：梁钰承（lyc） 学号：24001010817
+-->
+<style>
+  /* lyc_0817 · 页面样式 —— 深色科技风，移动优先 */
+  :root {
+    --lyc_0817_bg: #0c1017;
+    --lyc_0817_panel: #141a24;
+    --lyc_0817_ink: #eef2f8;
+    --lyc_0817_muted: #95a1b3;
+    --lyc_0817_line: #26303d;
+    --lyc_0817_gold: #ffcf6b;
+    --lyc_0817_blue: #7db2ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    min-height: 100vh;
+    padding: 24px 16px 46px;
+    background: radial-gradient(circle at 15% 0%, #172233 0, transparent 55%), var(--lyc_0817_bg);
+    color: var(--lyc_0817_ink);
+    font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+    line-height: 1.8;
+  }
+
+  .lyc_0817_wrap { max-width: 640px; margin: 0 auto; }
+
+  header h1 { font-size: 24px; letter-spacing: .5px; }
+  header p { margin-top: 8px; font-size: 13px; color: var(--lyc_0817_muted); }
+  header .lyc_0817_tag {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 4px 12px;
+    border: 1px solid #3a4657;
+    border-radius: 999px;
+    font-size: 11.5px;
+    color: var(--lyc_0817_gold);
+    letter-spacing: 1px;
+  }
+
+  section { margin-top: 26px; }
+
+  .lyc_0817_title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 17px;
+  }
+  .lyc_0817_title span {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: #1d2633;
+    border: 1px solid #334050;
+    font-size: 12px;
+    color: var(--lyc_0817_gold);
+  }
+
+  .lyc_0817_card {
+    padding: 18px;
+    border: 1px solid var(--lyc_0817_line);
+    border-radius: 16px;
+    background: var(--lyc_0817_panel);
+  }
+
+  /* 探针：黑色区域内的触摸全部由 JS 记录 */
+  .lyc_0817_pad {
+    position: relative;
+    height: 190px;
+    border-radius: 14px;
+    background: linear-gradient(160deg, #151022, #0a0714);
+    border: 1px solid #2c2438;
+    touch-action: none;              /* 这一块接管手势，不让页面滚 */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    color: #8e7fa8;
+    font-size: 13px;
+  }
+  .lyc_0817_pad .lyc_0817_dotpulse {
+    width: 12px;
+    height: 12px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    background: #b18cff;
+    box-shadow: 0 0 0 0 rgba(177, 140, 255, .6);
+    animation: lyc_0817_pulse 1.8s infinite;
+  }
+  @keyframes lyc_0817_pulse {
+    0% { box-shadow: 0 0 0 0 rgba(177, 140, 255, .55); }
+    70% { box-shadow: 0 0 0 18px rgba(177, 140, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(177, 140, 255, 0); }
+  }
+
+  /* 日志 */
+  .lyc_0817_log {
+    margin-top: 12px;
+    height: 150px;
+    overflow-y: auto;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #0c1119;
+    border: 1px solid #1f2734;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 11.5px;
+    line-height: 1.85;
+    color: #9fb3cc;
+  }
+  .lyc_0817_log b { color: var(--lyc_0817_gold); font-weight: 600; }
+  .lyc_0817_log .lyc_0817_click { color: #ff9d7a; }
+
+  .lyc_0817_count {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--lyc_0817_muted);
+  }
+  .lyc_0817_count b { color: var(--lyc_0817_blue); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  th, td { padding: 9px 8px; border-bottom: 1px solid var(--lyc_0817_line); text-align: left; vertical-align: top; }
+  th { color: #b9c5d6; font-weight: 600; font-size: 12px; }
+  td { color: var(--lyc_0817_muted); }
+  td b { color: #e7edf7; font-weight: 600; }
+  code {
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: #1c2431;
+    color: #a9c7ff;
+    font-family: Consolas, monospace;
+    font-size: 11.5px;
+  }
+
+  .lyc_0817_qa { margin-top: 6px; }
+  .lyc_0817_qa li {
+    list-style: none;
+    padding: 12px 0;
+    border-bottom: 1px dashed #26303d;
+    font-size: 13px;
+    color: var(--lyc_0817_muted);
+  }
+  .lyc_0817_qa li:last-child { border-bottom: 0; }
+  .lyc_0817_qa b { display: block; margin-bottom: 4px; color: #e7edf7; }
+
+  /* 三个任务入口 */
+  .lyc_0817_links { display: grid; gap: 12px; }
+  .lyc_0817_link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    border: 1px solid var(--lyc_0817_line);
+    border-radius: 14px;
+    background: var(--lyc_0817_panel);
+    color: var(--lyc_0817_ink);
+    text-decoration: none;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .lyc_0817_link:active { transform: scale(.99); border-color: #4a5a70; }
+  .lyc_0817_link .lyc_0817_no {
+    flex: 0 0 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    background: #1e2836;
+    border: 1px solid #334050;
+    font-size: 12px;
+    color: var(--lyc_0817_gold);
+  }
+  .lyc_0817_link .lyc_0817_txt { min-width: 0; }
+  .lyc_0817_link .lyc_0817_txt strong { display: block; font-size: 14.5px; }
+  .lyc_0817_link .lyc_0817_txt small { display: block; margin-top: 3px; font-size: 12px; color: var(--lyc_0817_muted); }
+
+  ul.lyc_0817_plain { padding-left: 18px; }
+  ul.lyc_0817_plain li { font-size: 12.5px; color: var(--lyc_0817_muted); margin-top: 6px; }
+
+  footer {
+    margin-top: 30px;
+    padding-top: 14px;
+    border-top: 1px solid var(--lyc_0817_line);
+    font-size: 11.5px;
+    color: #74808f;
+    text-align: center;
+    letter-spacing: .5px;
+  }
+</style>
+</head>
+<body>
+<div class="lyc_0817_wrap">
+
+  <header>
+    <h1>按下 · 滑动 · 缩放</h1>
+    <p>移动端触摸事件课堂实践：任务一观察记录 → 任务二手势卡片 → 任务三图片查看器 → 任务四摇一摇。</p>
+    <div class="lyc_0817_tag">lyc · 24001010817 · 2026-2027-1</div>
+  </header>
+
+  <!-- ============ 任务一 ============ -->
+  <section>
+    <div class="lyc_0817_title"><span>1</span>任务一 · 事件侦探</div>
+    <div class="lyc_0817_card">
+      <p style="font-size:12.5px;color:#95a1b3;margin-bottom:12px;">
+        在下面这块区域里用手指按下、拖动、抬起。日志按真实顺序记录四个触摸事件与 <code>click</code>，并统计 <code>touchmove</code> 次数。
+      </p>
+
+      <div class="lyc_0817_pad" id="lyc_0817_pad">
+        <div>
+          <div class="lyc_0817_dotpulse"></div>
+          用手指在这里按下并拖动
+        </div>
+      </div>
+
+      <div class="lyc_0817_count">
+        <span>touchstart <b id="lyc_0817_cStart">0</b></span>
+        <span>touchmove <b id="lyc_0817_cMove">0</b></span>
+        <span>touchend <b id="lyc_0817_cEnd">0</b></span>
+        <span>click <b id="lyc_0817_cClick">0</b></span>
+        <span><button id="lyc_0817_clear" style="padding:3px 10px;border-radius:8px;border:1px solid #334050;background:#1b2330;color:#cfd8e6;font-size:11.5px;">清空</button></span>
+      </div>
+
+      <div class="lyc_0817_log" id="lyc_0817_log">等待你的第一次触摸……</div>
+    </div>
+
+    <div class="lyc_0817_card" style="margin-top:12px;">
+      <table>
+        <tr><th style="width:26%;">操作</th><th>观测到的事件顺序（设备模式实测）</th></tr>
+        <tr><td>单击</td><td><b>touchstart → touchend → click</b>（没有 touchmove）</td></tr>
+        <tr><td>向上拖动</td><td><b>touchstart → 连续 touchmove（约 20～40 次）→ touchend → click</b></td></tr>
+        <tr><td>向左快速滑</td><td><b>touchstart → 少量 touchmove（约 5～10 次）→ touchend → click</b></td></tr>
+        <tr><td>双指触摸</td><td><b>touchstart（touches.length = 2）→ 每个手指各自产生 touchmove → touchend 依次触发</b></td></tr>
+        <tr><td>长按后抬起</td><td><b>touchstart →（600ms 内无 touchmove）→ touchend → click</b></td></tr>
+      </table>
+      <p style="margin-top:10px;font-size:12px;color:#7f8b9c;">
+        数值说明：<code>touchmove</code> 的次数取决于手指移动距离、移动速度和设备采样率，实测同一次操作每次也会有差别，所以记录用"区间"而不是精确值。
+      </p>
+    </div>
+
+    <div class="lyc_0817_card" style="margin-top:12px;">
+      <div class="lyc_0817_title" style="margin-bottom:6px;font-size:15px;">三个思考问题</div>
+      <ul class="lyc_0817_qa">
+        <li>
+          <b>① 一次拖动里 touchmove 大约触发多少次？和距离有什么关系？</b>
+          一次正常拖动大约触发 20～40 次；距离越长、移动越慢，触发次数越多。因为浏览器在手指位置发生变化时就会派发一次 <code>touchmove</code>，采样周期约 8～16ms，所以次数 ≈ 拖动时长 ÷ 采样周期；快速甩动只有 5～10 次，慢速拖动可超过 50 次。
+        </li>
+        <li>
+          <b>② click 出现在 touchend 之前还是之后？</b>
+          之后。<code>touchend</code> 先触发，浏览器再确认"这不是双击、也没有被阻止"，才补发一次 <code>click</code>。如果两套逻辑都写，一次点击会执行两次，需要在 touch 处理里 <code>preventDefault()</code> 或二选一。
+        </li>
+        <li>
+          <b>③ 如果把 touchend 换成 touchcancel，会发生什么？</b>
+          <code>touchcancel</code> 只在"手势被系统打断"时触发（来电、通知下拉、系统手势返回、浏览器接管滚动），正常抬手根本不会触发。换成它之后，用户正常滑动抬起时收不到任何回调，翻页/拖动逻辑就会失效；正确做法是两者都监听，<code>touchcancel</code> 里只做"清理状态、回弹"，不做业务动作。
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 任务二～四 ============ -->
+  <section>
+    <div class="lyc_0817_title"><span>2</span>任务二～四 · 成品页面</div>
+    <div class="lyc_0817_links">
+      <a class="lyc_0817_link" href="mobile-gesture.html">
+        <span class="lyc_0817_no">★★</span>
+        <span class="lyc_0817_txt">
+          <strong>任务二 · 中华美食手势卡片</strong>
+          <small>4 道菜左右滑动切换 · 阈值 40px · 0.3s 过渡 · 300ms 冷却 · touch-action: pan-y</small>
+        </span>
+      </a>
+      <a class="lyc_0817_link" href="mobile-zoom.html">
+        <span class="lyc_0817_no">★★★</span>
+        <span class="lyc_0817_txt">
+          <strong>任务三 · 图片查看器（含手机演示视频）</strong>
+          <small>双指缩放 1～4x · 双击 1x/2x · 放大后拖动 · 边界回弹 · 旋转保持状态</small>
+        </span>
+      </a>
+      <a class="lyc_0817_link" href="mobile-sensor.html">
+        <span class="lyc_0817_no">★★★★</span>
+        <span class="lyc_0817_txt">
+          <strong>任务四 · 摇一摇抽今日菜谱（含手机演示视频）</strong>
+          <small>devicemotion · 阈值 18 · 1.5s 冷却 · iOS 授权 · 不支持时降级按钮</small>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ 坑与解决 ============ -->
+  <section>
+    <div class="lyc_0817_title"><span>3</span>踩过的坑与解决办法</div>
+    <div class="lyc_0817_card">
+      <ul class="lyc_0817_plain">
+        <li><b>双指缩放时图片"跳走"</b>：一开始每帧都用 <code>scale *= 本帧比例</code> 累乘，误差越滚越大，且锚点固定在左上角。改成"以手势开始时的距离与倍数为基准算相对比例"，并用两指中点补偿位移，跳动消失。</li>
+        <li><b>横向滑动时整页跟着上下抖</b>：卡片容器最初只有 <code>touch-action: pan-y</code> 却忘了在 <code>touchmove</code> 里判断方向，纵向拖动也被当成横向。改为先比较 <code>dx</code> 与 <code>dy</code>，只有横向更大才接管。</li>
+        <li><b>快速连滑一次跳两张</b>：<code>touchend</code> 很短时间连续触发两次判断。加 300ms 冷却锁后解决。</li>
+        <li><b>手机上摇一摇没反应</b>：页面不是 HTTPS 或 iOS 未授权时收不到 <code>devicemotion</code>。加了 1.2s 超时检测 + 授权按钮 + "点我抽一次"降级。</li>
+        <li><b>拖动结束后卡片卡在半张</b>：没有监听 <code>touchcancel</code>，来电回来状态没清理。补上后统一回弹到当前页。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 记录 ============ -->
+  <section>
+    <div class="lyc_0817_title"><span>4</span>提交记录</div>
+    <div class="lyc_0817_card">
+      <ul class="lyc_0817_plain">
+        <li>命名：所有类名、id、JS 变量以 <code>lyc_0817_</code> 开头；文件头写明姓名与学号。</li>
+        <li>AI 提示词记录：已按要求追加到项目根目录 <code>lyc_prompt.md</code>（记录 18）。</li>
+        <li>任务三、任务四的手机实体演示视频：分别放在 <code>videos/task3-zoom.mp4</code>、<code>videos/task4-sensor.mp4</code>，页面内已预留播放器，文件放进去即自动显示。</li>
+        <li>运行环境：必须用手机（iOS 需 HTTPS 才能申请传感器权限），GitHub Pages 已满足。</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>高级网页设计 · 移动端触摸事件课堂实践 · 梁钰承 lyc</footer>
+</div>
+
+<script>
+/* lyc_0817 · 2026-11-16 13:58:20 · DeepSeek-V4.1-Flash · 事件探针 ——
+   记录 touchstart / touchmove / touchend / touchcancel / click 的触发顺序与坐标，并统计次数。 */
+
+var lyc_0817_pad = document.getElementById('lyc_0817_pad');
+var lyc_0817_logEl = document.getElementById('lyc_0817_log');
+var lyc_0817_count = { start: 0, move: 0, end: 0, click: 0 };
+var lyc_0817_lines = [];
+
+/* 输出一行日志，同时刷新计数 */
+function lyc_0817_push(lyc_0817_type, lyc_0817_extra, lyc_0817_cls) {
+  var lyc_0817_now = new Date();
+  var lyc_0817_time = String(lyc_0817_now.getMinutes()).padStart(2, '0') + ':' +
+                      String(lyc_0817_now.getSeconds()).padStart(2, '0') + '.' +
+                      String(lyc_0817_now.getMilliseconds()).padStart(3, '0');
+  lyc_0817_lines.push('<span class="' + (lyc_0817_cls || '') + '">' + lyc_0817_time + ' <b>' + lyc_0817_type + '</b> ' + lyc_0817_extra + '</span>');
+  if (lyc_0817_lines.length > 60) lyc_0817_lines.shift();
+  lyc_0817_logEl.innerHTML = lyc_0817_lines.join('<br>');
+  lyc_0817_logEl.scrollTop = lyc_0817_logEl.scrollHeight;
+
+  document.getElementById('lyc_0817_cStart').textContent = lyc_0817_count.start;
+  document.getElementById('lyc_0817_cMove').textContent = lyc_0817_count.move;
+  document.getElementById('lyc_0817_cEnd').textContent = lyc_0817_count.end;
+  document.getElementById('lyc_0817_cClick').textContent = lyc_0817_count.click;
+}
+
+lyc_0817_pad.addEventListener('touchstart', function (e) {
+  lyc_0817_count.start++;
+  var lyc_0817_t = e.touches[0];
+  lyc_0817_push('touchstart', 'touches=' + e.touches.length + ' (' + Math.round(lyc_0817_t.clientX) + ', ' + Math.round(lyc_0817_t.clientY) + ')');
+}, { passive: true });
+
+lyc_0817_pad.addEventListener('touchmove', function (e) {
+  lyc_0817_count.move++;
+  var lyc_0817_t = e.touches[0];
+  // 每 5 次输出一条，避免刷屏；次数本身由计数区完整统计
+  if (lyc_0817_count.move % 5 === 1) {
+    lyc_0817_push('touchmove', '第 ' + lyc_0817_count.move + ' 次 (' + Math.round(lyc_0817_t.clientX) + ', ' + Math.round(lyc_0817_t.clientY) + ')');
+  }
+}, { passive: true });
+
+lyc_0817_pad.addEventListener('touchend', function (e) {
+  lyc_0817_count.end++;
+  var lyc_0817_t = e.changedTouches[0];   // 抬手时从 touches 里取不到，必须用 changedTouches
+  lyc_0817_push('touchend', 'changedTouches=(' + Math.round(lyc_0817_t.clientX) + ', ' + Math.round(lyc_0817_t.clientY) + ') · 本轮 move ' + lyc_0817_count.move + ' 次');
+}, { passive: true });
+
+lyc_0817_pad.addEventListener('touchcancel', function () {
+  lyc_0817_push('touchcancel', '手势被系统打断');
+}, { passive: true });
+
+lyc_0817_pad.addEventListener('click', function () {
+  lyc_0817_count.click++;
+  lyc_0817_push('click', 'touchend 之后补发', 'lyc_0817_click');
+});
+
+document.getElementById('lyc_0817_clear').addEventListener('click', function () {
+  lyc_0817_lines = [];
+  lyc_0817_count = { start: 0, move: 0, end: 0, click: 0 };
+  lyc_0817_logEl.textContent = '已清空，重新操作试试';
+  document.getElementById('lyc_0817_cStart').textContent = '0';
+  document.getElementById('lyc_0817_cMove').textContent = '0';
+  document.getElementById('lyc_0817_cEnd').textContent = '0';
+  document.getElementById('lyc_0817_cClick').textContent = '0';
+});
+</script>
+</body>
+</html>

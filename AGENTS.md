@@ -20,8 +20,17 @@
 - 在 `vipshop/` 目录下运行：`python -m http.server 8080` 或 `npx serve .` / `npx http-server -p 8080`；也可以用 VS Code Live Server 打开 `vipshop/index.html`。
 - 请用移动端视口查看（如 iPhone 12 Pro）；页面在 ~420px 容器中居中显示。
 
+## 提示词记录规则（强制）
+- 每次执行任务之前，先把用户的提示词原文追加写入根目录 `lyc_prompt.md`，只追加、不覆盖、不删除历史记录。
+- 每条记录包含三项：时间（yyyy-MM-dd HH:mm:ss）、使用的模型、提示词内容（原文照录）。
+- 记录格式与历史条目保持一致：`## 记录 N` → `- **时间**` → `- **使用模型**` → `- **提示词内容**`，条目之间用 `---` 分隔。
+
+## 首页入口规则（强制）
+- 新建的 HTML 文件必须同时在根目录 `index.html` 中加入超链接入口，保证从首页可以直接点开；入口可复用现有的模块卡片（`.module` + `.link-list`）写法，并标注功能简介。
+
 ## 关键约定（仓库专属）
-- 课堂示例页命名：CSS 类名、id、CSS 自定义属性、JS 变量/函数统一以 `lyc_0817` 开头（如 `.lyc_0817_tab-nav`、`lyc_0817_newsTabs`、`--lyc_0817_orange`、`lyc_0817_initTabs`）。
+- 作者标识统一为 `lyc`（姓名缩写；学号缩写 0817）。
+- 课堂示例页命名：CSS 类名、id、CSS 自定义属性、JS 变量/函数一律以 `lyc_` 开头；本项目统一沿用 `lyc_0817` 作为完整前缀（如 `.lyc_0817_tab-nav`、`lyc_0817_newsTabs`、`--lyc_0817_orange`、`lyc_0817_initTabs`），同样满足"以 `lyc_` 开头"的要求；历史文档或作业中的 `wy_` 前缀一律对应改写为 `lyc_`。
 - 命名：布局类选择器以 `liang-` 前缀（如 `liang-main`、`liang-header`），变量/函数/id 以 `liang`/`Liang` 前缀。
 - CSS：以 Flexbox 为主，使用 CSS 变量，禁用 table/float 布局。全局样式在 `vipshop/css/liang.css`。
 - JS：原生 ES5+，不用框架。公共工具在 `vipshop/js/liang-common.js`（fetch 封装/Toast/购物车/返回顶部）。各页面脚本：`index.js`、`category.js`、`seckill.js`、`detail.js`、`cart.js`、`profile.js`、`settings.js`、`login.js`、`admin.js`。

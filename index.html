@@ -605,7 +605,78 @@
                     <li>
                         <a href="swiper-task-record.html" target="_blank">
                             <span class="name">📝 Swiper 三关进阶 · 提示词与 AI 对话记录</span>
-                            <span class="desc">任务一 两轮提示词 + AI 原始回答 + 粘贴验证截图 · 任务二 creative 追问 prev/next · 任务三 关键对话与答辩四连问（Markdown 版：swiper-task-record.md）</span>
+                            <span class="desc">任务一 两轮提示词 + AI 原始回答 + 粘贴验证截图 · 任务二 creative 追问 prev/next · 任务三 关键对话与答辩四连问（Markdown 版：swiper_prompt.md）</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 模块十二：从 JSON 到 fetch（今日新增） -->
+            <div class="module" style="grid-column: 1 / -1;">
+                <div class="module-title">
+                    <span class="icon">数</span>
+                    <span>从 JSON 到 fetch · 诗词卡片</span>
+                    <span class="badge">Express 3005 · 双接口 · 6 首诗词</span>
+                </div>
+                <ul class="link-list">
+                    <li>
+                        <a href="poems-cards.html" target="_blank">
+                            <span class="name">诗词卡片页（3005）· 上图下文</span>
+                            <span class="desc">fetch 请求 localhost:3005/api/poems，取 pic / title / content 渲染上图下文卡片 · 加载中与失败状态提示</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="poems.html" target="_blank">
+                            <span class="name">诗词卡片页（进阶）· 搜索与排序</span>
+                            <span class="desc">Promise.all 并发请求 /api/poems 与 /api/authors · 关键字搜索 · 按标题长度排序 · 服务器未启动时给出提示而非白屏</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                    <li style="grid-column: 1 / -1;">
+                        <a href="db/server.js" target="_blank">
+                            <span class="name">数据服务器 · db/server.js</span>
+                            <span class="desc">Express 读取 db/db.json，开放端口 3005 与两个接口；查看代码前请先在 db 文件夹执行 node server.js 启动服务</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 模块十三：移动端触摸交互（任务一～四） -->
+            <div class="module" style="grid-column: 1 / -1;">
+                <div class="module-title">
+                    <span class="icon">触</span>
+                    <span>移动端触摸交互 · 任务一～四</span>
+                    <span class="badge">Touch / Gesture / Pinch / 传感器</span>
+                </div>
+                <ul class="link-list">
+                    <li>
+                        <a href="mobile-events.html" target="_blank">
+                            <span class="name">任务一 · 事件侦探（探针 + 三个思考问题）</span>
+                            <span class="desc">可操作的事件探针：记录 touchstart / touchmove / touchend / click 的顺序与次数 · 五种操作观测表 · 三个思考问题的答案</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mobile-gesture.html" target="_blank">
+                            <span class="name">任务二 · 手势切菜（左右滑动卡片）</span>
+                            <span class="desc">单指左右滑动切换 4 道菜 · 40px 阈值与 300ms 冷却 · 跟手拖动与边界回弹 · 首尾边界提示</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mobile-zoom.html" target="_blank">
+                            <span class="name">任务三 · 图片查看器（双指缩放 / 双击）</span>
+                            <span class="desc">双指 1x～4x 以两指中点为锚点缩放 · 双击 1x/2x · 放大后单指拖动 · 边界限制 · 旋转保持状态（含实体演示视频位）</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mobile-sensor.html" target="_blank">
+                            <span class="name">任务四 · 摇一摇抽菜谱（devicemotion）</span>
+                            <span class="desc">合成加速度阈值 18 + 1.5s 冷却 · iOS 13+ 授权按钮 · 无传感器时降级为点按钮抽取（含实体演示视频位）</span>
                             <span class="arrow">›</span>
                         </a>
                     </li>
@@ -617,14 +688,42 @@
                 <div class="module-title" data-page-node-id="b12FX1BYCuOHbWOsZoBzsO">
                     <span class="icon" data-page-node-id="QIuS9W4C2uRpcqHRgvFCtB">+</span>
                     <span data-page-node-id="bDZAwHoiPui5jowbBO1hxY">其余模块</span>
-                    <span class="badge" data-page-node-id="VoCLQBrqdb78MODJmYOo0b">待增加</span>
+                    <span class="badge" data-page-node-id="VoCLQBrqdb78MODJmYOo0b">课堂练习</span>
                 </div>
                 <ul class="link-list" data-page-node-id="ZoBRdlKM0L1dRytqRSG6tg">
-                    <li data-page-node-id="CVy2fq99liyClj1OJIXIYf">
-                        <a href="javascript:void(0);" style="cursor: not-allowed; opacity: 0.6;" data-page-node-id="egtIOXBQFHXkRZgCSkwwYP">
-                            <span class="name" data-page-node-id="v9PUq3OGHBo5OU31hbYQDm">敬请期待</span>
-                            <span class="desc" data-page-node-id="nU67KM2xGGj55fjSJ7c0Xv">后续课程模块将陆续添加</span>
-                            <span class="arrow" data-page-node-id="Ogezgb7tWIAbNQzb6n8gG9">·</span>
+                    <li>
+                        <a href="dataTyp004.html" target="_blank">
+                            <span class="name">数 7 游戏 · dataTyp004</span>
+                            <span class="desc">数据类型与循环的课堂小游戏</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="grid004.html" target="_blank">
+                            <span class="name">网格布局 grid · grid004</span>
+                            <span class="desc">CSS Grid 网格布局练习</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="js_obj_fun.html" target="_blank">
+                            <span class="name">JS 对象与函数 · js_obj_fun</span>
+                            <span class="desc">对象与函数的课堂示例</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="svg004.html" target="_blank">
+                            <span class="name">SVG 图标 · svg004</span>
+                            <span class="desc">内联 SVG 图标的绘制与使用</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="swiper-task3.html" target="_blank">
+                            <span class="name">Swiper 任务三 · swiper-task3</span>
+                            <span class="desc">课堂任务三的入口页面</span>
+                            <span class="arrow">›</span>
                         </a>
                     </li>
                 </ul>

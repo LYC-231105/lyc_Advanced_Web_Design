@@ -210,6 +210,6 @@ s.autoplay.start();
 |---|---|
 | `swiper-task.html` | 能运行的页面（初始 cube、creative 电影墙、6 件展品、键盘、现场验证与答辩台） |
 | `swiper-task-record.html` | 提示词访问入口（网页版） |
-| `swiper-task-record.md` | 本文件（GitHub 直接阅读） |
+| `swiper_prompt.md` | 本文件（GitHub 直接阅读） |
 | `swiper-imgs/aida_modu.jpg` | AI 生成的第六件展品图片 |
 | `.screenshots/swiper-task/` | 全部验证截图 |

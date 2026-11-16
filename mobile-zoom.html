@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>任务三 · 图片查看器（双指缩放 / 双击放大 / 拖动）</title>
+<!--
+  lyc_0817 · 2026-11-16 13:58:20 · DeepSeek-V4.1-Flash · 任务三 图片查看器 ——
+  双指缩放 1x～4x（以两指中点为基准）、双击 1x/2x 切换、放大后单指拖动、边界限制、旋转屏幕保持状态。
+  姓名：梁钰承（lyc） 学号：24001010817
+-->
+<style>
+  /* lyc_0817 · 页面样式 —— 查看器区域接管全部手势 */
+  :root {
+    --lyc_0817_bg: #0d1017;
+    --lyc_0817_ink: #eef1f6;
+    --lyc_0817_muted: #8f9aab;
+    --lyc_0817_line: #262c37;
+    --lyc_0817_gold: #ffcf6b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    min-height: 100vh;
+    padding: 18px 14px 40px;
+    background: var(--lyc_0817_bg);
+    color: var(--lyc_0817_ink);
+    font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+  }
+
+  .lyc_0817_wrap { max-width: 520px; margin: 0 auto; }
+
+  .lyc_0817_head h1 { font-size: 20px; letter-spacing: .5px; }
+  .lyc_0817_head p { margin-top: 6px; font-size: 12.5px; line-height: 1.8; color: var(--lyc_0817_muted); }
+  .lyc_0817_head b { color: var(--lyc_0817_gold); font-weight: 600; }
+
+  /* 查看器：overflow:hidden 裁掉放大后溢出的部分 */
+  .lyc_0817_viewer {
+    position: relative;
+    height: 58vh;
+    min-height: 300px;
+    margin-top: 14px;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #05070b;
+    border: 1px solid var(--lyc_0817_line);
+    touch-action: none;          /* 关键：这一块的手势完全由 JS 接管 */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* 图片本体：所有缩放/位移都通过 transform 完成，不触发重排 */
+  .lyc_0817_img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform-origin: 0 0;        /* 以左上角为原点，便于按"两指中点"精确补偿 */
+    transform: translate(0, 0) scale(1);
+    transition: transform .25s ease;  /* 双击/回弹用 0.25s，拖动时会临时关掉 */
+    will-change: transform;
+    pointer-events: none;         /* 事件统一交给容器，避免图片抢焦点 */
+  }
+
+  .lyc_0817_img.lyc_0817_no-anim { transition: none; }
+
+  /* 缩放比例胶囊 */
+  .lyc_0817_badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(8, 10, 15, .72);
+    border: 1px solid #313848;
+    font-size: 12px;
+    color: var(--lyc_0817_gold);
+    letter-spacing: .5px;
+    pointer-events: none;
+  }
+
+  .lyc_0817_hint {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(8, 10, 15, .72);
+    border: 1px solid #313848;
+    font-size: 12px;
+    color: #cdd5e2;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity .4s ease;
+  }
+
+  .lyc_0817_tools {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .lyc_0817_btn {
+    flex: 1;
+    padding: 12px 10px;
+    border: 1px solid var(--lyc_0817_line);
+    border-radius: 12px;
+    background: #161b24;
+    color: var(--lyc_0817_ink);
+    font-size: 13.5px;
+    font-family: inherit;
+    touch-action: manipulation;
+    transition: background-color .15s ease, transform .15s ease;
+  }
+  .lyc_0817_btn:active { background: #222a36; transform: scale(.98); }
+
+  /* 说明与视频区 */
+  .lyc_0817_note, .lyc_0817_video {
+    margin-top: 18px;
+    padding: 16px;
+    border: 1px solid var(--lyc_0817_line);
+    border-radius: 14px;
+    background: #12161e;
+  }
+  .lyc_0817_note h2, .lyc_0817_video h2 { font-size: 15px; margin-bottom: 8px; }
+  .lyc_0817_note p, .lyc_0817_note li {
+    font-size: 12.5px;
+    line-height: 1.95;
+    color: var(--lyc_0817_muted);
+  }
+  .lyc_0817_note ol { padding-left: 18px; margin-top: 6px; }
+  .lyc_0817_note code {
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: #1d2430;
+    color: #a9c7ff;
+    font-family: Consolas, monospace;
+    font-size: 11.5px;
+  }
+
+  .lyc_0817_video video {
+    width: 100%;
+    border-radius: 10px;
+    background: #000;
+    display: block;
+  }
+  .lyc_0817_video .lyc_0817_empty {
+    padding: 26px 14px;
+    border: 1px dashed #333b49;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 12.5px;
+    line-height: 1.9;
+    color: #7f8b9c;
+  }
+</style>
+</head>
+<body>
+<div class="lyc_0817_wrap">
+
+  <div class="lyc_0817_head">
+    <h1>任务三 · 图片查看器</h1>
+    <p>双指缩放 <b>1x～4x</b> · 双击 <b>1x / 2x</b> · 放大后单指拖动 · 松手回到边界内</p>
+  </div>
+
+  <!-- 查看器容器：touchstart / touchmove / touchend 绑定在这里 -->
+  <div class="lyc_0817_viewer" id="lyc_0817_viewer">
+    <img class="lyc_0817_img" id="lyc_0817_img" src="swiper-imgs/aida_modu.jpg" alt="爱达·魔都号">
+    <div class="lyc_0817_badge" id="lyc_0817_badge">1.00x</div>
+    <div class="lyc_0817_hint" id="lyc_0817_hint">双指缩放请用手机打开 · 双击可放大</div>
+  </div>
+
+  <div class="lyc_0817_tools">
+    <button class="lyc_0817_btn" id="lyc_0817_reset">重置为 1x</button>
+    <button class="lyc_0817_btn" id="lyc_0817_toggle">切换 1x / 2x</button>
+  </div>
+
+  <!-- 答辩要点：为什么缩放不"跳" -->
+  <div class="lyc_0817_note">
+    <h2>如何保证"缩放不跳"</h2>
+    <ol>
+      <li><code>touchstart</code> 时记下三样：两指初始距离 <code>lyc_0817_startDist</code>、当前总倍数 <code>lyc_0817_startScale</code>、初始位移。</li>
+      <li>每帧按 <code>当前距离 ÷ 初始距离</code> 算出相对比例，再乘初始倍数得到新倍数——<b>始终以触摸起点为基准</b>，不做逐帧累乘，误差不累积。</li>
+      <li>缩放时用"两指中点"做锚点补偿：
+        <code>tx = midX - k * (startMidX - startTx)</code>，中点下的像素位置保持不变，视觉上就是"指哪缩哪"。</li>
+      <li>松手后统一 <code>clamp</code>：位移不超过 <code>(scale-1) × 容器宽/2</code>，缩回 1x 时归零，图片自动居中。</li>
+      <li>旋转屏幕只重算边界、不重置倍数，所以状态不会丢。</li>
+    </ol>
+  </div>
+
+  <!-- 手机实体演示视频：录制后把文件放到 videos/task3-zoom.mp4 即可自动出现 -->
+  <div class="lyc_0817_video">
+    <h2>手机实体演示视频</h2>
+    <video id="lyc_0817_video" controls playsinline preload="metadata" src="videos/task3-zoom.mp4"></video>
+    <div class="lyc_0817_empty" id="lyc_0817_video_empty">
+      还没有放入演示视频。用另一台设备录制手机操作过程，保存为<br>
+      <b>videos/task3-zoom.mp4</b> 后刷新本页即可播放。
+    </div>
+  </div>
+</div>
+
+<script>
+/* lyc_0817 · 2026-11-16 13:58:20 · DeepSeek-V4.1-Flash · 图片查看器逻辑 ——
+   双指缩放（1～4x，锚定两指中点）/ 单指拖动（仅放大时）/ 双击 1x↔2x / 松手边界回弹 / 旋转保持状态。 */
+
+var lyc_0817_viewer = document.getElementById('lyc_0817_viewer');
+var lyc_0817_img = document.getElementById('lyc_0817_img');
+var lyc_0817_badge = document.getElementById('lyc_0817_badge');
+var lyc_0817_hint = document.getElementById('lyc_0817_hint');
+
+var lyc_0817_MIN = 1;          // 最小倍数
+var lyc_0817_MAX = 4;          // 最大倍数
+var lyc_0817_scale = 1;        // 当前总倍数
+var lyc_0817_tx = 0;           // 当前横向位移（px）
+var lyc_0817_ty = 0;           // 当前纵向位移（px）
+
+var lyc_0817_startDist = 0;    // 双指初始距离
+var lyc_0817_startScale = 1;   // 手势开始时的倍数
+var lyc_0817_startTx = 0;      // 手势开始时位移
+var lyc_0817_startTy = 0;
+var lyc_0817_startMidX = 0;    // 手势开始时两指中点
+var lyc_0817_startMidY = 0;
+
+var lyc_0817_singleX = 0;      // 单指拖动起点
+var lyc_0817_singleY = 0;
+var lyc_0817_dragTx = 0;
+var lyc_0817_dragTy = 0;
+
+/* 两指直线距离：Math.hypot 等价于 √(dx²+dy²) */
+function lyc_0817_dist(lyc_0817_t1, lyc_0817_t2) {
+  return Math.hypot(lyc_0817_t2.clientX - lyc_0817_t1.clientX, lyc_0817_t2.clientY - lyc_0817_t1.clientY);
+}
+
+/* 把位移限制在允许范围内：放大后图片边缘不会被拖出容器 */
+function lyc_0817_clamp(lyc_0817_s, lyc_0817_x, lyc_0817_y) {
+  var lyc_0817_rect = lyc_0817_viewer.getBoundingClientRect();
+  var lyc_0817_maxX = (lyc_0817_s - 1) * lyc_0817_rect.width / 2;
+  var lyc_0817_maxY = (lyc_0817_s - 1) * lyc_0817_rect.height / 2;
+  return {
+    x: Math.max(-lyc_0817_maxX, Math.min(lyc_0817_maxX, lyc_0817_x)),
+    y: Math.max(-lyc_0817_maxY, Math.min(lyc_0817_maxY, lyc_0817_y))
+  };
+}
+
+/* 应用变换：anim=true 走 0.25s 过渡，拖动时传 false 保证跟手 */
+function lyc_0817_apply(lyc_0817_anim) {
+  lyc_0817_img.classList.toggle('lyc_0817_no-anim', lyc_0817_anim === false);
+  lyc_0817_img.style.transform = 'translate(' + lyc_0817_tx + 'px, ' + lyc_0817_ty + 'px) scale(' + lyc_0817_scale + ')';
+  lyc_0817_badge.textContent = lyc_0817_scale.toFixed(2) + 'x';
+}
+
+/* 按某个锚点缩放到目标倍数：k 为倍数变化率，锚点下的像素位置保持不变 —— 不跳的关键 */
+function lyc_0817_zoomTo(lyc_0817_target, lyc_0817_anchorX, lyc_0817_anchorY) {
+  var lyc_0817_next = Math.max(lyc_0817_MIN, Math.min(lyc_0817_MAX, lyc_0817_target));
+  var lyc_0817_k = lyc_0817_next / lyc_0817_scale;
+  lyc_0817_tx = lyc_0817_anchorX - lyc_0817_k * (lyc_0817_anchorX - lyc_0817_tx);
+  lyc_0817_ty = lyc_0817_anchorY - lyc_0817_k * (lyc_0817_anchorY - lyc_0817_ty);
+  lyc_0817_scale = lyc_0817_next;
+  var lyc_0817_c = lyc_0817_clamp(lyc_0817_scale, lyc_0817_tx, lyc_0817_ty);
+  lyc_0817_tx = lyc_0817_c.x;
+  lyc_0817_ty = lyc_0817_c.y;
+  if (lyc_0817_scale === 1) { lyc_0817_tx = 0; lyc_0817_ty = 0; }  // 1x 自动居中
+  lyc_0817_apply(true);
+}
+
+/* 页面打开先提示"请用手机打开"，第一次成功手势后淡出 */
+function lyc_0817_hideHint() {
+  lyc_0817_hint.style.opacity = '0';
+}
+
+/* 按下：区分单指 / 双指，分别记录起点 */
+lyc_0817_viewer.addEventListener('touchstart', function (e) {
+  lyc_0817_hideHint();
+
+  if (e.touches.length >= 2) {
+    lyc_0817_startDist = lyc_0817_dist(e.touches[0], e.touches[1]);
+    lyc_0817_startScale = lyc_0817_scale;
+    lyc_0817_startTx = lyc_0817_tx;
+    lyc_0817_startTy = lyc_0817_ty;
+    lyc_0817_startMidX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+    lyc_0817_startMidY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+    lyc_0817_img.classList.add('lyc_0817_no-anim');
+    return;
+  }
+
+  if (e.touches.length === 1) {
+    lyc_0817_singleX = e.touches[0].clientX;
+    lyc_0817_singleY = e.touches[0].clientY;
+    lyc_0817_dragTx = lyc_0817_tx;
+    lyc_0817_dragTy = lyc_0817_ty;
+  }
+}, { passive: true });
+
+/* 移动：双指算缩放，单指在放大状态下拖动 */
+lyc_0817_viewer.addEventListener('touchmove', function (e) {
+  if (e.touches.length >= 2 && lyc_0817_startDist > 0) {
+    // 相对初始距离计算比例：以起点为基准，避免逐帧累乘产生漂移
+    var lyc_0817_ratio = lyc_0817_dist(e.touches[0], e.touches[1]) / lyc_0817_startDist;
+    var lyc_0817_target = lyc_0817_startScale * lyc_0817_ratio;
+    var lyc_0817_next = Math.max(lyc_0817_MIN, Math.min(lyc_0817_MAX, lyc_0817_target));
+    var lyc_0817_k = lyc_0817_next / lyc_0817_startScale;
+
+    // 以"两指当前中点"为锚点，补偿到初始位移上
+    var lyc_0817_midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+    var lyc_0817_midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+    var lyc_0817_rect = lyc_0817_viewer.getBoundingClientRect();
+    var lyc_0817_ax = lyc_0817_startMidX - lyc_0817_rect.left;
+    var lyc_0817_ay = lyc_0817_startMidY - lyc_0817_rect.top;
+
+    lyc_0817_scale = lyc_0817_next;
+    lyc_0817_tx = (lyc_0817_midX - lyc_0817_rect.left) - lyc_0817_k * (lyc_0817_ax - lyc_0817_startTx);
+    lyc_0817_ty = (lyc_0817_midY - lyc_0817_rect.top) - lyc_0817_k * (lyc_0817_ay - lyc_0817_startTy);
+
+    // 拖动过程中允许略微越界，松手再回弹
+    lyc_0817_apply(false);
+    if (e.cancelable) e.preventDefault();
+    return;
+  }
+
+  if (e.touches.length === 1 && lyc_0817_scale > 1) {
+    lyc_0817_tx = lyc_0817_dragTx + (e.touches[0].clientX - lyc_0817_singleX);
+    lyc_0817_ty = lyc_0817_dragTy + (e.touches[0].clientY - lyc_0817_singleY);
+    lyc_0817_apply(false);
+    if (e.cancelable) e.preventDefault();
+  }
+}, { passive: false });   // 非被动：才能 preventDefault 阻止整页跟着缩放
+
+/* 抬起：双指结束时收尾；单指抬起时判断双击 */
+lyc_0817_viewer.addEventListener('touchend', function (e) {
+  if (lyc_0817_startDist > 0 && (e.touches.length < 2)) {
+    lyc_0817_startDist = 0;
+  }
+
+  // 松手统一回到边界内；缩到 1x 或以下自动居中
+  if (lyc_0817_scale <= 1.01) {
+    lyc_0817_scale = 1;
+    lyc_0817_tx = 0;
+    lyc_0817_ty = 0;
+    lyc_0817_apply(true);
+  } else {
+    var lyc_0817_c = lyc_0817_clamp(lyc_0817_scale, lyc_0817_tx, lyc_0817_ty);
+    lyc_0817_tx = lyc_0817_c.x;
+    lyc_0817_ty = lyc_0817_c.y;
+    lyc_0817_apply(true);
+  }
+}, { passive: true });
+
+/* 双击：用 click 计数（touchend 后浏览器会补发 click，轻点才有，拖动已被 preventDefault 去掉） */
+var lyc_0817_lastClick = 0;
+
+lyc_0817_viewer.addEventListener('click', function (e) {
+  var lyc_0817_now = Date.now();
+  if (lyc_0817_now - lyc_0817_lastClick < 300) {
+    lyc_0817_lastClick = 0;                 // 重置，避免三击被算成两次双击
+    var lyc_0817_rect = lyc_0817_viewer.getBoundingClientRect();
+    lyc_0817_zoomTo(lyc_0817_scale > 1.2 ? 1 : 2, e.clientX - lyc_0817_rect.left, e.clientY - lyc_0817_rect.top);
+  } else {
+    lyc_0817_lastClick = lyc_0817_now;
+  }
+});
+
+/* 被系统打断（来电、手势返回）：清掉双指状态并回弹 */
+lyc_0817_viewer.addEventListener('touchcancel', function () {
+  lyc_0817_startDist = 0;
+  var lyc_0817_c = lyc_0817_clamp(lyc_0817_scale, lyc_0817_tx, lyc_0817_ty);
+  lyc_0817_tx = lyc_0817_c.x;
+  lyc_0817_ty = lyc_0817_c.y;
+  lyc_0817_apply(true);
+});
+
+/* 按钮：重置 / 切换 */
+document.getElementById('lyc_0817_reset').addEventListener('click', function () {
+  lyc_0817_scale = 1;
+  lyc_0817_tx = 0;
+  lyc_0817_ty = 0;
+  lyc_0817_apply(true);
+});
+
+document.getElementById('lyc_0817_toggle').addEventListener('click', function () {
+  var lyc_0817_rect = lyc_0817_viewer.getBoundingClientRect();
+  lyc_0817_zoomTo(lyc_0817_scale > 1.2 ? 1 : 2, lyc_0817_rect.width / 2, lyc_0817_rect.height / 2);
+});
+
+/* 旋转屏幕 / 改变窗口：只重算边界，不重置倍数 */
+window.addEventListener('resize', function () {
+  var lyc_0817_c = lyc_0817_clamp(lyc_0817_scale, lyc_0817_tx, lyc_0817_ty);
+  lyc_0817_tx = lyc_0817_c.x;
+  lyc_0817_ty = lyc_0817_c.y;
+  lyc_0817_apply(true);
+});
+
+/* 视频占位：文件不存在时隐藏播放器，显示说明 */
+(function () {
+  var lyc_0817_video = document.getElementById('lyc_0817_video');
+  var lyc_0817_empty = document.getElementById('lyc_0817_video_empty');
+  lyc_0817_video.style.display = 'none';
+  lyc_0817_video.addEventListener('loadedmetadata', function () {
+    lyc_0817_video.style.display = 'block';
+    lyc_0817_empty.style.display = 'none';
+  });
+  lyc_0817_video.addEventListener('error', function () {
+    lyc_0817_video.style.display = 'none';
+    lyc_0817_empty.style.display = 'block';
+  });
+})();
+
+lyc_0817_apply(true);
+</script>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>诗词卡片 · 从 JSON 到 fetch</title>
+<!--
+  lyc_0817 · 2026-11-12 13:52:10 · DeepSeek-V4.1-Flash · 诗词卡片页 ——
+  配合 db/server.js 使用：用 fetch 同时请求 /api/poems 与 /api/authors，
+  把数据渲染成「上图下文」卡片，并提供关键字搜索、按标题长度排序与错误提示。
+  启动方式：先在 db 文件夹执行 node server.js（端口 3005），再打开本页。
+-->
+<style>
+  /* lyc_0817 · 2026-11-12 13:52:10 · 页面基础样式 —— 变量 + Flex 布局，无外部依赖 */
+  :root {
+    --lyc_0817_bg: #f5f7f4;
+    --lyc_0817_surface: #fffdf8;
+    --lyc_0817_ink: #23352e;
+    --lyc_0817_muted: #6b7a72;
+    --lyc_0817_green: #2f6b52;
+    --lyc_0817_line: #e2e6dd;
+    --lyc_0817_warn: #b4451f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: radial-gradient(ellipse at 15% 0%, #e7efe3 0, transparent 55%), var(--lyc_0817_bg);
+    color: var(--lyc_0817_ink);
+    font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+    line-height: 1.7;
+    padding: 36px 20px 56px;
+  }
+
+  .lyc_0817_wrap { max-width: 1080px; margin: 0 auto; }
+
+  /* 页面头部 */
+  .lyc_0817_head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 14px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--lyc_0817_line);
+  }
+
+  .lyc_0817_head h1 { font-size: 26px; letter-spacing: 1px; }
+  .lyc_0817_head p { margin-top: 6px; color: var(--lyc_0817_muted); font-size: 13.5px; }
+
+  .lyc_0817_status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border: 1px solid var(--lyc_0817_line);
+    border-radius: 999px;
+    background: var(--lyc_0817_surface);
+    font-size: 12.5px;
+    color: var(--lyc_0817_muted);
+  }
+
+  .lyc_0817_dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #b9c2bb;
+  }
+
+  .lyc_0817_status.is_ok .lyc_0817_dot { background: #38a169; }
+  .lyc_0817_status.is_err .lyc_0817_dot { background: #e53e3e; }
+
+  /* 工具条：搜索框 + 排序按钮 */
+  .lyc_0817_toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0 12px;
+  }
+
+  .lyc_0817_search {
+    flex: 1 1 260px;
+    min-width: 200px;
+    padding: 11px 16px;
+    border: 1px solid var(--lyc_0817_line);
+    border-radius: 12px;
+    background: var(--lyc_0817_surface);
+    color: var(--lyc_0817_ink);
+    font-size: 14px;
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease;
+  }
+
+  .lyc_0817_search:focus {
+    border-color: #8fb09a;
+    box-shadow: 0 0 0 3px rgba(47, 107, 82, .12);
+  }
+
+  .lyc_0817_btn {
+    padding: 11px 18px;
+    border: 1px solid var(--lyc_0817_line);
+    border-radius: 12px;
+    background: var(--lyc_0817_surface);
+    color: var(--lyc_0817_green);
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+  }
+
+  .lyc_0817_btn:hover { background: #eef4ea; border-color: #a9c1b1; }
+  .lyc_0817_btn.is_on { background: var(--lyc_0817_green); border-color: var(--lyc_0817_green); color: #fff; }
+
+  /* 作者条与结果计数 */
+  .lyc_0817_meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-size: 12.5px;
+    color: var(--lyc_0817_muted);
+  }
+
+  .lyc_0817_author_chip {
+    padding: 3px 11px;
+    border: 1px solid var(--lyc_0817_line);
+    border-radius: 999px;
+    background: var(--lyc_0817_surface);
+    color: #4a5f54;
+  }
+
+  /* 卡片列表：自适应网格，每张卡片上图下文 */
+  .lyc_0817_list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 20px;
+    list-style: none;
+  }
+
+  .lyc_0817_card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--lyc_0817_line);
+    border-radius: 16px;
+    background: var(--lyc_0817_surface);
+    box-shadow: 0 4px 14px rgba(35, 53, 46, .05);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+
+  .lyc_0817_card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(35, 53, 46, .12);
+  }
+
+  .lyc_0817_card img {
+    display: block;
+    width: 100%;
+    height: 158px;
+    object-fit: cover;
+    background: #e8ece6;
+  }
+
+  .lyc_0817_body { padding: 16px 18px 18px; }
+
+  .lyc_0817_body h2 {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+
+  .lyc_0817_dynasty { font-size: 11.5px; font-weight: 400; color: var(--lyc_0817_muted); white-space: nowrap; }
+  .lyc_0817_body p { font-size: 13.5px; color: #4e5f57; }
+  .lyc_0817_body .lyc_0817_author { margin-top: 10px; font-size: 12px; color: var(--lyc_0817_muted); }
+
+  /* 加载中 / 出错 / 无结果 的占位提示 */
+  .lyc_0817_tip {
+    grid-column: 1 / -1;
+    padding: 30px 24px;
+    border: 1px dashed var(--lyc_0817_line);
+    border-radius: 16px;
+    background: var(--lyc_0817_surface);
+    color: var(--lyc_0817_muted);
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .lyc_0817_tip_err { border-color: #efc9b9; color: var(--lyc_0817_warn); background: #fdf6f2; }
+  .lyc_0817_tip span { display: inline-block; margin-top: 6px; font-size: 12px; color: #9a8f86; }
+
+  .lyc_0817_foot {
+    margin-top: 34px;
+    padding-top: 16px;
+    border-top: 1px solid var(--lyc_0817_line);
+    text-align: center;
+    font-size: 12px;
+    color: #93a099;
+  }
+
+  @media (max-width: 560px) {
+    body { padding: 22px 14px 40px; }
+    .lyc_0817_head h1 { font-size: 21px; }
+    .lyc_0817_card img { height: 140px; }
+  }
+</style>
+</head>
+<body>
+<div class="lyc_0817_wrap">
+
+  <div class="lyc_0817_head">
+    <div>
+      <h1>诗词卡片 · 从 JSON 到 fetch</h1>
+      <p>数据来源：<code>db/db.json</code> → Express 接口 <code>localhost:3005</code> → fetch 取回 → 渲染上图下文</p>
+    </div>
+    <span class="lyc_0817_status" id="lyc_0817_status">
+      <span class="lyc_0817_dot"></span><span id="lyc_0817_statusText">正在连接数据服务…</span>
+    </span>
+  </div>
+
+  <!-- 工具条：搜索框用于筛选，按钮用于按标题长度排序 -->
+  <div class="lyc_0817_toolbar">
+    <input class="lyc_0817_search" id="lyc_0817_search" type="search" placeholder="输入关键字，筛选标题或内容…" autocomplete="off">
+    <button class="lyc_0817_btn" id="lyc_0817_sortBtn" type="button">按标题长度排序 ↑</button>
+    <button class="lyc_0817_btn" id="lyc_0817_clearBtn" type="button">清空筛选</button>
+  </div>
+
+  <div class="lyc_0817_meta" id="lyc_0817_meta"></div>
+
+  <!-- 卡片挂载容器 -->
+  <ul class="lyc_0817_list" id="lyc_0817_poemList"></ul>
+
+  <div class="lyc_0817_foot">高级网页设计 · 课堂案例《从 JSON 到 fetch》 · 端口 3005</div>
+</div>
+
+<script>
+/* lyc_0817 · 2026-11-12 13:52:10 · DeepSeek-V4.1-Flash · 诗词数据渲染 ——
+   用 Promise.all 并发请求 poems 与 authors 两个接口，再做前端筛选与排序。 */
+
+var lyc_0817_API_POEMS = 'http://localhost:3005/api/poems';
+var lyc_0817_API_AUTHORS = 'http://localhost:3005/api/authors';
+
+var lyc_0817_allPoems = [];       // 接口返回的原始诗词数组
+var lyc_0817_allAuthors = [];     // 接口返回的原始作者数组
+var lyc_0817_keyword = '';        // 当前搜索关键字
+var lyc_0817_sortState = 0;       // 0 默认顺序 / 1 标题短到长 / 2 标题长到短
+
+var lyc_0817_listEl = document.getElementById('lyc_0817_poemList');
+var lyc_0817_metaEl = document.getElementById('lyc_0817_meta');
+var lyc_0817_searchEl = document.getElementById('lyc_0817_search');
+var lyc_0817_sortBtn = document.getElementById('lyc_0817_sortBtn');
+var lyc_0817_clearBtn = document.getElementById('lyc_0817_clearBtn');
+var lyc_0817_statusEl = document.getElementById('lyc_0817_status');
+var lyc_0817_statusTextEl = document.getElementById('lyc_0817_statusText');
+
+/* lyc_0817 · 顶部连接状态 —— 成功绿色、失败红色，让用户一眼看出服务是否在线 */
+function lyc_0817_setStatus(isOk, text) {
+  lyc_0817_statusEl.classList.toggle('is_ok', isOk);
+  lyc_0817_statusEl.classList.toggle('is_err', !isOk);
+  lyc_0817_statusTextEl.textContent = text;
+}
+
+/* lyc_0817 · 取单个接口 —— 把「响应对象」转成「数据」；状态码异常时抛出错误交给 catch */
+function lyc_0817_getJson(url) {
+  return fetch(url).then(function (res) {
+    if (!res.ok) {
+      throw new Error(url + ' 返回状态码 ' + res.status);
+    }
+    return res.json();
+  });
+}
+
+/* lyc_0817 · 初始化 —— Promise.all 同时等两个接口，任何一个失败都会进入 catch */
+function lyc_0817_init() {
+  lyc_0817_listEl.innerHTML = '<li class="lyc_0817_tip">正在从 http://localhost:3005 加载数据…</li>';
+
+  Promise.all([
+    lyc_0817_getJson(lyc_0817_API_POEMS),
+    lyc_0817_getJson(lyc_0817_API_AUTHORS)
+  ]).then(function (result) {
+    lyc_0817_allPoems = result[0];
+    lyc_0817_allAuthors = result[1];
+    lyc_0817_setStatus(true, '已连接本地数据服务');
+    lyc_0817_render();
+  }).catch(function (err) {
+    // 关闭服务器后刷新页面会走到这里：给出操作提示，避免白屏
+    lyc_0817_setStatus(false, '数据服务未连接');
+    lyc_0817_metaEl.innerHTML = '';
+    lyc_0817_listEl.innerHTML =
+      '<li class="lyc_0817_tip lyc_0817_tip_err">'
+      + '数据获取失败！请先在 db 文件夹运行 node server.js（端口 3005），再刷新本页。'
+      + '<br><span>' + err.message + '</span></li>';
+  });
+}
+
+/* lyc_0817 · 查作者信息 —— 用作者姓名到 authors 数组里找到朝代，展示在卡片右上角 */
+function lyc_0817_findAuthor(name) {
+  for (var i = 0; i < lyc_0817_allAuthors.length; i++) {
+    if (lyc_0817_allAuthors[i].name === name) {
+      return lyc_0817_allAuthors[i];
+    }
+  }
+  return null;
+}
+
+/* lyc_0817 · 计算要显示的诗词 —— 先按关键字筛选，再按标题长度排序 */
+function lyc_0817_getVisiblePoems() {
+  var keyword = lyc_0817_keyword.trim();
+  var list = lyc_0817_allPoems.filter(function (poem) {
+    if (!keyword) {
+      return true; // 没输入关键字就显示全部
+    }
+    var title = poem.title || '';
+    var content = poem.content || '';
+    return title.indexOf(keyword) > -1 || content.indexOf(keyword) > -1;
+  });
+
+  if (lyc_0817_sortState === 1) {
+    list.sort(function (a, b) { return a.title.length - b.title.length; });
+  } else if (lyc_0817_sortState === 2) {
+    list.sort(function (a, b) { return b.title.length - a.title.length; });
+  }
+  return list;
+}
+
+/* lyc_0817 · 渲染卡片 —— 数据几条就循环几遍，模板字符串拼出「上图下文」 */
+function lyc_0817_render() {
+  var visible = lyc_0817_getVisiblePoems();
+
+  // 作者条 + 结果计数，说明第二份数据（authors）也被用上了
+  var chips = lyc_0817_allAuthors.map(function (author) {
+    return '<span class="lyc_0817_author_chip">' + author.name + ' · ' + author.dynasty + '</span>';
+  }).join('');
+  lyc_0817_metaEl.innerHTML = '<span>共 ' + lyc_0817_allPoems.length + ' 首诗词 / '
+    + lyc_0817_allAuthors.length + ' 位作者，当前显示 <b>' + visible.length + '</b> 首</span>' + chips;
+
+  if (visible.length === 0) {
+    lyc_0817_listEl.innerHTML = '<li class="lyc_0817_tip">没有匹配「' + lyc_0817_keyword + '」的诗词，换个关键字试试。</li>';
+    return;
+  }
+
+  var html = '';
+  for (var i = 0; i < visible.length; i++) {
+    var poem = visible[i];
+    var author = lyc_0817_findAuthor(poem.author);
+    var dynasty = author ? author.dynasty : '';
+    var intro = author ? author.intro : '';
+    html += '<li class="lyc_0817_card">'
+      + '<img src="' + poem.pic + '" alt="' + poem.title + '">'
+      + '<div class="lyc_0817_body">'
+      + '<h2><span>' + poem.title + '</span><span class="lyc_0817_dynasty">' + dynasty + '</span></h2>'
+      + '<p>' + poem.content + '</p>'
+      + '<div class="lyc_0817_author">作者：' + (poem.author || '佚名') + (intro ? ' · ' + intro : '') + '</div>'
+      + '</div></li>';
+  }
+  lyc_0817_listEl.innerHTML = html;
+}
+
+/* lyc_0817 · 搜索框 —— 边输入边筛选，数据已在本地，不重新请求接口 */
+lyc_0817_searchEl.addEventListener('input', function () {
+  lyc_0817_keyword = this.value;
+  lyc_0817_render();
+});
+
+/* lyc_0817 · 排序按钮 —— 在「默认 / 短到长 / 长到短」三种状态间循环 */
+lyc_0817_sortBtn.addEventListener('click', function () {
+  lyc_0817_sortState = (lyc_0817_sortState + 1) % 3;
+  this.classList.toggle('is_on', lyc_0817_sortState !== 0);
+  this.textContent = lyc_0817_sortState === 1 ? '按标题长度排序 ↑'
+    : lyc_0817_sortState === 2 ? '按标题长度排序 ↓'
+    : '按标题长度排序';
+  lyc_0817_render();
+});
+
+/* lyc_0817 · 清空 —— 关键字、排序状态一起复位 */
+lyc_0817_clearBtn.addEventListener('click', function () {
+  lyc_0817_keyword = '';
+  lyc_0817_sortState = 0;
+  lyc_0817_searchEl.value = '';
+  lyc_0817_sortBtn.classList.remove('is_on');
+  lyc_0817_sortBtn.textContent = '按标题长度排序';
+  lyc_0817_render();
+});
+
+lyc_0817_init();
+</script>
+</body>
+</html>

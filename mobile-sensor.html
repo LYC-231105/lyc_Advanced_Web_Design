@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>任务四 · 摇一摇抽今日菜谱</title>
+<!--
+  lyc_0817 · 2026-11-16 13:58:20 · DeepSeek-V4.1-Flash · 任务四 摇一摇彩蛋 ——
+  监听 devicemotion，用 accelerationIncludingGravity 算合成加速度，超过阈值 18 判定摇动，
+  触发后 1.5 秒冷却；不支持传感器 / iOS 未授权时给出提示与"点我抽一次"降级按钮。
+  姓名：梁钰承（lyc） 学号：24001010817
+-->
+<style>
+  /* lyc_0817 · 页面样式 —— 结果卡片带弹出动画 */
+  :root {
+    --lyc_0817_bg: #0b0f16;
+    --lyc_0817_panel: #141a24;
+    --lyc_0817_ink: #f0f3f8;
+    --lyc_0817_muted: #93a0b3;
+    --lyc_0817_line: #26303d;
+    --lyc_0817_gold: #ffcf6b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    min-height: 100vh;
+    padding: 24px 16px 44px;
+    background: radial-gradient(circle at 50% 0%, #1b2536 0, transparent 58%), var(--lyc_0817_bg);
+    color: var(--lyc_0817_ink);
+    font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+  }
+
+  .lyc_0817_wrap { max-width: 460px; margin: 0 auto; }
+
+  .lyc_0817_head h1 { font-size: 21px; letter-spacing: .5px; }
+  .lyc_0817_head p { margin-top: 7px; font-size: 12.5px; line-height: 1.85; color: var(--lyc_0817_muted); }
+  .lyc_0817_head b { color: var(--lyc_0817_gold); font-weight: 600; }
+
+  /* 手机轮廓 + 摇动提示 */
+  .lyc_0817_phone {
+    margin: 22px auto 0;
+    width: 168px;
+    height: 300px;
+    border: 2px solid #2f3a49;
+    border-radius: 26px;
+    background: linear-gradient(180deg, #171e29, #10151d);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: inset 0 0 0 6px #0b0f16;
+  }
+  .lyc_0817_phone .lyc_0817_icon { font-size: 44px; animation: lyc_0817_shake 2.4s ease-in-out infinite; }
+  .lyc_0817_phone .lyc_0817_label { font-size: 12px; color: var(--lyc_0817_muted); letter-spacing: 1px; }
+
+  @keyframes lyc_0817_shake {
+    0%, 62%, 100% { transform: rotate(0); }
+    66% { transform: rotate(-14deg); }
+    70% { transform: rotate(12deg); }
+    74% { transform: rotate(-9deg); }
+    78% { transform: rotate(6deg); }
+    82% { transform: rotate(0); }
+  }
+
+  /* 结果卡片 */
+  .lyc_0817_result {
+    margin-top: 22px;
+    padding: 22px 20px;
+    border: 1px solid var(--lyc_0817_line);
+    border-radius: 18px;
+    background: var(--lyc_0817_panel);
+    text-align: center;
+    transform: scale(.94);
+    opacity: .55;
+    transition: transform .28s cubic-bezier(.2, .9, .3, 1.4), opacity .28s ease, border-color .28s ease;
+  }
+
+  .lyc_0817_result.lyc_0817_pop {
+    transform: scale(1);
+    opacity: 1;
+    border-color: #4d5a34;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .45);
+  }
+
+  .lyc_0817_result .lyc_0817_emoji { font-size: 40px; }
+  .lyc_0817_result h2 { margin-top: 8px; font-family: "Songti SC", "STSong", serif; font-size: 25px; letter-spacing: 2px; color: #ffe3a1; }
+  .lyc_0817_result p { margin-top: 8px; font-size: 12.5px; line-height: 1.9; color: var(--lyc_0817_muted); }
+
+  /* 状态栏：实时合成加速度 */
+  .lyc_0817_meter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+    padding: 10px 14px;
+    border: 1px solid var(--lyc_0817_line);
+    border-radius: 12px;
+    background: #10151d;
+    font-size: 12px;
+    color: var(--lyc_0817_muted);
+    font-family: Consolas, monospace;
+  }
+  .lyc_0817_meter b { color: var(--lyc_0817_gold); font-weight: 600; }
+
+  /* 按钮 */
+  .lyc_0817_actions { display: flex; gap: 10px; margin-top: 14px; }
+  .lyc_0817_btn {
+    flex: 1;
+    padding: 13px 10px;
+    border: 1px solid #34404f;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #1d2634, #161d28);
+    color: var(--lyc_0817_ink);
+    font-size: 13.5px;
+    font-family: inherit;
+    touch-action: manipulation;
+    transition: transform .15s ease, border-color .15s ease;
+  }
+  .lyc_0817_btn:active { transform: scale(.97); border-color: #5b6a80; }
+  .lyc_0817_btn[disabled] { opacity: .45; }
+
+  .lyc_0817_status {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 12.5px;
+    line-height: 1.8;
+    color: #ffb4a2;
+    background: rgba(120, 40, 24, .22);
+    border: 1px solid rgba(180, 70, 45, .35);
+    display: none;
+  }
+  .lyc_0817_status.lyc_0817_show { display: block; }
+
+  /* 说明与视频 */
+  .lyc_0817_note, .lyc_0817_video {
+    margin-top: 20px;
+    padding: 16px;
+    border: 1px solid var(--lyc_0817_line);
+    border-radius: 14px;
+    background: #11161f;
+  }
+  .lyc_0817_note h2, .lyc_0817_video h2 { font-size: 15px; margin-bottom: 8px; }
+  .lyc_0817_note p, .lyc_0817_note li { font-size: 12.5px; line-height: 1.95; color: var(--lyc_0817_muted); }
+  .lyc_0817_note ol { padding-left: 18px; margin-top: 6px; }
+  .lyc_0817_note code {
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: #1c2431;
+    color: #a9c7ff;
+    font-family: Consolas, monospace;
+    font-size: 11.5px;
+  }
+
+  .lyc_0817_video video { width: 100%; border-radius: 10px; background: #000; display: block; }
+  .lyc_0817_video .lyc_0817_empty {
+    padding: 26px 14px;
+    border: 1px dashed #333d4d;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 12.5px;
+    line-height: 1.9;
+    color: #7f8b9c;
+  }
+</style>
+</head>
+<body>
+<div class="lyc_0817_wrap">
+
+  <div class="lyc_0817_head">
+    <h1>任务四 · 摇一摇抽菜谱</h1>
+    <p>摇一摇手机，抽一道<b>今日菜谱</b> · 阈值 <b>18</b> · 冷却 <b>1.5s</b></p>
+  </div>
+
+  <div class="lyc_0817_phone">
+    <div class="lyc_0817_icon">📱</div>
+    <div class="lyc_0817_label">摇一摇手机</div>
+  </div>
+
+  <!-- 结果卡片：抽中后加 .lyc_0817_pop 触发弹出动画 -->
+  <div class="lyc_0817_result" id="lyc_0817_result">
+    <div class="lyc_0817_emoji" id="lyc_0817_emoji">🍽️</div>
+    <h2 id="lyc_0817_name">今天是哪一道？</h2>
+    <p id="lyc_0817_desc">摇一摇手机开始抽取，或在下方点按钮抽一次</p>
+  </div>
+
+  <div class="lyc_0817_meter">
+    <span>合成加速度</span>
+    <span><b id="lyc_0817_mag">0.0</b> m/s² · 阈值 18</span>
+  </div>
+
+  <div class="lyc_0817_status" id="lyc_0817_status">
+    当前设备不支持摇一摇（收不到 devicemotion 数据），请用手机打开；也可以点下面的按钮抽一次。
+  </div>
+
+  <div class="lyc_0817_actions">
+    <button class="lyc_0817_btn" id="lyc_0817_draw">点我抽一次</button>
+    <button class="lyc_0817_btn" id="lyc_0817_allow" style="display:none;">允许使用传感器</button>
+  </div>
+
+  <!-- 为什么必须做降级 -->
+  <div class="lyc_0817_note">
+    <h2>为什么必须做降级</h2>
+    <ol>
+      <li>传感器不是所有设备都有：电脑浏览器、部分安卓平板收不到 <code>devicemotion</code>，不写降级就是一片空白。</li>
+      <li>iOS 13+ 要求<b>用户手势</b>触发 <code>DeviceMotionEvent.requestPermission()</code>，用户点"不允许"后就永远没有数据。</li>
+      <li>页面可能被浏览器拦截（非 HTTPS 环境下部分浏览器不给传感器权限），这时也要有可用的替代入口。</li>
+      <li>降级按钮能让功能"永远可用"，答辩和评分里的"降级与排错"看的就是这一点。</li>
+    </ol>
+  </div>
+
+  <!-- 手机实体演示视频：录制后放到 videos/task4-sensor.mp4 -->
+  <div class="lyc_0817_video">
+    <h2>手机实体演示视频</h2>
+    <video id="lyc_0817_video" controls playsinline preload="metadata" src="videos/task4-sensor.mp4"></video>
+    <div class="lyc_0817_empty" id="lyc_0817_video_empty">
+      还没有放入演示视频。用另一台设备录制手机摇动抽菜谱的过程，保存为<br>
+      <b>videos/task4-sensor.mp4</b> 后刷新本页即可播放。
+    </div>
+  </div>
+</div>
+
+<script>
+/* lyc_0817 · 2026-11-16 13:58:20 · DeepSeek-V4.1-Flash · 摇一摇逻辑 ——
+   devicemotion 取 accelerationIncludingGravity 算合成加速度，超阈值 18 抽菜谱并进入 1.5s 冷却；
+   1.2s 内收不到数据判定为"不支持"，显示提示与"点我抽一次"降级按钮；iOS 走授权按钮。 */
+
+var lyc_0817_dishes = [
+  { emoji: '🍜', name: '兰州牛肉面', desc: '一清二白三红四绿五黄，清汤配手工拉面。' },
+  { emoji: '🥟', name: '西安肉夹馍', desc: '腊汁肉酥烂，白吉馍现烤，肉汁浸透馍瓤。' },
+  { emoji: '🍲', name: '成都麻婆豆腐', desc: '麻辣烫香酥嫩鲜活，八字诀缺一不可。' },
+  { emoji: '🦐', name: '广州白灼虾', desc: '沸水几秒捞出过冰，吃的是食材本味。' },
+  { emoji: '🍛', name: '扬州炒饭', desc: '粒粒分明，蛋香裹米，配虾仁与火腿丁。' },
+  { emoji: '🥘', name: '东北锅包肉', desc: '外壳酥脆酸甜，里脊薄片挂糊两次炸。' }
+];
+
+var lyc_0817_result = document.getElementById('lyc_0817_result');
+var lyc_0817_emojiEl = document.getElementById('lyc_0817_emoji');
+var lyc_0817_nameEl = document.getElementById('lyc_0817_name');
+var lyc_0817_descEl = document.getElementById('lyc_0817_desc');
+var lyc_0817_magEl = document.getElementById('lyc_0817_mag');
+var lyc_0817_statusEl = document.getElementById('lyc_0817_status');
+var lyc_0817_allowBtn = document.getElementById('lyc_0817_allow');
+
+var lyc_0817_THRESHOLD = 18;      // 判定为摇动的合成加速度阈值
+var lyc_0817_COOLDOWN = 1500;     // 冷却时间：一次摇动只触发一次
+var lyc_0817_locked = false;      // 冷却锁
+var lyc_0817_gotEvent = false;    // 是否收到过有效的 devicemotion 数据
+var lyc_0817_started = false;     // 是否已经启动监听
+var lyc_0817_hasPerm = typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function';
+
+/* 抽一道菜：随机 + 弹出动画 */
+function lyc_0817_draw(lyc_0817_source) {
+  var lyc_0817_i = Math.floor(Math.random() * lyc_0817_dishes.length);
+  var lyc_0817_d = lyc_0817_dishes[lyc_0817_i];
+
+  lyc_0817_emojiEl.textContent = lyc_0817_d.emoji;
+  lyc_0817_nameEl.textContent = lyc_0817_d.name;
+  lyc_0817_descEl.textContent = lyc_0817_d.desc + '（来源：' + lyc_0817_source + '）';
+
+  lyc_0817_result.classList.remove('lyc_0817_pop');
+  void lyc_0817_result.offsetWidth;          // 强制重排，保证动画能重新播放
+  lyc_0817_result.classList.add('lyc_0817_pop');
+}
+
+/* 摇动处理：距离上次触发不足 1.5s 直接忽略 */
+function lyc_0817_onShake() {
+  if (lyc_0817_locked) return;
+  lyc_0817_locked = true;
+  lyc_0817_draw('摇一摇');
+  setTimeout(function () { lyc_0817_locked = false; }, lyc_0817_COOLDOWN);
+}
+
+/* devicemotion：加速度包含重力，静止时约 9.8，摇动时会突然冲高 */
+function lyc_0817_onMotion(e) {
+  var lyc_0817_a = e.accelerationIncludingGravity;
+  if (!lyc_0817_a || lyc_0817_a.x === null) return;   // 没有数据：交给降级逻辑
+
+  var lyc_0817_x = lyc_0817_a.x || 0;
+  var lyc_0817_y = lyc_0817_a.y || 0;
+  var lyc_0817_z = lyc_0817_a.z || 0;
+
+  // 三轴全为 0：桌面浏览器会发这种"空事件"，不能当成有效传感器数据
+  if (lyc_0817_x === 0 && lyc_0817_y === 0 && lyc_0817_z === 0) return;
+
+  lyc_0817_gotEvent = true;
+  lyc_0817_statusEl.classList.remove('lyc_0817_show');
+
+  var lyc_0817_mag = Math.sqrt(lyc_0817_x * lyc_0817_x + lyc_0817_y * lyc_0817_y + lyc_0817_z * lyc_0817_z);
+
+  lyc_0817_magEl.textContent = lyc_0817_mag.toFixed(1);
+  if (lyc_0817_mag > lyc_0817_THRESHOLD) lyc_0817_onShake();
+}
+
+/* 启动监听：先挂上 devicemotion，1.2 秒内没有有效数据再提示降级 / 授权 */
+function lyc_0817_start() {
+  if (lyc_0817_started) return;
+  lyc_0817_started = true;
+  window.addEventListener('devicemotion', lyc_0817_onMotion);
+
+  // 1.2 秒还没收到任何有效数据 → 判定不支持，显示降级提示（iOS 同时给出授权按钮）
+  setTimeout(function () {
+    if (lyc_0817_gotEvent) return;
+    lyc_0817_statusEl.textContent = lyc_0817_hasPerm
+      ? '如果这是 iPhone，需要先点下面的"允许使用传感器"授权；也可以直接点按钮抽一次。'
+      : '当前设备不支持摇一摇（收不到 devicemotion 数据），请用手机打开；也可以点下面的按钮抽一次。';
+    lyc_0817_statusEl.classList.add('lyc_0817_show');
+    if (lyc_0817_hasPerm) lyc_0817_allowBtn.style.display = 'block';
+  }, 1200);
+}
+
+/* 点击"抽一次"：降级方案，永远可用 */
+document.getElementById('lyc_0817_draw').addEventListener('click', function () {
+  lyc_0817_draw('按钮');
+});
+
+/* iOS 13+：权限必须由用户点击触发 */
+lyc_0817_allowBtn.addEventListener('click', function () {
+  DeviceMotionEvent.requestPermission().then(function (lyc_0817_state) {
+    lyc_0817_allowBtn.style.display = 'none';
+    if (lyc_0817_state === 'granted') {
+      lyc_0817_statusEl.classList.remove('lyc_0817_show');
+      // 已授权但可能仍无数据：再等 1.2 秒确认一次
+      lyc_0817_started = false;
+      lyc_0817_start();
+    } else {
+      lyc_0817_statusEl.textContent = '你拒绝了传感器权限，可以用下面的按钮抽一次。';
+      lyc_0817_statusEl.classList.add('lyc_0817_show');
+    }
+  }).catch(function () {
+    lyc_0817_allowBtn.style.display = 'none';
+    lyc_0817_statusEl.textContent = '传感器权限申请失败（需要 HTTPS 环境），可以直接点按钮抽一次。';
+    lyc_0817_statusEl.classList.add('lyc_0817_show');
+  });
+});
+
+/* 启动：直接监听；若浏览器给了 requestPermission（iOS/部分 Chromium），无数据时再显示授权按钮 */
+lyc_0817_start();
+
+/* 视频占位：文件不存在时隐藏播放器并显示说明 */
+(function () {
+  var lyc_0817_video = document.getElementById('lyc_0817_video');
+  var lyc_0817_empty = document.getElementById('lyc_0817_video_empty');
+  lyc_0817_video.style.display = 'none';
+  lyc_0817_video.addEventListener('loadedmetadata', function () {
+    lyc_0817_video.style.display = 'block';
+    lyc_0817_empty.style.display = 'none';
+  });
+  lyc_0817_video.addEventListener('error', function () {
+    lyc_0817_video.style.display = 'none';
+    lyc_0817_empty.style.display = 'block';
+  });
+})();
+</script>
+</body>
+</html>

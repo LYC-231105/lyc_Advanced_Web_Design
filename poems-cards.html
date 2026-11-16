@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>诗词卡片 · 上图下文（端口 3005）</title>
+<!--
+  lyc_0817 · 2026-11-12 14:00:14 · DeepSeek-V4.1-Flash · 诗词卡片页（3005） ——
+  用 fetch 请求本机数据服务器 http://localhost:3005/api/poems，
+  取回 db/db.json 中 poems 的 pic / title / content，渲染成「上图下文」卡片。
+  启动方式：先在 db 文件夹执行 node server.js（端口 3005），再打开本页。
+-->
+<style>
+  /* lyc_0817 · 2026-11-12 14:00:14 · 页面样式 —— CSS 变量 + Flex/Grid，无外部依赖 */
+  :root {
+    --lyc_0817_bg: #f4f6fb;
+    --lyc_0817_card: #ffffff;
+    --lyc_0817_ink: #1f2b3a;
+    --lyc_0817_muted: #6b7789;
+    --lyc_0817_blue: #1f4e8c;
+    --lyc_0817_line: #e3e8f1;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    padding: 40px 22px 56px;
+    background: radial-gradient(ellipse at 85% 0%, #e3ecf9 0, transparent 55%), var(--lyc_0817_bg);
+    color: var(--lyc_0817_ink);
+    font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+    line-height: 1.7;
+  }
+
+  .lyc_0817_wrap { max-width: 1000px; margin: 0 auto; }
+
+  /* 页头 */
+  .lyc_0817_head { margin-bottom: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--lyc_0817_line); }
+  .lyc_0817_head h1 { font-size: 25px; letter-spacing: 1px; }
+  .lyc_0817_head p { margin-top: 6px; font-size: 13px; color: var(--lyc_0817_muted); }
+  .lyc_0817_head code {
+    padding: 1px 6px;
+    border-radius: 5px;
+    background: #e9eff9;
+    color: var(--lyc_0817_blue);
+    font-family: Consolas, monospace;
+    font-size: 12.5px;
+  }
+
+  /* 卡片网格：数据几条就排几张 */
+  .lyc_0817_list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    list-style: none;
+  }
+
+  .lyc_0817_card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--lyc_0817_line);
+    border-radius: 14px;
+    background: var(--lyc_0817_card);
+    box-shadow: 0 4px 14px rgba(31, 43, 58, .06);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+
+  .lyc_0817_card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 26px rgba(31, 43, 58, .13);
+  }
+
+  /* 上图：固定高度 + cover 裁切，保证每张卡片高度一致 */
+  .lyc_0817_card img {
+    display: block;
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    background: #e8edf5;
+  }
+
+  /* 下文：标题 + 内容 */
+  .lyc_0817_text { padding: 16px 18px 18px; }
+  .lyc_0817_text h2 { font-size: 17px; margin-bottom: 8px; }
+  .lyc_0817_text p { font-size: 13.5px; color: #4c5a6b; }
+
+  /* 加载中 / 出错提示 */
+  .lyc_0817_tip {
+    grid-column: 1 / -1;
+    padding: 32px 22px;
+    border: 1px dashed var(--lyc_0817_line);
+    border-radius: 14px;
+    background: var(--lyc_0817_card);
+    color: var(--lyc_0817_muted);
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .lyc_0817_tip_err { border-color: #f0c9bd; background: #fdf5f2; color: #b0421f; }
+
+  .lyc_0817_foot {
+    margin-top: 34px;
+    padding-top: 14px;
+    border-top: 1px solid var(--lyc_0817_line);
+    text-align: center;
+    font-size: 12px;
+    color: #93a0b2;
+  }
+
+  @media (max-width: 520px) {
+    body { padding: 24px 14px 40px; }
+    .lyc_0817_head h1 { font-size: 20px; }
+    .lyc_0817_card img { height: 138px; }
+  }
+</style>
+</head>
+<body>
+<div class="lyc_0817_wrap">
+
+  <div class="lyc_0817_head">
+    <h1>诗词卡片 · 上图下文</h1>
+    <p>数据来源：<code>db/db.json</code> → 本地服务器 <code>http://localhost:3005/api/poems</code> → fetch 取回后渲染</p>
+  </div>
+
+  <!-- 卡片挂载容器：JS 会把每首诗词拼成一张 li 卡片塞进来 -->
+  <ul class="lyc_0817_list" id="lyc_0817_list">
+    <li class="lyc_0817_tip">正在从 http://localhost:3005 加载数据…</li>
+  </ul>
+
+  <div class="lyc_0817_foot">高级网页设计 · 课堂案例《从 JSON 到 fetch》 · 端口 3005</div>
+</div>
+
+<script>
+/* lyc_0817 · 2026-11-12 14:00:14 · DeepSeek-V4.1-Flash · 诗词渲染 ——
+   fetch 请求 /api/poems，取 poems 数组里的 pic / title / content，
+   用模板字符串拼成「上图下文」卡片；服务器未启动时给出提示，避免白屏。 */
+
+var lyc_0817_api = 'http://localhost:3005/api/poems';
+var lyc_0817_listEl = document.getElementById('lyc_0817_list');
+
+/* lyc_0817 · 渲染函数 —— 遍历数组，一条数据一张卡片 */
+function lyc_0817_renderPoems(lyc_0817_poems) {
+  var lyc_0817_html = '';
+  for (var lyc_0817_i = 0; lyc_0817_i < lyc_0817_poems.length; lyc_0817_i++) {
+    var lyc_0817_item = lyc_0817_poems[lyc_0817_i];
+    lyc_0817_html += '<li class="lyc_0817_card">'
+      + '<img src="' + lyc_0817_item.pic + '" alt="' + lyc_0817_item.title + '">'
+      + '<div class="lyc_0817_text">'
+      + '<h2>' + lyc_0817_item.title + '</h2>'
+      + '<p>' + lyc_0817_item.content + '</p>'
+      + '</div></li>';
+  }
+  lyc_0817_listEl.innerHTML = lyc_0817_html;
+}
+
+/* lyc_0817 · 加载函数 —— 两个 then：先拿响应，再解析成数组 */
+function lyc_0817_loadPoems() {
+  fetch(lyc_0817_api)
+    .then(function (lyc_0817_res) {
+      if (!lyc_0817_res.ok) {
+        throw new Error('接口返回状态码 ' + lyc_0817_res.status);
+      }
+      return lyc_0817_res.json(); // 第一次拿到的是响应，这里才拆出数据
+    })
+    .then(function (lyc_0817_poems) {
+      lyc_0817_renderPoems(lyc_0817_poems);
+    })
+    .catch(function (lyc_0817_err) {
+      // 服务器没启动 / 地址写错时走到这里：给出操作提示
+      lyc_0817_listEl.innerHTML = '<li class="lyc_0817_tip lyc_0817_tip_err">'
+        + '数据获取失败！请先在 db 文件夹运行 node server.js（端口 3005），再刷新本页。'
+        + '<br><small>' + lyc_0817_err.message + '</small></li>';
+    });
+}
+
+lyc_0817_loadPoems(); // 页面加载完立即请求
+</script>
+</body>
+</html>
