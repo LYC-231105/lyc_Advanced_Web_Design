@@ -133,7 +133,7 @@
             box-shadow: 0 4px 12px #243e3303;
         }
 
-        .module:nth-of-type(3), .module:last-child { grid-column: 1 / -1; }
+        .module:nth-of-type(3) { grid-column: 1 / -1; }
 
         .module-title {
             display: flex;
@@ -234,32 +234,6 @@
             .link-list li a:not([href^="javascript:"]):hover .arrow { background: var(--green); border-color: var(--green); color: #fff; }
         }
 
-        .module:last-child {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            gap: 28px;
-            padding-top: 20px;
-            padding-bottom: 20px;
-            border-style: dashed;
-            background: transparent;
-            box-shadow: none;
-        }
-
-        .module:last-child .module-title { margin-bottom: 0; }
-        .module:last-child .icon { background: #eeeee6; border-color: #dfdfd3; color: #7a8172; }
-        .module:last-child .link-list a {
-            min-height: 68px;
-            padding-top: 8px;
-            padding-bottom: 8px;
-            border: 0;
-            border-left: 1px solid var(--line);
-            border-radius: 0;
-            background: transparent;
-        }
-        .module:last-child .name { margin-bottom: 3px; font-size: 14px; }
-        .module:last-child .arrow { background: transparent; border-style: dashed; }
-
         /* 保留说明原文，降低视觉权重，保证可读性。 */
         .note {
             margin-top: 26px;
@@ -271,52 +245,6 @@
         .note h3 { margin-bottom: 8px; font-size: 14px; font-weight: 600; color: #565c43; }
         .note p { color: #6d7260; font-size: 12px; line-height: 2; }
         .footer { margin-top: 28px; text-align: center; font-size: 11px; letter-spacing: 1.5px; color: #788173; }
-
-        /* LLM 实践模块：今日测试截图 */
-        .module-note {
-            margin: 0 0 16px;
-            color: var(--muted);
-            font-size: 12.5px;
-            line-height: 1.9;
-        }
-
-        .shot-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-
-        .shot {
-            min-width: 0;
-            margin: 0;
-            padding: 10px;
-            border: 1px solid var(--line);
-            border-radius: 14px;
-            background: #f7f8f1;
-        }
-
-        .shot img {
-            display: block;
-            width: 100%;
-            height: auto;
-            border: 1px solid #e6e7dc;
-            border-radius: 9px;
-            background: #ffffff;
-        }
-
-        .shot figcaption {
-            margin-top: 9px;
-            color: var(--muted);
-            font-size: 12px;
-            line-height: 1.85;
-        }
-
-        .shot-wide { grid-column: 1 / -1; }
-
-        @media (max-width: 760px) {
-            .shot-grid { grid-template-columns: minmax(0, 1fr); }
-        }
 
         @media (max-width: 760px) {
             body { padding: 24px 18px; }
@@ -337,14 +265,12 @@
             .hero h1 { font-size: clamp(23px, 6.6vw, 32px); letter-spacing: .5px; }
             .hero::before { right: -190px; top: -160px; }
             .hero::after { right: -250px; top: -220px; }
-            .catalog, .link-list, .module:last-child { grid-template-columns: minmax(0, 1fr); }
+            .catalog, .link-list { grid-template-columns: minmax(0, 1fr); }
             .module-title { display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; align-items: start; }
             .module-title > span:nth-child(2) { align-self: center; }
             .module-title .badge { margin-top: 5px; }
             .link-list li a { min-height: 112px; padding-left: 18px; padding-right: 58px; }
             .link-list .arrow { right: 16px; }
-            .module:last-child { gap: 16px; }
-            .module:last-child .link-list a { padding-left: 0; border-left: 0; }
             .note { padding: 20px; }
             .footer { letter-spacing: .5px; font-size: 10px; }
         }
@@ -467,7 +393,7 @@
                 <div class="module-title">
                     <span class="icon">布</span>
                     <span>网页整体布局</span>
-                    <span class="badge">1 网页 · 1 样式</span>
+                    <span class="badge">2 网页 · 1 样式</span>
                 </div>
                 <ul class="link-list">
                     <li>
@@ -481,6 +407,13 @@
                         <a href="layout004.css" target="_blank">
                             <span class="name">网页整体布局样式</span>
                             <span class="desc">查看页面分区、两栏排列及固定定位的 CSS 样式</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                    <li style="grid-column: 1 / -1;">
+                        <a href="grid004.html" target="_blank">
+                            <span class="name">网格布局 grid · grid004</span>
+                            <span class="desc">CSS Grid 网格布局练习</span>
                             <span class="arrow">›</span>
                         </a>
                     </li>
@@ -542,7 +475,7 @@
                 <div class="module-title">
                     <span class="icon">标</span>
                     <span>图标库与移动端导航</span>
-                    <span class="badge">4 个页面 · 本地 CDN</span>
+                    <span class="badge">5 个页面 · 本地 CDN</span>
                 </div>
                 <ul class="link-list">
                     <li>
@@ -570,6 +503,38 @@
                         <a href="iconfont-4.html" target="_blank">
                             <span class="name">移动端底部导航 · SVG 图标</span>
                             <span class="desc">同款导航对照实现，iconfont.js 注入 symbol、use 引用渲染</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                    <li style="grid-column: 1 / -1;">
+                        <a href="svg004.html" target="_blank">
+                            <span class="name">SVG 图标 · svg004</span>
+                            <span class="desc">内联 SVG 图标的绘制与使用</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- JavaScript 基础：数据类型、循环、对象与函数 -->
+            <div class="module" style="grid-column: 1 / -1;">
+                <div class="module-title">
+                    <span class="icon">JS</span>
+                    <span>JavaScript 基础</span>
+                    <span class="badge">2 个页面 · 数据类型 / 对象 / 函数</span>
+                </div>
+                <ul class="link-list">
+                    <li>
+                        <a href="dataTyp004.html" target="_blank">
+                            <span class="name">数 7 游戏 · dataTyp004</span>
+                            <span class="desc">数据类型与循环的课堂小游戏</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="js_obj_fun.html" target="_blank">
+                            <span class="name">JS 对象与函数 · js_obj_fun</span>
+                            <span class="desc">对象与函数的课堂示例</span>
                             <span class="arrow">›</span>
                         </a>
                     </li>
@@ -655,6 +620,13 @@
                             <span class="arrow">›</span>
                         </a>
                     </li>
+                    <li style="grid-column: 1 / -1;">
+                        <a href="swiper-task3.html" target="_blank">
+                            <span class="name">Swiper 任务三 · swiper-task3</span>
+                            <span class="desc">课堂任务三的入口页面</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
 
@@ -729,126 +701,37 @@
                 </ul>
             </div>
 
-            <!-- 模块十四：LLM 应用实践（今日新增） -->
-            <div class="module" style="grid-column: 1 / -1;" id="mod-llm">
+            <!-- 模块十四：LLM 应用实践 -->
+            <div class="module" style="grid-column: 1 / -1;">
                 <div class="module-title">
                     <span class="icon">智</span>
-                    <span>LLM 应用实践 · 今日测试痕迹</span>
-                    <span class="badge">4 项能力 · 5 张实测截图</span>
-                </div>
-                <p class="module-note">课程实践里的 LLM 操作痕迹：平台切换 AI 客服、知识库问答（RAG）、图像识别、语音识别。下面截图均为 2026-11-23 实际测试时自动截取；演示前请先在本机 lyc_project/backend 执行 node server.js（端口 8817）。</p>
-                <div class="shot-grid">
-                    <figure class="shot">
-                        <img src="llm_shots/shot-platform-switch.png" alt="AI 客服在硅基流动与七牛云之间切换的实测截图" loading="lazy">
-                        <figcaption>① AI 客服：先用硅基流动提问，再切到七牛云追问「可以配送到哪些区域？」；历史对话一并发送，两轮都正常回答，模型名随平台变化。</figcaption>
-                    </figure>
-                    <figure class="shot">
-                        <img src="llm_shots/shot-kb.png" alt="知识库问答实测截图" loading="lazy">
-                        <figcaption>② 知识库问答：上传课程文档后提问「中华美食街的营业时间是几点？」；检索片段后由大模型作答，并列出引用文件与相关度。</figcaption>
-                    </figure>
-                    <figure class="shot">
-                        <img src="llm_shots/shot-vision.png" alt="图像识别实测截图" loading="lazy">
-                        <figcaption>③ 图像识别：上传网络拓扑截图，视觉模型返回中文描述，识别出两台路由器、四台主机与两道题目。</figcaption>
-                    </figure>
-                    <figure class="shot">
-                        <img src="llm_shots/shot-asr.png" alt="语音识别实测截图" loading="lazy">
-                        <figcaption>④ 语音识别：上传中文音频，七牛云 Qwen-Audio-3.0-ASR-Flash 转写为「你好，今天天气怎么样？请帮我打开窗帘。」</figcaption>
-                    </figure>
-                    <figure class="shot shot-wide">
-                        <img src="llm_shots/shot-trace.png" alt="操作痕迹面板实测截图" loading="lazy">
-                        <figcaption>⑤ 操作痕迹：每完成一次对话、上传或识别，实践页自动记录时间、功能与结果；首页入口与本面板读取同一份记录。</figcaption>
-                    </figure>
+                    <span>LLM 应用实践</span>
                 </div>
                 <ul class="link-list">
                     <li>
                         <a href="http://localhost:8817/llm.html" target="_blank">
-                            <span class="name">LLM 实践操作痕迹（完整演示页）</span>
-                            <span class="desc">四项能力一页完成 · 现场切换平台对话 · 每次操作自动写入操作痕迹</span>
+                            <span class="name">LLM 实践 · 今日四项能力</span>
+                            <span class="desc">平台切换 AI 客服、知识库问答（RAG）、图像识别、语音识别，点击进入演示页（端口 8817）</span>
                             <span class="arrow">›</span>
                         </a>
                     </li>
                     <li>
-                        <a href="http://localhost:8817/service.html" target="_blank">
-                            <span class="name">在线客服 · 硅基流动 / 七牛云切换</span>
-                            <span class="desc">中华美食街客服人设 · 3 类该答、其他问题礼貌拒绝 · 平台下拉热切换</span>
-                            <span class="arrow">›</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://localhost:8817/kb.html" target="_blank">
-                            <span class="name">知识库管理（RAG）</span>
-                            <span class="desc">上传 doc / docx / ppt / pptx / pdf / txt · 解析分片入库 · 带引用来源的问答</span>
-                            <span class="arrow">›</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://localhost:8817/vision.html" target="_blank">
-                            <span class="name">图像识别</span>
-                            <span class="desc">上传图片返回中文描述 · 复用硅基流动 API Key 与视觉模型</span>
-                            <span class="arrow">›</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://localhost:8817/asr.html" target="_blank">
-                            <span class="name">语音识别</span>
-                            <span class="desc">浏览器录音或上传音频 · 七牛云 Qwen-Audio-3.0-ASR-Flash 语音转文字</span>
+                        <a href="llm-shots.html" target="_blank">
+                            <span class="name">测试截图 · 带地址栏</span>
+                            <span class="desc">5 张实测截图，地址栏可见 localhost:8817/llm.html</span>
                             <span class="arrow">›</span>
                         </a>
                     </li>
                 </ul>
             </div>
 
-            <!-- 其余模块（预留） -->
-            <div class="module" data-page-node-id="QlHOpIJzaK1i7HPRLmuwaB">
-                <div class="module-title" data-page-node-id="b12FX1BYCuOHbWOsZoBzsO">
-                    <span class="icon" data-page-node-id="QIuS9W4C2uRpcqHRgvFCtB">+</span>
-                    <span data-page-node-id="bDZAwHoiPui5jowbBO1hxY">其余模块</span>
-                    <span class="badge" data-page-node-id="VoCLQBrqdb78MODJmYOo0b">课堂练习</span>
-                </div>
-                <ul class="link-list" data-page-node-id="ZoBRdlKM0L1dRytqRSG6tg">
-                    <li>
-                        <a href="dataTyp004.html" target="_blank">
-                            <span class="name">数 7 游戏 · dataTyp004</span>
-                            <span class="desc">数据类型与循环的课堂小游戏</span>
-                            <span class="arrow">›</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="grid004.html" target="_blank">
-                            <span class="name">网格布局 grid · grid004</span>
-                            <span class="desc">CSS Grid 网格布局练习</span>
-                            <span class="arrow">›</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="js_obj_fun.html" target="_blank">
-                            <span class="name">JS 对象与函数 · js_obj_fun</span>
-                            <span class="desc">对象与函数的课堂示例</span>
-                            <span class="arrow">›</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="svg004.html" target="_blank">
-                            <span class="name">SVG 图标 · svg004</span>
-                            <span class="desc">内联 SVG 图标的绘制与使用</span>
-                            <span class="arrow">›</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="swiper-task3.html" target="_blank">
-                            <span class="name">Swiper 任务三 · swiper-task3</span>
-                            <span class="desc">课堂任务三的入口页面</span>
-                            <span class="arrow">›</span>
-                        </a>
-                    </li>
-                </ul>
             </div>
         </div>
 
         <!-- 说明区 -->
         <div class="note" data-page-node-id="DMkl6y27hBhc5zONAHsUuH">
             <h3 data-page-node-id="SmYRkzIqVu7DGnezG7vA55">📌 页面说明</h3>
-            <p data-page-node-id="ZnPiwYEfw9uB8BwiKBIT0t">本页面为梁钰承的《高级网页设计》课堂实践导航首页，汇总了当前目录下除首页外的 7 个网页和 6 个 CSS 样式文件。课堂目录包含「HTML 基础」「自我介绍网页」「盒模型、层叠与继承/CSS选择器优先级」「上图下文/图上文字」「网页整体布局」「网页整体布局课后作业」和「CSS3 选择器与动画」。图片素材由各示例页面从 img 文件夹加载。本页面使用原生 HTML + CSS 编写，未依赖任何外部 CDN 资源。今日新增「LLM 应用实践 · 今日测试痕迹」模块，汇总平台切换 AI 客服、知识库问答、图像识别、语音识别 4 项能力与 5 张实测截图。</p>
+            <p data-page-node-id="ZnPiwYEfw9uB8BwiKBIT0t">本页面为梁钰承的《高级网页设计》课堂实践导航首页，汇总了当前目录下除首页外的 7 个网页和 6 个 CSS 样式文件。课堂目录包含「HTML 基础」「自我介绍网页」「盒模型、层叠与继承/CSS选择器优先级」「上图下文/图上文字」「网页整体布局」「网页整体布局课后作业」和「CSS3 选择器与动画」。图片素材由各示例页面从 img 文件夹加载。本页面使用原生 HTML + CSS 编写，未依赖任何外部 CDN 资源。此外还有「LLM 应用实践」模块：四项能力演示页（端口 8817）与测试截图页。</p>
         </div>
 
         <!-- 页脚 -->
