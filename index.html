@@ -272,6 +272,52 @@
         .note p { color: #6d7260; font-size: 12px; line-height: 2; }
         .footer { margin-top: 28px; text-align: center; font-size: 11px; letter-spacing: 1.5px; color: #788173; }
 
+        /* LLM 实践模块：今日测试截图 */
+        .module-note {
+            margin: 0 0 16px;
+            color: var(--muted);
+            font-size: 12.5px;
+            line-height: 1.9;
+        }
+
+        .shot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .shot {
+            min-width: 0;
+            margin: 0;
+            padding: 10px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: #f7f8f1;
+        }
+
+        .shot img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border: 1px solid #e6e7dc;
+            border-radius: 9px;
+            background: #ffffff;
+        }
+
+        .shot figcaption {
+            margin-top: 9px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.85;
+        }
+
+        .shot-wide { grid-column: 1 / -1; }
+
+        @media (max-width: 760px) {
+            .shot-grid { grid-template-columns: minmax(0, 1fr); }
+        }
+
         @media (max-width: 760px) {
             body { padding: 24px 18px; }
             .hero { padding: 34px 28px; grid-template-columns: 1fr 76px; gap: 22px; border-radius: 22px; }
@@ -683,6 +729,75 @@
                 </ul>
             </div>
 
+            <!-- 模块十四：LLM 应用实践（今日新增） -->
+            <div class="module" style="grid-column: 1 / -1;" id="mod-llm">
+                <div class="module-title">
+                    <span class="icon">智</span>
+                    <span>LLM 应用实践 · 今日测试痕迹</span>
+                    <span class="badge">4 项能力 · 5 张实测截图</span>
+                </div>
+                <p class="module-note">课程实践里的 LLM 操作痕迹：平台切换 AI 客服、知识库问答（RAG）、图像识别、语音识别。下面截图均为 2026-11-23 实际测试时自动截取；演示前请先在本机 lyc_project/backend 执行 node server.js（端口 8817）。</p>
+                <div class="shot-grid">
+                    <figure class="shot">
+                        <img src="llm_shots/shot-platform-switch.png" alt="AI 客服在硅基流动与七牛云之间切换的实测截图" loading="lazy">
+                        <figcaption>① AI 客服：先用硅基流动提问，再切到七牛云追问「可以配送到哪些区域？」；历史对话一并发送，两轮都正常回答，模型名随平台变化。</figcaption>
+                    </figure>
+                    <figure class="shot">
+                        <img src="llm_shots/shot-kb.png" alt="知识库问答实测截图" loading="lazy">
+                        <figcaption>② 知识库问答：上传课程文档后提问「中华美食街的营业时间是几点？」；检索片段后由大模型作答，并列出引用文件与相关度。</figcaption>
+                    </figure>
+                    <figure class="shot">
+                        <img src="llm_shots/shot-vision.png" alt="图像识别实测截图" loading="lazy">
+                        <figcaption>③ 图像识别：上传网络拓扑截图，视觉模型返回中文描述，识别出两台路由器、四台主机与两道题目。</figcaption>
+                    </figure>
+                    <figure class="shot">
+                        <img src="llm_shots/shot-asr.png" alt="语音识别实测截图" loading="lazy">
+                        <figcaption>④ 语音识别：上传中文音频，七牛云 Qwen-Audio-3.0-ASR-Flash 转写为「你好，今天天气怎么样？请帮我打开窗帘。」</figcaption>
+                    </figure>
+                    <figure class="shot shot-wide">
+                        <img src="llm_shots/shot-trace.png" alt="操作痕迹面板实测截图" loading="lazy">
+                        <figcaption>⑤ 操作痕迹：每完成一次对话、上传或识别，实践页自动记录时间、功能与结果；首页入口与本面板读取同一份记录。</figcaption>
+                    </figure>
+                </div>
+                <ul class="link-list">
+                    <li>
+                        <a href="http://localhost:8817/llm.html" target="_blank">
+                            <span class="name">LLM 实践操作痕迹（完整演示页）</span>
+                            <span class="desc">四项能力一页完成 · 现场切换平台对话 · 每次操作自动写入操作痕迹</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:8817/service.html" target="_blank">
+                            <span class="name">在线客服 · 硅基流动 / 七牛云切换</span>
+                            <span class="desc">中华美食街客服人设 · 3 类该答、其他问题礼貌拒绝 · 平台下拉热切换</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:8817/kb.html" target="_blank">
+                            <span class="name">知识库管理（RAG）</span>
+                            <span class="desc">上传 doc / docx / ppt / pptx / pdf / txt · 解析分片入库 · 带引用来源的问答</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:8817/vision.html" target="_blank">
+                            <span class="name">图像识别</span>
+                            <span class="desc">上传图片返回中文描述 · 复用硅基流动 API Key 与视觉模型</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:8817/asr.html" target="_blank">
+                            <span class="name">语音识别</span>
+                            <span class="desc">浏览器录音或上传音频 · 七牛云 Qwen-Audio-3.0-ASR-Flash 语音转文字</span>
+                            <span class="arrow">›</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
             <!-- 其余模块（预留） -->
             <div class="module" data-page-node-id="QlHOpIJzaK1i7HPRLmuwaB">
                 <div class="module-title" data-page-node-id="b12FX1BYCuOHbWOsZoBzsO">
@@ -733,7 +848,7 @@
         <!-- 说明区 -->
         <div class="note" data-page-node-id="DMkl6y27hBhc5zONAHsUuH">
             <h3 data-page-node-id="SmYRkzIqVu7DGnezG7vA55">📌 页面说明</h3>
-            <p data-page-node-id="ZnPiwYEfw9uB8BwiKBIT0t">本页面为梁钰承的《高级网页设计》课堂实践导航首页，汇总了当前目录下除首页外的 7 个网页和 6 个 CSS 样式文件。课堂目录包含「HTML 基础」「自我介绍网页」「盒模型、层叠与继承/CSS选择器优先级」「上图下文/图上文字」「网页整体布局」「网页整体布局课后作业」和「CSS3 选择器与动画」。图片素材由各示例页面从 img 文件夹加载。本页面使用原生 HTML + CSS 编写，未依赖任何外部 CDN 资源。</p>
+            <p data-page-node-id="ZnPiwYEfw9uB8BwiKBIT0t">本页面为梁钰承的《高级网页设计》课堂实践导航首页，汇总了当前目录下除首页外的 7 个网页和 6 个 CSS 样式文件。课堂目录包含「HTML 基础」「自我介绍网页」「盒模型、层叠与继承/CSS选择器优先级」「上图下文/图上文字」「网页整体布局」「网页整体布局课后作业」和「CSS3 选择器与动画」。图片素材由各示例页面从 img 文件夹加载。本页面使用原生 HTML + CSS 编写，未依赖任何外部 CDN 资源。今日新增「LLM 应用实践 · 今日测试痕迹」模块，汇总平台切换 AI 客服、知识库问答、图像识别、语音识别 4 项能力与 5 张实测截图。</p>
         </div>
 
         <!-- 页脚 -->

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>任务三 · 创作与技术答辩记录</title>
+<!-- lyc_0817 · 2026-11-09 20:41:48 · GPT-6 · 任务三交付记录 —— 本次真实需求、实现说明、答辩四问与图片来源；不伪造历史对话。 -->
+<link rel="stylesheet" href="css/lyc_0817_task3.css">
+<style>
+:root{--lyc_0817_bg:#f6f8fc;--lyc_0817_panel:#f8faff;--lyc_0817_line:#dbe4ff;--lyc_0817_text:#1f2937;--lyc_0817_muted:#64748b;--lyc_0817_gold:#1d5bbf}*{box-sizing:border-box}body{margin:0;background:#f6f8fc;color:#1f2937;font-family:"Microsoft YaHei","PingFang SC",sans-serif}.lyc_0817_record{background:#fff;border:1px solid #e8ecf5;border-radius:18px;box-shadow:0 4px 14px #1f29370f}.lyc_0817_record h1{color:#0f2b5b}.lyc_0817_record .lyc_0817_eyebrow{color:#1d5bbf;font-size:13px}.lyc_0817_record p,.lyc_0817_record li{color:#374151!important}.lyc_0817_record code{color:#1d4ed8!important}
+
+.lyc_0817_record{max-width:900px;margin:auto;padding:35px 24px 60px}.lyc_0817_record h1{font-size:34px;margin:24px 0}.lyc_0817_record h2{margin:30px 0 14px;color:var(--lyc_0817_gold);font-size:22px}.lyc_0817_record h3{margin:20px 0 10px;font-size:16px}.lyc_0817_record p,.lyc_0817_record li{line-height:1.95;color:#c5ced0}.lyc_0817_record li{margin-bottom:10px}.lyc_0817_record a{color:var(--lyc_0817_gold);text-decoration:underline;text-underline-offset:4px}.lyc_0817_record blockquote{margin:20px 0;padding:20px;border-left:3px solid var(--lyc_0817_gold);background:var(--lyc_0817_panel)}.lyc_0817_record pre{white-space:pre-wrap;overflow-wrap:anywhere;border:1px solid var(--lyc_0817_line);background:var(--lyc_0817_panel);border-radius:8px;padding:20px;line-height:1.8;font-size:13px}.lyc_0817_record code{color:#eed3a2}.lyc_0817_source{padding:16px 0;border-bottom:1px solid var(--lyc_0817_line)}
+</style>
+</head>
+<body><main class="lyc_0817_record">
+<a href="swiper-task.html#lyc_0817_task3">← 返回原页面任务三卡片</a>
+<p class="lyc_0817_eyebrow" style="margin-top:30px">高级网页设计 / 任务三 · 综合创作＋技术答辩</p>
+<h1>创作过程与答辩记录</h1>
+<p>作者标识：lyc_0817 · 日期：2026-11-09 · 本次实现模型：GPT-6</p>
+<h2>一、本次关键对话记录</h2>
+<h3>用户提示词（本次真实请求）</h3>
+<blockquote><p>在我给出的这个项目中的 Swiper 轮播组件 · 大国重器光影展里面，帮我把任务三单独写出来，任务三所需要的照片你自己上网搜索一下放进去，任务三的自主创新功能可以继续沿用现在这个，然后你也再加一个创新功能上去，具体的要求在图片中。</p></blockquote>
+<h3>AI 对需求的解释及回复要点</h3>
+<p>按截图中的“任务三 · 综合创作＋技术答辩”制作，位置在原网页任务二下方，使用单独的蓝白卡片。保留六件展品和完整 slide；沿用 keyboard、方向键回显及 delay 现场修改；新增可在浏览器保存的“观展护照”。</p>
+<p>本次回复：“沿用现有的键盘切换、按键回显和 delay 现场调节，再增加‘观展护照’：记录看过的展品，集齐六件后完成打卡。”最终交互采用用户主动为当前展品盖章，避免自动播放直接刷满护照。</p>
+<h3>用户补充要求（本次真实纠正）</h3><blockquote><p>我的意思是把任务3写到我给你的这个网页中的任务2的下方，只不过任务3单独放到一个框里，然后整体的审美跟现在已有的这个网页的审美保持一致即可。</p></blockquote><p>已按此要求将任务三移入 swiper-task.html，紧接任务二所在区域下方，独立成框；旧地址仅跳转到原页面的任务三。</p><h3>图片要求的取舍</h3>
+<p>最新要求已改为严格满足作业的生图条款：第六件展品“爱达·魔都号”使用内置 imagegen 生成，保存为 1600×900 像素、精确 16:9。此前使用的网络邮轮照片已被替换。其余五件展品保留已下载的实景照片；生成邮轮图在页面明确标注为 AI 示意图。</p>
+<h3>与原版的具体区别</h3>
+<p>原页面中任务三的调速能力依赖共享的 #lycSw4。本次将完整展台放入原网页任务二下方的独立卡片中，直接绑定任务三专属节点，读取六张本地照片；脚本使用闭包隔离状态，防止与任务一、二的辅助函数重名。首页入口也指向原网页中的任务三锚点。</p>
+<p>以上为本次真实请求与实现摘要。原项目中的历史 AI 回答仍见原记录页（历史共享演示台结构已被本次三任务独立卡片替代），本页不把新写的说明伪装成先前轮次的原始回答。</p>
+<h2>二、核心代码与参数</h2>
+<pre><code>var lyc_0817_swiper = new Swiper('#lyc_0817_exhibition', {
+  loop: true,
+  speed: 800,
+  autoplay: { delay: 3200, disableOnInteraction: false },
+  keyboard: {
+    enabled: true,
+    onlyInViewport: true,
+    pageUpDown: false
+  },
+  pagination: { el: '#lyc_0817_pagination', clickable: true },
+  navigation: {
+    prevEl: '#lyc_0817_prev',
+    nextEl: '#lyc_0817_next'
+  }
+});</code></pre>
+<p>这段是核心配置节选，完整代码还包括展品结构生成、按键回显、测量事件、护照存储和减少动态效果偏好适配。代码均在 <a href="js/lyc_0817_task3.js">js/lyc_0817_task3.js</a>，文件头与主要功能块已加作者、时间、模型和功能注释。</p>
+<h2>三、答辩四连问</h2>
+<h3>1. 这段代码什么意思？</h3>
+<p>Swiper 把六张 slide 变成可拖动的循环轮播；自动播放每张停留 3200 毫秒，动画持续 800 毫秒。keyboard 模块让方向键控制当前轮播，keyPress 事件把实际按键和当前展品序号显示在页面上。</p>
+<h3>2. AI 第一次哪里不对，你改了什么？</h3>
+<p>本次第一版误解了“单独写出来”，将任务三做成了另一张深色独立页面。用户明确希望放在原网页任务二下方后，已改为原页面内单独卡片，并统一为蓝白配色、橙色强调、圆角按钮和浅蓝功能面板。测量间隔还需在按键、拖动、点箭头、点圆点、点击缩略图及切换后台时清空基线，防止把手动等待时间算作自动翻页间隔。新增护照采用主动盖章并按展品 id 去重，保存失败时降级为本次页面内可用。</p>
+<h3>3. 新参数的作用？</h3>
+<ul><li><code>keyboard.enabled: true</code>：启用键盘控制。</li><li><code>onlyInViewport: true</code>：轮播在可视区域内才响应方向键；输入框内保留编辑操作。</li><li><code>pageUpDown: false</code>：不将 PageUp / PageDown 用于翻页。</li><li><code>disableOnInteraction: false</code>：手动翻页后继续自动播放。主动“暂停导览”调用 stop，直到点击继续才 start。</li><li><code>realIndex</code>：循环模式中的真实展品序号，护照按它查找当前展品，而非使用会受循环重排影响的 activeIndex。</li></ul>
+<h3>4. 现场把 delay 改成指定值并解释变化？</h3>
+<p>在“现场调速实验”输入 1000，点击“应用时间”。停留时间改为 1 秒，正常动态效果设置下连续两次自动翻页开始的预期间隔约为 1.8 秒，即停留 1000ms ＋ 动画 800ms。浏览器计时调度可能带来少量误差；手动操作后需重新等待两次连续自动翻页。暂停状态下修改参数不会擅自开始播放。</p>
+<pre><code>lyc_0817_swiper.params.autoplay.delay = 1000;
+lyc_0817_swiper.autoplay.stop();
+lyc_0817_swiper.autoplay.start();</code></pre>
+<h2>四、新增创新功能：观展护照与集章奖励</h2><p>本次追加：三个任务改为同级独立卡片、各自使用轮播实例；任务二移除混入的方向键回显与自动翻页计时，相关功能仅出现在任务三。调速区已补充“1000 毫秒 = 1 秒”、输入操作与实际翻页间隔示例。</p><p>六枚印章集齐后，解锁“大国重器探索官”称号和纪念证书。可输入最多 12 字昵称，点击下载生成 1600×1000 PNG；证书由 Canvas 本地绘制，无外部接口。刷新后仍可领取；重置护照后奖励重新锁定。尚未集齐时不会展示下载入口。</p>
+<p>切换到一件展品 → 点击盖章 → 点亮对应印章与缩略图标签 → 保存到 localStorage → 集齐六件显示完成提示。重复盖章不会增加数量，刷新后保留进度。“重置护照”只清除此功能的进度，不影响项目其他页面。浏览器禁止存储时提示降级，不阻断页面交互。</p>
+<h2 id="lyc_0817_sources">五、照片来源</h2>
+<p>素材整理日期：2026-11-09。前五张照片来自下列来源，第六张为 AI 生成。素材均已保存至 swiper-imgs/task3/，页面不热链外部图片；实景照片权利归原作者或来源方所有。</p>
+<div class="lyc_0817_source"><b>01 · 天宫空间站</b><p>来源：中国载人航天工程办公室；神舟十六号乘组拍摄。<a href="https://www.cmse.gov.cn/xwzx/202311/t20231128_54733.html" target="_blank" rel="noopener">原文及图片</a> · 本地：tiangong.jpg。</p></div>
+<div class="lyc_0817_source"><b>02 · 复兴号动车组</b><p>来源：新华网《复兴号智能动车组技术提升版列车将上线运行》。<a href="https://www.xinhuanet.com/politics/20240614/7425bb6e550f48fa8f20f21188e2ea78/c.html" target="_blank" rel="noopener">原文及图片</a> · 本地：fuxing.jpg。</p></div>
+<div class="lyc_0817_source"><b>03 · C919 大飞机</b><p>来源：新华社《国产大型客机C919圆满完成首次商业飞行》。<a href="https://www.news.cn/2023-05/28/c_1129651535_2.htm" target="_blank" rel="noopener">原文及图片</a> · 本地：c919.jpg。</p></div>
+<div class="lyc_0817_source"><b>04 · 奋斗者号</b><p>来源：中国科学院沈阳分院《金属所与沈阳自动化所助力“奋斗者”号全海深载人潜水器完成万米海试》。<a href="https://syb.cas.cn/xwzx/tpxw/202012/t20201201_5804150.html" target="_blank" rel="noopener">原文及图片</a> · 本地：fendouzhe.jpg。</p></div>
+<div class="lyc_0817_source"><b>05 · 中国天眼 FAST</b><p>来源：新华社《中国天眼：开启新征程》。<a href="https://www.news.cn/photo/2021-12/20/c_1128183060.htm" target="_blank" rel="noopener">原文及图片</a> · 本地：fast.jpg。</p></div>
+<div class="lyc_0817_source"><b>06 · 爱达·魔都号</b><p>来源：内置 imagegen 工具生成，1600×900 像素，横版 16:9。<a href="#lyc_0817_generation">查看实际生图提示词与处理说明</a> · 本地：aida.jpg。此图为 AI 示意图，不作为实景照片。</p></div>
+<h2>六、原版对照与本次修订</h2><p>对照来源：<a href="https://spontaneous-valkyrie-4e4229.netlify.app/swiper-lesson" target="_blank" rel="noopener">Swiper 原版课堂讲解</a>；核对日期：2026-11-09。</p><ul><li>任务二恢复原版效果实验台的默认 slide、3200ms 停留、800ms 动画、循环、可点击圆点，以及手动操作后继续播放；切换七种效果时继续使用同样的公共配置。</li><li>基础知识以折叠说明补齐，涵盖本地引入、三层骨架、圆点箭头、自动播放及布局参数，避免增加重复任务演示。</li><li>任务一补充两轮提示词、截图与结论要求；任务二补充本地官方示例入口、prev / next 解释、百分比基准与 20 度调试说明；任务三保留四问与记录入口。</li><li>五张原有图片逐张校验，与原站资源文件一致。任务三前五张实景图保留，第六张邮轮已按最新要求替换为 AI 生成 16:9 图。</li><li>保留截图作业要求及用户已确认的改动：任务一初始 cube、任务二新增 creative、任务三第六件展品和键盘能力、三个任务独立成框、护照和纪念证书。本地 CSS / JS 使用项目资源，不改为外部 CDN。</li></ul><h2 id="lyc_0817_finalAudit">七、最终逐项核查（2026-11-09）</h2>
+<p><b>页面功能与材料：</b>任务一的初始 cube、循环、3200ms 停留、圆点点击、拖动后继续播放已再次实测；两轮提示词及原有 AI 回答、验证截图与结论均有访问入口。任务二的第七个 creative 按钮、左右电影墙、prev / next 解释、百分比说明、官方示例入口和现场 20 度修改均已核对。任务三的六件完整展品、键盘回显、输入时保留方向键、delay 修改、护照收集、刷新保存、奖励解锁、证书下载与重置均已实测。</p>
+<p>三个任务各自成框、各用自己的实例；320px 与 390px 视口无横向溢出，未发现脚本异常。最新证据：<a href=".screenshots/swiper-task3/task1-current.png">任务一四项验证</a>、<a href=".screenshots/swiper-task3/task2-current.png">任务二电影墙与 20 度</a>、<a href=".screenshots/swiper-task3/keyboard-audit.png">任务三键盘回显</a>、<a href=".screenshots/swiper-task3/reward-audit.png">实际下载的纪念证书</a>。</p>
+<p><b>图片要求已补齐：</b>用户最新要求“把图片按照要求改了”，邮轮已使用内置 imagegen 生成并保存为 1600×900、精确 16:9。页面、替代文字及素材记录均已标明 AI 来源。</p>
+<p><b>本次 GitHub 更新内容：</b>按用户要求，以当前三任务页面、脚本、样式、素材和记录更新仓库中的对应文件，保留原有访问路径，覆盖对应旧版内容。教师要求的现场答辩仍需由学生本人完成，本页提供答辩准备材料。</p>
+<h2 id="lyc_0817_generation">八、邮轮 AI 生图记录</h2><p>日期：2026-11-09。工具：内置 imagegen（非命令行或自建 API）。用户最新指示：“把图片按照要求改了，然后提交到GitHub，并且覆盖原来的这部分内容”。</p><p>生成目标：首艘国产大型邮轮“爱达·魔都号”，摄影写实风格，晴天海面、斜上方视角、完整船体入镜、底部留海水以容纳页面文字、横版 16:9、无水印和文字。</p><details><summary>工具实际使用的原始提示词</summary><pre>Use case: photorealistic-natural. Asset type: a single landscape image for a Chinese classroom Swiper exhibition, sixth exhibit 爱达·魔都号 (Adora Magic City), China's first domestically built large cruise ship. Generate a realistic photographic-style AI illustration of the Adora Magic City at sea, an enormous white multi-deck cruise ship with green/blue decorative hull accents, viewed from an elevated three-quarter bow angle on deep blue water, distant pale coastline, clear afternoon sunlight and natural soft clouds. The complete ship must fit within the image with comfortable space around bow, stern and funnel; believable proportions and detailed deck railings. This is an AI illustration, not documentary evidence. Composition: EXACTLY 16:9 horizontal aspect ratio, output 1536 x 864 pixels (or another exact 16:9 resolution), no borders, no collage, no inset panels. Keep bottom portion mostly sea so the webpage can overlay its own caption. No text, no watermark, no added logo, no caption, no people in foreground.</pre></details><p>生成器实际输出为 1672×941；为满足严格比例，最终将整幅画面规范化为 1600×900，并保存为 <a href="swiper-imgs/task3/aida.jpg">swiper-imgs/task3/aida.jpg</a>，保留完整船体。尺寸实测满足 宽×9＝高×16。</p><h2>九、运行和提交</h2>
+<p>实际验证：Chrome 桌面 1440px 与手机 390px 布局通过，无横向溢出；六张照片、六个圆点、键盘回显、输入框不抢键、末张回首张、护照集齐与刷新保存、重置、暂停后调速保持暂停、首页入口和 file 协议运行均已检查，本次追加检查：三个同级任务框、各自操作独立、任务二无键盘与计时混入、集章解锁与证书下载、奖励刷新恢复和重置锁定均通过，未发现脚本异常。delay = 1000、speed = 800 时实测连续自动翻页间隔为 1.80 秒。验证截图：<a href=".screenshots/swiper-task3/desktop.png">桌面版</a>、<a href=".screenshots/swiper-task3/mobile.png">手机版</a>。</p>
+<p>从项目根目录运行 <code>python -m http.server 8080</code>，打开 <code>http://localhost:8080/swiper-task.html#lyc_0817_task3</code>。本页不使用 fetch，直接打开 HTML 也可展示；HTTP 与 file 协议的护照存储互不共用。</p>
+<p>提交文件：swiper-task.html、swiper-task3-record.html、js/lyc_0817_swiper_tasks.js、css/lyc_0817_task3.css、js/lyc_0817_task3.js、swiper-imgs/task3/ 中六张展品图片，以及项目已有的 swiper/ 本地组件包。首页 index.html 已添加任务三锚点入口；swiper-task3.html 仅兼容旧链接并跳转。上传 GitHub 后，从相对链接进入本记录页即可阅读提示词和答辩说明。</p>
+<p style="margin-top:30px"><a href="swiper-task.html#lyc_0817_task3">返回原网页任务三，开始探索 →</a></p>
+</main></body></html>

@@ -1,0 +1,24 @@
+大国重器光影展 · 代码整理包
+整理日期：2026-11-12
+
+打开 index.html 即可查看主页以及任务一、任务二、任务三。
+swiper-task.html 保留原页面文件名，与默认入口展示相同的任务内容。
+
+文件对应关系：
+主页及三个任务的 HTML：index.html、swiper-task.html
+任务一、二的 JS：js/lyc_0817_swiper_tasks.js
+任务三的 JS：js/lyc_0817_task3.js
+任务样式：css/lyc_0817_task3.css（其余公共样式在 HTML 内）
+提示词记录：swiper_prompt.md
+提示词网页版：swiper-task-record.html、swiper-task3-record.html
+展品图片：swiper-imgs/
+本地 Swiper 组件及官方示例：swiper/
+验证截图：.screenshots/
+
+运行方式：
+方式一：直接用浏览器打开 index.html。
+方式二：在本文件夹中运行 python -m http.server 8080，
+再访问 http://localhost:8080/index.html。
+
+保持文件夹结构完整，相对路径才能正常使用。
+本文件夹是原项目相关文件的整理副本。
